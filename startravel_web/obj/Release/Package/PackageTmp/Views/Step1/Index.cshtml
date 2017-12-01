@@ -1,0 +1,871 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+
+@model  startravel_web.Models.step1_view_return_data
+<!-- jQuery (Bootstrap 所有外掛均需要使用) -->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/star-ui")
+
+@Scripts.Render("~/bundles/modernizr")
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>燦星旅遊-出國旅遊第一選擇，夢想般國外旅遊行程</title>
+    <link rel="shortcut icon" href="~/Content/images/star-icon.png" />
+
+    <link rel="shortcut icon" href="~/Content/images/star-icon.png" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-ui.css">
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/HeaderFooter.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/step-css.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 shim and Respond.js 讓 IE8 支援 HTML5 元素與媒體查詢 -->
+    <!-- 警告：Respond.js 無法在 file:// 協定下運作 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+    </script>
+}
+
+
+    @using (Html.BeginForm("Index", "Step2", FormMethod.Post, new { enctype = "multipart/form-data", name = "myForm" ,id ="myform"}))
+    {
+    <!-- header======================================================================= -->
+    <div class="header-03">
+        <div class="star-container">
+            <div class="header-rainbow">
+                <img src="~/Content/images/rainbow.png" alt="">
+            </div>
+            <a class="header-logo" href="http://www.startravel.com.tw/" title="">
+                <img src="~/Content/images/logo-text.png" alt="">
+            </a>
+        </div>
+    </div>
+
+
+    <!-- 內容區塊===================================================================== -->
+    <div class="content content-white">
+        <div class="star-container">
+            <!-- step -->
+            <div class="step">
+                <img class="img-responsive" src="~/Content/images/step01.png" alt="">
+            </div>
+            <div class="step-mobile">
+                <span>1</span>
+                選擇成行人數
+                <a href="../detail.html" title="">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+            </div>
+
+
+            @{
+                DateTime igrptraffic_s = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_e = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_s_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_s_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_e_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_e_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+
+
+            @Html.HiddenFor(model => model.grpproductdetail_result.Data.PROD_NO)
+            @Html.HiddenFor(model => model.grpproductdetail_result.Data.GRP_NO)
+            <!-- mainInfo -->
+            <div class="mainInfo mb-40">
+                <h3 class="orderInfo-title"><i class="glyphicon glyphicon-tags"></i> 訂購資訊</h3>
+                <div class="orderInfo-block">
+                    @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NAME).ToString()))
+                    <div class="orderInfo-block-1">
+                        <div>行程日期｜</div>
+                        <div>@igrptraffic_s.ToString("MM/dd") (@igrptraffic_s.ToString("ddd")) ～ @igrptraffic_e.ToString("MM/dd") (@igrptraffic_e.ToString("ddd")) </div>
+                    </div>
+                    <div class="orderInfo-block-1">
+                        <div>交通資訊｜</div>
+                        <div>
+                            航班參考<br>
+                            去程：@igrptraffic_s_d.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].city_from_name).ToString() @igrptraffic_s_a.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].city_to_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].air_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].air_no).ToString() <br>
+                            回程：@igrptraffic_e_d.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].city_from_name).ToString() @igrptraffic_e_a.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].city_to_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].air_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].air_no).ToString()
+
+                        </div>
+                    </div>
+                    <div class="orderInfo-block-1">
+                        <div>住宿飯店｜</div>
+                        <div>參考行程介紹之團體飯店</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 填寫旅客資料 -->
+            <div class="mb-10">
+                <span class="text-purple text-bold h3">選擇房型及人數</span>
+            </div>
+
+            <div class="table-responsive hidden-xs mt-10">
+                <table class="star-table03 table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">房型</th>
+                            <th style="width: 0%;">含稅售價</th>
+                            <th style="width: 30%;">入住人數</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            int i = 0;
+                            int room_num = 0;
+                         }
+                        @foreach (var item in Model.grppriceinfo_result.Data)
+                        {
+                            i = 0;
+                            int role_type_count=Model.grppriceinfo_result.Data.Count;
+                            foreach (var item_s in item.Role_Type)
+                            {
+
+                                <tr>
+                                    @{ if (i == 0)
+                                     {
+                                        <td>@Html.DisplayFor(modelitem => item.Category_name)</td>
+
+                                     }
+                                     else
+                                     {
+                                        <td></td>
+                                     }
+                                     i = i + 1;
+                                     
+                                    }
+
+                                    <td class="text-center" >
+                                        @Html.DisplayFor(modelitem_s => item_s.Type_name) / <span class="text-orange2 cost_value" id="cost_value">@Html.DisplayFor(modelitem_s => item_s.Price)</span> 元
+                                    </td>
+
+                                    <td>
+                                        <select class="star-select2" onchange="droplist_select();">
+                                            <option value="0">0人</option>
+                                            <option value="1">1人</option>
+                                            <option value="2">2人</option>
+                                            <option value="3">3人</option>
+                                            <option value="4">4人</option>
+                                            <option value="5">5人</option>
+                                            <option value="6">6人</option>
+                                            <option value="7">7人</option>
+                                            <option value="8">8人</option>
+                                            <option value="9">9人</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                room_num = room_num + 1;
+                            }
+
+
+
+                        }
+                        <tr>
+                            <td colspan="3" class="star-table03-subtotal">
+                                共計人數 <span class="text-orange2 h3">0</span>人，應付總額 <span class="text-orange h1 total_cost_span">0</span> 元
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                function droplist_select() {
+                    var total_count = 0;
+                    var total_cost = 0;
+                    var current_cost = 0;
+                    var current_count = 0;
+                    $('.table-responsive .star-select2').each(function () {
+                        total_count += parseInt($(this).val());
+                        current_count = parseInt($(this).val());
+                        current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text());
+                        total_cost += current_count * current_cost;
+                    });
+                   
+                       
+                   // total_cost = $(this).text()
+                      
+                    console.log(total_cost);
+                    $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
+                    $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
+                }
+
+                function droplist_select_mobile() {
+                    var total_count = 0;
+                    var total_cost = 0;
+                    var current_cost = 0;
+                    var current_count = 0;
+                    $('.table-mobile .star-select2').each(function () {
+                        total_count += parseInt($(this).val());
+                        current_count = parseInt($(this).val());
+                        current_cost = $(this).parent().parent().siblings().children('.col-xs-7').children('.text-orange2').text();
+                        total_cost += current_count * current_cost;
+                    });
+
+
+                    // total_cost = $(this).text()
+
+                    console.log(current_cost);
+                    $('.mobile-people').html(total_count.toLocaleString());
+                    $('.mobile_cost').html(total_cost.toLocaleString());
+                }
+
+             </script>
+            <div class="mb-40 hidden-xs">
+                <p>
+                    備註說明：<br>
+                    ※嬰兒為0~2歲(不含)、兒童為2~12歲(不含)、成人為12歲 (含)以上<br>
+                    ※雙人房：2個床位。因地區、飯店之體系屬性不同，雙人房提供之床型，恕無法指定為一大床或兩小床； 如有特殊需求，請於訂單成立時提出，我們將為您向飯店提出需求，唯是否取得，需視入住飯店之住房狀況，不便之處，敬請見諒。<br>
+                    ※三人房：3個床位。飯店多以雙人房加行軍床或沙發床方式提供3名佔床者同住一房。商品若無提供3人房價格，則表示該飯店無提供加床服務。<br>
+                    ※若選擇之商品無提供三人房價格，則表示該飯店不提供加床服務<br>
+                    ※兒童佔床：即表示兒童佔床位，即小孩(2~12歲)佔床位，部分地區或飯店規定4歲以上兒童必須佔床，遇此狀況將以飯店確認後回覆為準<br>
+                    ※兒童不佔床：即表兒童不佔床。一個房間以兩個兒童為限，故另一兒童須佔床。成人則一律佔床。
+                </p>
+            </div>
+
+
+
+
+
+            <!--  <div class="table-mobile">-->
+            <div class="table-mobile">
+             @for (i = 0; i < Model.grppriceinfo_result.Data.Count;i=i+1 )
+             {
+                 var item = Model.grppriceinfo_result.Data[i];      
+                foreach (var item_s in item.Role_Type)
+                {  
+                <div class="gray-block">
+                    @Html.DisplayFor(modelitem => item.Category_name)
+                </div>
+                <div class="order-mobile">
+                    <form>
+                        
+                        <div class="row">
+                            <div class="col-xs-5 text-right pt-10 pb-10">
+                                入住人數
+                            </div>
+                            <div class="col-xs-7">
+                                <select class="star-select2" onchange="droplist_select_mobile();">
+                                    <option value="0">0人</option>
+                                    <option value="1">1人</option>
+                                    <option value="2">2人</option>
+                                    <option value="3">3人</option>
+                                    <option value="4">4人</option>
+                                    <option value="5">5人</option>
+                                    <option value="6">6人</option>
+                                    <option value="7">7人</option>
+                                    <option value="8">8人</option>
+                                    <option value="9">9人</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-5 text-right">
+                                含稅售價
+                            </div>
+                            <div class="col-xs-7">
+                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / <span class="text-orange2">@Html.DisplayFor(modelitem_s => item_s.Price)</span>元
+                            </div>
+                        </div>
+                        
+                        
+                    </form>               
+                </div>
+                }
+             }
+
+
+             
+                <div class="yellow-block">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            共計人數
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="text-orange mobile-people">0</span>人
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            應付總額
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="text-orange mobile_cost">0</span>元
+                        </div>
+                    </div>
+                    <a href="javascript:;" title="">備註說明</a>
+                </div>
+
+            </div>
+
+
+            <!-- 旅遊契約書 -->
+            <div class="travelContract mb-20">
+                <span class="text-purple text-bold h3 hidden-xs">旅遊契約書</span>
+                <div class="mobile-title-purple">
+                    旅遊契約書
+                    <a class="travelContractBook-Mopen" href="javascript:;" title="">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </a>
+                    <a class="travelContractBook-Mclose" href="javascript:;" title="">
+                        <i class="glyphicon glyphicon-chevron-up"></i>
+                    </a>
+                </div>
+                <div class="travelContractBook mb-20">
+                    國外(團體)旅遊契約書                                               中華民國105年12月12日觀業字第1050922838號函修正<br>
+                    訂單編號：<br>
+                    立契約書人 （本契約審閱期間至少一日，　    　年　　月　　日由甲方攜回審閱）<br>
+                    旅　客(以下稱甲方)　                  　等  人　　<br>
+                    緊急聯絡人姓名：              與旅客關係：               電話：                 <br>
+                    旅行業(以下稱乙方)　燦星國際旅行社股份有限公司　<br>
+                    <br>
+                    甲乙雙方同意就本旅遊事項，依下列約定辦理。<br>
+                    <br>
+                    <b>第 一 條：（國外旅遊之意義）</b><br>
+                    本契約所謂國外旅遊，係指到中華民國疆域以外其他國家或地區旅遊。<br>
+                    赴中國大陸旅行者，準用本旅遊契約之規定。<br>
+                    <b>第 二 條：（適用之範圍及順序）</b><br>
+                    甲乙雙方關於本旅遊之權利義務，依本契約條款之約定定之；本契約中未約定者，適用中華民國有關法令之規定。<br>
+                    <b>第 三 條：（旅遊團名稱、旅遊行程及廣告責任）</b><br>
+                    本旅遊團名稱為：                        <br>
+                    一、旅遊地區（國家、城市或觀光點）：<br>
+                    二、行程（啟程出發地點、回程之終止地點、日期、交通工具、住宿旅館、餐飲、遊覽、安排購物行程及其所附隨之服務說明）：<br>
+                    與本契約有關之附件、廣告、宣傳文件、行程表或說明會之說明內容均視為本契約內容之一部分。乙方應確保廣告內容之真實，對甲方所負之義務不得低於廣告之內容。<br>
+                    第一項記載得以所刊登之廣告、宣傳文件、行程表或說明會之說明內容代之。<br>
+                    未記載第一項內容或記載之內容與刊登廣告、宣傳文件、行程表或說明會之說明記載不符者，以最有利於甲方之內容為準。  <br>
+                    <b>第 四 條：（集合及出發時地）</b><br>
+                    甲方應於民國____  年____  月____ 日     時      分於                          準時集合出發。甲方未準時到約定地點集合致未能出發，亦未能中途加入旅遊者，視為甲方任意解除契約，乙方得依第十三條之約定，行使損害賠償請求權。<br>
+                    <b>第 五 條：（旅遊費用及付款方式）</b><br>
+                    旅遊費用：______________________。<br>
+                    除雙方有特別約定者外，甲方應依下列約定繳付：<br>
+                    一、簽訂本契約時，甲方應以           方式繳付新臺幣___________元。<br>
+                    二、其餘款項以           方式於出發前三日或說明會時繳清。    <br>
+                    前項之特別約定，除經雙方同意並增訂其他協議事項於本契約第三十七條，乙方不得以任何名義要求增加旅遊費用。<br>
+                    <b>第 六 條：（旅客怠於給付旅遊費用之效力）</b><br>
+                    甲方因可歸責自己之事由，怠於給付旅遊費用者，乙方得定相當期限催告甲方給付，甲方逾期不為給付者，乙方得終止契約。甲方應賠償之費用，依第十三條約定辦理；乙方如有其他損害，並得請求賠償。<br>
+                    <b>第 七 條：（旅客協力義務）</b><br>
+                    旅遊需甲方之行為始能完成，而甲方不為其行為者，乙方得定相當期限，催告甲方為之。甲方逾期不為其行為者，乙方得終止契約，並得請求賠償因契約終止而生之損害。<br>
+                    旅遊開始後，乙方依前項規定終止契約時，甲方得請求乙方墊付費用將其送回原出發地。於到達後，由甲方附加年利率 5 ％利息償還乙方。<br>
+                    <b>第 八 條：（旅遊費用所涵蓋之項目）</b><br>
+                    甲方依第五條約定繳納之旅遊費用，除雙方依第三十七條另有約定以外，應包括下列項目：<br>
+                    一、  代辦證件之行政規費：乙方代理甲方辦理出國所需之手續費及簽證費及其他規費。 <br>
+                    二、  交通運輸費：旅程所需各種交通運輸之費用。<br>
+                    三、  餐飲費：旅程中所列應由乙方安排之餐飲費用。<br>
+                    四、  住宿費：旅程中所列住宿及旅館之費用，如甲方需要單人房，經乙方同意安排者，甲方應補繳所需差額。<br>
+                    五、  遊覽費用：旅程中所列之一切遊覽費用及入場門票費等。<br>
+                    六、  接送費：旅遊期間機場、港口、車站等與旅館間之一切接送費用。 <br>
+                    七、  行李費：團體行李往返機場、港口、車站等與旅館間之一切接送費用及團體行李接送人員之小費，行李數量之重量依航空公司規定辦理。<br>
+                    八、  稅捐：各地機場服務稅捐及團體餐宿稅捐。<br>
+                    九、  服務費：領隊及其他乙方為甲方安排服務人員之報酬。<br>
+                    十、  保險費：責任保險及履約保證保險。<br>
+                    前項第二款交通運輸費及第五款遊覽費用，其費用於契約簽訂後經政府機關或經營管理業者公布調高或調低逾百分之十者，應由甲方補足，或由乙方退還。<br>
+                    第一項第二款至第五款之年長者門票減免、兒童住宿不佔床及各項優惠等，詳如附件（報價單）。如契約相關文件均未記載者，甲方得請求如實退還差額。<br>
+                    <br>
+                    <b>第 九 條：（旅遊費用所未涵蓋項目）</b><br>
+                    第五條之旅遊費用，除雙方依第三十七條另有約定者外，不包含下列項目：<br>
+                    一、非本旅遊契約所列行程之一切費用。 <br>
+                    二、甲方之個人費用：如自費行程費用、行李超重費、飲料及酒類、洗衣、電話、網際網路使用費、私人交通費、行程外陪同購物之報酬、自由活動費、個人傷病醫療費、宜自行給與提供個人服務者（如旅館客房服務人員）之小費或尋回遺失物費用及報酬。<br>
+                    三、未列入旅程之簽證、機票及其他有關費用。<br>
+                    四、建議任意給予隨團領隊人員、當地導遊、司機之小費。<br>
+                    五、保險費：甲方自行投保旅行平安保險之費用。<br>
+                    六、其他由乙方代辦代收之費用。<br>
+                    前項第二款、第四款建議給予之小費，乙方應於出發前，說明各觀光地區小費收取狀況及約略金額。<br>
+                    <b>第 十 條：（組團旅遊最低人數）</b><br>
+                    本旅遊團須有  16  人以上簽約參加始組成。如未達前定人數，乙方應於預訂出發之  7  日前(至少七日，如未記載時，視為七日)通知甲方解除契約；怠於通知致甲方受損害者，乙方應賠償甲方損害。<br>
+                    前項組團人數如未記載者，視為無最低組團人數；其保證出團者，亦同。<br>
+                    乙方依第一項規定解除契約後，得依下列方式之一，返還或移作依第二款成立之新旅遊契約之旅遊費用：<br>
+                    一、退還甲方已交付之全部費用。但乙方已代繳之行政規費得予扣除。<br>
+                    二、徵得甲方同意，訂定另一旅遊契約，將依第一項解除契約應返還甲方之全部費用，移作該另訂之旅遊契約之費用全部或一部。如有超出之賸餘費用，應退還甲方。<br>
+                    <b>第 十一 條：（代辦簽證、洽購機票）</b><br>
+                    如確定所組團體能成行，乙方即應負責為甲方申辦護照及依旅程所需之簽證，並代訂妥機位及旅館。乙方應於預定出發七日前，或於舉行出國說明會時，將甲方之護照、簽證、機票、機位、旅館及其他必要事項向甲方報告，並以書面行程表確認之。乙方怠於履行上述義務時，甲方得拒絕參加旅遊並解除契約，乙方即應退還甲方所繳之所有費用。<br>
+                    乙方應於預定出發日前，將本契約所列旅遊地之地區城市、國家或觀光點之風俗人情、地理位置或其他有關旅遊應注意事項儘量提供甲方旅遊參考。<br>
+                    <b>第 十二 條：（因可歸責於旅行業之事由致無法成行）</b><br>
+                    因可歸責於乙方之事由，致旅遊活動無法成行者，乙方於知悉旅遊活動無法成行時，應即通知甲方且說明其事由，並退還甲方已繳之旅遊費用。乙方怠於通知者，應賠償甲方依旅遊費用之全部計算之違約金。<br>
+                    乙方已為前項通知者，則按通知到達甲方時，距出發日期時間之長短，依下列規定計算其應賠償甲方之違約金：<br>
+                    一、通知於出發日前第四十一日以前到達者，賠償旅遊費用百分之五。<br>
+                    二、通知於出發日前第三十一日至第四十日以內到達者，賠償旅遊費用百分之十。<br>
+                    三、通知於出發日前第二十一日至第三十日以內到達者，賠償旅遊費用百分之二十。<br>
+                    四、通知於出發日前第二日至第二十日以內到達者，賠償旅遊費用百分之三十。<br>
+                    五、通知於出發日前一日到達者，賠償旅遊費用百分之五十。<br>
+                    六、通知於出發當日以後到達者，賠償旅遊費用百分之一百。<br>
+                    甲方如能證明其所受損害超過前項各款基準者，得就其實際損害請求賠償。<br>
+                    <b>第 十三 條：（出發前旅客任意解除契約及其責任）</b><br>
+                    甲方於旅遊活動開始前解除契約者，應依乙方提供之收據，繳交行政規費，並應賠償乙方之損失，其賠償基準如下：<br>
+                    一、旅遊開始前第四十一日以前解除契約者，賠償旅遊費用百分之五。<br>
+                    二、旅遊開始前第三十一日至第四十日以內解除契約者，賠償旅遊費用百分之十。<br>
+                    三、旅遊開始前第二十一日至第三十日以內解除契約者，賠償旅遊費用百分之二十。<br>
+                    四、旅遊開始前第二日至第二十日以內解除契約者，賠償旅遊費用百分之三十。<br>
+                    五、旅遊開始前一日解除契約者，賠償旅遊費用百分之五十。<br>
+                    六、甲方於旅遊開始日或開始後解除契約或未通知不參加者，賠償旅遊費用百分之一百。<br>
+                    前項規定作為損害賠償計算基準之旅遊費用，應先扣除行政規費後計算之。<br>
+                    乙方如能證明其所受損害超過第一項之各款基準者，得就其實際損害請求賠償。<br>
+                    <b>第 十四 條：（出發前有法定原因解除契約）</b><br>
+                    因不可抗力或不可歸責於雙方當事人之事由，致本契約之全部或一部無法履行時，任何一方得解除契約，且不負損害賠償責任。<br>
+                    前項情形，乙方應提出已代繳之行政規費或履行本契約已支付之必要費用之單據，經核實後予以扣除，並將餘款退還甲方。<br>
+                    任何一方知悉旅遊活動無法成行時，應即通知他方並說明其事由；其怠於通知致他方受有損害時，應負賠償責任。<br>
+                    為維護本契約旅遊團體之安全與利益，乙方依第一項為解除契約後，應為有利於團體旅遊之必要措置。<br>
+                    <b>第 十五 條：（出發前客觀風險事由解除契約）</b><br>
+                    出發前，本旅遊團所前往旅遊地區之一，有事實足認危害旅客生命、身體、健康、財產安全之虞者，準用前條之規定，得解除契約。但解除之一方，應另按旅遊費用百分之 5 補償他方（不得超過百分之五）。<br>
+                    <b>第 十六 條：（領隊）</b><br>
+                    乙方應指派領有領隊執業證之領隊。<br>
+                    乙方違反前項規定，應賠償甲方每人以每日新臺幣一千五百元乘以全部旅遊日數，再除以實際出團人數計算之三倍違約金。甲方受有其他損害者，並得請求乙方損害賠償。<br>
+                    領隊應帶領甲方出國旅遊，並為甲方辦理出入國境手續、交通、食宿、遊覽及其他完成旅遊所須之往返全程隨團服務。<br>
+                    <b>第 十七 條：（證照之保管及返還）</b><br>
+                    乙方代理甲方辦理出國簽證或旅遊手續時，應妥慎保管甲方之各項證照，及申請該證照而持有甲方之印章、身分證等，乙方如有遺失或毀損者，應行補辦；如致甲方受損害者，應賠償甲方之損害。<br>
+                    甲方於旅遊期間，應自行保管其自有之旅遊證件。但基於辦理通關過境等手續之必要，或經乙方同意者，得交由乙方保管。<br>
+                    前二項旅遊證件，乙方及其受僱人應以善良管理人之注意保管之；甲方得隨時取回，乙方及其受僱人不得拒絕。<br>
+                    <b>第 十八 條：（旅客之變更權）</b><br>
+                    甲方於旅遊開始  7  日前，因故不能參加旅遊者，得變更由第三人參加旅遊。乙方非有正當理由，不得拒絕。<br>
+                    前項情形，如因而增加費用，乙方得請求該變更後之第三人給付；如減少費用，甲方不得請求返還。甲方並應於接到乙方通知後  1  日內協同該第三人到乙方營業處所辦理契約承擔手續。<br>
+                    承受本契約之第三人，與甲方雙方辦理承擔手續完畢起，承繼甲方基於本契約之一切權利義務。<br>
+                    <b>第 十九 條：（旅行業務之轉讓）</b><br>
+                    乙方於出發前如將本契約變更轉讓予其他旅行業者，應經甲方書面同意。<br>
+                    甲方如不同意者，得解除契約，乙方應即時將甲方已繳之全部旅遊費用退還；甲方受有損害者，並得請求賠償。<br>
+                    甲方於出發後始發覺或被告知本契約已轉讓其他旅行業，乙方應賠償甲方全部旅遊費用百分之五之違約金；甲方受有損害者，並得請求賠償。受讓之旅行業者或其履行輔助人，關於旅遊義務之違反，有故意或過失時，甲方亦得請求讓與之旅行業者負責。<br>
+                    <b>第 二十 條：（國外旅行業責任歸屬）</b><br>
+                    乙方委託國外旅行業安排旅遊活動，因國外旅行業有違反本契約或其他不法情事，致甲方受損害時，乙方應與自己之違約或不法行為負同一責任。但由甲方自行指定或旅行地特殊情形而無法選擇受託者，不在此限。<br>
+                    <b>第 二十一 條：（賠償之代位）</b><br>
+                    乙方於賠償甲方所受損害後，甲方應將其對第三人之損害賠償請求權讓與乙方，並交付行使損害賠償請求權所需之相關文件及證據。<br>
+                    <b>第 二十二 條：（因可歸責於旅行業之事由致旅遊內容變更）</b><br>
+                    旅程中之食宿、交通、觀光點及遊覽項目等，應依本契約所訂等級與內容辦理，甲方不得要求變更，但乙方同意甲方之要求而變更者，不在此限，惟其所增加之費用應由甲方負擔。除非有本契約第十四條或第二十六條之情事，乙方不得以任何名義或理由變更旅遊內容。因可歸責於乙方之事由，致未達成旅遊契約所定旅程、交通、食宿或遊覽項目等事宜時，甲方得請求乙方賠償各該差額二倍之違約金。<br>
+                    乙方應提出前項差額計算之說明，如未提出差額計算之說明時，其違約金之計算至少為全部旅遊費用之百分之五。<br>
+                    甲方受有損害者，另得請求賠償。<br>
+                    <b>第 二十三 條：（因可歸責於旅行業之事由致無法完成旅遊或致旅客遭留置）</b><br>
+                    旅行團出發後，因可歸責於乙方之事由，致甲方因簽證、機票或其他問題無法完成其中之部分旅遊者，乙方除依二十四條規定辦理外，另應以自己之費用安排甲方至次一旅遊地，與其他團員會合；無法完成旅遊之情形，對全部團員均屬存在時，並應依相當之條件安排其他旅遊活動代之；如無次一旅遊地時，應安排甲方返國。等候安排行程期間，甲方所產生之食宿、交通或其他必要費用，應由乙方負擔。<br>
+                    前項情形，乙方怠於安排交通時，甲方得搭乘相當等級之交通工具至次一旅遊地或返國；其所支出之費用，應由乙方負擔。<br>
+                    乙方於第一項、第二項情形未安排交通或替代旅遊時，應退還甲方未旅遊地部分之費用，並賠償同額之懲罰性違約金。<br>
+                    因可歸責於乙方之事由，致甲方遭恐怖分子留置、當地政府逮捕、羈押或留置時，乙方應賠償甲方以每日新台幣二萬元乘以逮捕羈押或留置日數計算之懲罰性違約金，並應負責迅速接洽救助事宜，將甲方安排返國，其所需一切費用，由乙方負擔。留置時數在五小時以上未滿一日者，以一日計算。<br>
+                    <b>第 二十四 條：（因可歸責於旅行業之事由致行程延誤時間）</b><br>
+                    因可歸責於乙方之事由，致延誤行程期間，甲方所支出之食宿或其他必要費用，應由乙方負擔。甲方就其時間之浪費，得按日請求賠償。每日賠償金額，以全部旅遊費用除以全部旅遊日數計算。但行程延誤之時間浪費，以不超過全部旅遊日數為限。<br>
+                    前項每日延誤行程之時間浪費，在五小時以上未滿一日者，以一日計算。<br>
+                    甲方受有其他損害者，另得請求賠償。<br>
+                    <b>第 二十五 條：（旅行業棄置或留滯旅客）</b><br>
+                    乙方於旅遊途中，因故意棄置或留滯甲方時，除應負擔棄置或留滯期間甲方支出之食宿及其他必要費用，按實計算退還甲方未完成旅程之費用，及由出發地至第一旅遊地與最後旅遊地返回之交通費用外，並應至少賠償依全部旅遊費用除以全部旅遊日數乘以棄置或留滯日數後相同金額五倍之違約金。<br>
+                    乙方於旅遊途中，因重大過失有前項棄置或留滯甲方情事時，乙方除應依前項規定負擔相關費用外，並應賠償依前項規定計算之三倍違約金。<br>
+                    乙方於旅遊途中，因過失有第一項棄置或留滯甲方情事時，乙方除應依前項規定負擔相關費用外，並應賠償依第一項規定計算之一倍違約金。<br>
+                    前三項情形之棄置或留滯甲方之時間，在五小時以上未滿一日者，以一日計算；乙方並應儘速依預訂旅程安排旅遊活動，或安排甲方返國。<br>
+                    甲方受有損害者，另得請求賠償。<br>
+                    <b>第 二十六 條：（旅遊途中因不可抗力或不可歸責於旅行業之事由致旅遊內容變更）</b><br>
+                    旅遊途中因不可抗力或不可歸責於乙方之事由，致無法依預定之旅程、交通、食宿或遊覽項目等履行時，為維護本契約旅遊團體之安全及利益，乙方得變更旅程、遊覽項目或更換食宿、旅程；其因此所增加之費用，不得向甲方收取，所減少之費用，應退還甲方。<br>
+                    甲方不同意前項變更旅程時，得終止本契約，並得請求乙方墊付費用將其送回原出發地，於到達後附加年利率 5 ％利息償還乙方。<br>
+                    <b>第 二十七 條：（責任歸屬及協辦）</b><br>
+                    旅遊期間，因不可歸責於乙方之事由，致甲方搭乘飛機、輪船、火車、捷運、纜車等大眾運輸工具所受損害者，應由各該提供服務之業者直接對甲方負責。但乙方應盡善良管理人之注意，協助甲方處理。<br>
+                    <b>第 二十八 條：（旅客終止契約後之回程安排）</b><br>
+                    甲方於旅遊活動開始後，怠於配合乙方完成旅遊所需之行為致影響後續旅遊行程，而終止契約者，甲方得請求乙方墊付費用將其送回原出發地，於到達後附加年利率  5  ％利息償還之，乙方不得拒絕。<br>
+                    前項情形，乙方因甲方退出旅遊活動後，應可節省或無須支出之費用，應退還甲方。<br>
+                    乙方因第一項事由所受之損害，得向甲方請求賠償。<br>
+                    <b>第 二十九 條：（出發後旅客任意終止契約）</b><br>
+                    甲方於旅遊活動開始後，中途離隊退出旅遊活動時，不得要求乙方退還旅遊費用。<br>
+                    前項情形，乙方因甲方退出旅遊活動後，應可節省或無須支出之費用，應退還甲方。乙方並應為甲方安排脫隊後返回出發地之住宿及交通，其費用由甲方負擔。<br>
+                    甲方於旅遊活動開始後，未能及時參加依本契約所排定之行程者，視為自願放棄其權利，不得向乙方要求退費或任何補償。<br>
+                    <b>第 三十 條：（旅行業之協助處理義務）</b><br>
+                    甲方在旅遊中發生身體或財產上之事故時，乙方應盡善良管理人之注意為必要之協助及處理。<br>
+                    前項之事故，係因非可歸責於乙方之事由所致者，其所生之費用，由甲方負擔。<br>
+                    <b>第 三十一 條：（旅行業應投保責任保險及履約保證保險）</b><br>
+                    乙方應依主管機關之規定辦理責任保險及履約保證保險。責任保險投保金額：<br>
+                    一、  □依法令規定。<br>
+                    二、  ■高於法令規定，金額為：<br>
+                    (一) 每一旅客意外死亡新臺幣二百萬元。<br>
+                    (二) 每一旅客因意外事故所致體傷之醫療費用新臺幣二十萬元。<br>
+                    (三) 國內/外旅遊善後處理費用新臺幣十萬元。<br>
+                    (四) 每一旅客證件遺失之損害賠償費用新臺幣二千元。<br>
+                    乙方如未依前項規定投保者，於發生旅遊事故或不能履約之情形，應以主管機關規定最低投保金額計算其應理賠金額之三倍作為賠償金額。<br>
+                    乙方應於出團前，告知甲方有關投保旅行業責任保險之保險公司名稱及其連絡方式，以備甲方查詢。<br>
+                    <b>第 三十二 條：（購物及瑕疵損害之處理方式）</b><br>
+                    為顧及旅客之購物方便，乙方如安排甲方購買禮品時，應於本契約第三條所列行程中預先載明。乙方不得於旅遊途中，臨時安排購物行程。但經甲方要求或同意者，不在此限。<br>
+                    乙方安排特定場所購物，所購物品有貨價與品質不相當或瑕疪者，甲方得於受領所購物品後一個月內，請求乙方協助處理。 <br>
+                    乙方不得以任何理由或名義要求甲方代為攜帶物品返國。<br>
+                    <b>第 三十三 條：（誠信原則）</b><br>
+                    甲乙雙方應以誠信原則履行本契約。乙方依旅行業管理規則之規定，委託他旅行業代為招攬時，不得以未直接收甲方繳納費用，或以非直接招攬甲方參加本旅遊，或以本契約實際上非由乙方參與簽訂為抗辯。<br>
+                    <b>第 三十四 條：（消費爭議處理）</b><br>
+                    本契約履約過程中發生爭議時，乙方應即主動與甲方協商解決之。<br>
+                    乙方消費爭議處理申訴（客服）專線或電子信箱：service@startravel.com.tw<br>
+                    乙方對甲方之消費爭議申訴，應於三個營業日內專人聯繫處理，並依據消費者保護法之規定，自申訴之日起十五日內妥適處理之。<br>
+                    雙方經協商後仍無法解決爭議時，甲方得向交通部觀光局、直轄市或各縣（市）消費者保護官、直轄市或各縣（市）消費者爭議調解委員會、中華民國旅行業品質保障協會或鄉（鎮、市、區）公所調解委員會提出調解（處）申請，乙方除有正當理由外，不得拒絕出席調解（處）會。<br>
+                    <b>第 三十五 條：（個人資料之保護）</b><br>
+                    乙方因履行本契約之需要，於代辦證件、安排交通工具、住宿、餐飲、遊覽及其所附隨服務之目的內，甲方同意乙方得依法規規定蒐集、處理、傳輸及利用其個人資料。<br>
+                    甲方：□同意。□不同意（甲方如不同意，乙方將無法提供本契約之旅遊服務）。<br>
+                    （二者擇一勾選；未勾選者，視為不同意）<br>
+                    簽名： <br>
+                    <br>
+                    前項甲方之個人資料，乙方負有保密義務，非經甲方書面同意或依法規規定，不得將其個人資料提供予第三人。<br>
+                    第一項甲方個人資料蒐集之特定目的消失或旅遊終了時，乙方應主動或依甲方之請求，刪除、停止處理或利用甲方個人資料。但因執行職務或業務所必須或經甲方書面同意者，不在此限。<br>
+                    乙方發現第一項甲方個人資料遭竊取、竄改、毀損、滅失或洩漏時，應即向主管機關通報，並立即查明發生原因及責任歸屬，且依實際狀況採取必要措施。<br>
+                    前項情形，乙方應以書面、簡訊或其他適當方式通知甲方，使其可得知悉各該事實及乙方已採取之處理措施、客服電話窗口等資訊。<br>
+                    <b>第 三十六 條：（約定合意管轄法院）</b><br>
+                    甲、乙雙方就本契約有關之爭議，以中華民國之法律為準據法。<br>
+                    因本契約發生訴訟時，甲乙雙方同意以 士林 地方法院為第一審管轄法院，但不得排除消費者保護法第四十七條或民事訴訟法第四百三十六條之九規定之小額訴訟管轄法院之適用。<br>
+                    <b>第 三十七 條（其他協議事項）</b><br>
+                    甲乙雙方同意遵守下列各項：<br>
+                    一、  甲方□同意□不同意乙方將其姓名提供給其他同團旅客。<br>
+                    二、  本契約之旅遊費用均以團體票或團體人數計價，遇個別身分優惠情形(如半票、不占床等)無價差，恕不另退費。<br>
+                    三、  前項協議事項，如有變更本契約其他條款之規定，除經交通部觀光局核准，其約定無效，但有利於甲方者，不在此限。<br>
+                    訂約人<br>
+                    <br>
+                    甲方：<br><br>
+                    住(居)所地址：<br>
+                    身分證字號：<br>
+                    電話或電傳：<br>
+                    (請參團旅客簽名；若有代表簽約者，煩請 簽名後一並簽署【等___ 幾位】並請務必回傳第一頁及本頁至您的業務人員)<br>
+                    <br>
+                    <br>
+                    乙方：燦星國際旅行社股份有限公司<br>
+                    註冊編號：交觀綜字第2136號<br>
+                    負責人：陳彥君<br>
+                    住址：台北市內湖區堤頂大道一段333號5樓<br>
+                    電話或傳真：(02)8178-3100<br>
+                    <br>
+                    乙方委託之旅行業副署公司名稱：（本契約如係綜合或甲種旅行業自行組團而與旅客簽約者，下列各項免填）<br>
+                    註冊編號：<br>
+                    <br>
+                    負責人：<br>
+                    地　址：<br>
+                    電話或電傳：<br>
+                    <br>
+                    <br>
+                    簽約日期：中華民國　　　　年　　　　月　　　　日　　<br>
+                    （如未記載以交付訂金日為簽約日期） <br>
+                    <br>
+                    簽約地點：　<br>
+                    （如未記載以甲方住所地為簽約地點）<br>
+
+                   </div>
+            </div>
+
+
+            <!-- 會員登入 -->
+
+            <div class="memberLogoin">
+                
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-sm-push-2 mb-20">
+                                    <h2 class="text-purple text-bold text-center mb-20">會員登入</h2>
+                                    <div class="form-group ">
+                                        <input type="text" class="form-control" name="user_name" id="user_name" placeholder="請輸入身分證字號" required="required">
+                                    </div>
+                                    <div class="form-group ">
+                                        <input type="password" class="form-control" name="user_passwd" id="user_passwd" placeholder="輸入密碼" required="required">
+                                    </div>
+                                    <div>
+                                        <input class="star-input" type="checkbox" id="read" name="" value="">
+                                        <label for="read"></label>
+                                        <div class="pl-30 mb-10" style="margin-top: -28px;">
+                                            <span class="text-purple text-bold">我已完整閱讀<span class="text-red">訂購須知</span>(含個資聲明)及旅遊契約書並同意所有規定事項</span>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:" class="loginBTN01" onclick="loginfuction()">登入</a>
+                                    <!-- <input type="button" class="loginBTN01"  title="" value="登入" onclick="login_click()" />-->
+                                    <!--<input type="submit" class="loginBTN01" title="" value="登入"  />-->
+                                    <input type="hidden" id="room_count" name="room_count_name" value="">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="loginBTN02">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                                        <button type="">忘記密碼？</button>
+                                        <button type="">加入會員</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+
+
+
+
+
+
+             </div>
+
+           </div>
+
+           
+        <script>
+
+            function loginfuction(){
+            
+                var user_name = $('#user_name').val();
+                var user_passwd = $('#user_passwd').val();
+                var checked_box_value=  $('#read').is(':checked');
+
+                if ((user_name=="" )|| (user_passwd==""))
+                {
+                    alert( "身分證字號或密碼為空");
+
+                    console("null");
+                  //  return RedirectToAction("Index", "Step1", new { prod_no = view_prod_no, grp_no = view_grp_no });
+                }else if(checked_box_value==false){
+
+                    alert( "請勾選閱讀事項");
+
+                }else{
+                    
+                    $('#myform').submit();
+
+                }
+            
+            
+            
+            }
+
+
+        </script>       
+        
+        
+        
+        
+        
+         <script>
+
+                $('#myform').submit(function(){
+                    var ary_room=[];
+                    
+                    $('.table-responsive .star-select2').each(function () {
+                        ary_room.push($(this).val());
+
+
+                    });
+                   
+                  
+                    $('#room_count').val(ary_room);
+                    
+                    console.log(ary_room);
+                    console.log($('#room_count').val());
+
+                    return true;
+                });
+
+
+      
+             </script>
+
+
+
+
+            <!-- footer======================================================================= -->
+            <div class="footer">
+                <!-- award -->
+                <div class="footerAward">
+                    <div class="star-container">
+                        <ul>
+                            <li>
+                                <a href="javascript:;" title="">
+                                    <img src="~/Content/images/award-01.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">
+                                    <img src="~/Content/images/award-02.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">
+                                    <img src="~/Content/images/award-03.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">
+                                    <img src="~/Content/images/award-04.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- footermenu -->
+                <div class="footerMenu">
+                    <div class="star-container">
+                        <ul>
+                            <li>
+                                <a href="javascript:;" title="">關於燦星</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">交易安全</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">隱私權條款</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">策略聯盟</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">菁英募集</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">企業商務</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">福委會</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">寫信給我們</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">網站導覽</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">陸客來台</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" title="">防詐騙聲明</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- footerContent -->
+                <div class="footerContent">
+                    <div class="star-container">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <a class="footerPhone" href="tel:0281783000" title="">訂購諮詢專線：(02)8178-3000</a>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <a class="footerPhone" href="tel:024128686" title="">全台門市訂購專線：(02)412-8686</a>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <a class="footerPhone" href="tel:0227900550" title="">企業服務專線：(02)2790-0550</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+                                <strong class="footerContentTitle">燦星國際旅行社股份有限公司</strong>
+                                總公司：<a href="javascript:;" target="_blank">台北市內湖區堤頂大道一段331號4樓</a><br>
+                                訂購諮詢電話：<a href="tel:0281783000">(02)8178-3000</a><br>
+                                || 週六日/ 國定假日 AM09:00~PM19:00 ||<br>
+                                || 平日 週一 ~ 週五 AM08:00~AM02:00 ||<br>
+                                傳真電話：070-10168-965<br>
+                                客服信箱：<a href="mailto:service@startravel.com.tw">service@startravel.com.tw</a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <strong class="footerContentTitle">全台服務據點</strong>
+                                代表門市<br>
+                                台北寧夏店 (02)2556-1226<br>
+                                台北南京旗艦店 (02)6608-8155<br>
+                                新北蘆洲門市 (02)2281-6076<br>
+                                新北土城門市 (02)8261-6403<br>
+                                桃園八德門市 (03)361-8368<br>
+                                新竹竹科門市 (03)578-5377<br>
+                                苗栗竹南門市 (037)550-545<br>
+                                台中門市 (04)3600-6799<br>
+                                台南永華店 (06)293-3200<br>
+                                高雄門市 (07)969-6618
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <strong class="footerContentTitle">企業服務 </strong>
+                                服務項目：獎勵旅遊、商務差旅、員工旅遊、自組一團、公家機關<br>
+                                專線：(02)2790-0550、(02)81783000#8151<br>
+                                信箱：mice01@startravel.com.tw <br>
+                                週一~週五 AM9:00-PM18:00<br>
+                                <br>
+                                <strong class="footerContentTitle">同業聯絡</strong>
+                                <a href="http://goo.gl/ZEItJe" title="" target="_blank">http://goo.gl/ZEItJe</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footerCertification -->
+                <div class="footerCertification">
+                    <div class="star-container">
+                        <ul>
+                            <li>
+                                <a class="footer-icon01" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon02" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon03" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon04" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon05" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon06" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                            <li>
+                                <a class="footer-icon07" href="javascript:;" title="" target="_blank"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- footerCopyright -->
+                <div class="footerCopyright">
+                    <div class="star-container">
+                        ‧代表人：陳彥君 ‧聯絡人：鐘長利  綜合旅行社‧交觀綜字第2136號‧旅行社品質保障協會100字第北1819號 © 燦星旅遊版權所有盜用必究　All Rights Reserved.
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- footer-mobile=============================================================== -->
+            <div class="footer-mobile">
+                <div>
+                    代表人：陳彥君 / 聯絡人：鐘長利<br>
+                    綜合旅行社 / 交觀綜字第2136號 / 旅行社品質保障協會100字第北1819號<br>
+                    © 燦星旅遊版權所有盜用必究 All Rights Reserved.
+                </div>
+            </div>
+
+
+
+
+            <!-- gotoTop==================================================================== -->
+            <div class="gotoTop">
+                <a href="javascript:;" id="topBTN">
+                    <img src="~/Content/images/gotoTop.png" alt="">
+                </a>
+            </div>
+
+}
+</body>
+</html>

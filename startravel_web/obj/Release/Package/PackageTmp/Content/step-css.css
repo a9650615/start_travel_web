@@ -1,0 +1,915 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+/* 結帳步驟共用==================================================================== */
+
+.content .step{
+	padding: 10px 0;
+}
+.content .step-mobile{
+	display: none;
+	width: 100%;
+	background-color: #771a7a;
+	padding: 10px 10px 10px 30px;
+	color: #ffffff;
+	text-align: center;
+	position: relative;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.content .step-mobile span{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: #ffffff;
+	color: #771a7a;
+	display: inline-block;
+}
+.content .step-mobile a{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	color: #ffffff;	
+}
+.content .step-mobile a:focus,
+.content .step-mobile a:hover{
+	color: #ffd200;
+}
+@media screen and (max-width:768px){
+	.content .step{
+		display: none;
+	}
+	.content .step-mobile{
+		display: block;
+	}
+
+}
+
+.content .mainInfo{
+	width: 100%;
+	padding: 15px;
+	background-color: #f4ecf5;
+	line-height: 30px;
+}
+.content .mainInfo a{
+	color: #006d9a;
+	text-decoration: underline;
+	transition: .3s;
+}
+.content .mainInfo a:focus,
+.content .mainInfo a:hover{
+	background-color: #ffd200;
+	color: #771a7a;
+	text-decoration: none;
+}
+@media screen and (max-width:768px){
+	.content .mainInfo{
+		padding: 5px;
+		padding-bottom: 40px;
+	}
+}
+
+
+
+
+.content .infoBlock{
+	border: 1px solid #771a7a;
+	padding: 15px;
+}
+
+
+/* 上下步 */
+.content .goNext{
+	min-width: 100%;
+	background-color: #771a7a;
+	margin-left: -15px;
+	margin-right: -15px;
+	font-weight: bold;
+}
+.content .goNext a{
+	transition: .3s;
+}
+.content .goNext .goBackBtn{
+	color: #ffffff;
+	padding: 0 15px;
+	display: inline-block;
+	font-size: 24px;
+	line-height: 90px;
+}
+.content .goNext .goNextBtn{
+	width: 240px;
+	text-align: center;
+	background-color: #ffd200;
+	display: inline-block;
+	font-size: 30px;
+	line-height: 90px;
+	color: #771a7a;
+	float: right;
+}
+.content .goNext a:focus,
+.content .goNext a:hover{
+	text-decoration: none;
+}
+.content .goNext .goBackBtn:focus,
+.content .goNext .goBackBtn:hover{
+	font-size: 20px;
+}
+.content .goNext .goNextBtn:focus,
+.content .goNext .goNextBtn:hover{
+	width: 280px;
+	font-size: 40px;
+}
+@media screen and (max-width:380px){
+	.content .goNext .goBackBtn{
+		padding: 0 10px;
+		font-size: 16px;
+		line-height: 70px;
+	}
+	.content .goNext .goNextBtn{
+		width: 140px;
+		font-size: 20px;
+		line-height: 70px;
+	}
+	.content .goNext .goBackBtn:focus,
+	.content .goNext .goBackBtn:hover{
+		font-size: 14px;
+	}
+	.content .goNext .goNextBtn:focus,
+	.content .goNext .goNextBtn:hover{
+		font-size: 28px;
+		width: 160px;
+	}
+}
+.content .goNext2{
+	min-width: 100%;
+	height: 90px;
+	background-color: #771a7a;
+	margin-left: -15px;
+	margin-right: -15px;
+	font-weight: bold;
+	line-height: 90px;
+}
+.content .goNext2 .goNextBtn{
+	width: 240px;
+	text-align: center;
+	background-color: #ffd200;
+	display: inline-block;
+	font-size: 30px;
+	line-height: 90px;
+	color: #771a7a;
+	float: right;
+	transition: .3s;
+}
+.content .goNext2 .goNextBtn:focus,
+.content .goNext2 .goNextBtn:hover{
+	width: 280px;
+	font-size: 40px;
+	text-decoration: none;
+}
+@media screen and (max-width:380px){
+	.content .goNext2{
+		height: 70px;
+	}
+	.content .goNext2 .goNextBtn{
+		width: 150px;
+		font-size: 20px;
+		line-height: 70px;
+	}
+	.content .goNext2 .goNextBtn:focus,
+	.content .goNext2 .goNextBtn:hover{
+		font-size: 28px;
+		width: 200px;
+	}
+}
+
+
+.mobile-goNext{
+	width: 100%;
+	background-color: #771a7a;
+	padding: 25px 10px;
+	display: none;
+	color: #ffffff;
+}
+.mobile-goNext a{
+	float: right;
+	display: inline-block;
+	font-size: 24px;
+	color: #ffd200;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: 2px solid #ffef00;
+	transition: .3s;
+}
+.mobile-goNext .mobile-goNext-price{
+	padding: 10px 0;
+	display: inline-block;
+	font-size: 14px;
+}
+.mobile-goNext .mobile-goNext-price>strong{
+	font-size: 30px;
+}
+.mobile-goNext a:focus,
+.mobile-goNext a:hover{
+	background-color: #ffd200;
+	color: #771a7a;
+	text-decoration: none;
+}
+.mobile-goNext .clear{
+	clear: both;
+}
+@media screen and (max-width:768px){
+	.mobile-goNext{
+		display: block;
+	}
+}
+/* @media screen and (max-width:500px){
+	.mobile-goNext a{
+		font-size: 18px;
+		padding: 5px 15px;
+	}
+	.mobile-goNext .mobile-goNext-price{
+		padding: 5px 0;
+	}
+	.mobile-goNext .mobile-goNext-price>strong{
+		font-size: 20px;
+	}
+} */
+
+
+
+@media screen and (max-width:767px){
+	.mobile-goNext-fixed{
+		width: 100%;
+		display: inline-block;
+		height: calc(100vh - 100px) ;
+		overflow-y: auto;
+	}
+	.mobile-goNext-fixed::-webkit-scrollbar { display: none; }
+	.mobile-goNext-fixed::-o-scrollbar { display: none; }
+	.mobile-goNext-fixed::-moz-scrollbar { display: none; }
+	.mobile-goNext-fixed::-ms-scrollbar { display: none; }
+}
+
+
+
+
+
+
+
+
+
+/* star-table01 */
+.star-table01{
+	border: 1px solid #771a7a;
+}
+.star-table01>thead>tr>th{
+	border: 1px solid #771a7a;
+	color: #771a7a;
+	font-weight: bold;
+}
+.star-table01 tr td{
+	border: 1px solid #771a7a;
+}
+.star-table01 .star-table01-subtotal{
+	text-align: right;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.star-table01 .star-table01-total{
+	background-color: #f4ecf5;
+	color: #771a7a;
+	text-align: right;
+	font-size: 18px;
+	font-weight: bold;
+}
+.star-table01 .star-table01-total span{
+	font-size: 30px;
+	line-height: 70px;
+}
+@media screen and (max-width:768px){
+	.star-table01 .star-table01-subtotal{
+		text-align: left;
+	}
+	.star-table01 .star-table01-total{
+		text-align: left;
+	}
+
+}
+
+
+
+/* star-table02 */
+.star-table02{
+	border: 1px solid #771a7a;
+}
+.star-table02>thead>tr>th{
+	border: 1px solid #ffffff;
+	color: #ffffff;
+	background-color:#771a7a; 
+	font-weight: bold;
+	text-align: center;
+}
+.star-table02 tr td{
+	border: 1px solid #771a7a;
+	text-align: center;
+}
+
+
+
+
+/* star-table03 */
+.star-table03{
+	border: 1px solid #bbbbbb;
+}
+.star-table03>thead>tr>th{
+	border-bottom: 1px solid transparent;
+	background-color:#e9e9e9; 
+	font-weight: bold;
+	text-align: center;
+}
+.star-table03>tbody>tr>td{
+	font-size: 18px;
+	vertical-align: middle;
+}
+.star-table03>tbody>tr>td.star-table03-subtotal{
+	text-align: right;
+	font-size: 20px;
+}
+@media screen and (max-width:768px){
+	.star-table03-subtotal{
+		text-align: left;
+	}
+}
+
+
+
+
+
+/* table-mobile */
+.table-mobile{
+	display: none;
+}
+@media screen and (max-width:768px){
+	.table-mobile{
+		display: block;
+	}
+}
+.table-mobile .gray-block{
+	width: 100%;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 30px;
+	background-color: #ececec;
+	padding: 2px 10px;
+}
+.order-mobile{
+	padding: 10px;
+}
+.table-mobile .yellow-block{
+	background-color: #fff8d9;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	border-bottom: 3px solid #dddddd;
+	text-align: right;
+}
+.table-mobile .yellow-block a{
+	color: #007cbf;
+	text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* STEP02 成行人數============================================================ */
+.travelContractBook{
+	border: 1px solid #bbbbbb;
+	padding: 10px;
+	width: 100%;
+	height: 300px;
+	overflow-y: auto;
+}
+.memberLogoin{
+	background-color: #f4ecf5;
+	padding: 20px;
+	position: relative;
+}
+.memberLogoin .form-group input{
+	border-color: #771a7a;
+}
+.memberLogoin .loginBTN01{
+	width: 100%;
+	font-size: 24px;
+	padding: 1px 6px;
+	line-height: 40px;
+	background-color: #771a7a;
+	color: #ffffff;
+	font-weight: bold;
+	border-radius: 5px;
+	border-color: transparent;
+	transition: .3s;
+	display: block;
+	text-align: center;
+}
+.memberLogoin .loginBTN01:focus,
+.memberLogoin .loginBTN01:hover{
+	opacity: .8;
+	text-decoration: none;
+}
+
+.memberLogoin .loginBTN02{
+	border-left: 1px solid #c5c5c5;
+	margin-top: 30px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+.memberLogoin .loginBTN02 button{
+	width: 100%;
+	font-size: 16px;
+	color: #771a7a;
+	background-color: #ffffff;
+	border-radius: 5px;
+	border:1px solid #bbbbbb;
+	line-height: 40px;
+	transition: .3s;
+	margin-bottom: 20px;
+}
+.memberLogoin .loginBTN02 button:focus,
+.memberLogoin .loginBTN02 button:hover{
+	border-color: #771a7a;
+}
+@media screen and (max-width:768px){
+	.memberLogoin .loginBTN02{
+		border-left: 0px solid transparent;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+}
+
+
+
+.mobile-title-purple{
+	width: 100%;
+	background-color: #f4ecf5;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 5px 10px;
+	line-height: 40px;
+	color: #771a7a;
+	clear: right;
+	display: none;
+}
+.mobile-title-purple .travelContractBook-Mopen{
+	float: right;
+	color: #c7bcd1;
+	display: inline-block;
+}
+.mobile-title-purple .travelContractBook-Mclose{
+	float: right;
+	color: #c7bcd1;
+	display: none;
+}
+@media screen and (max-width:768px){
+	.travelContractBook{
+		width: 100%;
+		padding: 5px;
+		font-size: 14px;
+		display: none;
+	}
+	.mobile-title-purple{
+		display: block;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* STEP03 填寫旅客資料============================================================ */
+.orderInfo-block .orderInfo-block-1{
+	clear: left;
+	display: block;
+	min-height: 30px;
+}
+.orderInfo-block .orderInfo-block-1 div{
+	float: left;
+	display: inline-block;
+}
+.orderInfo-block-1 span{
+	font-size: 36px;
+	color: #ff4200;
+	display: inline-block;
+	margin-top: 20px;
+}
+.passengerInfo .passengerInfo-title{
+	width: 300px;
+	padding: 10px;
+	background-color: #771a7a;
+	color: #ffffff;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.passengerInfo .passengerInfo-title span{
+	display: inline-block;
+	margin-left: 20px;
+	color: #ffd200;
+}
+@media screen and (max-width:768px){
+	.passengerInfo .passengerInfo-title{
+		width: 100%;
+	}
+}
+.joinTheList{
+	padding-left: 10px;
+}
+.joinTheList label{
+	position: relative;
+	margin-left: 20px;
+}
+.joinTheList a{
+	color: #0082c8;
+	text-decoration: underline;
+	transition: .3s;
+}
+.joinTheList a:focus,
+.joinTheList a:hover{
+	color: #771a7a;
+	background-color: #eee4ee;
+	text-decoration: none;
+}
+.addItem{
+	width: 100%;
+	padding: 0px 10px;
+	display: inline-block;
+	position: relative;
+}
+.addItem2{
+	width: 100%;
+	padding: 5px 10px;
+	display: inline-block;
+	position: relative;
+	background-color: #f1f1f1;
+}
+.addItem-price{
+	line-height: 30px;
+	margin-top: 10px;
+}
+.addAllbtn{
+	display: inline-block;
+	margin-left: 20px;
+}
+.addAllcost{
+	display: inline-block;
+	margin-left: 20px;
+	padding-left: 30px;
+	line-height: 25px;
+	background-image: url('./images/icon-check.png');
+	background-repeat: no-repeat;
+	background-position: 0 -150px;
+}
+.addAllcost span{
+	color: #ff4200;
+	font-size: 24px;
+}
+.contactInfo-btn{
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+
+}
+
+
+
+
+
+
+
+
+/* STEP04-1選擇付款方式============================================================== */
+.mainInfo .orderInfo-title{
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+.mainInfo .orderInfo-title i.glyphicon-tags{
+	color: #771a7a;
+	font-size: 20px;
+	margin-right: 5px;
+}
+.mainInfo .orderInfo-block{
+	padding-left: 30px;
+}
+@media screen and (max-width:768px){
+	.mainInfo .orderInfo-block{
+		padding-left: 0px;
+	}
+}
+.mainInfo .orderInfo-block .orderNumber{
+	color: #ff4200;
+	font-size: 20px;
+	font-weight: bold;
+}
+.paymentTermNotice{
+	color: #0082c8;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.chooseItem-topBlock{
+	min-width: 100%;
+	background-color: #f4ecf5;
+	margin-right: -15px;
+	margin-top: -15px;
+	margin-left: -15px;
+	padding: 5px 15px;
+	font-size: 20px;
+	line-height: 40px;
+	margin-bottom: 20px;
+}
+.chooseItem-topBlock .orange-info{
+	text-align: right;
+	float: right;
+	line-height: 40px;
+}
+.chooseItem-radiobox{
+	display: inline-block;
+	position: relative;
+/* 	margin-left: 10px;
+	margin-right: 10px; */
+}
+.step03-paymentInfo{
+	line-height: 1.5em;
+}
+.step03-paymentInfo .row{
+	text-align: right;
+	margin-bottom:20px;
+}
+.step03-paymentInfo hr{
+	border-color: #bbbbbb;
+}
+.choosePayment-first .chooseItem-radiobox,
+.choosePayment-item .chooseItem-radiobox{
+	margin-left: 0px;
+	position: relative;
+}
+.choosePayment-item{
+	background-color: #f4ecf5;
+	padding: 10px 15px 10px;
+	margin-bottom: 10px;
+	line-height: 30px;
+}
+.choosePayment-item div{
+	margin: 5px 0;
+	position: relative;
+}
+@media screen and (max-width:768px){
+	.step03-paymentInfo{
+		background-color: #fff8d9;
+	}
+	.open-paymentInfo-block{
+		display: none;
+	}
+
+}
+.open-paymentInfo{
+	color: #007cbf;
+	text-decoration: underline;
+}
+
+
+
+
+
+
+
+/* STEP04-2結帳頁=================================================================== */
+/* ATM匯款資訊 */
+.content .atmInfo .atmInfo-top{
+	text-align: center;
+	padding: 10px 0;
+	color: #771a7a;
+	border-bottom: 1px solid #aaaaaa;
+}
+.content .atmInfo .atmInfo-bottom{
+	text-align: center;
+	padding: 10px 0;
+}
+
+
+/* 填寫信用卡資料 */
+.cardInfo label{
+	line-height: 45px;
+}
+.cardInfo input.form-control{
+	height: 45px;
+	border-radius: 5px;
+	line-height: 45px;
+	border: 1px solid #aaaaaa;
+}
+.cardInfo input.cardInfo-input2{
+	width: 100px;
+	height: 45px;
+	border-radius: 5px;
+	line-height: 45px;
+	border: 1px solid #aaaaaa;
+	padding: 0 10px;
+	margin-left: 15px;
+}
+.cardInfo input:focus{
+	outline: none;
+	border-color: #771a7a;
+}
+.cardInfo select{
+	width: 100%;
+	height: 45px;
+	border-radius: 5px;
+	display: inline-block;
+	line-height: 45px;
+	border: 1px solid #aaaaaa;
+}
+.cardInfo select:focus{
+	outline: none;
+	border-color: #771a7a;
+}
+.cardInfo .cardInfo-label{
+	text-align: right;
+}
+@media screen and (max-width:768px){
+	.cardInfo .cardInfo-label{
+		text-align: left;
+	}
+	.cardInfo input.cardInfo-input2{
+		width: 30%;
+		margin-left: 0;
+		display: block;
+	}
+}
+
+/* 安全交易說明 */
+.content .paySSL{
+	width: 100%;
+	padding: 15px;
+	background-color: #feffe7;
+}
+.content .paySSL .paySSL-img{
+	text-align: center;
+}
+.content .paySSL .paySSL-img img{
+	max-width: 100%;
+}
+.content .paySSL h4{
+	font-size: 20px;
+}
+.content .paySSL ul{
+	padding-left:20px ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* STEP05完成訂購============================================================== */
+.orange-info{
+	font-size: 20px;
+	display: block;
+	color: #ff4200;
+	font-weight: bold;
+	font-family: "Tahoma","微軟正黑體";
+	line-height: 30px;
+}
+.orderDetails-name{
+	font-weight: 800;
+}
+.orderDetails-product{
+	font-size: 20px;
+	color: #999999;
+}
+.orderDetails ul{
+	color: #771a7a;
+	padding-left: 20px;
+}
+.orderDetails ul li span{
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+}
+.orderDetails-table,.orderDetails-table>thead>tr>th{
+	text-align: center;
+}
+.orderDetails-table>thead>tr>th{
+	background-color: #f7f2de;
+}
+.orderDetails-table>tbody>tr>td{
+	background-color: #efefef;
+}
+.orderDetails-table>thead>tr>th,
+.orderDetails-table>tbody>tr>td{
+	border: 1px solid #ffffff;
+}
+.orderDetails-info{
+	text-align: right;
+	font-size: 18px;
+	line-height: 30px;
+	font-weight: bold;
+}
+.orderDetails-info .orderDetails-info-important{
+	color: #ff4200;
+	font-size: 24px;
+	line-height: 36px;
+}
+.contentInfor-title{
+	padding: 5px 15px;
+	display: inline-block;
+	border: 1px solid #771a7a;
+	float: left;
+}
+.contentInfor-info{
+	padding: 5px 15px;
+	display: inline-block;
+	float: left;
+}
+.step05-note{
+	border-left: 5px solid #771a7a;
+	padding: 5px 15px;
+}
+.orderDetails-mobile{
+	padding: 0 15px;
+}
+.orderDetails-mobile>.row{
+	border-bottom: 1px solid #dddddd;
+	/* padding: 5px 0; */
+	margin-bottom: 10px;
+}
+@media screen and (max-width:768px){
+	.orange-info{
+		font-size: 16px;
+	}
+	.orderDetails-name{
+		font-size: 16px;
+	}
+	.orderDetails-product{
+		font-size: 16px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:990px){
+
+
+}
+@media screen and (max-width:768px){
+
+
+}
+@media screen and (max-width:380px){
+
+
+
+}

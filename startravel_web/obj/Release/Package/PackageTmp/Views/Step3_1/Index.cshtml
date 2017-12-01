@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+
+@model startravel_web.Models.step3_1_view_return_data
+
+@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/star-ui")
+
+@Scripts.Render("~/bundles/modernizr")
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>燦星旅遊-出國旅遊第一選擇，夢想般國外旅遊行程</title>
+    <link rel="shortcut icon" href="~/Content/images/star-icon.png" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-ui.css">
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/HeaderFooter.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/step-css.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim and Respond.js 讓 IE8 支援 HTML5 元素與媒體查詢 -->
+    <!-- 警告：Respond.js 無法在 file:// 協定下運作 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <!-- header======================================================================= -->
+    <div class="header-03">
+        <div class="star-container">
+            <div class="header-rainbow">
+                <img src="~/Content/images/rainbow.png" alt="">
+            </div>
+            <a class="header-logo" href="http://www.startravel.com.tw/" title="">
+                <img src="~/Content/images/logo-text.png" alt="">
+            </a>
+        </div>
+    </div>
+
+    <!-- 內容區塊===================================================================== -->
+    <div class="content content-white">
+        <div class="star-container">
+            <!-- step -->
+            <div class="step">
+                <img class="img-responsive" src="~/Content/images/step03.png" alt="">
+            </div>
+            <div class="step-mobile">
+                <span>3</span>
+                選擇付款方式
+                <a href="~/step3/Index" title="">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+            </div>
+
+
+
+
+            @{
+                DateTime order_date_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.ORDER_DATE).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+            }
+
+            <!-- mainInfo -->
+            <div class="mainInfo mb-20">
+                <strong>
+                    親愛的 <span class="text-purple">@Html.DisplayFor(model =>model.orderinfomation_result.Data.USER_NAME).ToString()</span> 您好： <br>
+                    感謝您訂購： @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.orderinfomation_result.Data.PROD_NAME).ToString()))<br>
+                    訂單編號： <span class="text-red">@Html.DisplayFor(model => model.orderinfomation_result.Data.ORDER_NO).ToString()</span> ( 請務必記錄，以方便您日後查詢本次交易狀況)<br>
+                    訂購日期： @order_date_d.ToString("yyyy/MM/dd")<br>
+                    提醒您 ! 出國前別忘了檢查您的護照及簽證日期，如您尚未辦理相關證照，StarTravel 提供您最完善迅速的簽證服務。前往辦理簽證<br>
+                    若有相關問題請聯絡我們的客服人員 吳滿齡
+                </strong>
+            </div>
+
+
+
+            @{
+                int total_prod_amt = 0;
+            }
+
+
+
+            <!-- 付款明細 -->
+            <div class="paymentDetails">
+                <h3 class="text-purple text-bold">付款明細</h3>
+                <div class="table-responsive">
+                    <table class="star-table01 table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">旅客姓名</th>
+                                <th style="width:40%;">商品名稱</th>
+                                <th style="width:20%;">出發日期</th>
+                                <th style="width:20%;">應付金額</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for(int i=0;i<Model.orderinfomation_result.Data.OrderLst.Count;i=i+1)
+                            {
+                                var item_cus = Model.orderinfomation_result.Data.OrderLst[i]; 
+                                string cus_name=item_cus.CUS_NAME;
+                                string cus_sex_s;
+                                //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                if(cus_sex_i==0)
+                                {
+                                    cus_sex_s = "MR.";
+                                }else{
+                                    cus_sex_s = "MS.";
+                                }
+                                
+                                
+                                total_prod_amt = total_prod_amt + Prod_Amt_i;
+                             <tr>
+                                <td>@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</td>
+                                <td>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item_cus.PROD_NAME).ToString()))</td>
+                                <td>2017/10/17</td>
+                                <td>@Prod_Amt_i.ToString("#,#")</td>
+                            </tr>
+                            }
+
+                            <tr>
+                                <td class="star-table01-subtotal" colspan="4">
+                                    應付總額 @total_prod_amt.ToString("#,#") 元<br>
+                                    -本人折抵T-Cash @Html.DisplayFor(model =>model.tcash).ToString() 元<br>
+                                    -未付金額1,000元
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="star-table01-total" colspan="4">
+                                    本次結帳金額 <span>49,000</span> 元(含稅)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            @{
+                string atm_account_s = Html.DisplayFor(model => model.atmtransferaccount_result.Data[0].ATMTransferAccountNo).ToString();
+                string[] atm_count_arrary = atm_account_s.ToString().Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            <!-- ATM匯款資訊 -->
+            <div class="atmInfo">
+                <h3 class="text-purple text-bold">ATM匯款資訊</h3>
+                <div class="infoBlock mb-20">
+                    <div class="atmInfo-top">
+                        ATM帳號： @atm_count_arrary[1].ToString()<br>
+                        (兆豐國際商業銀行 @atm_count_arrary[0].ToString() )
+                    </div>
+                    <div class="atmInfo-bottom">
+                        ●本訂單之ATM轉帳付款，不受非約定帳戶每日三萬元的限制！您可以放心選擇ATM轉帳付款，完成您的訂購程序。<br>
+                        ●本訂單不接受國外匯款，或國外ATM虛擬帳號之匯款
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 下一步 -->
+            <div class="goNext mb-20">
+                <a class="goBackBtn" href="~/step3/Index" title="">
+                    上一步
+                </a>
+                <a class="goNextBtn" href="~/step4/Index" title="">
+                    完成訂購
+                </a>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- 安全交易說明 -->
+            <div class="paySSL">
+                <div class="row">
+                    <div class="paySSL-img col-xs-12 col-sm-3">
+                        <img src="../../images/paySSL.png" alt="">
+                    </div>
+                    <div class="col-xs-12 col-sm-9">
+                        <h4>安全交易說明</h4>
+                        <ul>
+                            <li>本網站所在地為台灣(TAIWAN)，交易使用幣別為新台幣(NTD)。</li>
+                            <li>配合隻收單銀行：中國信託商業銀行。</li>
+                            <li>本網站採用全世界最先進的SSL(Secure Socket Layer)128bit傳輸加密機制，您的重要資訊接用複雜的數學雲算方式進行亂數編碼，能有效保障交易安全。</li>
+                            <li>此外，本網站亦經網際威信(HiTrust)認證為「全球安全認證網站」，並使用其Veri-Sign電子交易安全簽章認證服務。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- footer======================================================================= -->
+    <div class="footer">
+        <!-- award -->
+        <div class="footerAward">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-01.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-02.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-03.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-04.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footermenu -->
+        <div class="footerMenu">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a href="javascript:;" title="">關於燦星</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">交易安全</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">隱私權條款</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">策略聯盟</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">菁英募集</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">企業商務</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">福委會</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">寫信給我們</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">網站導覽</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">陸客來台</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">防詐騙聲明</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footerContent -->
+        <div class="footerContent">
+            <div class="star-container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:0281783000" title="">訂購諮詢專線：(02)8178-3000</a>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:024128686" title="">全台門市訂購專線：(02)412-8686</a>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:0227900550" title="">企業服務專線：(02)2790-0550</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">燦星國際旅行社股份有限公司</strong>
+                        總公司：<a href="javascript:;" target="_blank">台北市內湖區堤頂大道一段331號4樓</a><br>
+                        訂購諮詢電話：<a href="tel:0281783000">(02)8178-3000</a><br>
+                        || 週六日/ 國定假日 AM09:00~PM19:00 ||<br>
+                        || 平日 週一 ~ 週五 AM08:00~AM02:00 ||<br>
+                        傳真電話：070-10168-965<br>
+                        客服信箱：<a href="mailto:service@startravel.com.tw">service@startravel.com.tw</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">全台服務據點</strong>
+                        代表門市<br>
+                        台北寧夏店 (02)2556-1226<br>
+                        台北南京旗艦店 (02)6608-8155<br>
+                        新北蘆洲門市 (02)2281-6076<br>
+                        新北土城門市 (02)8261-6403<br>
+                        桃園八德門市 (03)361-8368<br>
+                        新竹竹科門市 (03)578-5377<br>
+                        苗栗竹南門市 (037)550-545<br>
+                        台中門市 (04)3600-6799<br>
+                        台南永華店 (06)293-3200<br>
+                        高雄門市 (07)969-6618
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">企業服務 </strong>
+                        服務項目：獎勵旅遊、商務差旅、員工旅遊、自組一團、公家機關<br>
+                        專線：(02)2790-0550、(02)81783000#8151<br>
+                        信箱：mice01@startravel.com.tw <br>
+                        週一~週五 AM9:00-PM18:00<br>
+                        <br>
+                        <strong class="footerContentTitle">同業聯絡</strong>
+                        <a href="http://goo.gl/ZEItJe" title="" target="_blank">http://goo.gl/ZEItJe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footerCertification -->
+        <div class="footerCertification">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a class="footer-icon01" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon02" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon03" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon04" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon05" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon06" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon07" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footerCopyright -->
+        <div class="footerCopyright">
+            <div class="star-container">
+                ‧代表人：陳彥君 ‧聯絡人：鐘長利  綜合旅行社‧交觀綜字第2136號‧旅行社品質保障協會100字第北1819號 © 燦星旅遊版權所有盜用必究　All Rights Reserved.
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- footer-mobile=============================================================== -->
+    <div class="footer-mobile">
+        <div>
+            代表人：陳彥君 / 聯絡人：鐘長利<br>
+            綜合旅行社 / 交觀綜字第2136號 / 旅行社品質保障協會100字第北1819號<br>
+            © 燦星旅遊版權所有盜用必究 All Rights Reserved.
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- gotoTop==================================================================== -->
+    <div class="gotoTop">
+        <a href="javascript:;" id="topBTN">
+            <img src="~/Content/images/gotoTop.png" alt="">
+        </a>
+    </div>
+
+
+
+
+</body>
+</html>
