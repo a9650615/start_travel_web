@@ -882,9 +882,24 @@
 
 
 
-
-
-
+/* 詳細頁面-手機版月曆表 */
+.list-style {
+    padding: 10px;
+    font-size: 1rem;
+}
+.list-style > .date {
+    color: #333;
+    border-right: #ccc solid 2px;
+    padding: 10px 15px 10px 0px;
+    border-radius: 7px;
+    margin-right: 20px;
+}
+.list-style:not(:first-child) {
+    border-top: #ccc 1px solid;
+}
+.list-style .float-right {
+    float: right;
+}
 
 
 
@@ -2150,6 +2165,7 @@
 	margin: 5px 0;
 	font-weight: bold;
 	transition: .3s;
+    background:rgba(0,0,0,0);
 }
 .travel-mobile-bottom-signUp .travel-mobile-bottom-signUp-BTN:focus,
 .travel-mobile-bottom-signUp .travel-mobile-bottom-signUp-BTN:hover{

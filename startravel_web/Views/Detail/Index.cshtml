@@ -343,6 +343,7 @@
                 string s_month_first_d = s_month.DayOfWeek.ToString("d");
                 string e_month_first_d = e_month.DayOfWeek.ToString("d");
                 DateTime s_current_day = DateTime.ParseExact(s_month.ToString("yyyyMMdd"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime m_current_day = DateTime.ParseExact(s_month.ToString("yyyyMMdd"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture); //for mobile
                 DateTime e_current_day = DateTime.ParseExact(e_month.ToString("yyyyMMdd"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
                 int s_month_first_d_int = Int32.Parse(s_month_first_d);
@@ -383,7 +384,7 @@
                                             </a>
                                         </th>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidden-xs">
                                         <th style="width:14.28571%">日</th>
                                         <th style="width:14.28571%">一</th>
                                         <th style="width:14.28571%">二</th>
@@ -393,7 +394,10 @@
                                         <th style="width:14.28571%">六</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="hidden-xs">
+                                    @{ 
+                                        int date = 0;
+                                    }
                                    @{
                                        int i = 0; int j = 0;
                                        int start_flag = 0;
@@ -543,6 +547,46 @@
                                       }
                               </tbody>
                             </table>
+                            <!-- 自製區快 非f2e list-style(custom- style.css)-->
+                            <div class="content-mobile">
+                                @{ date_arrery_index = 0; }
+                                @for (i = 1; i <= s_month_days; i++)
+                                {
+                                    if (date_arrery_index < grp_date_number)
+                                    {
+                                        if (m_current_day.ToString("yyyyMMdd").Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
+                                        {
+
+                                            string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
+                                            int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+
+                                            <div class="list-style">
+                                                <span class="date">@i 日</span>
+                                                <span class="price">@price_grp_i.ToString("#,#")</span>
+                                                <div class="float-right">
+                                                    @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
+                                                    {
+                                                        if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
+                                                        {
+                                                            <span class="quota text-green">可候補</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="javascript:;" class="more">看更多團</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            date_arrery_index++;
+                                        }
+                                    }
+                                    m_current_day = m_current_day.AddDays(1);
+                                }
+                            </div>
                         </div>
                     </div>
 
