@@ -49,9 +49,9 @@ namespace startravel_web.Models
         public PassengerContacts_get_result passengercontacts_get_result { get; set; }
         public OrderStore_result orderstore_result { get; set; }
         public string room_count { get; set; }
-        public string[] psub_list { get; set; }
-        public string[] visa_list { get; set; }
-        public string[] insu_list { get; set; }
+        public string psub_list { get; set; }
+        public string visa_list { get; set; }
+        public string insu_list { get; set; }
         public int visa_count { get; set; }
         public int pusb_count { get; set; }
         public int insu_count { get; set; }

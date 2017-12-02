@@ -34,9 +34,9 @@ namespace startravel_web.Controllers
              string view_prod_no_s = "IGRP000011159";
              string view_grp_no_s = "TYO05ITC0717T";
              string room_count_name_s="1,1,0,0,0,0";
-            string[] psub_list = new string[7];
-            string[] visa_list = new string[7];
-            string[] insu_list = new string[7];
+            string psub_list = "";
+            string visa_list =  "";
+            string insu_list = "";
             int pusb_count = 0;
             int visa_count = 0;
             int insu_count = 0;
@@ -69,17 +69,36 @@ namespace startravel_web.Controllers
                 string name_num = item.prod_SUB_NO.Substring(0,4);
                 if (name_num.Equals("VISA"))
                 {
-                    visa_list[visa_count] = i.ToString();
+                    if (visa_count==0)
+                    {
+                       visa_list = i.ToString();
+                    }else
+                    {
+                        visa_list =visa_list+","+i.ToString();
+                    }
                     visa_count = visa_count + 1;
                 }
                 else if (name_num.Equals("PSUB"))
                 {
-                    psub_list[pusb_count] = i.ToString();
+                    if (pusb_count==0)
+                    { 
+                      psub_list = i.ToString();
+                    }else
+                    {
+                       psub_list =psub_list+","+i.ToString();
+                    }
                     pusb_count = pusb_count + 1;
                 }
                 else if (name_num.Equals("INSU"))
                 {
-                    insu_list[insu_count] = i.ToString();
+                    if (insu_count==0)
+                    { 
+                      insu_list = i.ToString();
+                    }
+                    else
+                    {
+                        insu_list = insu_list+","+i.ToString();
+                    }
                     insu_count = insu_count + 1;
                 }
                 
@@ -200,9 +219,9 @@ namespace startravel_web.Controllers
                     string view_grp_no_s = view_grp_no;
                     string room_count_name_s = room_count_name;
 
-                    string[] psub_list = new string[7];
-                    string[] visa_list = new string[7];
-                    string[] insu_list = new string[7];
+                    string psub_list = "";
+                    string visa_list = "";
+                    string insu_list = "";
                     int pusb_count = 0;
                     int visa_count = 0;
                     int insu_count = 0;
@@ -232,27 +251,50 @@ namespace startravel_web.Controllers
                     var orderstore_source = await api.OrderStore_api();
 
 
+
                     for (int i = 0; i < grpaddpurchase_source.Data.Count; i = i + 1)
                     {
                         var item = grpaddpurchase_source.Data[i];
                         string name_num = item.prod_SUB_NO.Substring(0, 4);
                         if (name_num.Equals("VISA"))
                         {
-                            visa_list[visa_count] = i.ToString();
+                            if (visa_count == 0)
+                            {
+                                visa_list = i.ToString();
+                            }
+                            else
+                            {
+                                visa_list = visa_list + "," + i.ToString();
+                            }
                             visa_count = visa_count + 1;
                         }
                         else if (name_num.Equals("PSUB"))
                         {
-                            psub_list[pusb_count] = i.ToString();
+                            if (pusb_count == 0)
+                            {
+                                psub_list = i.ToString();
+                            }
+                            else
+                            {
+                                psub_list = psub_list + "," + i.ToString();
+                            }
                             pusb_count = pusb_count + 1;
                         }
                         else if (name_num.Equals("INSU"))
                         {
-                            insu_list[insu_count] = i.ToString();
+                            if (insu_count == 0)
+                            {
+                                insu_list = i.ToString();
+                            }
+                            else
+                            {
+                                insu_list = insu_list + "," + i.ToString();
+                            }
                             insu_count = insu_count + 1;
                         }
 
                     }
+
 
                     string ary_member_info = loginverify_source.Data.MEMBER_NAME + "," + loginverify_source.Data.EMAIL;
 

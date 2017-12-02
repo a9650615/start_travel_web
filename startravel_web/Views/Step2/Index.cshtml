@@ -87,6 +87,9 @@
 
 
                 string[] room_count_arrary = Html.DisplayFor(model => model.room_count).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                string[] visa_list = Html.DisplayFor(model => model.visa_list).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                string[] psub_list = Html.DisplayFor(model => model.psub_list).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                string[] insu_list = Html.DisplayFor(model => model.insu_list).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
              
 
@@ -310,7 +313,7 @@
 
                                             @for (int i = 0; i < Model.pusb_count; i = i + 1)
                                             {
-                                                int arrary_num_pusb = int.Parse(Model.psub_list[i]);
+                                                int arrary_num_pusb = int.Parse(psub_list[i]);
                                                 <div class="addItem">
                                                     <div class="row mb-20">
                                                         <div class="col-xs-12 col-sm-8">
@@ -348,7 +351,7 @@
                                             @for (int i = 0; i < Model.visa_count; i = i + 1)
                                             {
                                                 var check_box_num_visa = i + Model.pusb_count;
-                                                int arrary_num_visa = int.Parse(Model.visa_list[i]);
+                                                int arrary_num_visa = int.Parse(visa_list[i]);
                                                 <div class="addItem">
                                                     <div class="row mb-20">
                                                         <div class="col-xs-12 col-sm-8">
@@ -384,7 +387,7 @@
                                             @for (int i = 0; i < Model.insu_count; i = i + 1)
                                             {
                                                 var check_box_num_insu = i + Model.pusb_count + Model.visa_count;
-                                                int arrary_num_insu = int.Parse(Model.insu_list[i]);
+                                                int arrary_num_insu = int.Parse(insu_list[i]);
 
                                                 <div class="addItem">
                                                     <div class="row mb-20">
