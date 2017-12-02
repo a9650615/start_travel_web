@@ -1294,7 +1294,9 @@ else if (str.Equals("JP"))
         });
 
         $('.date-close').click(function () {
-            $('.chooseDate').hide();
+            //$('.chooseDate').hide();
+            $('#widgetCalendar').DatePickerClear()
+            $('#widgetCalendar').DatePickerSetDate(new Date(), true)
         });
 
         $('#widgetCalendar').DatePicker({
