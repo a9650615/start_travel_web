@@ -143,11 +143,11 @@
                             <tbody>
                                 <tr>
                                     <td>@Html.DisplayFor(modelitem => item.COND_QTYB_NOTE).ToString() – @Html.DisplayFor(modelitem => item.QTYAC_NOTE).ToString()</td>
-                                    <td>@Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()</td>
-                                    <td>@Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()</td>
-                                    <td>@Html.DisplayFor(modelitem => item.PRE_AMT).ToString()</td>
-                                    <td>@Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()</td>
-                                    <td><span class="text-orange">@Html.DisplayFor(modelitem => item.NOPAID).ToString()</span></td>
+                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("C")</td>
+                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("C")</td>
+                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("C")</td>
+                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("C")</td>
+                                    <td><span class="text-orange">@Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("C")</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,7 +162,7 @@
                                     商品金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()
+                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("C")
                                 </div>
                             </div>
                             <div class="row">
@@ -170,7 +170,7 @@
                                     加購金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()
+                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("C")
                                 </div>
                             </div>
                            
@@ -179,7 +179,7 @@
                                     訂金金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Html.DisplayFor(modelitem => item.PRE_AMT).ToString()
+                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("C")
                                 </div>
                             </div>
                             <div class="row">
@@ -187,7 +187,7 @@
                                     已付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()
+                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("C")
                                 </div>
                             </div>
                             <div class="row">
@@ -195,7 +195,7 @@
                                     未付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    <span class="text-orange">@Html.DisplayFor(modelitem => item.NOPAID).ToString()</span>
+                                    <span class="text-orange">@Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("C")</span>
                                 </div>
                             </div>
 

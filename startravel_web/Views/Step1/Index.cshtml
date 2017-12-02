@@ -252,11 +252,12 @@
             <div class="table-mobile">
              @for (i = 0; i < Model.grppriceinfo_result.Data.Count;i=i+1 )
              {
-                 var item = Model.grppriceinfo_result.Data[i];      
-                foreach (var item_s in item.Role_Type)
-                {  
+                 var item = Model.grppriceinfo_result.Data[i];
+                 foreach (var item_s in item.Role_Type)
+                 {
                 <div class="gray-block">
-                    @Html.DisplayFor(modelitem => item.Category_name)
+                    @Html.DisplayFor(modelitem => item.Category_name) /
+                    @Html.DisplayFor(modelitem_s => item_s.Type_name)
                 </div>
                 <div class="order-mobile">
                     <form>
@@ -285,7 +286,7 @@
                                 含稅售價
                             </div>
                             <div class="col-xs-7">
-                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / <span class="text-orange2">@Html.DisplayFor(modelitem_s => item_s.Price)</span>元
+                                <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("##,##")</span>元
                             </div>
                         </div>
                         
