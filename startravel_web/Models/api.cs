@@ -55,6 +55,7 @@ namespace startravel_web.Models
         public int visa_count { get; set; }
         public int pusb_count { get; set; }
         public int insu_count { get; set; }
+        public string member_info { get; set; }
 
     }
 

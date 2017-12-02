@@ -41,8 +41,11 @@ namespace startravel_web.Controllers
             int visa_count = 0;
             int insu_count = 0;
 
-
             ApiController api = new ApiController();
+
+            LoginVerify_PostData loginverify_postData = new LoginVerify_PostData() { ID_NO = "T111111111", password = "test999" };
+            var loginverify_source = await api.LoginVerify_api(loginverify_postData);
+            
             GRPProductDetail_PostData grpproductdetail_postData = new GRPProductDetail_PostData() { prod_no = view_prod_no_s, grp_no = view_grp_no_s };
             IGRPTrafficInfo_PostData igrptrafficinfo_postData = new IGRPTrafficInfo_PostData() { prod_no = view_prod_no_s, grp_no = view_grp_no_s };
             GRPPriceInfo_PostData grppriceinfo_postData = new GRPPriceInfo_PostData() { prod_no = view_prod_no_s, grp_no = view_grp_no_s };
@@ -82,6 +85,8 @@ namespace startravel_web.Controllers
                 
             }
 
+            string ary_member_info = loginverify_source.Data.MEMBER_NAME + "," + loginverify_source.Data.EMAIL;
+
             step2_view_return_data step2_view_data = new step2_view_return_data {
                                  grpproductdetail_result = grpsource,
                                  igrptrafficinfo_result = igrptrafficinfo_source,
@@ -90,6 +95,7 @@ namespace startravel_web.Controllers
                                  grpaddpurchase_result = grpaddpurchase_source,
                                  passengercontacts_get_result=passengercontacts_source,
                                  orderstore_result=orderstore_source,
+                                 member_info = ary_member_info,
                                  visa_list = visa_list,
                                  psub_list = psub_list,
                                  insu_list = insu_list,
@@ -188,7 +194,7 @@ namespace startravel_web.Controllers
                 if (loginverify_source.rCode.Equals("0001"))
                 {
                     string member_number = loginverify_source.Data.MEMBER_NO;
-                    TempData["message"] = "登入成功";
+                   // TempData["message"] = "登入成功";
                     string member_number_s = member_number;
                     string view_prod_no_s = view_prod_no;
                     string view_grp_no_s = view_grp_no;
@@ -201,6 +207,12 @@ namespace startravel_web.Controllers
                     int visa_count = 0;
                     int insu_count = 0;
 
+
+
+                    ///Session
+                   // Session.Add("user_name", loginverify_source.Data.MEMBER_NAME);
+
+                    //ClientScript.RegisterClientScriptBlock(typeof(Default8), "SessionValue", String.Format("<script>var SessionValue='{0}';</script>", Session["AAA"])); 
 
                     // ApiController api = new ApiController();
                     GRPProductDetail_PostData grpproductdetail_postData = new GRPProductDetail_PostData() { prod_no = view_prod_no_s, grp_no = view_grp_no_s };
@@ -242,6 +254,9 @@ namespace startravel_web.Controllers
 
                     }
 
+                    string ary_member_info = loginverify_source.Data.MEMBER_NAME + "," + loginverify_source.Data.EMAIL;
+
+
                     step2_view_return_data step2_view_data = new step2_view_return_data
                     {
                         grpproductdetail_result = grpsource,
@@ -251,6 +266,8 @@ namespace startravel_web.Controllers
                         grpaddpurchase_result = grpaddpurchase_source,
                         passengercontacts_get_result = passengercontacts_source,
                         orderstore_result = orderstore_source,
+                        //loginverify_result=loginverify_source,
+                        member_info=ary_member_info,
                         visa_list = visa_list,
                         psub_list = psub_list,
                         insu_list = insu_list,
@@ -259,6 +276,10 @@ namespace startravel_web.Controllers
                         insu_count = insu_count
                     };
 
+                    //=====create memberInfo
+                    
+
+                    
 
                     //=====build passenget list item
                     List<SelectListItem> passenget_item = new List<SelectListItem>();
@@ -335,16 +356,51 @@ namespace startravel_web.Controllers
             }
            }
 
-            public ActionResult test()
+            public ActionResult test(
+                                            string contact_c_first_name,
+                                            string contact_c_last_name,
+                                            string contact_mobile,
+                                            string contact_h_phone,
+                                            string contact_o_phone,
+                                            string contact_email,
+                                            string contact_time,
+                                            string contact_note,
+                                            string passengerInfo_first_c_name_array,
+                                            string passengerInfo_last_c_name_array,
+                                            string passengerInfo_first_e_name_array,
+                                            string passengerInfo_last_e_name_array,
+                                            string passengerInfo_sex_array,
+                                            string passengerInfo_id_array,
+                                            string passengerInfo_birthday_array,
+                                            string passengerInfo_food_array,
+                                            string passengerInfo_prod_sub_array
+
+                )
             {
+
+                Response.Write("contact_c_first_name：" + contact_c_first_name + "<br/>");
+                Response.Write("contact_c_last_name：" + contact_c_last_name + "<br/>");
+                Response.Write("contact_mobile：" + contact_mobile + "<br/>");
+                Response.Write("contact_h_phone：" + contact_h_phone + "<br/>");
+                Response.Write("contact_o_phone：" + contact_o_phone + "<br/>");
+                Response.Write("contact_email：" + contact_email + "<br/>");
+                Response.Write("contact_time：" + contact_time + "<br/>");
+                Response.Write("contact_note：" + contact_note + "<br/>");
+                Response.Write("passengerInfo_first_c_name_array：" +passengerInfo_first_c_name_array +"<br/>");
+                Response.Write("passengerInfo_last_c_name_array：" +passengerInfo_last_c_name_array + "<br/>");
+                Response.Write("passengerInfo_first_e_name_array：" + passengerInfo_first_e_name_array + "<br/>");
+                Response.Write("passengerInfo_last_e_name_array：" +passengerInfo_last_e_name_array + "<br/>");
+                Response.Write("passengerInfo_sex_array：" + passengerInfo_sex_array + "<br/>");
+                Response.Write("passengerInfo_id_array：" + passengerInfo_id_array + "<br/>");
+                Response.Write("passengerInfo_birthday_array：" + passengerInfo_birthday_array + "<br/>");
+                Response.Write("passengerInfo_food_array：" + passengerInfo_food_array + "<br/>");
+                Response.Write("passengerInfo_prod_sub_array：" + passengerInfo_prod_sub_array + "<br/>");
+          
+          
           
             
                 return View();
             }
-   
-
-
-      
-
+ 
 	}
 }

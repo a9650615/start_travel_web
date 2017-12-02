@@ -44,7 +44,7 @@
 
 
 
-@using (Html.BeginForm("test", "Step2", FormMethod.Get, new { enctype = "multipart/form-data", name = "orderForm", id = "orderForm" }))
+@using (Html.BeginForm("test", "Step2", FormMethod.Get, new { enctype = "multipart/form-data", name = "myForm" ,id ="myform"}))
 {
     <!-- header======================================================================= -->
     <div class="header-03">
@@ -275,7 +275,7 @@
                         </div>
 
                         <span class="text-bold h3">加購商品</span>
-                        @if (total_passenger_count==9)
+                        @if (total_passenger_count==0)
                         {
                         <div class="addAllbtn">
                             <input class="star-input" type="checkbox" id="addAll"  onclick="addall_click()" >
@@ -421,7 +421,6 @@
             <input type="hidden" id="pusb_count_hidden" name="pusb_count_hidden" value="@Model.pusb_count">
             <input type="hidden" id="visa_count_hidden" name="visa_count_hidden" value="@Model.visa_count">
             <input type="hidden" id="insu_count_hidden" name="insu_count_hidden" value="@Model.insu_count">
-            <input type="hidden" id="room_count_hidden" name="room_count_hidden" value="@Model.room_count">
         </div>
     </div>
     <div class="content content-gray">
@@ -433,9 +432,8 @@
             <div class="mb-20">
                 <span class="text-purple text-bold h3">聯絡人資料</span>
                 <div class="contactInfo-btn">
-                    <input class="star-input" type="checkbox" id="contactInfo01" name="" value="" onclick="contactinfo_click('@Html.DisplayFor(modelitem => modelitem.member_info)')">
+                    <input class="star-input" type="checkbox" id="contactInfo01" name="" value="">
                     <label for="contactInfo01"></label>行程聯絡人同會員本人
-                    <input type="hidden" id="contactInfo_hidden" name="contactInfo_hidden" value="0">
                 </div>
                 <span class="text-orange">*為必填</span>
                
@@ -444,8 +442,8 @@
                             <div class="form-group">
                                 <label>中文姓名 <span class="text-orange">*</span></label>
                                 <div class="star-input-group input-group">
-                                    <input type="text" class="form-control" id="contact_c_first_name" name="contact_c_first_name" placeholder="姓">
-                                    <input type="text" class="form-control" id="contact_c_last_name" name="contact_c_last_name"  placeholder="名">
+                                    <input type="text" class="form-control" placeholder="姓">
+                                    <input type="text" class="form-control" placeholder="名">
                                 </div>
                             </div>
 
@@ -458,43 +456,45 @@
                         <div class="col-xs-12 col-sm-3">
                             <div class="form-group">
                                 <label>行動電話</label>
-                                <input type="text" class="form-control" id="contact_mobile" name="contact_mobile" placeholder="">
+                                <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-3">
                             <div class="form-group">
                                 <label>住家電話 <span class="text-orange">*</span></label>
-                                <input type="text" class="form-control" id="contact_h_phone" name="contact_h_phone" placeholder="">
+                                <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-3">
                             <div class="form-group">
                                 <label>公司電話 <span class="text-orange">*</span></label>
-                                <input type="text" class="form-control" id="contact_o_phone" name="contact_o_phone" placeholder="">
+                                <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
                     </div>
-                    
+                    <p>
+                        聯絡方式 &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="text-orange">若選擇電話，但撥打2次皆聯絡不到您時，會改以 e-mail 或簡訊聯繫</span>
+                    </p>
 
                     <div>
-                        <!--<input class="star-input" type="radio" id="contact01" name="contact" value="deposit">-->
-                        <label for="contact01"></label><span class="text-18 text-bold">email</span>
-                        <input class="star-input" type="text" id="contact_email" name="contact_email" placeholder="請輸入Ｅmail">
+                        <input class="star-input" type="radio" id="contact01" name="contact" value="deposit">
+                        <label for="contact01"></label><span class="text-18 text-bold">email或簡訊</span>
+                        <input class="star-input" type="text" name="" placeholder="請輸入Ｅmail">
                     </div>
                     <div class="mb-20">
-                        <!--<input class="star-input" type="radio" id="contact02" name="contact" value="deposit">-->
+                        <input class="star-input" type="radio" id="contact02" name="contact" value="deposit">
                         <label for="contact02"></label><span class="text-18 text-bold">電話聯繫，方便聯繫時段：</span>
-                        <select class="star-select " id="contact_time_select">
-                            <option value="0">09:00-12:00</option>
-                            <option value="1">12:00-18:00</option>
-                            <option value="2">18:00-21:00</option>
+                        <select class="star-select">
+                            <option>09:00-12:00</option>
+                            <option>12:00-18:00</option>
+                            <option>18:00-21:00</option>
                         </select>
-                        <input type="hidden" id="contact_time" name="contact_time" value="0">
                     </div>
                     <div>
                         <div class="form-group">
                             <label>備註</label>
-                            <input type="textarea" class="form-control star-input" id="contact_note" name="contact_note" placeholder="">
+                            <input type="textarea" class="form-control star-input" placeholder="">
                         </div>
                     </div>
                
@@ -504,7 +504,12 @@
 
         </div>
     </div>
-    
+    <div class="content content-gray">
+    </div>
+    <div class="content content-white">
+    </div>
+    <div class="content content-gray">
+    </div>
     <div class="content content-white">
         <div class="star-container">
 
@@ -581,7 +586,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
-                                        @Html.DropDownList("store_item", (IEnumerable<SelectListItem>)ViewBag.Selectstore,  new { id = "store_item", onchange = "droplist_select_store()" })
+                                        @Html.DropDownList("store_item", (IEnumerable<SelectListItem>)ViewBag.Selectstore, "請選擇門市", new { id = "store_item", onchange = "droplist_select_store()" })
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
@@ -641,19 +646,11 @@
 
 
 
-            <input type="hidden" id="passengerInfo_first_c_name_array" name="passengerInfo_first_c_name_array" >
-            <input type="hidden" id="passengerInfo_last_c_name_array" name="passengerInfo_last_c_name_array">
-            <input type="hidden" id="passengerInfo_first_e_name_array" name="passengerInfo_first_e_name_array">
-            <input type="hidden" id="passengerInfo_last_e_name_array" name="passengerInfo_last_e_name_array">
-            <input type="hidden" id="passengerInfo_sex_array" name="passengerInfo_sex_array">
-            <input type="hidden" id="passengerInfo_id_array" name="passengerInfo_id_array">
-            <input type="hidden" id="passengerInfo_birthday_array" name="passengerInfo_birthday_array">
-            <input type="hidden" id="passengerInfo_food_array" name="passengerInfo_food_array">
-            <input type="hidden" id="passengerInfo_prod_sub_array" name="passengerInfo_prod_sub_array">
 
 
 
-           
+
+
 
 
             <!-- 下一步 -->
@@ -693,28 +690,7 @@
 
         });
 
-        function contactinfo_click(k){
 
-            console.log(k);
-            var member_NewArray = new Array();
-            var checked_box_value=  $('#contactInfo01').is(':checked');
-
-            member_NewArray=k.split(",");
-            var member_c_f_name=member_NewArray[0].slice(0,1);
-            var member_c_l_name=member_NewArray[0].slice(1,3);
-            var member_email=member_NewArray[1];
-            
-            if(checked_box_value==true)
-            {
-                console.log(member_c_f_name);
-                console.log(member_c_l_name);
-                console.log(member_email);
-                  $('#contact_c_first_name').val(member_c_f_name);
-                  $('#contact_c_last_name').val(member_c_l_name);
-                  $('#contact_email').val(member_email);
-            }
-            //co Session["user_name"];
-        }
 
 
 
@@ -730,24 +706,16 @@
             var cus_birthday_array=[];
             var cus_food_array=[];
 
-
-            //pusb
-            var pusb_count=$('#pusb_count_hidden').val();
-            var visa_count=$('#visa_count_hidden').val();
-            var insu_count=$('#insu_count_hidden').val();
-
-            var cus_prod_sub_list=[];    ///   {   ,  ,    ,   |    , ,     |      }
-                                                        ///      pusb          visa          insu
-
-              
             var i=0;
 
            
-            // *********///ervery_passenger     passengerInfo
+            //passengerInfo
             for(i=0;i<parseInt(k);i=i+1)
             {
 
-               
+                //passengerInfo_id_no_
+                //passengerInfo_birthday_
+                //passengerInfo_food
                 var passengerInfo_first_c_name_no= ".passengerInfo_first_c_name_"+i;
                 var passengerInfo_last_c_name_no= ".passengerInfo_last_c_name_"+i;
                 var passengerInfo_first_e_name_no= ".passengerInfo_first_e_name_"+i;
@@ -765,77 +733,7 @@
                 cus_id_array.push($(passengerInfo_id_no).val());
                 cus_birthday_array.push($(passengerInfo_birthday_no).val());
                 cus_food_array.push($(passengerInfo_food_no).val());
-
-
-                //pusb
-                for(var j=0;j<pusb_count;j=j+1)
-                {
-                    var checked_box_no="#add_"+j+"_pusb_"+i;
-                    var checked_box_value=  $(checked_box_no).is(':checked');
-                    if(checked_box_value==true)
-                    {
-
-                        cus_prod_sub_list.push(1);
-
-                    }else{
-
-                        cus_prod_sub_list.push(0);
-                    }
-
-
-                }
-
-                //visa
-                for(var j=0;j<visa_count;j=j+1)
-                {
-                    var checked_box_no="#add_"+j+"_visa_"+i;
-                    var checked_box_value=  $(checked_box_no).is(':checked');
-                    if(checked_box_value==true)
-                    {
-
-                        cus_prod_sub_list.push(1);
-
-                    }else{
-
-                        cus_prod_sub_list.push(0);
-                    }
-
-
-                }
-
-                //insu
-                for(var j=0;j<insu_count;j=j+1)
-                {
-                    var checked_box_no="#add_"+j+"_insu_"+i;
-                    var checked_box_value=  $(checked_box_no).is(':checked');
-                    if(checked_box_value==true)
-                    {
-
-                        cus_prod_sub_list.push(1);
-
-                    }else{
-
-                        cus_prod_sub_list.push(0);
-                    }
-                }
             }
-            // *********ervery_passenger     passengerInfo
-
-            //contact_info
-            var contact_time_value=$('#contact_time_select').val();
-            $('#contact_time').val(contact_time_value);
-
-
-            $('#passengerInfo_first_c_name_array').val(cus_name_c_first_array);
-            $('#passengerInfo_last_c_name_array').val(cus_name_c_last_array);
-            $('#passengerInfo_first_e_name_array').val(cus_name_e_first_array);
-            $('#passengerInfo_last_e_name_array').val(cus_name_e_last_array);
-            $('#passengerInfo_sex_array').val(cus_sex_array);
-            $('#passengerInfo_id_array').val(cus_id_array);
-            $('#passengerInfo_birthday_array').val(cus_birthday_array);
-            $('#passengerInfo_food_array').val(cus_food_array);
-            $('#passengerInfo_prod_sub_array').val(cus_prod_sub_list);
-
             console.log(cus_name_c_first_array);
             console.log(cus_name_c_last_array);
             console.log(cus_name_e_first_array);
@@ -844,17 +742,9 @@
             console.log(cus_id_array);
             console.log(cus_birthday_array);
             console.log(cus_food_array);
-            console.log(cus_prod_sub_list);
-            console.log($('#contact_time').val());
-            $('#orderForm').submit();
+
             //passengerInfo
         }
-
-        $('#orderForm').submit(function() {
-        
-
-            return true;
-        });
 
 
     </script>
@@ -899,7 +789,48 @@
             var addall_state=$('#addall_hidden').val();
 
 
-           
+            //console.log(totalcost_pusb);
+            //console.log(NewArray[0]);
+            //console.log(NewArray[1]);
+           // console.log(checked_box_value);
+            // var check_value=$(this).val()
+            if(parseInt(addall_state)==1)
+            {
+                for(var i=1;i<parseInt(total_people_count);i=i+1)
+                {
+                    
+                    var allcost_no_other="#addAllcost_"+i;
+                    var allcost_hidden_no_other="#addallcost_hidden_"+i;
+                    var checked_box_other_no="#add_"+NewArray[0]+"_pusb_"+i;
+                        //var checked_box_no="#add_"+j+"_pusb_0";
+                        var checked_box_value=  $(checked_box_no).is(':checked');
+                        //var checked_box_other_no="#add_"+j+"_pusb_"+i;
+                        if(checked_box_value==true)
+                        {
+                            console.log(checked_box_value);
+                            console.log(checked_box_other_no);
+                            $(checked_box_no).attr("checked","checked");
+                            $(checked_box_other_no).attr("checked","checked");
+                            finaltotalcost_pusb= parseInt(totalcost_pusb)+ary[parseInt(NewArray[1])].PROD_SUB_PRICE;
+
+                        }else{
+
+                           
+                            $(checked_box_no).removeAttr("checked");
+                            $(checked_box_other_no).removeAttr("checked");
+                            finaltotalcost_pusb= parseInt(totalcost_pusb)-ary[parseInt(NewArray[1])].PROD_SUB_PRICE;
+                        }
+                        $(allcost_hidden_no).val(finaltotalcost_pusb);
+                        $(allcost_no).find('span').html(finaltotalcost_pusb);
+                        $(allcost_hidden_no_other).val(finaltotalcost_pusb);
+                        $(allcost_no_other).find('span').html(finaltotalcost_pusb);
+                   
+                }
+
+
+
+            }else
+            {
                   if(checked_box_value==true)
                   {
                        $(checked_box_no).attr("checked","checked");
@@ -913,7 +844,7 @@
             // totalcost= ary[parseInt(k)].PROD_SUB_PRICE;
             $(allcost_hidden_no).val(finaltotalcost_pusb);
             $(allcost_no).find('span').html(finaltotalcost_pusb);
-          
+            }
 
 
         }
