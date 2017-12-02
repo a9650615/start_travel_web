@@ -55,15 +55,15 @@
 /* 顯示搜尋結果-mobile */
 .mobile-searchLine{
 	width: 100%;
-	height: 40px;
+    height: auto;
 	background-color: #ececec;
 	padding: 5px;
 	display: block;
 }
 .mobile-searchLine a{
 	width: 100%;
-	height: 30px;
 	line-height: 30px;
+    height: auto;
 	display: inline-block;
 	overflow : hidden;
     text-overflow:ellipsis;
@@ -89,6 +89,7 @@
         width: 100% !important;
         left: 0 !important;
         top: 0px !important;
+        height: auto !important;
     }
 
     .chooseDate::after, .chooseDate::before {
@@ -98,8 +99,21 @@
 
     .datepicker, .datepickerContainer {
         position: relative !important;
-        width: 95% !important;
+        width: 100% !important;
         text-align: center;
+        height: auto !important;
+        background: rgba(0,0,0,0) !important;
+        top: auto !important;
+        left: auto !important;
+        margin-bottom: 35px;
+    }
+
+    .datepickerSpace {
+        display: none;
+    }
+
+    .datepickerContainer>table>tbody>tr>td {
+        display: block !important;
     }
 }
 
