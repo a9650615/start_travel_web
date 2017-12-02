@@ -1284,9 +1284,6 @@ else if (str.Equals("JP"))
 
         //grp_no & prod_no
         ///datepicker
-        var now3 = new Date();
-        //now3.addDays(-4);
-        var now4 = new Date();
 
         $('#choose-date').click(function () {
             $('.chooseDate').show();
@@ -1303,15 +1300,21 @@ else if (str.Equals("JP"))
         $('#widgetCalendar').DatePicker({
             flat: true,
             format: 'Y/m/d (w)',
-            date: [new Date(now3), new Date(now4)],
+            date: [new Date(), new Date()],
             calendars: 2,
             mode: 'range',
             starts: 1,
             onChange: function (formated) {
-                //console.log(formated);
-                //console.log(formated[0]);
-                //console.log(formated[1]);
-                $('#choose-date').val(formated.join('~'));
+                let startDate = new Date(formated[0])
+                let endDate = new Date(formated[1])
+
+                if (startDate <  new Date()) {
+                    startDate = new Date(new Date().toDateString())
+                    $('#widgetCalendar').DatePickerSetDate(startDate, true)
+                }
+
+                let format = $('#widgetCalendar').DatePickerGetDate(true);
+                $('#choose-date').val(format.join('~'));
             }
 
         });
