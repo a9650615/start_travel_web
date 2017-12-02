@@ -212,20 +212,28 @@
                 string[] atm_count_arrary = atm_account_s.ToString().Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            <!-- ATM匯款資訊 -->
-            <div class="atmInfo">
-                <h3 class="text-purple text-bold">ATM匯款資訊</h3>
-                <div class="infoBlock mb-20">
-                    <div class="atmInfo-top">
-                        ATM帳號： @atm_count_arrary[1].ToString()<br>
-                        (兆豐國際商業銀行 @atm_count_arrary[0].ToString() )
-                    </div>
-                    <div class="atmInfo-bottom">
-                        ●本訂單之ATM轉帳付款，不受非約定帳戶每日三萬元的限制！您可以放心選擇ATM轉帳付款，完成您的訂購程序。<br>
-                        ●本訂單不接受國外匯款，或國外ATM虛擬帳號之匯款
+            @{
+                string pay = Request.Form["payment4"];
+                int payment4;
+                Int32.TryParse(pay, out payment4);
+            }
+            @if (payment4 <= 2)
+            {
+                <!-- ATM匯款資訊 -->
+                <div class="atmInfo">
+                    <h3 class="text-purple text-bold">ATM匯款資訊</h3>
+                    <div class="infoBlock mb-20">
+                        <div class="atmInfo-top">
+                            ATM帳號： @atm_count_arrary[1].ToString()<br>
+                            (兆豐國際商業銀行 @atm_count_arrary[0].ToString() )
+                        </div>
+                        <div class="atmInfo-bottom">
+                            ●本訂單之ATM轉帳付款，不受非約定帳戶每日三萬元的限制！您可以放心選擇ATM轉帳付款，完成您的訂購程序。<br>
+                            ●本訂單不接受國外匯款，或國外ATM虛擬帳號之匯款
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
 
 
