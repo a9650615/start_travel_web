@@ -1,0 +1,646 @@
+﻿<!DOCTYPE html>
+@model startravel_web.Models.step3_view_return_data
+
+@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/star-ui")
+
+@Scripts.Render("~/bundles/modernizr")
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>燦星旅遊-出國旅遊第一選擇，夢想般國外旅遊行程</title>
+    <link rel="shortcut icon" href="~/Content/images/star-icon.png" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-ui.css">
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/HeaderFooter.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/step-css.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim and Respond.js 讓 IE8 支援 HTML5 元素與媒體查詢 -->
+    <!-- 警告：Respond.js 無法在 file:// 協定下運作 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="mobile-goNext-fixed">
+
+    <!-- header======================================================================= -->
+    <div class="header-03">
+        <div class="star-container">
+            <div class="header-rainbow">
+                <img src="~/Content/images/rainbow.png" alt="">
+            </div>
+            <a class="header-logo" href="http://www.startravel.com.tw/" title="">
+                <img src="~/Content/images/logo-text.png" alt="">
+            </a>
+        </div>
+    </div>
+    <!-- 內容區塊===================================================================== -->
+    <div class="content content-white">
+        <div class="star-container">
+            <!-- step -->
+            <div class="step">
+                <img class="img-responsive" src="~/Content/images/step03.png" alt="">
+            </div>
+            <div class="step-mobile">
+                <span>3</span>
+                選擇付款方式
+                <a href="~/step2/Index" title="">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+            </div>
+
+
+
+
+
+
+            <!-- mainInfo -->
+            <div class="mainInfo mb-40">
+                <h3 class="orderInfo-title"><i class="glyphicon glyphicon-tags"></i> 訂購資訊</h3>
+                <div class="orderInfo-block">
+                    <span class="orderNumber">訂單編號：@Html.DisplayFor(model => model.paymentorder_result.Data[0].Order_No).ToString()</span><br>
+                    ( 為能更快速服務，與客服人員洽詢時，請提示您的訂單編號 )<br>
+                    服務洽詢：客服人員 陳祐仁     分機 535
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <!-- 選擇付款商品 -->
+            <div class="chooseItem mb-40">
+                <span class="text-purple text-bold h3 text-mobile-block">選擇付款商品</span>
+                您可以依旅客分別付款，不必一次付清款項
+                <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
+                <form method="post" target="./Step3_1/Index" id="main-form">
+
+                    @for (int i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
+                    {
+                        var item = Model.paymentorder_result.Data[i];
+                        string[] cust_name_arrary = Html.DisplayFor(modelitem => item.Cust_Name).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                        string c_name = cust_name_arrary[0];
+                        string e_name = cust_name_arrary[1];
+                        string cust_sex = cust_name_arrary[2];
+                        int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item.Prod_Amt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        int Pre_Amt_i = int.Parse(Html.DisplayFor(modelitem => item.Pre_Amt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        int UnPayAmt_i = int.Parse(Html.DisplayFor(modelitem => item.UnPayAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        int total_order_prod_sub = 0;
+
+                        for (int k = 0; k < item.OrderProdSub.Count; k = k + 1)
+                        {
+                            var item_order_prod_sub = item.OrderProdSub[k];
+
+                            int Prod_Sub_Price_i = int.Parse(Html.DisplayFor(modelitem => item_order_prod_sub.Prod_Sub_Price).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                            total_order_prod_sub = total_order_prod_sub + Prod_Sub_Price_i;
+
+                        }
+
+
+                        //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                        <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit">
+                            <div class="chooseItem-topBlock">
+                                <div class="chooseItem-radiobox">
+                                    <input class="star-input" type="radio" id="deposit_@i" name="payment_@i" value="deposit" checked>
+                                    <label for="deposit_@i"></label>訂金
+                                </div>
+                                <div class="chooseItem-radiobox">
+                                    <input class="star-input" type="radio" id="payOff_@i" name="payment_@i" value="payOff">
+                                    <label for="payOff_@i"></label>付清
+                                </div>
+                                <p class="orange-info hidden-xs">
+                                    <img src="~/Content//images/icon-orang-check.png" alt=""> 已成立
+                                </p>
+                            </div>
+                            <p class="orange-info hidden-sm hidden-md hidden-lg">
+                                <img src="~/Content//images/icon-orang-check.png" alt=""> 已成立
+                            </p>
+                            <p class="orange-info">付款期限 @Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString()</p>
+                            <h3 class="orderDetails-name"> @c_name.ToString()   @e_name,@cust_sex.</h3>
+                            <p class="orderDetails-product">@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => item.Prod_Name).ToString()))</p>
+                            <div class="table-responsive hidden-xs">
+                                <table class="orderDetails-table table">
+                                    <thead>
+                                        <tr>
+                                            <th>規格</th>
+                                            <th>商品金額</th>
+                                            <th>加購金額</th>
+                                            <th>訂金金額</th>
+                                            <th>已付金額</th>
+                                            <th>未付金額</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
+                                            <td>@Prod_Amt_i.ToString()</td>
+                                            <td>@total_order_prod_sub.ToString()</td>
+                                            <td>@Pre_Amt_i.ToString()</td>
+                                            <td>@PaidAmt_i.ToString()</td>
+                                            <td><span class="text-orange">@UnPayAmt_i.ToString()</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="table-mobile">
+                                <span class="text-purple">@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</span>
+                                <div class="orderDetails-mobile mt-10">
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            商品金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @Prod_Amt_i.ToString()
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            加購金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @total_order_prod_sub.ToString()
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            訂金金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @Pre_Amt_i.ToString()
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            已付金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @PaidAmt_i.ToString()
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            未付金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            <span class="text-orange">@UnPayAmt_i.ToString()</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @{
+                        int tcashavbl_i = int.Parse(Html.DisplayFor(model => model.tcashavblbalance_result.Data.Tcash).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint); ;
+                    }
+
+                    <div class="infoBlock step03-paymentInfo">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-9 col-md-10">
+                                付款小計
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                                <span id="t_price"></span> 元整
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-9 col-md-10">
+                                本人可用T-Cash餘額
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                                @tcashavbl_i.ToString()
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-9 col-md-10">
+                                折抵本人T-Cash
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                                <!-- <span class="text-orange">-400</span> -->
+                                <div class="form-group">
+                                    <input class="form-control text-right text-red" type="number" name="t_cash" id="t_cash" max="@tcashavbl_i.ToString()" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row h3-5">
+                            <div class="col-xs-6 col-sm-9 col-md-10">
+                                <span>付款總計</span>
+                            </div>
+                            <div class="col-xs-6 col-sm-3 col-md-2">
+                                <span class="text-orange h3" id="total-price"></span> 元整
+                            </div>
+                        </div>
+                        <div class="row hidden-lg hidden-md hidden-sm">
+                            <div class="col-xs-12 col-sm-12">
+                                <a class="open-paymentInfo" href="javascript:;" title="">※請注意</a>
+                            </div>
+                        </div>
+
+                        <hr class="open-paymentInfo-block">
+
+                        <div class="open-paymentInfo-block">
+                            ※請注意 :<br>
+                            1. T-Cash折抵只能使用在一次付清或是付清尾款<br>
+                            2. 會員之T-Cash只能抵扣本人的費用<br>
+                            <br>
+                            ※ 關於SSL線上付款注意事項：<br>
+                            訂購國內電子機票者，請再次確認訂購的商品航段與搭乘旅客姓名是否正確 !<br>
+                            刷卡金額在$50,000元(含)以上時，持卡人須檢附身份證及信用卡之正反面影本予客服人員以備銀行查驗，若無法配合提供此項文件者，本公司將不會進行請款並視同該次付款無效。
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+            <script>
+                $(document).ready(() => {
+                    $('.chooseItem-radiobox>label').click(function () {
+                        $(this).parents('.infoBlock').attr('type', $(this).siblings('.star-input').eq(0).val())
+                        count_data()
+                    })
+                    if (@tcashavbl_i.ToString() <= 0) {
+                        $('#t_cash').val(0).attr('disabled','disabled')
+                    }
+                    $('#t_cash').keydown(() => count_data())
+
+                    $('#send-to').click(() => {
+                        $('#main-form').submit()
+                    })
+                    count_data()
+                })
+
+                let count_data = () => {
+                    let total = 0
+                    $('.infoBlock').each(function () {
+                        if ($(this).attr('type'))
+                        total += Number($(this).attr('data-' + $(this).attr('type')))
+                    })
+                    console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#t_price').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#total-price').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                }
+            </script>
+
+
+
+
+
+
+            <!-- 選擇付款方式 -->
+                <div class="choosePayment mb-40">
+                    <span class="text-purple text-bold h3">選擇付款方式</span>
+                    <div class="choosePayment-first mb-20 mt-20">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="checkbox" id="travelCard" name="card_avalible" value="1">
+                            <label for="travelCard"></label>請申請使用國民旅遊卡
+                        </div>
+                    </div>
+                    <div class="choosePayment-item">
+
+                        @for (int i = 0; i < 2; i = i + 1)
+                        {
+                            var item_0_b = Model.orderinstallment_result.Data[i];
+                            <div>
+                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="deposit">
+                                <label for="pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_0_b.PMCH_NAME).ToString()
+                            </div>
+                        }
+
+                    </div>
+                    <div class="choosePayment-item">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="radio" id="deposit3" name="payment4" value="deposit">
+                            <label for="deposit3"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[2].PMCH_NAME).ToString()
+
+                        </div>
+                    </div>
+                    <div class="choosePayment-item">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="radio" id="unionPayCards" name="payment4" value="deposit">
+                            <label for="unionPayCards"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[3].PMCH_NAME).ToString()
+                        </div>
+                    </div>
+                    <div class="choosePayment-item">
+                        分期付款
+                        @for (int i = 4; i < Model.orderinstallment_result.Data.Count; i = i + 1)
+                        {
+                            var item_4_b = Model.orderinstallment_result.Data[i];
+                            <div>
+                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="deposit">
+                                <label for="_pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_4_b.PMCH_NAME).ToString()
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- 下一步 -->
+            <div class="goNext mb-20 hidden-xs">
+                <a class="goBackBtn" href="~/step2/Index" title="">
+                    上一步
+                </a>
+                <a class="goNextBtn" href="javasscript:;" id="send-to" title="">
+                    確認送出
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- footer======================================================================= -->
+    <div class="footer">
+        <!-- award -->
+        <div class="footerAward">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-01.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-02.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-03.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">
+                            <img src="~/Content/images/award-04.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footermenu -->
+        <div class="footerMenu">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a href="javascript:;" title="">關於燦星</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">交易安全</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">隱私權條款</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">策略聯盟</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">菁英募集</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">企業商務</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">福委會</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">寫信給我們</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">網站導覽</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">陸客來台</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="">防詐騙聲明</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footerContent -->
+        <div class="footerContent">
+            <div class="star-container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:0281783000" title="">訂購諮詢專線：(02)8178-3000</a>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:024128686" title="">全台門市訂購專線：(02)412-8686</a>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <a class="footerPhone" href="tel:0227900550" title="">企業服務專線：(02)2790-0550</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">燦星國際旅行社股份有限公司</strong>
+                        總公司：<a href="javascript:;" target="_blank">台北市內湖區堤頂大道一段331號4樓</a><br>
+                        訂購諮詢電話：<a href="tel:0281783000">(02)8178-3000</a><br>
+                        || 週六日/ 國定假日 AM09:00~PM19:00 ||<br>
+                        || 平日 週一 ~ 週五 AM08:00~AM02:00 ||<br>
+                        傳真電話：070-10168-965<br>
+                        客服信箱：<a href="mailto:service@startravel.com.tw">service@startravel.com.tw</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">全台服務據點</strong>
+                        代表門市<br>
+                        台北寧夏店 (02)2556-1226<br>
+                        台北南京旗艦店 (02)6608-8155<br>
+                        新北蘆洲門市 (02)2281-6076<br>
+                        新北土城門市 (02)8261-6403<br>
+                        桃園八德門市 (03)361-8368<br>
+                        新竹竹科門市 (03)578-5377<br>
+                        苗栗竹南門市 (037)550-545<br>
+                        台中門市 (04)3600-6799<br>
+                        台南永華店 (06)293-3200<br>
+                        高雄門市 (07)969-6618
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <strong class="footerContentTitle">企業服務 </strong>
+                        服務項目：獎勵旅遊、商務差旅、員工旅遊、自組一團、公家機關<br>
+                        專線：(02)2790-0550、(02)81783000#8151<br>
+                        信箱：mice01@startravel.com.tw <br>
+                        週一~週五 AM9:00-PM18:00<br>
+                        <br>
+                        <strong class="footerContentTitle">同業聯絡</strong>
+                        <a href="http://goo.gl/ZEItJe" title="" target="_blank">http://goo.gl/ZEItJe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footerCertification -->
+        <div class="footerCertification">
+            <div class="star-container">
+                <ul>
+                    <li>
+                        <a class="footer-icon01" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon02" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon03" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon04" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon05" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon06" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                    <li>
+                        <a class="footer-icon07" href="javascript:;" title="" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- footerCopyright -->
+        <div class="footerCopyright">
+            <div class="star-container">
+                ‧代表人：陳彥君 ‧聯絡人：鐘長利  綜合旅行社‧交觀綜字第2136號‧旅行社品質保障協會100字第北1819號 © 燦星旅遊版權所有盜用必究　All Rights Reserved.
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<!-- 下一步-M -->
+<div class="mobile-goNext">
+    <span class="mobile-goNext-price"><strong id="footer-total">32,900</strong> 元整</span>
+    <a id="send-to" title="">
+        確認送出
+    </a>
+    <div class="clear"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- footer-mobile=============================================================== -->
+<div class="footer-mobile">
+    <div>
+        代表人：陳彥君 / 聯絡人：鐘長利<br>
+        綜合旅行社 / 交觀綜字第2136號 / 旅行社品質保障協會100字第北1819號<br>
+        © 燦星旅遊版權所有盜用必究 All Rights Reserved.
+    </div>
+</div>
+
+
+
+
+
+
+<!-- gotoTop==================================================================== -->
+<div class="gotoTop">
+    <a href="javascript:;" id="topBTN">
+        <img src="~/Content/images/gotoTop.png" alt="">
+    </a>
+</div>
+
+
+
+
+
+
+
+<!-- 光箱打開4 -->
+<div class="lightboxOpen lightboxOpen04">
+    <div class="lightbox-box">
+        <div class="lightbox-title">
+            付款期限注意事項
+        </div>
+        <div class="lightbox-content">
+            <p>
+                國外旅遊商品：<br>
+                1、出發日8天內之訂單，請立即完成SSL線上付款，訂單始能生效。<br>
+                2、出發日9天以上之訂單，付款期限保留至訂購次3日之早上10點鐘。但不得小於出發前7日之早上10點鐘。<br>
+                3、逾時未付款者系統將自動取消訂單，不再保留您的訂位與訂購資料。<br>
+                <br>
+                國內旅遊商品：<br>
+                1、出發日4天內之訂單，請立即完成SSL線上付款，訂單始能生效。<br>
+                2、出發日5天以上之訂單，付款期限保留至訂購次日之早上點12點鐘。但不得小於出發前3日之早上10點鐘。<br>
+                3、逾時未付款者系統將自動取消訂單，不再保留您的訂位與訂購資料。<br>
+                <br>
+                國內機票商品--關於ATM轉帳付款注意事項：<br>
+                1、適用於出發日前六~六十天訂購者，才能以ATM轉帳方式付款。<br>
+                2、選擇ATM轉帳付款者，需於訂購日次一日晚上22：00前完成轉帳付款！(訂購後一日內，不包括訂購當天)<br>
+                <br>
+                國內機票商品--關於SSL線上付款注意事項：<br>
+                1、適用於出發日前六十天內訂購者。<br>
+                2、於出發日前六~六十天訂購者，需於訂購日次一日晚上22：00前完成線上付款！(訂購後一日內，不包括訂購當天)<br>
+                3、於出發日前五天(含)內訂購者，請於訂購同時完成線上SSL付款，訂單方為有效。<br>
+                4、訂購國內電子機票者，請再次確認訂購的商品航段與搭乘旅客姓名是否正確 !<br>
+                5、刷卡金額在$50,000元(含)以上時，持卡人須檢附身份證及信用卡之正反面影本予客服人員以備銀行查驗，若無法配合提供此項文件者，本公司將不會進行請款並視同該次付款無效。<br>
+                註：特惠商品、搶購活動與旺季期間出發等特殊商品，本公司將保有將縮短付款期限之權利。<br>
+                <br>
+                付款小秘訣：<br>
+                1、如您的訂單中有多個旅客，且每個旅客要刷自己的卡，以獲得較佳的信用卡保險，請依參考下面說明網址。<br>
+                2、若訂單旅客中，只有部分旅客於付款期限內付款，且已過付款期限，系統將自動取消未付款之其餘旅客訂位與訂購資料，並協助已付款旅客成行(如原訂購雙人房但最後只有單人出發，需補單人房價差)。<br>
+                3、額度設定：一般銀行對未約定帳號之ATM轉帳額度為3~10萬元，SSL線上付款額度為1~5萬元，若付款總額超過限制，請自行與銀行確認額度是否超過，可請銀行調高後，再自行從燦星首頁的『會員服務』內的『訂單查詢與線上付款』付款。<br>
+                4、如您付款後因各項因素而需辦理退款時，若以刷卡付款者將以刷退方式處理，若以現金或ATM轉帳付款者，將現金匯款方式辦理。
+            </p>
+        </div>
+        <a class="lightboxClose" href="javascript:;" title=""><i class="glyphicon glyphicon-remove"></i></a>
+    </div>
+</div>
+
+
+</body>
+
+
+
+
+</html>
+

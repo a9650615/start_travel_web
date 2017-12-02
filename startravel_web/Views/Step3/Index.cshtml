@@ -87,9 +87,9 @@
                 <span class="text-purple text-bold h3 text-mobile-block">選擇付款商品</span>
                 您可以依旅客分別付款，不必一次付清款項
                 <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
-                <form>
+                <form method="post" action="/tour/Step3_1/Index" id="main-form">
 
-                    @for (int i = 0; i < Model.paymentorder_result.Data.Count;i=i+1)
+                    @for (int i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
                     {
                         var item = Model.paymentorder_result.Data[i];
                         string[] cust_name_arrary = Html.DisplayFor(modelitem => item.Cust_Name).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -102,115 +102,115 @@
                         int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int UnPayAmt_i = int.Parse(Html.DisplayFor(modelitem => item.UnPayAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int total_order_prod_sub = 0;
-                        
-                        for (int k = 0; k < item.OrderProdSub.Count;k=k+1 )
+
+                        for (int k = 0; k < item.OrderProdSub.Count; k = k + 1)
                         {
                             var item_order_prod_sub = item.OrderProdSub[k];
 
                             int Prod_Sub_Price_i = int.Parse(Html.DisplayFor(modelitem => item_order_prod_sub.Prod_Sub_Price).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                             total_order_prod_sub = total_order_prod_sub + Prod_Sub_Price_i;
-                            
+
                         }
 
 
-                            //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                    <div class="infoBlock mt-20">
-                        <div class="chooseItem-topBlock">
-                            <div class="chooseItem-radiobox">
-                                <input class="star-input" type="radio" id="deposit" name="payment" value="deposit">
-                                <label for="deposit"></label>訂金
+                        //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                        <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit">
+                            <div class="chooseItem-topBlock">
+                                <div class="chooseItem-radiobox">
+                                    <input class="star-input" type="radio" id="deposit_@i" name="payment_@i" value="deposit" checked>
+                                    <label for="deposit_@i"></label>訂金
+                                </div>
+                                <div class="chooseItem-radiobox">
+                                    <input class="star-input" type="radio" id="payOff_@i" name="payment_@i" value="payOff">
+                                    <label for="payOff_@i"></label>付清
+                                </div>
+                                <p class="orange-info hidden-xs">
+                                    <img src="~/Content//images/icon-orang-check.png" alt=""> 已成立
+                                </p>
                             </div>
-                            <div class="chooseItem-radiobox">
-                                <input class="star-input" type="radio" id="payOff" name="payment" value="payOff">
-                                <label for="payOff"></label>付清
-                            </div>
-                            <p class="orange-info hidden-xs">
+                            <p class="orange-info hidden-sm hidden-md hidden-lg">
                                 <img src="~/Content//images/icon-orang-check.png" alt=""> 已成立
                             </p>
-                        </div>
-                        <p class="orange-info hidden-sm hidden-md hidden-lg">
-                            <img src="~/Content//images/icon-orang-check.png" alt=""> 已成立
-                        </p>
-                        <p class="orange-info">付款期限 @Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString()</p>
-                        <h3 class="orderDetails-name"> @c_name.ToString()   @e_name,@cust_sex.</h3>
-                        <p class="orderDetails-product">@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => item.Prod_Name).ToString()))</p>
-                        <div class="table-responsive hidden-xs">
-                            <table class="orderDetails-table table">
-                                <thead>
-                                    <tr>
-                                        <th>規格</th>
-                                        <th>商品金額</th>
-                                        <th>加購金額</th>                                   
-                                        <th>訂金金額</th>
-                                        <th>已付金額</th>
-                                        <th>未付金額</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
-                                        <td>@Prod_Amt_i.ToString()</td>
-                                        <td>@total_order_prod_sub.ToString()</td>
-                                        <td>@Pre_Amt_i.ToString()</td>
-                                        <td>@PaidAmt_i.ToString()</td>
-                                        <td><span class="text-orange">@UnPayAmt_i.ToString()</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <p class="orange-info">付款期限 @Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString()</p>
+                            <h3 class="orderDetails-name"> @c_name.ToString()   @e_name,@cust_sex.</h3>
+                            <p class="orderDetails-product">@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => item.Prod_Name).ToString()))</p>
+                            <div class="table-responsive hidden-xs">
+                                <table class="orderDetails-table table">
+                                    <thead>
+                                        <tr>
+                                            <th>規格</th>
+                                            <th>商品金額</th>
+                                            <th>加購金額</th>
+                                            <th>訂金金額</th>
+                                            <th>已付金額</th>
+                                            <th>未付金額</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
+                                            <td>@Prod_Amt_i.ToString()</td>
+                                            <td>@total_order_prod_sub.ToString()</td>
+                                            <td>@Pre_Amt_i.ToString()</td>
+                                            <td>@PaidAmt_i.ToString()</td>
+                                            <td><span class="text-orange">@UnPayAmt_i.ToString()</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
 
-                        <div class="table-mobile">
-                            <span class="text-purple">@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</span>
-                            <div class="orderDetails-mobile mt-10">
-                                <div class="row">
-                                    <div class="col-xs-8 pl-0">
-                                        商品金額
+                            <div class="table-mobile">
+                                <span class="text-purple">@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</span>
+                                <div class="orderDetails-mobile mt-10">
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            商品金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @Prod_Amt_i.ToString()
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4 text-right pr-0">
-                                       @Prod_Amt_i.ToString()
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            加購金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @total_order_prod_sub.ToString()
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-8 pl-0">
-                                        加購金額
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            訂金金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @Pre_Amt_i.ToString()
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4 text-right pr-0">
-                                      @total_order_prod_sub.ToString()
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            已付金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @PaidAmt_i.ToString()
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-8 pl-0">
-                                        訂金金額
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
+                                            未付金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            <span class="text-orange">@UnPayAmt_i.ToString()</span>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4 text-right pr-0">
-                                        @Pre_Amt_i.ToString()
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-8 pl-0">
-                                        已付金額
-                                    </div>
-                                    <div class="col-xs-4 text-right pr-0">
-                                      @PaidAmt_i.ToString()
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-8 pl-0">
-                                        未付金額
-                                    </div>
-                                    <div class="col-xs-4 text-right pr-0">
-                                        <span class="text-orange">@UnPayAmt_i.ToString()</span>
-                                    </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
                     }
 
                     @{
-                        int tcashavbl_i = int.Parse(Html.DisplayFor(model=> model.tcashavblbalance_result.Data.Tcash).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint); ;
+                        int tcashavbl_i = int.Parse(Html.DisplayFor(model => model.tcashavblbalance_result.Data.Tcash).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint); ;
                     }
 
                     <div class="infoBlock step03-paymentInfo">
@@ -219,7 +219,7 @@
                                 付款小計
                             </div>
                             <div class="col-xs-6 col-sm-3 col-md-2">
-                                31,500 元整
+                                <span id="t_price"></span> 元整
                             </div>
                         </div>
                         <div class="row">
@@ -237,7 +237,7 @@
                             <div class="col-xs-6 col-sm-3 col-md-2">
                                 <!-- <span class="text-orange">-400</span> -->
                                 <div class="form-group">
-                                    <input class="form-control text-right text-red" type="text" name="">
+                                    <input class="form-control text-right text-red" type="number" name="t_cash" id="t_cash" max="@tcashavbl_i.ToString()" min="0">
                                 </div>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
                                 <span>付款總計</span>
                             </div>
                             <div class="col-xs-6 col-sm-3 col-md-2">
-                                <span class="text-orange h3">31,500</span> 元整
+                                <span class="text-orange h3" id="total-price"></span> 元整
                             </div>
                         </div>
                         <div class="row hidden-lg hidden-md hidden-sm">
@@ -268,71 +268,123 @@
                         </div>
 
                     </div>
-                </form>
+
             </div>
 
+            <script>
+                $(document).ready(() => {
+                    $('.chooseItem-radiobox>label').click(function () {
+                        $(this).parents('.infoBlock').attr('type', $(this).siblings('.star-input').eq(0).val())
+                        count_data()
+                    })
+                    if (@tcashavbl_i.ToString() <= 0) {
+                        $('#t_cash').val(0).attr('disabled','disabled')
+                    }
+                    $('#t_cash').keydown(() => count_data())
+
+                    $('.send-to').click(() => {
+                        $('#main-form').submit()
+                        //$('#card-data-send').submit()
+                        openWindowWithPost('https://payment.startravel.com.tw/fakepage', '付款頁面', {}, {})
+                    })
+                    count_data()
+                })
+
+                let count_data = () => {
+                    let total = 0
+                    $('.infoBlock').each(function () {
+                        if ($(this).attr('type'))
+                        total += Number($(this).attr('data-' + $(this).attr('type')))
+                    })
+                    console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#t_price').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#total-price').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                }
+
+                function openWindowWithPost(url, name, keys, values) {
+                    var newWindow = window.open(url, name, "width=500,height=300");
+                    if (!newWindow){
+                        return false;
+                    }
+    
+                    var html = "";
+                    html += "<html><head></head><body><form id='formid' method='post' action='"    + url + "'>";
+                    if (keys && values && (keys.length == values.length)){
+                        for ( var i = 0; i < keys.length; i++){
+                            html += "<input type='hidden' name='" + keys[i] + "' value='" + values[i] + "'/>";
+                        }
+                    }
+                    html += "</form><script type='text/javascript'>document.getElementById(\"formid\").submit()<\/script></body></html>";
+                    newWindow.document.write(html);
+                    return newWindow;
+                }
+            </script>
 
 
 
-
-
+            @{
+                int payment_method = 1;
+            }
 
 
             <!-- 選擇付款方式 -->
-            <div class="choosePayment mb-40">
-                <span class="text-purple text-bold h3">選擇付款方式</span>
-                <div class="choosePayment-first mb-20 mt-20">
-                    <div class="chooseItem-radiobox">
-                        <input class="star-input" type="checkbox" id="travelCard" name="payment3" value="deposit">
-                        <label for="travelCard"></label>請申請使用國民旅遊卡
-                    </div>
-                </div>
-                <div class="choosePayment-item">
-                     
-                    @for (int i = 0; i < 2; i = i + 1)
-                    {
-                        var item_0_b = Model.orderinstallment_result.Data[i];
-                           <div>
-                               <input class="star-input" type="radio" id="payOff_@i" name="payment4" value="deposit">
-                              <label for="payOff_@i"></label>@Html.DisplayFor(modelitem => item_0_b.PMCH_NAME).ToString()
-                           </div>
-                    }
-                 
-                </div>
-                <div class="choosePayment-item">                 
-                    <div class="chooseItem-radiobox">
-                        <input class="star-input" type="radio" id="deposit3" name="payment4" value="deposit">
-                        <label for="deposit3"></label>@Html.DisplayFor(model =>model.orderinstallment_result.Data[2].PMCH_NAME).ToString()
-          
-                    </div>
-                </div>       
-                <div class="choosePayment-item">
-                    <div class="chooseItem-radiobox">
-                        <input class="star-input" type="radio" id="unionPayCards" name="payment3" value="deposit">
-                        <label for="unionPayCards"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[3].PMCH_NAME).ToString()
-                    </div>
-                </div>
-                <div class="choosePayment-item">
-                    分期付款
-                    @for (int i = 4; i < Model.orderinstallment_result.Data.Count; i = i + 1)
-                    {
-                        var item_4_b = Model.orderinstallment_result.Data[i];
-                        <div>
-                            <input class="star-input" type="radio" id="payOff_@i" name="payment4" value="deposit">
-                            <label for="payOff_@i"></label>@Html.DisplayFor(modelitem => item_4_b.PMCH_NAME).ToString()
+                <div class="choosePayment mb-40">
+                    <span class="text-purple text-bold h3">選擇付款方式</span>
+                    <div class="choosePayment-first mb-20 mt-20">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="checkbox" id="travelCard" name="card_avalible" value="1">
+                            <label for="travelCard"></label>請申請使用國民旅遊卡
                         </div>
-                    }
+                    </div>
+                    <div class="choosePayment-item">
+
+                        @for (int i = 0; i < 2; i = i + 1)
+                        {
+                            var item_0_b = Model.orderinstallment_result.Data[i];
+                            <div>
+                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="@payment_method">
+                                <label for="pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_0_b.PMCH_NAME).ToString()
+                            </div>
+                            payment_method++;
+                        }
+
+                    </div>
+                    <div class="choosePayment-item">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="radio" id="deposit3" name="payment4" value="@(payment_method++)">
+                            <label for="deposit3"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[2].PMCH_NAME).ToString() (一次付清)
+
+                        </div>
+                    </div>
+                    <div class="choosePayment-item">
+                        <div class="chooseItem-radiobox">
+                            <input class="star-input" type="radio" id="unionPayCards" name="payment4" value="@(payment_method++)">
+                            <label for="unionPayCards"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[3].PMCH_NAME).ToString()
+                        </div>
+                    </div>
+                    <div class="choosePayment-item">
+                        分期付款
+                        @for (int i = 4; i < Model.orderinstallment_result.Data.Count; i = i + 1)
+                        {
+                           
+                            var item_4_b = Model.orderinstallment_result.Data[i];
+                            <div>
+                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="@payment_method">
+                                <label for="_pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_4_b.PMCH_NAME).ToString()
+                            </div>
+                            payment_method++;
+                        }
+                    </div>
+
                 </div>
 
+            </form>
 
 
-            </div>
+            <form id="card-data-send" target="_blank" action="https://payment.startravel.com.tw/fakepage">
 
-
-
-
-
-
+            </form>
 
 
 
@@ -343,7 +395,7 @@
                 <a class="goBackBtn" href="~/step2/Index" title="">
                     上一步
                 </a>
-                <a class="goNextBtn" href="~/step3_1/Index" title="">
+                <a class="goNextBtn send-to" href="javasscript:;"  title="">
                     確認送出
                 </a>
             </div>
@@ -526,8 +578,8 @@
 
 <!-- 下一步-M -->
 <div class="mobile-goNext">
-    <span class="mobile-goNext-price"><strong>32,900</strong> 元整</span>
-    <a href="step3-1.html" title="">
+    <span class="mobile-goNext-price"><strong id="footer-total">32,900</strong> 元整</span>
+    <a class="send-to" href="#" title="">
         確認送出
     </a>
     <div class="clear"></div>
