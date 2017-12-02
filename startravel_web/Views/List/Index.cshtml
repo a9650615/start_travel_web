@@ -716,7 +716,31 @@ else if (str.Equals("JP"))
                     <li><a href="javascript:;" onclick="right_button_click()"></a></li>
                 </ul>
 
-                   
+                  <script>
+                      function isScrolledIntoView(elem)
+                      {
+                          var docViewTop = $(window).scrollTop();
+                          var docViewBottom = docViewTop + $(window).height();
+
+                          var elemTop = $(elem).offset().top;
+                          var elemBottom = elemTop + $(elem).height()
+
+                          return ((docViewBottom > (elemTop+ $(elem).height()) ))
+                      }
+
+                      $(document).ready(() => {
+                          $(window).scroll(() => {
+                              if (@(Search_result_currentpage)==@total_page) {
+                                  $('#mobile-loadmore').text('沒有資料了')
+                              }
+                              else 
+                                  if (isScrolledIntoView('#mobile-loadmore') && $(window).width() < 767) {
+                                      $("html, body").stop().animate({scrollTop:0}, 500, 'swing');
+                                      to_page(@(Search_result_currentpage+1));
+                                  }
+                          })
+                      })
+                  </script>
 
 
 
@@ -1213,6 +1237,11 @@ else if (str.Equals("JP"))
             $('#searchForm').submit();
         }
 
+        function to_page(index) {
+            $('#research_page').val(index);
+            $('#searchForm').submit();
+        }
+
     
         function detail_button_click(th){
 
@@ -1565,7 +1594,7 @@ else if (str.Equals("JP"))
 
 
 
-            <div class="mobile-loadmore">
+            <div id="mobile-loadmore" class="mobile-loadmore">
                 載入更多...
             </div>
 
