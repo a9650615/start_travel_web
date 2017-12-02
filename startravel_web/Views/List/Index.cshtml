@@ -208,206 +208,13 @@ else if (str.Equals("JP"))
 
         }
 
-    <!-- 手機版============================================================================= -->
-    <div class="content content-white content-mobile">
-        <div class="mobile-searchLine">
-            <a href="javascript:; title="">
-                <i class="glyphicon glyphicon-search"></i>
-               @grplist_city_from –  @grplist_city_to／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
-            </a>
-        </div>
-
-        @{int i = 0;}
-
-        @for (i = 0; i < Model.grplist_result.Data.prod.Count; i = i + 1)
-        {
-            var item = Model.grplist_result.Data.prod[i];
-            string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
-            int number = i + 1;
-
-            int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-            DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-
-            TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
-            int final_day = different_s_tour.Days + 1;
-            string price = Html.DisplayFor(modelitem => item.Price).ToString();
-            int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-        <!-- 第一筆 -->
-        <div class="star-searchResultsItem-mobile">
-            <h4>
-                <a href="detail.html" title="">@Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item.Prod_Name).ToString()))</a>
-            </h4>
-            <div class="row mb-10">
-                <div class="col-xs-6 star-searchResultsItem-mobile-img">
-                    <img src="http://www.startravel.com.tw/@Html.DisplayFor(modelitem => item.Image_URL).ToString()">
-                    <span>@(i + 1)</span>
-                </div>
-                <div class="col-xs-6 star-searchResultsItem-mobile-textR">
-                    <h1>@final_day<small>天</small></h1>
-                    <ul>
-                        <li class="qkk_@(i + 1)">@qkk_d 人以上成行</li>
-                        <li>送旅遊金</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row mb-10">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="abgne-star-carousel">
-                        <div class="star-btn">
-                            <a href="javascript:;" class="prev star-left0@(i + 1)" onclick="new_prev_list_function('0,@Html.DisplayFor(modelitem => number),@Html.DisplayFor(modelitem => item.GrpList.Count),0,0')">
-                                <i class="glyphicon glyphicon-chevron-left"></i>
-                            </a>
-                            <a href="javascript:;" class="next star-right0@(i + 1)" onclick="new_prev_list_function('0,@Html.DisplayFor(modelitem => number),@Html.DisplayFor(modelitem => item.GrpList.Count),1,0')">
-                                <i class="glyphicon glyphicon-chevron-right" ></i>
-                            </a>
-                        </div>
-                        <div class="star-list-title">
-                            <div>
-                                @city_transfer(grplist_city_from).ToString() 出發
-                            </div>
-                            <div>
-                                去程
-                            </div>
-                            <div>
-                                回程
-                            </div>
-                        </div>
-                        <div class="frame">
-                            <ul class="star-list0@(i+1) star-list">
-                                <!--選項區-->
-                                @{int j = 0;
-
-                                }
-                                @for (j = 0; j < item.GrpList.Count; j = j + 1)
-                                {
-                                    var item_grplist = item.GrpList[j];
-                                    string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
-                                    DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                                    int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                    DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                    DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                    string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM).ToString();
-                                    string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO).ToString();
-                                    string s_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[0].AIR_NAME).ToString();
-                                    string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
-                                    DateTime e_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                    DateTime e_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                    string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM).ToString();
-                                    string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO).ToString();
-                                    string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
-                                    string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
-                                    <li>
-                                        <div class="text-purple text-bold">
-                                            @{
-                                                if (int_QTY_KK > 0)
-                                                {
-                                                    <a href="detail.html" title="">@current_day.ToString("MM/dd(ddd)")</a>  @:可報 @int_QTY_KK 位
-                                                    if (item_grplist.DEPARTURE_FLAG.Equals("1"))
-                                                    {
-                                                        <a class="ensure" href="javascript:;" title="">保出</a>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                        <!--<a class="event lightboxOpen-control02" href="javascript:;" title="">活動<i class="glyphicon glyphicon-chevron-right"></i></a>-->
-                                                         @: 關團
-                                                }
-                                            }
-                                        </div>
-                                        <div>
-                                            @s_depart_time.ToString("HH:mm") @city_transfer(s_city_from)/@s_arrive_time.ToString("HH:mm")@city_transfer(s_city_to)  @s_air_name
-                                        </div>
-                                        <div>
-                                            @e_depart_time.ToString("HH:mm") @city_transfer(e_city_from)/@e_arrive_time.ToString("HH:mm")@city_transfer(e_city_to)  @e_air_name
-                                        </div>
-                                    </li>
-                                }
-                                <!--選項區-->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12">
-                    <div class="star-searchResultsItem-mobile-date01">
-                        <!-- 更多日期 -->
-                        @for (int n = 0; n < item.GrpList.Count; n = n + 1)
-                        {
-                            var item_grplist_s = item.GrpList[n];
-                            string string_s_date = Html.DisplayFor(modelitem => item_grplist_s.S_DATE).ToString();
-                            DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-
-                            if (n == (item.GrpList.Count - 1))
-                            {
-                                <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
-                            }
-                            else
-
-                            {
-                                <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>@:|
-                            }
-                        }
-                    </div>
-                    <a href="javascript:;" title="">更多</a>
-                </div>
-            </div>
-            <div class="row star-searchResultsItem-mobile-price">
-                <div class="col-xs-6">
-                    <h2 class="text-orange">@price_d.ToString("#,#") <small>元</small></h2>
-                    <p class="text-gray">12期 23,500起 <a class="lightboxOpen-control01 text-gray" href="javascript:;" title=""><i class="glyphicon glyphicon-info-sign"></i></a></p>
-                </div>
-                <div class="col-xs-6">
-                    <a class="star-searchResultsItem-mobile-viewItinerary" id="@(i+1)" onclick="detail_button_click(this)" title="">查看行程</a>
-                </div>
-            </div>
-        </div>
-
-        }
-
-
-
-
-
-
-        <div class="mobile-loadmore">
-            載入更多...
-        </div>
-
-        <div class="conditions conditions-moblie">
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="updown active">
-                        <span class="up"></span>
-                        <a href="javascript:;" title="">價格</a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="updown">
-                        <span class=""></span>
-                        <a href="javascript:;" title="">天數</a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="updown">
-                        <span class="down"></span>
-                        <a href="javascript:;" title="">出發日</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-
-
-    </div>
-    <!-- 手機區塊結尾-->
+    
 
     <!-- 內容區塊===================================================================== -->
-    <div class="content content-gray hidden-xs">
+    <div class="content content-gray">
 
         <!-- 搜尋條件列 -->
-        <div class="search">
+        <div class="search hidden-xs">
             <div class="star-container">
                 <div class="searchLine">
                     <i class="glyphicon glyphicon-search"></i>
@@ -611,119 +418,118 @@ else if (str.Equals("JP"))
                 </div>
             </div>
 
-       
-  
+            if (Model.grplist_result.rCode.Equals("0001"))
+            {
+                int Search_result_total = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.Total).ToString());
+                int Search_result_pagesize = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.PageSize).ToString());
+                int Search_result_currentpage = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString());
+                //int Search_result_currentpage = int.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString(), System.Globalization.NumberStyles.AllowDecimalPoint);
+                // string Search_result_total = Html.DisplayFor(model => model.grplist_result.Data.Total).ToString();
+
+                int total_page = 0;
+
+                if (Search_result_total % Search_result_pagesize == 0)
+                {
+                    total_page = Search_result_total / Search_result_pagesize;
+                }
+                else
+                {
+                    total_page = (Search_result_total / Search_result_pagesize) + 1;
+                }
+                   <!-- 搜尋比數與排列 -->
 
 
-          if(Model.grplist_result.rCode.Equals("0001"))
-          { 
-                <!-- 灰色區塊開始 -->
-                <div class="star-container">
-                @{
-                   // string Search_result_total = Html.DisplayFor(model => model.grplist_result.Data.Total).ToString();
-
-                     int Search_result_total = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.Total).ToString());
-                    int Search_result_pagesize = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.PageSize).ToString());
-                     int Search_result_currentpage = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString());
-                      //int Search_result_currentpage = int.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString(), System.Globalization.NumberStyles.AllowDecimalPoint);
-
-                       int total_page = 0;
-
-                        if(Search_result_total%Search_result_pagesize==0)
-                        {
-                             total_page = Search_result_total / Search_result_pagesize;
-                          }
-                          else
-                        {
-                           total_page = (Search_result_total / Search_result_pagesize)+1;
-                        }
-                    }
-
-                
-                           <!-- 搜尋比數與排列 -->
-                 
-
-                    <input type="hidden" id="order_type_1" name="order_type_1" value="">
-                  
-                    <div class="conditions mt-20">
-
-                        @if(Model.grplist_postdata.order_type.Equals("PriceInc"))
-                        { 
-                           <div class="updown active price" id="price" >
-                                 <span class="up"  ></span>
-                                 <a href="javascript:;" title=""  onclick="conditions_order(this)">價格</a>
+                <input type="hidden" id="order_type_1" name="order_type_1" value="">
+                <div class="conditions star-container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    @if (Model.grplist_postdata.order_type.Equals("PriceInc"))
+                                    {
+                                        <div class="updown price active" id="price">
+                                            <span class="up"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">價格</a>
+                                        </div>
+                                    }
+                                    else if (Model.grplist_postdata.order_type.Equals("PriceDesc"))
+                                    {
+                                        <div class="updown price active" id="price">
+                                            <span class="down"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">價格</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="updown price" id="price">
+                                            <span class=""></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">價格</a>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-xs-4">
+                                    @if (Model.grplist_postdata.order_type.Equals("DayInc"))
+                                    {
+                                        <div class="updown day active" id="day">
+                                            <span class="up"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
+                                        </div>
+                                    }
+                                    else if (Model.grplist_postdata.order_type.Equals("DayDesc"))
+                                    {
+                                        <div class="updown day active" id="day">
+                                            <span class="down"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="updown day" id="day">
+                                            <span class=""></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-xs-4">
+                                    @if (Model.grplist_postdata.order_type.Equals("SdateInc"))
+                                    {
+                                        <div class="updown start_date active" id="start_date">
+                                            <span class="up"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
+                                        </div>
+                                    }
+                                    else if (Model.grplist_postdata.order_type.Equals("SdateDesc"))
+                                    {
+                                        <div class="updown start_date active" id="start_date">
+                                            <span class="down"></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="updown start_date" id="start_date">
+                                            <span class=""></span>
+                                            <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
+                                        </div>
+                                    }
+                                </div>
                             </div>
-                        }
-                        else if (Model.grplist_postdata.order_type.Equals("PriceDesc"))
-                        {
-                            <div class="updown active price" id="price">
-                                <span class="down"></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">價格</a>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="updown price" id="price">
-                                <span class=""></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">價格</a>
-                            </div>
-                        }
-
-                        @if (Model.grplist_postdata.order_type.Equals("DayInc"))
-                        {
-                            <div class="updown active day" id="day">
-                                <span class="up"></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
-                            </div>
-                        }
-                        else if (Model.grplist_postdata.order_type.Equals("DayDesc"))
-                        {
-                            <div class="updown active day" id="day">
-                                <span class="down"></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="updown day" id="day">
-                                <span class=""></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">天數</a>
-                            </div>
-                        }
-
-                      
-                        @if (Model.grplist_postdata.order_type.Equals("SdateInc"))
-                        {
-                            <div class="updown active start_date" id="start_date">
-                                <span class="up"></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
-                            </div>
-                        }
-                        else if (Model.grplist_postdata.order_type.Equals("SdateDesc"))
-                        {
-                            <div class="updown active start_date" id="start_date">
-                                <span class="down"></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="updown start_date" id="start_date">
-                                <span class=""></span>
-                                <a href="javascript:;" title="" onclick="conditions_order(this)">出發日</a>
-                            </div>
-                        }
-              
-                        <div class="numberOfSearches">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="numberOfSearches col-xs-12 col-sm-6" style="text-align:right;">
                             @Search_result_currentpage/共 @total_page 頁
                         </div>
                     </div>
                     
+                    </div>
+                </div>
+                <!-- 灰色區塊開始 -->
+                <div class="star-container hidden-xs">
 
                 <!-- 結果列表 -->
                 <div class="searchResultsList">
 
-                            @{i=0;}
+                            @{int i=0;}
 
                @for (i = 0; i < Model.grplist_result.Data.prod.Count;i=i+1 )
                 {
@@ -1348,20 +1154,16 @@ else if (str.Equals("JP"))
             // document.forms[1].method = "order_search";
             // console.log(th);
             //  $('.conditions')({
-            var current_type = $('.conditions').children('.active').children('span').attr("class");
-            var current_id = $('.conditions').children('.active').attr("id");
+            var current_type = $(th).siblings('span').attr("class");
+            var current_id = $('.conditions .updown.active').attr("id");
             var click_id     = $(th).parent().attr("id");
-
+            console.log(current_id)
 
             if (current_type == "up") {
-                $('.conditions').children('.active').children('span').removeClass("up");
+                $('.conditions .updown.active').children('span').removeClass("up");
             } else {
-                $('.conditions').children('.active').children('span').removeClass("down");
+                $('.conditions .updown.active').children('span').removeClass("down");
             }
-
-            var x = $('.conditions').children('.active').removeClass("active");
-
-            var y = $(th).parent().addClass("active");
 
             if (current_id == click_id) {
                 if (current_type == "up") {
@@ -1374,7 +1176,9 @@ else if (str.Equals("JP"))
                 $(th).siblings('span').addClass("up");
             }
 
-            // console.log(current_type);
+            $('.conditions .updown.active').removeClass("active");
+
+            $(th).parent().addClass("active");
 
 
             //console.log(y);
@@ -1541,10 +1345,9 @@ else if (str.Equals("JP"))
             console.log($('#search_etime_e').val());
             ///************etime
             ///************order_type
-            var current_type = $('.conditions').children('.active').children('span').attr("class");
-            var current_id = $('.conditions').children('.active').attr("id");
+            var current_type = $('.conditions .updown.active').children('span').attr("class");
+            var current_id = $('.conditions .updown.active').attr("id");
             var final_order_type = "";
-
             if (current_id == "price")
             {
                 if (current_type == "up") {
@@ -1595,12 +1398,179 @@ else if (str.Equals("JP"))
             return true;
         });
 
+        function tweak() {
+            $('.searchCriteria').show()
+        }
+
     </script>
 
 
 
 }    
+        <!-- 手機版============================================================================= -->
+        <div class="content content-white content-mobile">
+            <div class="mobile-searchLine" >
+                <a href="javascript:;" onclick="tweak()" title="" >
+                    <i class="glyphicon glyphicon-search"></i>
+                    @grplist_city_from –  @grplist_city_to／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
+                </a>
+            </div>
 
+            @for (int i = 0; i < Model.grplist_result.Data.prod.Count; i = i + 1)
+            {
+                var item = Model.grplist_result.Data.prod[i];
+                string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
+                int number = i + 1;
+
+                int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+
+                TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
+                int final_day = different_s_tour.Days + 1;
+                string price = Html.DisplayFor(modelitem => item.Price).ToString();
+                int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+        <!-- 第一筆 -->
+                <div class="star-searchResultsItem-mobile">
+                    <h4>
+                        <a href="detail.html" title="">@Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item.Prod_Name).ToString()))</a>
+                    </h4>
+                    <div class="row mb-10">
+                        <div class="col-xs-6 star-searchResultsItem-mobile-img">
+                            <img src="http://www.startravel.com.tw/@Html.DisplayFor(modelitem => item.Image_URL).ToString()">
+                            <span>@(i + 1)</span>
+                        </div>
+                        <div class="col-xs-6 star-searchResultsItem-mobile-textR">
+                            <h1>@final_day<small>天</small></h1>
+                            <ul>
+                                <li class="qkk_@(i + 1)">@qkk_d 人以上成行</li>
+                                <li>送旅遊金</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="abgne-star-carousel">
+                                <div class="star-btn">
+                                    <a href="javascript:;" class="prev star-left0@(i + 1)" onclick="new_prev_list_function('0,@Html.DisplayFor(modelitem => number),@Html.DisplayFor(modelitem => item.GrpList.Count),0,0')">
+                                        <i class="glyphicon glyphicon-chevron-left"></i>
+                                    </a>
+                                    <a href="javascript:;" class="next star-right0@(i + 1)" onclick="new_prev_list_function('0,@Html.DisplayFor(modelitem => number),@Html.DisplayFor(modelitem => item.GrpList.Count),1,0')">
+                                        <i class="glyphicon glyphicon-chevron-right"></i>
+                                    </a>
+                                </div>
+                                <div class="star-list-title">
+                                    <div>
+                                        @city_transfer(grplist_city_from).ToString() 出發
+                                    </div>
+                                    <div>
+                                        去程
+                                    </div>
+                                    <div>
+                                        回程
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <ul class="star-list0@(i+1) star-list">
+                                        <!--選項區-->
+                                        @{int j = 0;
+
+                                        }
+                                        @for (j = 0; j < item.GrpList.Count; j = j + 1)
+                                        {
+                                            var item_grplist = item.GrpList[j];
+                                            string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
+                                            DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                            int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                            DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                            DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                            string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM).ToString();
+                                            string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO).ToString();
+                                            string s_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[0].AIR_NAME).ToString();
+                                            string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
+                                            DateTime e_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                            DateTime e_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                            string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM).ToString();
+                                            string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO).ToString();
+                                            string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
+                                            string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
+                                            <li>
+                                                <div class="text-purple text-bold">
+                                                    @{
+                                                        if (int_QTY_KK > 0)
+                                                        {
+                                                            <a href="detail.html" title="">@current_day.ToString("MM/dd(ddd)")</a>  @:可報 @int_QTY_KK 位
+                                                    if (item_grplist.DEPARTURE_FLAG.Equals("1"))
+                                                            {
+                                                                <a class="ensure" href="javascript:;" title="">保出</a>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                        <!--<a class="event lightboxOpen-control02" href="javascript:;" title="">活動<i class="glyphicon glyphicon-chevron-right"></i></a>-->
+                                                            @: 關團
+                                                }
+                                                    }
+                                                </div>
+                                                <div>
+                                                    @s_depart_time.ToString("HH:mm") @city_transfer(s_city_from)/@s_arrive_time.ToString("HH:mm")@city_transfer(s_city_to)  @s_air_name
+                                                </div>
+                                                <div>
+                                                    @e_depart_time.ToString("HH:mm") @city_transfer(e_city_from)/@e_arrive_time.ToString("HH:mm")@city_transfer(e_city_to)  @e_air_name
+                                                </div>
+                                            </li>
+                                                        }
+                                        <!--選項區-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="star-searchResultsItem-mobile-date01">
+                                <!-- 更多日期 -->
+                                @for (int n = 0; n < item.GrpList.Count; n = n + 1)
+                                {
+                                    var item_grplist_s = item.GrpList[n];
+                                    string string_s_date = Html.DisplayFor(modelitem => item_grplist_s.S_DATE).ToString();
+                                    DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+
+                                    if (n == (item.GrpList.Count - 1))
+                                    {
+                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
+                                    }
+                                    else
+
+                                    {
+                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>@:|
+                            }
+                                }
+                            </div>
+                            <a href="javascript:;" title="">更多</a>
+                        </div>
+                    </div>
+                    <div class="row star-searchResultsItem-mobile-price">
+                        <div class="col-xs-6">
+                            <h2 class="text-orange">@price_d.ToString("#,#") <small>元</small></h2>
+                        </div>
+                        <div class="col-xs-6">
+                            <a class="star-searchResultsItem-mobile-viewItinerary" id="@(i+1)" onclick="detail_button_click(this)" title="">查看行程</a>
+                        </div>
+                    </div>
+                </div>
+
+                                                        }
+
+
+
+
+
+
+            <div class="mobile-loadmore">
+                載入更多...
+            </div>
+
+        </div>
+        <!-- 手機區塊結尾-->
 
 
             <!-- footer======================================================================= -->
