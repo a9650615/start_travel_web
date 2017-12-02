@@ -280,7 +280,10 @@
                     if (@tcashavbl_i.ToString() <= 0) {
                         $('#t_cash').val(0).attr('disabled','disabled')
                     }
-                    $('#t_cash').keydown(() => count_data())
+                    $('#t_cash').keydown(() =>{
+                        count_data()
+                        $('#t-cash').val($('#t_cash').val() || 0)
+                    })
 
                     $('.send-to').click(() => {
                         $('#main-form').submit()
@@ -326,7 +329,7 @@
             @{
                 int payment_method = 1;
             }
-
+            <input name="t_cash" id="t-cash" type="hidden" value="0" />
 
             <!-- 選擇付款方式 -->
                 <div class="choosePayment mb-40">
@@ -379,7 +382,7 @@
 
                 </div>
 
-            </form>
+            
 
 
             <form id="card-data-send" target="_blank" action="https://payment.startravel.com.tw/fakepage">
@@ -402,6 +405,7 @@
 
 
         </div>
+        </form>
     </div>
 
 
