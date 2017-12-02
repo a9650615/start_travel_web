@@ -31,9 +31,9 @@ namespace startravel_web.Controllers
 
 
              string member_number_s = "MEM0000000028";
-             string view_prod_no_s = "IGRP000017364";
-             string view_grp_no_s = "OKA04ITC1417A";
-             string room_count_name_s="1,1,0,0,0";
+             string view_prod_no_s = "IGRP000011159";
+             string view_grp_no_s = "TYO05ITC0717T";
+             string room_count_name_s="1,1,0,0,0,0";
             string[] psub_list = new string[7];
             string[] visa_list = new string[7];
             string[] insu_list = new string[7];
@@ -373,11 +373,27 @@ namespace startravel_web.Controllers
                                             string passengerInfo_id_array,
                                             string passengerInfo_birthday_array,
                                             string passengerInfo_food_array,
-                                            string passengerInfo_prod_sub_array
+                                            string passengerInfo_prod_sub_array,
+                                            string company_title,
+                                            string uniform_numbers,
+                                            string recipients,
+                                            string recipients_address,
+                                            string receipt_store_item,
+                                            string receipt_store_address,
+                                            string registered,
+                                            string registered_address,
+                                            string order_note,
+                                            string total_people_hidden,
+                                            string pusb_count_hidden,
+                                            string visa_count_hidden,
+                                            string insu_count_hidden,
+                                            string room_count_hidden
 
                 )
             {
 
+
+                Response.Write("***********連絡人資料*********"  + "<br/>");
                 Response.Write("contact_c_first_name：" + contact_c_first_name + "<br/>");
                 Response.Write("contact_c_last_name：" + contact_c_last_name + "<br/>");
                 Response.Write("contact_mobile：" + contact_mobile + "<br/>");
@@ -386,6 +402,7 @@ namespace startravel_web.Controllers
                 Response.Write("contact_email：" + contact_email + "<br/>");
                 Response.Write("contact_time：" + contact_time + "<br/>");
                 Response.Write("contact_note：" + contact_note + "<br/>");
+                Response.Write("***********旅客人資料*********" + "<br/>");
                 Response.Write("passengerInfo_first_c_name_array：" +passengerInfo_first_c_name_array +"<br/>");
                 Response.Write("passengerInfo_last_c_name_array：" +passengerInfo_last_c_name_array + "<br/>");
                 Response.Write("passengerInfo_first_e_name_array：" + passengerInfo_first_e_name_array + "<br/>");
@@ -395,6 +412,22 @@ namespace startravel_web.Controllers
                 Response.Write("passengerInfo_birthday_array：" + passengerInfo_birthday_array + "<br/>");
                 Response.Write("passengerInfo_food_array：" + passengerInfo_food_array + "<br/>");
                 Response.Write("passengerInfo_prod_sub_array：" + passengerInfo_prod_sub_array + "<br/>");
+                Response.Write("***********其他資料*********" + "<br/>");
+                Response.Write("company_title：" + company_title + "<br/>");
+                Response.Write("uniform_numbers：" + uniform_numbers + "<br/>");
+                Response.Write("recipients：" + recipients + "<br/>");
+                Response.Write("recipients_address：" + recipients_address + "<br/>");
+                Response.Write("receipt_store_item：" + receipt_store_item + "<br/>");
+                Response.Write("receipt_store_address：" + receipt_store_address + "<br/>");
+                Response.Write("registered：" + registered + "<br/>");
+                Response.Write("registered_address：" + registered_address + "<br/>");
+                Response.Write("order_note：" + order_note + "<br/>");
+                Response.Write("***********其他資料(total people,pusb,visa,insu)*********" + "<br/>");
+                Response.Write("total_people_hidden：" + total_people_hidden + "<br/>");
+                Response.Write("pusb_count_hidden：" + pusb_count_hidden + "<br/>");
+                Response.Write("visa_count_hidden：" + visa_count_hidden + "<br/>");
+                Response.Write("insu_count_hidden：" + insu_count_hidden + "<br/>");
+                Response.Write("room_count_hidden：" + room_count_hidden + "<br/>");
           
           
           

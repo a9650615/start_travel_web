@@ -503,6 +503,68 @@ namespace startravel_web.Models
         public string DIRECT_ALLPay { get; set; }
     }
 
+
+    //order 1.6
+    public class OrderGrpCreate_PostData
+    {
+        public string ORDER_SALES { get; set; }
+        public string ORDER_CONTACT_NO { get; set; }
+        public string ORDER_CONTACT_TYPE { get; set; }
+        public string ORDER_CONTACT_NAME { get; set; }
+        public string ORDER_CONTACT_ID { get; set; }
+        public string ORDER_CONTACT_TEL1 { get; set; }
+        public string ORDER_CONTACT_TEL2 { get; set; }
+        public string ORDER_CONTACT_MOBIL { get; set; }
+        public string ORDER_CONTACT_EMAIL { get; set; }
+        public string ORDER_CONTACT_FAX { get; set; }
+        public string ORDER_CONTACT_ADDRESS { get; set; }
+        public string ORDER_NOTE { get; set; }
+        public string ORDER_INV_ID { get; set; }
+        public string ORDER_INV_NO { get; set; }
+        public string ORDER_INV_RECEIVER { get; set; }
+        public string ORDER_INV_ADDRESS { get; set; }
+        public string ORDER_INV_TYPE { get; set; }
+        public string ORDER_TAKE_TYPE { get; set; }
+        public string ORDER_MAIL_RECEIVER { get; set; }
+        public string ORDER_MAIL_ADDRESS { get; set; }
+        public string ORDER_CREATOR { get; set; }
+        public string PROD_NO { get; set; }
+        public string GRP_NO { get; set; }
+        public List<OrderGrpCreateCusModel_param> ORDER_CUS { get; set; }
+    }
+
+    public class OrderGrpCreateCusModel_param
+    {
+        public string CUS_SEQNO { get; set; }
+        public string CUS_TYPE { get; set; }
+        public string CUS_ID { get; set; }
+        public string CUS_NAME_C_FIRST { get; set; }
+        public string CUS_NAME_C_LAST { get; set; }
+        public string CUS_NAME_E_FIRST { get; set; }
+        public string CUS_NAME_E_LASTE { get; set; }
+        public string CUS_SEX { get; set; }
+        public string CUS_BIRTHDAY { get; set; }
+        public string CUS_TEL1 { get; set; }
+        public string CUS_TEL2 { get; set; }
+        public string CUS_MOBIL { get; set; }
+        public string CUS_EMAIL { get; set; }
+        public string CUS_FAX { get; set; }
+        public string CUS_ADDRESS { get; set; }
+        public string CUS_FOOD { get; set; }
+        public string PASSPORT_NO { get; set; }
+        public string PASSPORT_S_DATE { get; set; }
+        public string PASSPORT_E_DATE { get; set; }
+        public string ROOM_COND { get; set; }
+        public List<OrderGrpCreateProdSubModel_param> ORDER_PROD_SUB { get; set; }
+    }
+    public class OrderGrpCreateProdSubModel_param
+    {
+
+        public string PROD_SUB_NO { get; set; }
+        public string PROD_SUB_QTY { get; set; }
+    }
+
+
     ///member
     ///
 

@@ -529,13 +529,13 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
                                         <label>公司抬頭</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="company_title" name="company_title">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
                                         <label>統一編號</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="uniform_numbers" name="uniform_numbers">
                                     </div>
                                 </div>
                             </div>
@@ -545,13 +545,13 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
                                         <label>收件人</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="recipients" name="recipients">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group">
                                         <label>收件地址：</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="recipients_address" name="recipients_address">
                                     </div>
                                 </div>
                             </div>
@@ -582,11 +582,12 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
                                         @Html.DropDownList("store_item", (IEnumerable<SelectListItem>)ViewBag.Selectstore,  new { id = "store_item", onchange = "droplist_select_store()" })
+                                        <input type="hidden" id="receipt_store_item" name="receipt_store_item" value="">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group">
-                                        <input type="text" class="form-control store_address" placeholder="">
+                                        <input type="text" class="form-control store_address" id="receipt_store_address" name="receipt_store_address" placeholder="" value="@Model.orderstore_result.Data[0].Dept_Address">
                                     </div>
                                 </div>
                             </div>
@@ -600,13 +601,13 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="form-group">
                                         <label>收件人</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="registered" name="registered">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group">
                                         <label>收件地址：</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder="" id="registered_address" name="registered_address">
                                     </div>
                                 </div>
                             </div>
@@ -631,7 +632,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-8">
                             <div class="form-group">
-                                <input type="textarea" class="form-control star-input" placeholder="其他需求">
+                                <input type="textarea" class="form-control star-input" placeholder="其他需求" id="order_note" name="order_note">
                             </div>
                         </div>
                     </div>
@@ -852,7 +853,9 @@
 
         $('#orderForm').submit(function() {
         
+            var store_item = $('#store_item').val();
 
+            $('#receipt_store_item').val(store_item);
             return true;
         });
 
@@ -865,12 +868,9 @@
             var total_number=0;
             var ary = @Html.Raw(Json.Encode(Model.orderstore_result.Data));
             total_number =parseInt($('#store_item').val());
-            if(total_number==null)
-            {
-
-            }else{
+           
                 $('.store_address').val(ary[total_number].Dept_Address);
-            }
+            
         }
     </script>
 
