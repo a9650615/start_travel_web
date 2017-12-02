@@ -47,7 +47,7 @@
 }
 
 
-    @using (Html.BeginForm("Index", "Step2", FormMethod.Post, new { enctype = "multipart/form-data", name = "myForm" ,id ="myform"}))
+    @using (Html.BeginForm("Index", "Step2", FormMethod.Post, new { enctype = "multipart/form-data", name = "myForm", id = "myform" }))
     {
     <!-- header======================================================================= -->
     <div class="header-03">
@@ -139,22 +139,22 @@
                         @foreach (var item in Model.grppriceinfo_result.Data)
                         {
                             i = 0;
-                            int role_type_count=Model.grppriceinfo_result.Data.Count;
+                            int role_type_count = Model.grppriceinfo_result.Data.Count;
                             foreach (var item_s in item.Role_Type)
                             {
 
                                 <tr>
                                     @{ if (i == 0)
-                                     {
+                                        {
                                         <td>@Html.DisplayFor(modelitem => item.Category_name)</td>
 
-                                     }
-                                     else
-                                     {
+                                        }
+                                        else
+                                        {
                                         <td></td>
-                                     }
-                                     i = i + 1;
-                                     
+                                        }
+                                        i = i + 1;
+
                                     }
 
                                     <td class="text-center" >
@@ -176,12 +176,12 @@
                                         </select>
                                     </td>
                                 </tr>
-                                room_num = room_num + 1;
-                            }
+                                                room_num = room_num + 1;
+                                            }
 
 
 
-                        }
+                                        }
                         <tr>
                             <td colspan="3" class="star-table03-subtotal">
                                 共計人數 <span class="text-orange2 h3">0</span>人，應付總額 <span class="text-orange h1 total_cost_span">0</span> 元
@@ -219,7 +219,7 @@
                     $('.table-mobile .star-select2').each(function () {
                         total_count += parseInt($(this).val());
                         current_count = parseInt($(this).val());
-                        current_cost = $(this).parent().parent().siblings().children('.col-xs-7').children('.text-orange2').text();
+                        current_cost = parseInt($(this).parent().parent().siblings().children('.col-xs-7').children('.text-orange2').text().replace(',',''));
                         total_cost += current_count * current_cost;
                     });
 
@@ -250,14 +250,17 @@
 
             <!--  <div class="table-mobile">-->
             <div class="table-mobile">
+            @{
+                var ii = 0;
+            }
              @for (i = 0; i < Model.grppriceinfo_result.Data.Count;i=i+1 )
-             {
-                 var item = Model.grppriceinfo_result.Data[i];
-                 foreach (var item_s in item.Role_Type)
-                 {
+            {
+                var item = Model.grppriceinfo_result.Data[i];
+                foreach (var item_s in item.Role_Type)
+                {
+                     ii++;
                 <div class="gray-block">
-                    @Html.DisplayFor(modelitem => item.Category_name) /
-                    @Html.DisplayFor(modelitem_s => item_s.Type_name)
+                    @Html.DisplayFor(modelitem => item.Category_name) (第 @(ii)  間)
                 </div>
                 <div class="order-mobile">
                     <form>
@@ -283,7 +286,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-5 text-right">
-                                含稅售價
+                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / 含稅售價
                             </div>
                             <div class="col-xs-7">
                                 <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("##,##")</span>元
