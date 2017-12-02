@@ -138,27 +138,27 @@
                          }
                         @foreach (var item in Model.grppriceinfo_result.Data)
                         {
-                            i = 0;
-                            int role_type_count = Model.grppriceinfo_result.Data.Count;
-                            foreach (var item_s in item.Role_Type)
-                            {
+                                i = 0;
+                                int role_type_count = Model.grppriceinfo_result.Data.Count;
+                                int length = item.Role_Type.Count;
+                                foreach (var item_s in item.Role_Type)
+                                {
 
                                 <tr>
-                                    @{ if (i == 0)
-                                        {
-                                        <td>@Html.DisplayFor(modelitem => item.Category_name)</td>
+                                                @{ if (i == 0)
+                                                {
+                                                <td rowspan="@length" style="border-right: 1px solid #dddddd; text-align: center;">@Html.DisplayFor(modelitem => item.Category_name)</td>
+            
+                                                }
+                                                else
+                                                {
+                                                }
+                                                i = i + 1;
 
-                                        }
-                                        else
-                                        {
-                                        <td></td>
-                                        }
-                                        i = i + 1;
-
-                                    }
+                                            }
 
                                     <td class="text-center" >
-                                        @Html.DisplayFor(modelitem_s => item_s.Type_name) / <span class="text-orange2 cost_value" id="cost_value">@Html.DisplayFor(modelitem_s => item_s.Price)</span> 元
+                                        @Html.DisplayFor(modelitem_s => item_s.Type_name) / <span class="text-orange2 cost_value" id="cost_value">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("#,#")</span> 元
                                     </td>
 
                                     <td>
@@ -181,7 +181,7 @@
 
 
 
-                                        }
+                        }
                         <tr>
                             <td colspan="3" class="star-table03-subtotal">
                                 共計人數 <span class="text-orange2 h3">0</span>人，應付總額 <span class="text-orange h1 total_cost_span">0</span> 元
