@@ -82,8 +82,26 @@
 
 
 
+/* Date Picker Mobile*/
+@media screen and (max-width: 767px) {
+    .chooseDate {
+        position:relative !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: 0px !important;
+    }
 
+    .chooseDate::after, .chooseDate::before {
+        content: "";
+        border: none !important;
+    }
 
+    .datepicker, .datepickerContainer {
+        position: relative !important;
+        width: 95% !important;
+        text-align: center;
+    }
+}
 
 
 
