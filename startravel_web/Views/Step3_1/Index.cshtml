@@ -85,6 +85,10 @@
 
             @{
                 int total_prod_amt = 0;
+                int t_Cash = 0;
+                var t_Cash_str = Request.Form["t_cash"];
+                if (t_Cash_str == "") { t_Cash_str = "0"; }
+                Int32.TryParse(t_Cash_str, out t_Cash);
             }
 
 
@@ -104,9 +108,9 @@
                         </thead>
                         <tbody>
 
-                            @for(int i=0;i<Model.orderinfomation_result.Data.OrderLst.Count;i=i+1)
+                            @for (int i=0;i<Model.orderinfomation_result.Data.OrderLst.Count;i=i+1)
                             {
-                                var item_cus = Model.orderinfomation_result.Data.OrderLst[i]; 
+                                var item_cus = Model.orderinfomation_result.Data.OrderLst[i];
                                 string cus_name=item_cus.CUS_NAME;
                                 string cus_sex_s;
                                 //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
@@ -118,8 +122,8 @@
                                 }else{
                                     cus_sex_s = "MS.";
                                 }
-                                
-                                
+
+
                                 total_prod_amt = total_prod_amt + Prod_Amt_i;
                              <tr>
                                 <td>@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</td>
@@ -132,13 +136,13 @@
                             <tr>
                                 <td class="star-table01-subtotal" colspan="4">
                                     應付總額 @total_prod_amt.ToString("#,#") 元<br>
-                                    -本人折抵T-Cash @Html.DisplayFor(model =>model.tcash).ToString() 元<br>
+                                    -本人折抵T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
                                     -未付金額1,000元
                                 </td>
                             </tr>
                             <tr>
                                 <td class="star-table01-total" colspan="4">
-                                    本次結帳金額 <span>49,000</span> 元(含稅)
+                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("C"))</span> 元(含稅)
                                 </td>
                             </tr>
                         </tbody>
@@ -197,11 +201,11 @@
                 }
                     <div class="infoBlock text-right mt--1">
                         應付總額 @total_prod_amt.ToString("#,#") 元<br>
-                        -本人折抵T-Cash @Html.DisplayFor(model =>model.tcash).ToString() 元<br>
+                        -本人折抵T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
                         -未付金額1,000元
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
-                        本次結帳金額 <span>49,000</span> 元(含稅)
+                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("C"))</span> 元(含稅)
                     </div>
                 </div>
             </div>
