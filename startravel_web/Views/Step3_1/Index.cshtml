@@ -92,7 +92,7 @@
             <!-- 付款明細 -->
             <div class="paymentDetails">
                 <h3 class="text-purple text-bold">付款明細</h3>
-                <div class="table-responsive">
+                <div class="table-responsive hidden-xs">
                     <table class="star-table01 table table-hover">
                         <thead>
                             <tr>
@@ -143,6 +143,66 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="table-mobile">
+                @for (int i = 0; i < Model.orderinfomation_result.Data.OrderLst.Count; i = i + 1)
+                {
+                    var item_cus = Model.orderinfomation_result.Data.OrderLst[i];
+                    string cus_name = item_cus.CUS_NAME;
+                    string cus_sex_s;
+                    //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                    int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                    int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                    if (cus_sex_i == 0)
+                    {
+                        cus_sex_s = "MR.";
+                    }
+                    else
+                    {
+                        cus_sex_s = "MS.";
+                    }
+
+
+                    total_prod_amt = total_prod_amt + Prod_Amt_i;
+                <div class="table-mobile infoBlock">
+                    <span class="text-purple">@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</span>
+                    <div class="orderDetails-mobile mt-10">
+                        <div class="row">
+                            <div class="col-xs-12 pl-0">
+                                商品名稱
+                            </div>
+                            <div class="col-xs-12 pr-0 pl-0">
+                                @Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item_cus.PROD_NAME).ToString()))
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 pl-0">
+                                出發日期
+                            </div>
+                            <div class="col-xs-4 text-right pr-0">
+                                2017/10/17
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 pl-0">
+                                應付金額
+                            </div>
+                            <div class="col-xs-4 text-right pr-0">
+                                @Prod_Amt_i.ToString("#,#")
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                }
+                    <div class="infoBlock text-right mt--1">
+                        應付總額 @total_prod_amt.ToString("#,#") 元<br>
+                        -本人折抵T-Cash @Html.DisplayFor(model =>model.tcash).ToString() 元<br>
+                        -未付金額1,000元
+                    </div>
+                    <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
+                        本次結帳金額 <span>49,000</span> 元(含稅)
+                    </div>
                 </div>
             </div>
 
