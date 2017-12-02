@@ -1190,11 +1190,8 @@
                 DateTime DUEDAY_PAY = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_PAY).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime DUEDAY_DOC = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_DOC).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 int max_tourer_d = int.Parse(Html.DisplayFor(model => model.grpproductdetail_result.Data.MAX_TOURER).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+
             }
-
-
-
-
 
 
             <div id="travel-description" class="travel-block hidden-xs">
@@ -1236,33 +1233,26 @@
                         <div class="panel-body">
 
                             <p>
+                                <p>
                                 (處理規定說明)<br>
-                                1.成行人數 : 16人以上成團     本團最大團員數 : 40人<br>
-                                2.訂金金額 : 5000元<br>
-                                3.訂金繳交期限 : 訂單成立後1日<br>
-                                4.尾款繳交期限 : 2016/07/13<br>
-                                5.證件繳交期限 : 2016/07/13<br>
+                                1.成行人數 : @min_tourer_d.ToString()人以上成團     本團最大團員數 : @max_tourer_d.ToString()人<br>
+                                2.訂金金額 : @pre_amt_d 元<br>
+                                3.訂金繳交期限 : 訂單成立後 @Html.DisplayFor(model => model.grpproductdetail_result.Data.PRE_DAY).ToString()日<br>
+                                4.尾款繳交期限 : @DUEDAY_PAY.ToString("yyyy/MM/dd")<br>
+                                5.證件繳交期限 : @DUEDAY_DOC.ToString("yyyy/MM/dd")<br>
+                            </p>
+                            <p>
                                 <br>
                                 (費用包含)<br>
-                                1.團體來回經紀商機票乙張<br>
-                                2.住宿及全程表列餐食。(兩人一室，若指定單人房請補單人房差)<br>
-                                3.行程所列之旅由交通費用<br>
-                                4.200萬履約責任險暨10萬意外醫療險<br>
-                                5.本商品稅金部分包含 : 兩地機場稅、燃油附加稅、以及代辦服務費。<br>
+                                    <p>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_CONTRAIN).ToString()))<br></p>
                                 <br>
-                                1.機上特殊餐食(如 : 兒童餐、素食餐..等)，請於付訂時告知客服，開票後無法變更。<br>
-                                2.素食貴賓 : 因台灣與日本飲食文化不同，日本多數素食者可食用蔥、薑、蒜、辣椒、奶<br>
-                                甚至柴魚或肉汁高湯煮的餐飲。<br>
-                                為尊重台灣速食貴賓飲食習慣，在避免使用上述食材前提下，餐廳多以各式蔬菜、豆腐等食材搭配漬物之定食或鍋物來提供，且當地全素食品購買不易，故建議素食貴賓，也可自備素食品，以備不時之需。<br>
+                                (費用不包含)<br>
+                                   <p>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_NOT_CONTRAIN).ToString()))</p>
                                 <br>
-                                (簽證資訊)<br>
-                                1.持中華民國護照進入日本免簽證，請確認護照效期於出發當天算起6個月以上。<br>
-                                2.軍人 : 出國須蓋兩種章(持照人出國應經核准)、(年 月 日之前同意出國 字第 號核准)<br>
-                                3.役男 : 出國須蓋兩種章(持照人出國應經核准尚未履行兵役義務)、(役男出國核准年 月 日前一次有效縣市公所)。<br>
-                                4.接近役齡男子 : 出國須蓋一種章(尚未履行兵役)。<br>
-                                5.雙重國籍 : 進出中華民國國境，需使用同一本護照進、出國境。
+                                (其他)<br>
+                                <p>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NOTE).ToString()))<br></p>
+                                
                             </p>
-
 
                         </div>
                     </div>

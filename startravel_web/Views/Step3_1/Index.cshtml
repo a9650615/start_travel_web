@@ -142,7 +142,7 @@
                             </tr>
                             <tr>
                                 <td class="star-table01-total" colspan="4">
-                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("C"))</span> 元(含稅)
+                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅)
                                 </td>
                             </tr>
                         </tbody>
@@ -205,7 +205,7 @@
                         -未付金額1,000元
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
-                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("C"))</span> 元(含稅)
+                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("#,#"))</span> 元(含稅)
                     </div>
                 </div>
             </div>
