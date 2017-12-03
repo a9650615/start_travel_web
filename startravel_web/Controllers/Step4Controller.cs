@@ -19,7 +19,7 @@ namespace startravel_web.Controllers
         public async Task<ActionResult> Index()
         {
 
-            string order_number_s = "SPO0004207587";
+            string order_number_s = Request.Form["order_no_hidden"];
 
             ApiController api = new ApiController();
             OrderInfomation_PostData orderinfomation_postData = new OrderInfomation_PostData() { order_no = order_number_s };

@@ -88,6 +88,7 @@
                 您可以依旅客分別付款，不必一次付清款項
                 <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
                 <form method="post" action="/tour/Step3_1/Index" id="main-form">
+                    <input type="hidden" value="@Model.order_no" name="order_no_hidden">
 
                     @for (int i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
                     {

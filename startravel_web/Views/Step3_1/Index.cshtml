@@ -239,56 +239,68 @@
                 </div>
             }
 
+            <form action="~/step4/Index" method="post" id="step3_1_form">
+                <input type="hidden" value="@Model.order_no" name="order_no_hidden">
 
-
-            <!-- 下一步 -->
-            <div class="goNext mb-20">
-                <a class="goBackBtn" href="~/step3/Index" title="">
-                    上一步
-                </a>
-                <a class="goNextBtn" href="~/step4/Index" title="">
-                    完成訂購
-                </a>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- 安全交易說明 -->
-            <div class="paySSL">
-                <div class="row">
-                    <div class="paySSL-img col-xs-12 col-sm-3">
-                        <img src="../../images/paySSL.png" alt="">
-                    </div>
-                    <div class="col-xs-12 col-sm-9">
-                        <h4>安全交易說明</h4>
-                        <ul>
-                            <li>本網站所在地為台灣(TAIWAN)，交易使用幣別為新台幣(NTD)。</li>
-                            <li>配合隻收單銀行：中國信託商業銀行。</li>
-                            <li>本網站採用全世界最先進的SSL(Secure Socket Layer)128bit傳輸加密機制，您的重要資訊接用複雜的數學雲算方式進行亂數編碼，能有效保障交易安全。</li>
-                            <li>此外，本網站亦經網際威信(HiTrust)認證為「全球安全認證網站」，並使用其Veri-Sign電子交易安全簽章認證服務。</li>
-                        </ul>
-                    </div>
+                <!-- 下一步 -->
+                <div class="goNext mb-20">
+                    <a class="goBackBtn" href="~/step3/Index" title="">
+                        上一步
+                    </a>
+                    <a class="goNextBtn" href="#" title="" id="step4_click">
+                        完成訂購
+                    </a>
                 </div>
-            </div>
+
+            </form>
+
+
+            <script>
+                $(document).ready(() => {
+                
+                  
+                $('#step4_click').click(()=> {
+                
+                    $('#step3_1_form').submit();
+                })
+                
+                });
+
+            </script>
 
 
 
-        </div>
+
+
+
+
+
+
+
+
+
+
+                    <!-- 安全交易說明 -->
+                    <div class="paySSL">
+                        <div class="row">
+                            <div class="paySSL-img col-xs-12 col-sm-3">
+                                <img src="../../images/paySSL.png" alt="">
+                            </div>
+                            <div class="col-xs-12 col-sm-9">
+                                <h4>安全交易說明</h4>
+                                <ul>
+                                    <li>本網站所在地為台灣(TAIWAN)，交易使用幣別為新台幣(NTD)。</li>
+                                    <li>配合隻收單銀行：中國信託商業銀行。</li>
+                                    <li>本網站採用全世界最先進的SSL(Secure Socket Layer)128bit傳輸加密機制，您的重要資訊接用複雜的數學雲算方式進行亂數編碼，能有效保障交易安全。</li>
+                                    <li>此外，本網站亦經網際威信(HiTrust)認證為「全球安全認證網站」，並使用其Veri-Sign電子交易安全簽章認證服務。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+</div>
     </div>
 
 

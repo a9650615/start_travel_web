@@ -111,6 +111,18 @@
                     string cus_sex_s;
                     string cus_name = item.CUS_NAME;
                     DateTime op_dl_datetime_d = DateTime.ParseExact(Html.DisplayFor(modelitem => item.OP_DL_DATETIME).ToString(), "yyyyMMddHHmm", System.Globalization.CultureInfo.InvariantCulture);
+
+                    string paid_amt_s = Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("#,#");
+                    string prod_price_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("#,#");
+                    string prod_sub_amt_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("#,#");
+                    string pre_amt_s = Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("#,#");
+                    string nopaid_s = Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("#,#");
+                    paid_amt_s = paid_amt_s == "" ? "0" : paid_amt_s;
+                    prod_price_s = prod_price_s == "" ? "0" : prod_price_s;
+                    prod_sub_amt_s = prod_sub_amt_s == "" ? "0" : prod_sub_amt_s;
+                    pre_amt_s = pre_amt_s == "" ? "0" : pre_amt_s;
+                    nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
+                    
                     int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                     if (cus_sex_i == 1)
                     {
@@ -143,11 +155,11 @@
                             <tbody>
                                 <tr>
                                     <td>@Html.DisplayFor(modelitem => item.COND_QTYB_NOTE).ToString() – @Html.DisplayFor(modelitem => item.QTYAC_NOTE).ToString()</td>
-                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("#,#")</td>
-                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("#,#")</td>
-                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("#,#")</td>
-                                    <td>@Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("#,#")</td>
-                                    <td><span class="text-orange">@Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("#,#")</span></td>
+                                    <td>@prod_price_s</td>
+                                    <td>@prod_sub_amt_s</td>
+                                    <td>@pre_amt_s</td>
+                                    <td>@paid_amt_s</td>
+                                    <td><span class="text-orange">@nopaid_s</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,7 +174,7 @@
                                     商品金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("#,#")
+                                    @prod_price_s
                                 </div>
                             </div>
                             <div class="row">
@@ -170,7 +182,7 @@
                                     加購金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("#,#")
+                                    @prod_sub_amt_s
                                 </div>
                             </div>
                            
@@ -179,7 +191,7 @@
                                     訂金金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("#,#")
+                                    @pre_amt_s
                                 </div>
                             </div>
                             <div class="row">
@@ -187,7 +199,7 @@
                                     已付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("#,#")
+                                    @paid_amt_s
                                 </div>
                             </div>
                             <div class="row">
@@ -195,7 +207,7 @@
                                     未付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    <span class="text-orange">@Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("#,#")</span>
+                                    <span class="text-orange">@nopaid_s</span>
                                 </div>
                             </div>
 
@@ -205,101 +217,6 @@
                 }
                 
 
-                @{
-                    DateTime checkin_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderHTL.CHECKIN).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime checkout_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderHTL.CHECKOUT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                    
-                }
-
-
-                <!-- 住宿資訊 -->
-                <div class="hotelInfo mb-40">
-                    <h3 class="text-purple text-bold">住宿資訊</h3>
-                    <div class="table-responsive hidden-xs">
-                        <table class="star-table02 table table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width:35%;">飯店名稱</th>
-                                    <th style="width:35%;">旅客姓名</th>
-                                    <th style="width:15%;">入住日期</th>
-                                    <th style="width:15%;">退房日期</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderHTL.HOTEL_NAME).ToString()</td>
-                                    <td>
-                                     @for(int i=0;i<Model.orderinfomation_result.Data.OrderLst.Count;i=i+1)
-                                     {
-                                         var item_s=Model.orderinfomation_result.Data.OrderLst[i];
-                                         string cus_name_sub=item_s.CUS_NAME;
-                                         if(i==0)
-                                         {
-                                              @cus_name_sub.ToString()
-                                         }else
-                                         {
-                                             @cus_name_sub.ToString()
-                                         }
-                                         
-                                     }
-                                  
-                                    </td>
-                                    <td>@checkin_d.ToString("yyyy/MM/dd")</td>
-                                    <td>@checkout_d.ToString("yyyy/MM/dd")</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-mobile infoBlock">
-                        <div class="orderDetails-mobile">
-                            <div class="row">
-                                <div class="col-xs-6 pl-0">
-                                    飯店名稱
-                                </div>
-                                <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderHTL.HOTEL_NAME).ToString()
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 pl-0">
-                                    旅客姓名
-                                </div>
-                                <div class="col-xs-6 text-right pr-0">
-                                    @for (int i = 0; i < Model.orderinfomation_result.Data.OrderLst.Count; i = i + 1)
-                                    {
-                                        var item_s = Model.orderinfomation_result.Data.OrderLst[i];
-                                        string cus_name_sub = item_s.CUS_NAME;
-                                        if (i == 0)
-                                        {
-                                            @cus_name_sub.ToString() <br />
-                                        }
-                                        else
-                                        {
-                                            @cus_name_sub.ToString() <br />
-                                        }
-
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 pl-0">
-                                    入住日期
-                                </div>
-                                <div class="col-xs-6 text-right pr-0">
-                                    @checkin_d.ToString("yyyy/MM/dd")
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 pl-0">
-                                    退房日期
-                                </div>
-                                <div class="col-xs-6 text-right pr-0">
-                                    @checkout_d.ToString("yyyy/MM/dd")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
                 @{
@@ -457,25 +374,22 @@
                             </thead>
                             <tbody>
 
+                            
+
                                 @for(int i=0;i<Model.orderinfomation_result.Data.CusAndSub.Count;i=i+1)
                                 {
-                                    var item_s=Model.orderinfomation_result.Data.CusAndSub[i];
-                                    var item=Model.orderinfomation_result.Data.OrderLst[i];
+
+                                    var item_s = Model.orderinfomation_result.Data.CusAndSub[i];
+                                
+                                    
                                     string cusandsub_name = item_s.CUS_NAME;
-                                    string cus_sex_s="";
+                                    
+                                    string cus_sex_s = "";
                                     string cus_food_s = "";
-                                    string prod_sub_name_s= "";
-                                    int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                    string cus_food = Html.DisplayFor(modelitem => item_s.CUS_FOOD).ToString();
+                                    string prod_sub_name_s = "";
+                                      string cus_food = Html.DisplayFor(modelitem => item_s.CUS_FOOD).ToString();
                                     string prod_sub_name = Html.DisplayFor(modelitem => item_s.PROD_SUB_NAME).ToString();
-                                    if (cus_sex_i == 0)
-                                    {
-                                        cus_sex_s = "MR.";
-                                    }
-                                    else
-                                    {
-                                        cus_sex_s = "MS.";
-                                    }
+                                    
 
                                     if (cus_food.Equals("BBML"))
                                     {
@@ -510,12 +424,30 @@
                                     if (prod_sub_name.Equals(""))
                                     {
                                         prod_sub_name_s = "無";
-                                    }else
+                                    }
+                                    else
                                     {
-                                        prod_sub_name_s=prod_sub_name;
+                                        prod_sub_name_s = prod_sub_name;
                                     }
                                     
                                     
+                                    
+                                    if (Model.orderinfomation_result.Data.OrderLst.Count < (i+1))
+                                    {
+                                        continue;
+                                    }
+                                    var item = Model.orderinfomation_result.Data.OrderLst[i];
+
+                                    int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+
+                                    if (cus_sex_i == 1)
+                                    {
+                                        cus_sex_s = "MR.";
+                                    }
+                                    else
+                                    {
+                                        cus_sex_s = "MS.";
+                                    }
                                 <tr>
                                     <td>@cusandsub_name</td>
                                     <td>@Html.DisplayFor(modelitem => item_s.CUS_E_NAME).ToString() ,@cus_sex_s.ToString()</td>
@@ -530,6 +462,10 @@
                         @for (int i = 0; i < Model.orderinfomation_result.Data.CusAndSub.Count; i = i + 1)
                         {
                             var item_s = Model.orderinfomation_result.Data.CusAndSub[i];
+                            if (Model.orderinfomation_result.Data.OrderLst.Count < (i + 1))
+                            {
+                                continue;
+                            }  
                             var item = Model.orderinfomation_result.Data.OrderLst[i];
                             string cusandsub_name = item_s.CUS_NAME;
                             string cus_sex_s = "";
