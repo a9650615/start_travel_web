@@ -1177,7 +1177,7 @@
 .abgne-star-carousel {
 	width: 100%;
 	display: inline-block;
-	height: 140px;
+	height: 200px;
 	position: relative;
 }
 .abgne-star-carousel * {
@@ -1211,7 +1211,7 @@
 .abgne-star-carousel .star-btn a i{
 	display: block;
 	position: absolute;
-	top: 60px;bottom: 0;
+	top: 90px;bottom: 0;
 	left: 0;right: 0;
 	margin: auto;
 }
@@ -1229,7 +1229,7 @@
 	left: 150px;
 	overflow: hidden;
 	width: calc(100% - 180px);
-	height: 140px;
+	height: 100%;
 	outline: 1px solid #bbbbbb;
 }
 .abgne-star-carousel ul {
@@ -1239,8 +1239,8 @@
 	transition: .3s;
 }
 .abgne-star-carousel li {
-	width: 380px;
-	height: 140px;
+	width: 280px;
+	height: 200px;
 	position: relative;
 	display: inline-block;
 	font-size: 16px;
@@ -1253,7 +1253,7 @@
 }
 .star-list-title{
 	width: 120px;
-	height: 140px;
+	height: 100%;
 	margin-left: 30px;
 }
 .star-list-title>div{
@@ -1275,7 +1275,7 @@
 		left: 100px;
 		overflow: hidden;
 		width: calc(100% - 130px);
-		height: 140px;
+		height: 100%;
 		outline: 1px solid #bbbbbb;
 	}
 	.abgne-star-carousel li {
