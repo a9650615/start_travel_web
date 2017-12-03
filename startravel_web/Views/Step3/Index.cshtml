@@ -102,6 +102,11 @@
                         int Pre_Amt_i = int.Parse(Html.DisplayFor(modelitem => item.Pre_Amt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int UnPayAmt_i = int.Parse(Html.DisplayFor(modelitem => item.UnPayAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+
+                        
+                        
+                        
+                        
                         int total_order_prod_sub = 0;
 
                         for (int k = 0; k < item.OrderProdSub.Count; k = k + 1)
@@ -113,7 +118,23 @@
 
                         }
 
+                        UnPayAmt_i = UnPayAmt_i + total_order_prod_sub;
+                        
+                        
+                        string Prod_Amt_s = Prod_Amt_i.ToString("#,#");
+                        string total_order_prod_sub_s = total_order_prod_sub.ToString("#,#");
+                        string Pre_Amt_s = Pre_Amt_i.ToString("#,#");
+                        string PaidAmt_s = PaidAmt_i.ToString("#,#");
+                        string UnPayAmt_s = UnPayAmt_i.ToString("#,#");
 
+                        Prod_Amt_s = Prod_Amt_s == "" ? "0" : Prod_Amt_s;
+                        total_order_prod_sub_s = total_order_prod_sub_s == "" ? "0" : total_order_prod_sub_s;
+                        Pre_Amt_s = Pre_Amt_s == "" ? "0" : Pre_Amt_s;
+                        PaidAmt_s = PaidAmt_s == "" ? "0" : PaidAmt_s;
+                        UnPayAmt_s = UnPayAmt_s == "" ? "0" : UnPayAmt_s;
+                        
+                        
+                        
                         //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                         <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit">
                             <div class="chooseItem-topBlock">
@@ -150,11 +171,11 @@
                                     <tbody>
                                         <tr>
                                             <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
-                                            <td>@Prod_Amt_i.ToString("#,#")</td>
-                                            <td>@total_order_prod_sub.ToString("#,#")</td>
-                                            <td>@Pre_Amt_i.ToString("#,#")</td>
-                                            <td>@PaidAmt_i.ToString("#,#")</td>
-                                            <td><span class="text-orange">@UnPayAmt_i.ToString("#,#")</span></td>
+                                            <td>@Prod_Amt_s</td>
+                                            <td>@total_order_prod_sub_s</td>
+                                            <td>@Pre_Amt_s</td>
+                                            <td>@PaidAmt_s</td>
+                                            <td><span class="text-orange">@UnPayAmt_s</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -169,7 +190,7 @@
                                             商品金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @Prod_Amt_i.ToString("#,#")
+                                            @Prod_Amt_s
                                         </div>
                                     </div>
                                     <div class="row">
@@ -177,7 +198,7 @@
                                             加購金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @total_order_prod_sub.ToString("#,#")
+                                            @total_order_prod_sub_s
                                         </div>
                                     </div>
                                     <div class="row">
@@ -185,7 +206,7 @@
                                             訂金金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @Pre_Amt_i.ToString("#,#")
+                                            @Pre_Amt_s
                                         </div>
                                     </div>
                                     <div class="row">
@@ -193,7 +214,7 @@
                                             已付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @PaidAmt_i.ToString("#,#")
+                                            @PaidAmt_s
                                         </div>
                                     </div>
                                     <div class="row">
@@ -201,7 +222,7 @@
                                             未付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            <span class="text-orange">@UnPayAmt_i.ToString("#,#")</span>
+                                            <span class="text-orange">@UnPayAmt_s</span>
                                         </div>
                                     </div>
 
