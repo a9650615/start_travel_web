@@ -686,14 +686,17 @@
                       }
 
                       $(document).ready(() => {
+                          var start = false
                           $(window).scroll(() => {
                               if (@(Search_result_currentpage)==@total_page) {
                                   $('#mobile-loadmore').text('沒有資料了')
+                                 
                               }
-                              else 
-                                  if (isScrolledIntoView('#mobile-loadmore') && $(window).width() < 767) {
-                                      $("html, body").stop().animate({scrollTop:0}, 500, 'swing');
-                                      to_page(@(Search_result_currentpage+1));
+                              else
+                                  if (isScrolledIntoView('#mobile-loadmore') && $(window).width() < 767 && !start) {
+                                      $("html, body").stop().animate({scrollTop:0}, 500, 'swing', () => $("html, body").scrollTop(0));
+                                      to_page(@(Search_result_currentpage)+1);
+                                      start = true;
                                   }
                           })
                       })
@@ -1196,7 +1199,9 @@
 
         function to_page(index) {
             $('#research_page').val(index);
-            $('#searchForm').submit();
+            $('.star-pager').find('.active').children('a').text(index)
+            page_button_click($('.star-pager').find('.active').children('a'));
+            //$('#searchForm').submit();
         }
 
     
