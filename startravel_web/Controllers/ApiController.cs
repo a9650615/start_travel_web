@@ -248,6 +248,21 @@ namespace startravel_web.Controllers
 
         }
 
+        //order_1.6
+        public async Task<OrderGrpCreate_result> OrderGrpCreate_api(OrderGrpCreate_PostData postdata)
+        {
+            string targetURI = "https://dorder-api.startravel.com.tw/api/OrderGrpCreate";
+            HttpClient client = new HttpClient();
+            client.MaxResponseContentBufferSize = Int32.MaxValue;
+            string json = JsonConvert.SerializeObject(postdata);
+            HttpContent contentPost = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(targetURI, contentPost).Result;
+            var collection = response.Content.ReadAsStringAsync().Result;
+            var collection_jobj = JsonConvert.DeserializeObject<OrderGrpCreate_result>(collection);
+            return collection_jobj;
+
+        }
+
         //PMCH
         public async Task<OrderInstallment_result> OrderInstallment_api(OrderInstallment_PostData postdata)
         {

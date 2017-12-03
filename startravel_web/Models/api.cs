@@ -56,6 +56,7 @@ namespace startravel_web.Models
         public int pusb_count { get; set; }
         public int insu_count { get; set; }
         public string member_info { get; set; }
+        public string member_number { get; set; }
 
     }
 
@@ -814,7 +815,24 @@ namespace startravel_web.Models
      }
 
      //order_1.5
+    //order_1.6
 
+     public class OrderGrpCreate_result
+     {
+         public OrdersCreateViewModel Data { get; set; }
+         public DateTime TokenExpires { get; set; }
+         public String rCode { get; set; }
+         public String rCodeDesc { get; set; }
+
+     }
+
+     public class OrdersCreateViewModel
+     {
+         public string ORDER_NO { get; set; }
+        
+     }
+
+    //order_1.6
 
      //pach1.1
      public class OrderInstallment_result

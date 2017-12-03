@@ -40,7 +40,7 @@ namespace startravel_web.Controllers
             // JObject grpsource_ob =await grpsource;
             step1_view_return_data step1_view_data = new step1_view_return_data { grpproductdetail_result = grpsource, igrptrafficinfo_result = igrptrafficinfo_source, grppriceinfo_result = grppriceinfo_source };
 
-
+            /////uututut
 
             return View(step1_view_data);
         }

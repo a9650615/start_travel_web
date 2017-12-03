@@ -425,6 +425,13 @@
             <input type="hidden" id="visa_count_hidden" name="visa_count_hidden" value="@Model.visa_count">
             <input type="hidden" id="insu_count_hidden" name="insu_count_hidden" value="@Model.insu_count">
             <input type="hidden" id="room_count_hidden" name="room_count_hidden" value="@Model.room_count">
+            <input type="hidden" id="pusb_array_hidden" name="pusb_array_hidden" value="@Model.psub_list">
+            <input type="hidden" id="visa_array_hidden" name="visa_array_hidden" value="@Model.visa_list">
+            <input type="hidden" id="insu_array_hidden" name="insu_array_hidden" value="@Model.insu_list">
+            <input type="hidden" id="prod_no_hidden" name="prod_no_hidden" value="@Model.grpproductdetail_result.Data.PROD_NO">
+            <input type="hidden" id="grp_no_hidden" name="grp_no_hidden" value="@Model.grpproductdetail_result.Data.GRP_NO">
+            <input type="hidden" id="member_no_hidden" name="member_no_hidden" value="@Model.member_number">
+
         </div>
     </div>
     <div class="content content-gray">
@@ -436,7 +443,7 @@
             <div class="mb-20">
                 <span class="text-purple text-bold h3">聯絡人資料</span>
                 <div class="contactInfo-btn">
-                    <input class="star-input" type="checkbox" id="contactInfo01" name="" value="" onclick="contactinfo_click('@Html.DisplayFor(modelitem => modelitem.member_info)')">
+                    <input class="star-input" type="checkbox" id="contactInfo01" name="" value="" onclick="contactinfo_click('@Model.member_info')">
                     <label for="contactInfo01"></label>行程聯絡人同會員本人
                     <input type="hidden" id="contactInfo_hidden" name="contactInfo_hidden" value="0">
                 </div>
