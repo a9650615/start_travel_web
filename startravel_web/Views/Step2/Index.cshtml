@@ -249,8 +249,8 @@
                                 <div class="form-group">
                                     <label>性別</label>
                                     <select class="passengerinfo_sex_@total_passenger_count">
-                                        <option value="0">男</option>
-                                        <option value="1">女</option>
+                                        <option value="1">男</option>
+                                        <option value="0">女</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -1168,7 +1168,7 @@
                 $(ary_passengerInfo_first_e_name).val(ary[total_count].NAME_E_FIRST);
                 $(ary_passengerInfo_last_e_name).val(ary[total_count].NAME_E_LAST);
                 if(ary[total_count].SEX==null){
-                    $(ary_passengerinfo_sex).val(0);
+                    $(ary_passengerinfo_sex).val(1);
                 }else{
                     $(ary_passengerinfo_sex).val(ary[total_count].SEX);
                 }

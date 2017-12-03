@@ -116,7 +116,7 @@
                                 //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                                 int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                 int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                if(cus_sex_i==0)
+                                if(cus_sex_i==1)
                                 {
                                     cus_sex_s = "MR.";
                                 }else{
@@ -157,7 +157,7 @@
                     //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                     int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                     int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                    if (cus_sex_i == 0)
+                    if (cus_sex_i == 1)
                     {
                         cus_sex_s = "MR.";
                     }

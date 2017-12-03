@@ -721,7 +721,7 @@ namespace startravel_web.Controllers
                      ORDER_CONTACT_NO =member_no_hidden,
                      ORDER_CONTACT_TYPE =null,
                      ORDER_CONTACT_NAME =contact_c_first_name+""+contact_c_last_name,
-                     ORDER_CONTACT_ID = "A123456789",
+                     ORDER_CONTACT_ID = "A180352504",
                      ORDER_CONTACT_TEL1 =contact_h_phone,
                      ORDER_CONTACT_TEL2 =contact_o_phone,
                      ORDER_CONTACT_MOBIL = contact_mobile,
