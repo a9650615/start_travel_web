@@ -202,8 +202,17 @@
                         current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
                         total_cost += current_count * current_cost;
                     });
+                    var ary_room=[];
+                    
+                    $('.table-responsive .star-select2').each(function () {
+                        ary_room.push($(this).val());
+
+
+                    });
                    
-                       
+                  
+                    $('#room_count').val(ary_room);
+                    
                    // total_cost = $(this).text()
                       
                     console.log(total_cost);
@@ -225,6 +234,16 @@
 
 
                     // total_cost = $(this).text()
+                    var ary_room=[];
+                    
+                    $('.table-mobile .star-select2').each(function () {
+                        ary_room.push($(this).val());
+
+
+                    });
+                   
+                  
+                    $('#room_count').val(ary_room);
 
                     console.log(current_cost);
                     $('.mobile-people').html(total_count.toLocaleString());
@@ -259,7 +278,7 @@
                                 入住人數
                             </div>
                             <div class="col-xs-7">
-                                <select class="star-select2" onchange="droplist_select();">
+                                <select class="star-select2" onchange="droplist_select_mobile();">
                                     <option value="0">0人</option>
                                     <option value="1">1人</option>
                                     <option value="2">2人</option>
@@ -653,23 +672,7 @@
         
          <script>
 
-                $('#myform').submit(function(){
-                    var ary_room=[];
-                    
-                    $('.table-responsive .star-select2').each(function () {
-                        ary_room.push($(this).val());
-
-
-                    });
-                   
-                  
-                    $('#room_count').val(ary_room);
-                    
-                    console.log(ary_room);
-                    console.log($('#room_count').val());
-
-                    return true;
-                });
+                
 
 
       
