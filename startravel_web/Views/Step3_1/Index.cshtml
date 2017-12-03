@@ -135,14 +135,15 @@
 
                             <tr>
                                 <td class="star-table01-subtotal" colspan="4">
-                                    應付總額 @total_prod_amt.ToString("#,#") 元<br>
-                                    -本人折抵T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
-                                    -未付金額1,000元
+                                    訂單總額 @total_prod_amt.ToString("#,#") 元<br>
+                                    -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
+                                    -應付金額 @((total_prod_amt - t_Cash).ToString("##,##")) 元<br />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="star-table01-total" colspan="4">
-                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅)
+                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅) <br/>
+                                    未付金額 0 元 <br/>
                                 </td>
                             </tr>
                         </tbody>
@@ -167,7 +168,7 @@
                     }
 
 
-                    total_prod_amt = total_prod_amt + Prod_Amt_i;
+                    //total_prod_amt = total_prod_amt + Prod_Amt_i;
                 <div class="table-mobile infoBlock">
                     <span class="text-purple">@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</span>
                     <div class="orderDetails-mobile mt-10">
@@ -200,12 +201,13 @@
                 </div>
                 }
                     <div class="infoBlock text-right mt--1">
-                        應付總額 @total_prod_amt.ToString("#,#") 元<br>
-                        -本人折抵T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
-                        -未付金額1,000元
+                        訂單總額 @total_prod_amt.ToString("#,#") 元<br>
+                        -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
+                        -應付金額 @((total_prod_amt - t_Cash).ToString("##,##")) 元<br />
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
-                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("#,#"))</span> 元(含稅)
+                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅) <br />
+                        未付金額 0 元 <br />
                     </div>
                 </div>
             </div>
