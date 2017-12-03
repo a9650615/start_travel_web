@@ -199,7 +199,7 @@
                     $('.table-responsive .star-select2').each(function () {
                         total_count += parseInt($(this).val());
                         current_count = parseInt($(this).val());
-                        current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text());
+                        current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
                         total_cost += current_count * current_cost;
                     });
                    
