@@ -149,11 +149,11 @@
                                     <tbody>
                                         <tr>
                                             <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
-                                            <td>@Prod_Amt_i.ToString("##,##")</td>
-                                            <td>@total_order_prod_sub.ToString("##,##")</td>
-                                            <td>@Pre_Amt_i.ToString("##,##")</td>
-                                            <td>@PaidAmt_i.ToString("##,##")</td>
-                                            <td><span class="text-orange">@UnPayAmt_i.ToString("##,##")</span></td>
+                                            <td>@Prod_Amt_i.ToString("#,#")</td>
+                                            <td>@total_order_prod_sub.ToString("#,#")</td>
+                                            <td>@Pre_Amt_i.ToString("#,#")</td>
+                                            <td>@PaidAmt_i.ToString("#,#")</td>
+                                            <td><span class="text-orange">@UnPayAmt_i.ToString("#,#")</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -168,7 +168,7 @@
                                             商品金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @Prod_Amt_i.ToString("##,##")
+                                            @Prod_Amt_i.ToString("#,#")
                                         </div>
                                     </div>
                                     <div class="row">
@@ -176,7 +176,7 @@
                                             加購金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @total_order_prod_sub.ToString("##,##")
+                                            @total_order_prod_sub.ToString("#,#")
                                         </div>
                                     </div>
                                     <div class="row">
@@ -184,7 +184,7 @@
                                             訂金金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @Pre_Amt_i.ToString("##,##")
+                                            @Pre_Amt_i.ToString("#,#")
                                         </div>
                                     </div>
                                     <div class="row">
@@ -192,7 +192,7 @@
                                             已付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @PaidAmt_i.ToString("##,##")
+                                            @PaidAmt_i.ToString("#,#")
                                         </div>
                                     </div>
                                     <div class="row">
@@ -200,7 +200,7 @@
                                             未付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            <span class="text-orange">@UnPayAmt_i.ToString("##,##")</span>
+                                            <span class="text-orange">@UnPayAmt_i.ToString("#,#")</span>
                                         </div>
                                     </div>
 

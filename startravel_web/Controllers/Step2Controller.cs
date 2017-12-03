@@ -636,7 +636,9 @@ namespace startravel_web.Controllers
                   string[] cus_birthday_array = passengerInfo_birthday_array.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                   for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
                   {
-                      cus_birthday_count_list[i] = cus_birthday_array[i];
+                      DateTime cus_birthday_transfer = DateTime.ParseExact(cus_birthday_array[i], "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture);
+
+                      cus_birthday_count_list[i] = cus_birthday_transfer.ToString("yyyyMMdd");
                   }
 
                 //birthday
@@ -745,11 +747,11 @@ namespace startravel_web.Controllers
                 };
 
                 JavaScriptSerializer Serializer = new JavaScriptSerializer();
-                Response.Write(Serializer.Serialize(OrderGrpCreate_postData));   
+                Response.Write(Serializer.Serialize(OrderGrpCreate_postData) + "<br/>");   
 
 
                 var ordergrpcreate_source = await api.OrderGrpCreate_api(OrderGrpCreate_postData);
-
+                Response.Write("********************************" + "<br/>");
                 Response.Write("ordergrpcreate_source.rCode:" + ordergrpcreate_source.rCode + "<br/>");
                 Response.Write("ordergrpcreate_source.rCodeDesc:" + ordergrpcreate_source.rCodeDesc + "<br/>");
 
