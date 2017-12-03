@@ -22,7 +22,7 @@ namespace startravel_web.Controllers
 
             string order_number_s = Request.Form["order_no_hidden"];
             //string member_number_s = "MEM0000000028";
-            int tcash_i = 0;
+            int tcash_i =0; 
             bool is_atm = true; //atm :true credit card:1false
             ApiController api = new ApiController();
             OrderInfomation_PostData orderinfomation_postData = new OrderInfomation_PostData() { order_no = order_number_s };

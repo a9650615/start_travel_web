@@ -85,6 +85,10 @@
 
             @{
                 int total_prod_amt = 0;
+                  int total_this_time_pay=0;
+                  int not_paid_i = 0;
+                  string not_paid_s = "";
+                  string total_this_pay_s = "";
                 int t_Cash = 0;
                 var t_Cash_str = Request.Form["t_cash"];
                 if (t_Cash_str == "") { t_Cash_str = "0"; }
@@ -113,8 +117,36 @@
                                 var item_cus = Model.orderinfomation_result.Data.OrderLst[i];
                                 string cus_name=item_cus.CUS_NAME;
                                 string cus_sex_s;
-                                //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                                int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                DateTime s_date_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                int nopaid_i = int.Parse(Html.DisplayFor(modelitem => item_cus.NOPAID).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                string nopaid_s = nopaid_i.ToString("#,#");
+                                nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
+                                
+                                
+                                string cus_no="payment_"+i;
+
+                                string is_payoff = Request.Form[cus_no];
+                                
+                                
+                              
+                                
+                                if(is_payoff.Equals("deposit"))
+                                {
+                                    int cus_this_pay = int.Parse(item_cus.PRE_AMT);
+
+                                    total_this_time_pay = total_this_time_pay + cus_this_pay;
+                                }
+                                else
+                                {
+                                    int cus_this_pay = nopaid_i;
+
+                                    total_this_time_pay = total_this_time_pay + cus_this_pay;
+                                }
+
+                                 total_this_pay_s = total_this_time_pay.ToString("#,#");
+                                total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;
+                                
+                                
                                 int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                 if(cus_sex_i==1)
                                 {
@@ -124,12 +156,19 @@
                                 }
 
 
-                                total_prod_amt = total_prod_amt + Prod_Amt_i;
+                                total_prod_amt = total_prod_amt + nopaid_i;
+
+
+                                not_paid_i = total_prod_amt - total_this_time_pay;
+
+                                not_paid_s = not_paid_i.ToString("#,#");
+                                not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
+                                
                              <tr>
                                 <td>@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</td>
                                 <td>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item_cus.PROD_NAME).ToString()))</td>
-                                <td>2017/10/17</td>
-                                <td>@Prod_Amt_i.ToString("#,#")</td>
+                                <td>@s_date_d.ToString("yyyy/MM/dd")</td>
+                                <td>@nopaid_s</td>
                             </tr>
                             }
 
@@ -137,13 +176,13 @@
                                 <td class="star-table01-subtotal" colspan="4">
                                     訂單總額 @total_prod_amt.ToString("#,#") 元<br>
                                     -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
-                                    -應付金額 @((total_prod_amt - t_Cash).ToString("##,##")) 元<br />
+                                    -應付金額 @((total_prod_amt - t_Cash).ToString("#,#")) 元<br />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="star-table01-total" colspan="4">
-                                    本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅) <br/>
-                                    未付金額 0 元 <br/>
+                                    本次結帳金額 <span>@total_this_pay_s</span> 元(含稅) <br/>
+                                    未付金額 @not_paid_s 元 <br/>
                                 </td>
                             </tr>
                         </tbody>
@@ -156,7 +195,37 @@
                     string cus_name = item_cus.CUS_NAME;
                     string cus_sex_s;
                     //DateTime _d = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                    int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item_cus.PROD_PRICE).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                    DateTime s_date_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    int nopaid_i = int.Parse(Html.DisplayFor(modelitem => item_cus.NOPAID).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                    string nopaid_s = nopaid_i.ToString("#,#");
+                    nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
+
+
+                    string cus_no = "payment_" + i;
+
+                    string is_payoff = Request.Form[cus_no];
+
+
+
+
+                /*    if (is_payoff.Equals("deposit"))
+                    {
+                        int cus_this_pay = int.Parse(item_cus.PRE_AMT);
+
+                        total_this_time_pay = total_this_time_pay + cus_this_pay;
+                    }
+                    else
+                    {
+                        int cus_this_pay = nopaid_i;
+
+                        total_this_time_pay = total_this_time_pay + cus_this_pay;
+                    }
+
+                    total_this_pay_s = total_this_time_pay.ToString("#,#");
+                    total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;*/
+                                
+                    
+                    
                     int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                     if (cus_sex_i == 1)
                     {
@@ -167,8 +236,13 @@
                         cus_sex_s = "MS.";
                     }
 
-
+                    //total_prod_amt = total_prod_amt + nopaid_i;
                     //total_prod_amt = total_prod_amt + Prod_Amt_i;
+
+                   // not_paid_i = total_prod_amt - total_this_time_pay;
+
+                //    not_paid_s = not_paid_i.ToString("#,#");
+                 //   not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
                 <div class="table-mobile infoBlock">
                     <span class="text-purple">@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</span>
                     <div class="orderDetails-mobile mt-10">
@@ -185,7 +259,7 @@
                                 出發日期
                             </div>
                             <div class="col-xs-4 text-right pr-0">
-                                2017/10/17
+                                @s_date_d.ToString("yyyy/MM/dd")
                             </div>
                         </div>
                         <div class="row">
@@ -193,7 +267,7 @@
                                 應付金額
                             </div>
                             <div class="col-xs-4 text-right pr-0">
-                                @Prod_Amt_i.ToString("#,#")
+                                @nopaid_s
                             </div>
                         </div>
 
@@ -206,8 +280,8 @@
                         -應付金額 @((total_prod_amt - t_Cash).ToString("##,##")) 元<br />
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
-                        本次結帳金額 <span>@((total_prod_amt - t_Cash).ToString("##,##"))</span> 元(含稅) <br />
-                        未付金額 0 元 <br />
+                        本次結帳金額 <span>@total_this_pay_s</span> 元(含稅) <br />
+                        未付金額 @not_paid_s 元 <br />
                     </div>
                 </div>
             </div>

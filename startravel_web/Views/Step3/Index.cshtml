@@ -89,7 +89,7 @@
                 <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
                 <form method="post" action="/tour/Step3_1/Index" id="main-form">
                     <input type="hidden" value="@Model.order_no" name="order_no_hidden">
-                    @{ int i;}}
+                    @{ int i;}
                     @for (i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
                     {
                         var item = Model.paymentorder_result.Data[i];
