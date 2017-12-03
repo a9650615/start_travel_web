@@ -150,57 +150,14 @@
         </div>
     </div>
 
-    <!--城市轉換-->
-        @helper city_transfer(string str)
-        {
-string city_to_ch = "";
-if (str.Equals("TPE"))
-{
-    city_to_ch = "台北";
-
-
-}
-else if (str.Equals("BKK"))
-{
-    city_to_ch = "曼谷";
-
-} else if (str.Equals("DMK"))
-{
-    city_to_ch = "曼谷";
-
-}
-else if (str.Equals("TXG"))
-{
-    city_to_ch = "台中";
-}
-else if (str.Equals("KHH"))
-{
-    city_to_ch = "高雄小港";
-
-}
-else if (str.Equals("JP"))
-{
-    city_to_ch = "日本";
-}
-
-
-
-
-
-
-             @city_to_ch
-
-
-
-
-        }
+ 
 
         @{
             DateTime grplist_s_data_s = DateTime.ParseExact(Html.DisplayFor(model => model.grplist_postdata.S_DATE_S).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
             DateTime grplist_s_data_e = DateTime.ParseExact(Html.DisplayFor(model => model.grplist_postdata.S_DATE_E).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-            string grplist_city_from = Html.DisplayFor(model => model.grplist_postdata.CITY_FROM).ToString();
+            string grplist_city_from = Html.DisplayFor(model => model.grplist_result.Data.prod[0].City_From_Name).ToString();
 
-            string grplist_city_to = Html.DisplayFor(model => model.grplist_postdata.CITY_TO).ToString();
+            string grplist_city_to = Html.DisplayFor(model => model.grplist_result.Data.prod[0].CAT1Name).ToString();
             if (grplist_city_to.Equals(""))
             {
                 grplist_city_to = Html.DisplayFor(model => model.grplist_postdata.TravelRegion).ToString();
@@ -234,7 +191,7 @@ else if (str.Equals("JP"))
                     <div class="col-xs-12 col-sm-2">
                         <div class="form-group">
                             <label>出發地</label>
-                            @{string grplist_city_from_s = city_transfer(grplist_city_from).ToString();}
+                         
                             @Html.DropDownList("departurelist_item", (IEnumerable<SelectListItem>)ViewBag.departurelistItems, new { id = "departurelist_item", onchange = "" }) 
                             <input type="hidden" id="search_city_from" name="search_city_from" value="">
                         </div>
@@ -242,7 +199,7 @@ else if (str.Equals("JP"))
                     <div class="col-xs-12 col-sm-3">
                         <div class="form-group">
                             <label>目的地</label>
-                            @{string grplist_city_to_s = city_transfer(grplist_city_to).ToString();}
+                       
                             @Html.DropDownList("travelregionlist_item", (IEnumerable<SelectListItem>)ViewBag.grptravelregionlistItems, new { id = "travelregionlist_item", onchange = "" }) 
                             <input type="hidden" id="search_city_to" name="search_city_to" value="">                          
                         </div>
@@ -568,7 +525,7 @@ else if (str.Equals("JP"))
                                             </div>
                                             <div class="star-list-title">
                                                 <div>
-                                                    @grplist_city_from_s 出發
+                                                    @grplist_city_from 出發
                                                 </div>
                                                 <div>
                                                     去程
@@ -592,14 +549,14 @@ else if (str.Equals("JP"))
                                                     int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                     DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                                     DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                                    string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM).ToString();
-                                                    string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO).ToString();
+                                                    string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM_NAME).ToString();
+                                                    string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO_NAME).ToString();
                                                     string s_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[0].AIR_NAME).ToString();
                                                     string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
                                                     DateTime e_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                                     DateTime e_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                                    string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM).ToString();
-                                                    string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO).ToString();
+                                                    string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM_NAME).ToString();
+                                                    string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO_NAME).ToString();
                                                     string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
                                                     string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
 
@@ -617,10 +574,10 @@ else if (str.Equals("JP"))
                                                                 } 
                                                                 } </div>
                                                                    <div>
-                                                                       @s_depart_time.ToString("HH:mm") @city_transfer(s_city_from)/@s_arrive_time.ToString("HH:mm")@city_transfer(s_city_to)  @s_air_name
+                                                                       @s_depart_time.ToString("HH:mm") @s_city_from/@s_arrive_time.ToString("HH:mm")@s_city_to  @s_air_name
                                                                    </div>
                                                                    <div>
-                                                                      @e_depart_time.ToString("HH:mm") @city_transfer(e_city_from)/@e_arrive_time.ToString("HH:mm")@city_transfer(e_city_to)  @e_air_name
+                                                                      @e_depart_time.ToString("HH:mm") @e_city_from/@e_arrive_time.ToString("HH:mm")@e_city_to  @e_air_name
                                                                    </div>
                                                                </li>
                                                 }
@@ -1491,7 +1448,7 @@ else if (str.Equals("JP"))
                                 </div>
                                 <div class="star-list-title">
                                     <div>
-                                        @city_transfer(grplist_city_from).ToString() 出發
+                                        @grplist_city_from 出發
                                     </div>
                                     <div>
                                         去程
@@ -1514,14 +1471,14 @@ else if (str.Equals("JP"))
                                             int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                             DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                             DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM).ToString();
-                                            string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO).ToString();
+                                            string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM_NAME).ToString();
+                                            string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO_NAME).ToString();
                                             string s_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[0].AIR_NAME).ToString();
                                             string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
                                             DateTime e_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                             DateTime e_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM).ToString();
-                                            string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO).ToString();
+                                            string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM_NAME).ToString();
+                                            string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO_NAME).ToString();
                                             string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
                                             string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
                                             <li>
@@ -1543,10 +1500,10 @@ else if (str.Equals("JP"))
                                                     }
                                                 </div>
                                                 <div>
-                                                    @s_depart_time.ToString("HH:mm") @city_transfer(s_city_from)/@s_arrive_time.ToString("HH:mm")@city_transfer(s_city_to)  @s_air_name
+                                                    @s_depart_time.ToString("HH:mm") @s_city_from/@s_arrive_time.ToString("HH:mm")@s_city_to  @s_air_name
                                                 </div>
                                                 <div>
-                                                    @e_depart_time.ToString("HH:mm") @city_transfer(e_city_from)/@e_arrive_time.ToString("HH:mm")@city_transfer(e_city_to)  @e_air_name
+                                                    @e_depart_time.ToString("HH:mm") @e_city_from/@e_arrive_time.ToString("HH:mm")@e_city_to  @e_air_name
                                                 </div>
                                             </li>
                                                         }

@@ -109,6 +109,10 @@ namespace startravel_web.Models
         public string Prod_Type1 { get; set; }
         public decimal Price { get; set; }
         public decimal Price_Agt { get; set; }
+        public string City_From_Name { get; set; }
+        public string City_To_Name { get; set; }
+        public string CAT1Name { get; set; }
+        public string CAT2Name { get; set; }
         public List<GRPListViewModels> GrpList { get; set; }
     }
 
@@ -239,7 +243,11 @@ namespace startravel_web.Models
     {
         public String DATE_AT { get; set; }
         public String CITY_FROM { get; set; }
+        public String CITY_FROM_NAME { get; set; }
+        public String CITY_FROM_SC_NAME { get; set; } 
         public String CITY_TO { get; set; }
+        public String CITY_TO_NAME { get; set; }
+        public String CITY_TO_SC_NAME { get; set; }  
         public String AIR_NAME { get; set; }
         public String FLY_NO { get; set; }
         public String DEPARRT_TIME { get; set; }
