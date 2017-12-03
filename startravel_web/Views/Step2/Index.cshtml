@@ -524,13 +524,7 @@
                 <span class="text-orange ml-20">本公司依財政部台財稅第821481937號函，僅提供代收轉付收據供旅客記帳之用，不另開立統一發票</span>
 
                
-                    <div class="mt-10">
-                        <input class="star-input" type="radio" id="receipt01" name="receipt" value="deposit">
-                        <label for="receipt01"></label><span class="text-18 text-bold">不用寄送代收轉付收據</span>
-                        <div class="text-gray mt-10 pl-30">
-                            *本公司將依法開立並保留，如日後需求，請來電02-81783000或服務信箱：service@startravel.com.tw，開立後若需要修改「抬頭」，請檢附相關證明(如名片、識別證等)以玆修改作業。恕無法開立提供非旅客本人外之第三者使用。
-                        </div>
-                    </div>
+                    
                     <div class="mt-10">
                         <input class="star-input" type="radio" id="receipt02" name="receipt" value="deposit">
                         <label for="receipt02"></label><span class="text-18 text-bold">開立代收轉付收據</span>
@@ -583,7 +577,14 @@
             <!-- 取件方式 -->
             <div class="mb-20">
                 <span class="text-purple text-bold h3">取件方式</span>
-               
+                    <div class="mt-10">
+                        <input class="star-input" type="radio" id="receipt01" name="receipt2" value="deposit">
+                        <label for="receipt01"></label><span class="text-18 text-bold">不用寄送代收轉付收據</span>
+                        <div class="text-gray mt-10 pl-30">
+                            *本公司將依法開立並保留，如日後需求，請來電02-81783000或服務信箱：service@startravel.com.tw，開立後若需要修改「抬頭」，請檢附相關證明(如名片、識別證等)以玆修改作業。恕無法開立提供非旅客本人外之第三者使用。
+                        </div>
+                    </div>
+
                     <div class="mt-10">
                         <input class="star-input" type="radio" id="receipt03" name="receipt2" value="deposit">
                         <label for="receipt03"></label><span class="text-18 text-bold">到店自取</span>
@@ -684,7 +685,7 @@
 
     <!-- 下一步-M -->
     <div class="mobile-goNext">
-        <a href="~/step3/Index" title="">
+        <a href="javascript:;" title="" onclick="order_click('@Html.DisplayFor(modelitem => total_passenger_count)')">
             送出訂單資料
         </a>
         <div class="clear"></div>
