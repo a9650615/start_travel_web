@@ -89,8 +89,8 @@
                 <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
                 <form method="post" action="/tour/Step3_1/Index" id="main-form">
                     <input type="hidden" value="@Model.order_no" name="order_no_hidden">
-
-                    @for (int i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
+                    @{ int i;}}
+                    @for (i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
                     {
                         var item = Model.paymentorder_result.Data[i];
                         string[] cust_name_arrary = Html.DisplayFor(modelitem => item.Cust_Name).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -211,6 +211,7 @@
                     }
 
                     @{
+                        int total_size = i;
                         int tcashavbl_i = int.Parse(Html.DisplayFor(model => model.tcashavblbalance_result.Data.Tcash).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint); ;
                     }
 
@@ -295,6 +296,10 @@
                     count_data()
                 })
 
+                window.onhashchange = function() {
+                    count_data()
+                }
+
                 let count_data = () => {
                     let total = 0
                     $('.infoBlock').each(function () {
@@ -331,6 +336,7 @@
             @{
                 int payment_method = 1;
             }
+            <input name="total_size" id="" type="hidden" value="@total_size" />
             <input name="t_cash" id="t-cash" type="hidden" value="0" />
 
             <!-- 選擇付款方式 -->
@@ -344,7 +350,7 @@
                     </div>
                     <div class="choosePayment-item">
 
-                        @for (int i = 0; i < 2; i = i + 1)
+                        @for (i = 0; i < 2; i = i + 1)
                         {
                             var item_0_b = Model.orderinstallment_result.Data[i];
                             <div>
@@ -370,7 +376,7 @@
                     </div>
                     <div class="choosePayment-item">
                         分期付款
-                        @for (int i = 4; i < Model.orderinstallment_result.Data.Count; i = i + 1)
+                        @for (i = 4; i < Model.orderinstallment_result.Data.Count; i = i + 1)
                         {
                            
                             var item_4_b = Model.orderinstallment_result.Data[i];
