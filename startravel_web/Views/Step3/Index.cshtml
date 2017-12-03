@@ -314,18 +314,23 @@
                         }
                         $('#main-form').submit()
                     })
+                    $('.chooseItem-radiobox>input:checked').each(function () {
+                        console.log($(this).attr('value'))
+                        $(this).parents('.infoBlock').attr('type', $(this).attr('value'))
+                        //$(`input[name=${$(this).attr('name')}]`).checked(false)
+                    })
                     count_data()
                 })
 
-                window.onhashchange = function() {
-                    count_data()
-                }
+                //setInterval(() => {
+                //    count_data()
+                //}, 1000)
 
                 let count_data = () => {
                     let total = 0
                     $('.infoBlock').each(function () {
                         if ($(this).attr('type'))
-                        total += Number($(this).attr('data-' + $(this).attr('type')))
+                            total += Number($(this).attr('data-' + $(this).attr('type')))
                     })
                     console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#t_price').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
