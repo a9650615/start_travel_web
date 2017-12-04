@@ -802,6 +802,17 @@
 
                     return []
                 }
+                function updateMobilDate(data, date) {
+                    let dateStr = `${date[0]}${format(date[1])}`
+                    $('.content-mobile').html("")
+                    console.log(data)
+                    data.forEach(function (val) {
+                        console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
+                        console.log(val.Grp)
+                        if (val.S_date.includes(dateStr))
+                            $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_hl<=0?``:`<span class="quota text-green">可候補</span>`}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+                    })
+                }
 
                 function updateFullDate(data, date) {
                     let table1 = $('.table-responsive').eq(0)
@@ -811,7 +822,7 @@
                     let start2 = new Date(nextDate.join("/")+"/1").getDay()
                     let end1 = new Date(date[0], date[1], 0).getDate()
                     let end2 = new Date(nextDate[0], nextDate[1], 0).getDate()
-                    console.log(data, date)
+                    updateMobilDate( data.Data.grp_date, date)
                     table1.find('tbody td').each(function() {
                         let day = parseInt($(this).attr("class").replace("date-", "")) - start1
                         if (day <= end1 && day > 0){
@@ -836,10 +847,10 @@
                                 let dd = date_data[0]
                                 $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_hl<=0?"":`<span class="quota text-green">可候補</span>`}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
 
-                                }
-                                else {
-                                    $(this).html(`<span class="date active">${day}</span>`)
-                                }
+                            }
+                            else {
+                                $(this).html(`<span class="date active">${day}</span>`)
+                            }
                         }
                         else
                             $(this).html("")
@@ -861,12 +872,12 @@
                     let lastDate = autoChangeYearDate(date[0], date[1])
                     let nextDate = autoChangeYearDate(date[0], date[1]+2)
 
-                    return fetch(`Detail/calendar_reset?prod_no=IGRP000017364&s_month=${lastDate[0]}${format(lastDate[1])}&e_month=${nextDate[0]}${format(nextDate[1])}`, {
+                    return fetch(`Detail/calendar_reset?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&s_month=${lastDate[0]}${format(lastDate[1])}&e_month=${nextDate[0]}${format(nextDate[1])}`, {
                         method: 'GET'
                     })
                     .then(function(response) {
                         return response.json();
-                     })
+                    })
 
                 }
 
@@ -884,6 +895,16 @@
                         })
                         console.log(nowYear, nowMonth)
 
+                    })
+
+                    $('#date-1-go-next').click(function() {
+                        let changedDate = autoChangeYearDate(nowYear, nowMonth+1)
+                        nowYear = changedDate[0]
+                        nowMonth = changedDate[1]
+                        updateHeader(nowYear, nowMonth)
+                        getDate(changedDate).then((res) => {
+                            updateFullDate(res, autoChangeYearDate(nowYear, nowMonth))
+                        })
                     })
 
                     $('#date-2-go-next').click(() => {
