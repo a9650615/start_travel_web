@@ -295,7 +295,7 @@
             </div>
 
             <script>
-                $(document).ready(() => {
+                $(document).ready(function() {
                     $('.chooseItem-radiobox>label').click(function () {
                         $(this).parents('.infoBlock').attr('type', $(this).siblings('.star-input').eq(0).val())
                         count_data()
@@ -303,12 +303,12 @@
                     if (@tcashavbl_i.ToString() <= 0) {
                         $('#t_cash').val(0).attr('disabled','disabled')
                     }
-                    $('#t_cash').keydown(() =>{
+                    $('#t_cash').keydown(function(){
                         count_data()
                         $('#t-cash').val($('#t_cash').val() || 0)
                     })
 
-                    $('.send-to').click(() => {
+                    $('.send-to').click(function(){
                         if($("input[name=payment4]:checked").attr('data-pay') == "true") {
                             openWindowWithPost('https://payment.startravel.com.tw/fakepage', '付款頁面', {}, {})
                         }
@@ -326,7 +326,7 @@
                 //    count_data()
                 //}, 1000)
 
-                let count_data = () => {
+                let count_data = function() {
                     let total = 0
                     $('.infoBlock').each(function () {
                         if ($(this).attr('type'))
