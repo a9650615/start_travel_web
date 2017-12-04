@@ -376,11 +376,11 @@
                                     <tr>
                                         <th colspan="7" class="month">
                                             <a class="month-prev" href="javascript:;" title="">
-                                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                                <i class="glyphicon glyphicon-chevron-left" id="date-1-go-back"></i>
                                             </a>
-                                            @s_month.GetDateTimeFormats('y')[0].ToString()
+                                            <span id="tb-1-h">@s_month.GetDateTimeFormats('y')[0].ToString()</span>
                                             <a class="month-next hidden-lg hidden-md" href="javascript:;" title="">
-                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                                <i class="glyphicon glyphicon-chevron-right" id="date-1-go-next"></i>
                                             </a>
                                         </th>
                                     </tr>
@@ -419,7 +419,7 @@
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                                              <td>
+                                                              <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <span class="date active">@date_i</span>
                                                                     <span class="price">@price_grp_i.ToString("#,#") </span>
@@ -446,7 +446,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
                                                                      <span class="date">@date_i</span>
                                                                </div>
@@ -459,7 +459,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <td>
+                                                            <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
                                                                      <span class="date"> </span>
                                                                </div>
@@ -481,7 +481,7 @@
 
                                                                     string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                                              <td>
+                                                              <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <span class="date active">@date_i</span>
                                                                     <span class="price">@price_grp_i.ToString("#,#") </span>
@@ -508,7 +508,7 @@
                                                                 }
                                                                 else
                                                                 {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
                                                                      <span class="date">@date_i</span>
                                                                </div>
@@ -517,7 +517,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + ( j + 1 ))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date">@date_i</span>
                                                                     </div>
@@ -530,7 +530,7 @@
                                                         else
                                                         {
 
-                                                              <td>
+                                                              <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
                                                                      <span class="date"> </span>
                                                                </div>
@@ -601,11 +601,11 @@
                                     <tr>
                                         <th colspan="7" class="month">
                                             <a class="month-prev hidden-lg hidden-md hidden-sm" href="javascript:;" title="">
-                                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                                <i class="glyphicon glyphicon-chevron-left" id="date-2-go-back"></i>
                                             </a>
-                                            @e_month.GetDateTimeFormats('y')[0].ToString()
+                                            <span id="tb-2-h">@e_month.GetDateTimeFormats('y')[0].ToString()</span>
                                             <a class="month-next" href="javascript:;" title="">
-                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                                <i class="glyphicon glyphicon-chevron-right" id="date-2-go-next"></i>
                                             </a>
                                         </th>
                                     </tr>
@@ -641,7 +641,7 @@
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                                                <td>
+                                                                <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date active">@date_i_e</span>
                                                                         <span class="price">@price_grp_i.ToString("#,#") </span>
@@ -669,7 +669,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date">@date_i_e</span>
                                                                     </div>
@@ -682,7 +682,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <td>
+                                                            <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <span class="date"> </span>
                                                                 </div>
@@ -703,7 +703,7 @@
                                                                 {
                                                                     string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                                                <td>
+                                                                <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date active">@date_i_e</span>
                                                                         <span class="price">@price_grp_i.ToString("#,#") </span>
@@ -731,7 +731,7 @@
                                                                 }
                                                                 else
                                                                 {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date">@date_i_e</span>
                                                                     </div>
@@ -740,7 +740,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <td>
+                                                                <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <span class="date">@date_i_e</span>
                                                                     </div>
@@ -753,7 +753,7 @@
                                                         else
                                                         {
 
-                                                            <td>
+                                                            <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <span class="date"> </span>
                                                                 </div>
@@ -781,7 +781,96 @@
                 </div>
             </div>
 
+            <script>
 
+                /* Date change month*/
+
+                function autoChangeYearDate(yaer, month) {
+                    if (month<=0)
+                        return [yaer-1, 12]
+                    if (month > 12)
+                        return [yaer+1, 1]
+
+                    return [yaer, month]
+                }
+
+                function updateFullDate(data, date) {
+                    let table1 = $('.table-responsive').eq(0)
+                    let table2 = $('.table-responsive').eq(1)
+                    let nextDate = autoChangeYearDate(date[0], date[1]+1)
+                    let start1 = new Date(date.join("/")+"/1").getDay()
+                    let start2 = new Date(nextDate.join("/")+"/1").getDay()
+                    let end1 = new Date(date[0], date[1], 0).getDate()
+                    let end2 = new Date(nextDate[0], nextDate[1], 0).getDate()
+
+                    table1.find('tbody td').each(function() {
+                        let day = parseInt($(this).attr("class").replace("date-", "")) - start1
+                        if (day <= end1 && day > 0)
+                            $(this).html(day)
+                        else
+                            $(this).html("")
+                    })
+                    table2.find('tbody td').each(function() {
+                        let day = parseInt($(this).attr("class").replace("date-", "")) - start2
+                        if (day <= end2 && day > 0)
+                            $(this).html(day)
+                        else
+                            $(this).html("")
+                    })
+                    console.log(end1, end2)
+                }
+
+                function updateHeader(year, month) {
+                    let date_1 = autoChangeYearDate(year, month)
+                    let date_2 = autoChangeYearDate(year, month + 1)
+                    $('#tb-1-h').text(`${date_1[0]}年${date_1[1]}月`)
+                    $('#tb-2-h').text(`${date_2[0]}年${date_2[1]}月`)
+                }
+
+                function format(num) {
+                    return num<10 ? "0" + num: num
+                }
+
+                function getDate(date) {
+                    let nextDate = autoChangeYearDate(date[0], date[1]+1)
+                    
+                    fetch('https://dtour-api.startravel.com.tw/api/GRPCalendar', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            "prod_no": "IGRP000017364",
+                            "s_month": `${date[0]}${format(date[1])}`,
+                            "e_month": `${nextDate[0]}${format(nextDate[1])}`
+                        })
+                    }).then(function(response) {
+                        console.log(response.json())
+                        return response.json();
+                    })
+                }
+
+                $(document).ready(() => {
+                    let nowYear = new Date().getFullYear()
+                    let nowMonth = new Date().getMonth() + 1
+                    
+                    $('#date-1-go-back').click(() => {
+                        let changedDate = autoChangeYearDate(nowYear, nowMonth-1)
+                        nowYear = changedDate[0]
+                        nowMonth = changedDate[1]
+                        updateHeader(nowYear, nowMonth)
+                        getDate(changedDate)
+                        console.log(nowYear, nowMonth)
+                        updateFullDate({}, autoChangeYearDate(nowYear, nowMonth))
+                    })
+
+                    $('#date-2-go-next').click(() => {
+                        let changedDate = autoChangeYearDate(nowYear, nowMonth+1)
+                        nowYear = changedDate[0]
+                        nowMonth = changedDate[1]
+                        updateHeader(nowYear, nowMonth)
+                        console.log(nowYear, nowMonth)
+                        updateFullDate({}, autoChangeYearDate(nowYear, nowMonth))
+                    })
+                })
+            </script>
 
 
         </div>
