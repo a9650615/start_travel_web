@@ -811,6 +811,7 @@ namespace startravel_web.Models
          public String CUS_E_NAME { get; set; }
          public String CUS_FOOD { get; set; }
          public String PROD_SUB_NAME { get; set; }
+         public string CUS_SEQNO { get; set; }
        
      }
      public class OrderContactInfoViewModel

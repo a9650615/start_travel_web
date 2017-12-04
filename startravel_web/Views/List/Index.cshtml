@@ -871,9 +871,12 @@
                 //console.log(list_2);
             }
 
-
+            
             var rcode_grp_result = @Html.Raw(Json.Encode(Model.grplist_result.rCode));
+            var count =@Html.Raw(Json.Encode(Model.grplist_result.Data).IsEmpty());
 
+
+           // console.log(rcode_grp_result);
             if(rcode_grp_result=="0001")
             {
                 //qkk
@@ -924,6 +927,7 @@
                 // console.log(click_after_prod);
                
                 //qkk
+             
 
 
             }
