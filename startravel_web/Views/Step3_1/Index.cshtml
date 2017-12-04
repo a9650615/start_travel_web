@@ -115,19 +115,24 @@
                             @for (int i=0;i<Model.orderinfomation_result.Data.OrderLst.Count;i=i+1)
                             {
                                 var item_cus = Model.orderinfomation_result.Data.OrderLst[i];
+                               
                                 string cus_name=item_cus.CUS_NAME;
                                 string cus_sex_s;
                                 DateTime s_date_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                 int nopaid_i = int.Parse(Html.DisplayFor(modelitem => item_cus.NOPAID).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                
+                                
                                 string nopaid_s = nopaid_i.ToString("#,#");
                                 nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
+
+
                                 
                                 
                                 string cus_no="payment_"+i;
 
                                 string is_payoff = Request.Form[cus_no];
                                 
-                                
+                              
                               
                                 
                                 if(is_payoff.Equals("deposit"))

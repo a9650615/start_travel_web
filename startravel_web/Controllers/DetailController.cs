@@ -49,7 +49,7 @@ namespace startravel_web.Controllers
 
 
            detail_view_return_data view_data = new detail_view_return_data { grpproductdetail_result = grpsource, grpcalendar_result = grpcalendar_source, grpaddpurchase_result = grpaddpurchase_source, grppriceinfo_result = grppriceinfo_source};
-
+   
            return View(view_data);
         }
 
