@@ -1042,10 +1042,12 @@
             <div id="travel-characteristics" class="travel-block hidden-xs">
                 <span class="h3 text-bold">行程特色</span>
                 <div class="travel-characteristics-text mt-10">
-                    <img src="http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL1)" width="1140" height="300">
-                    <img src="http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL2)" width="1140" height="300">
-                    <img src="http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL3)" width="1140" height="300">
-                    <img src="http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL4)" width="1140" height="300">
+                    <div class="images-special">
+                        <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL1)) center;"></div></div>
+                        <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL2)) center;"></div></div>
+                        <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL3)) center;"></div></div>
+                        <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL4)) center;"></div></div>
+                    </div>
 
                     <p>                      
                         @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_DESC3).ToString()))
@@ -1071,8 +1073,12 @@
                         <div class="panel-body">
 
                             <div class="travel-characteristics-text mt-10">
-                                <img src="http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.URL)/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL1)" width="1140" height="300">
-                                <p>
+                                <div class="images-special">
+                                    <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL1)) center;"></div></div>
+                                    <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL2)) center;"></div></div>
+                                    <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL3)) center;"></div></div>
+                                    <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL4)) center;"></div></div>
+                                </div><p>
                                     @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_DESC3).ToString()))  
                                 </p>
 

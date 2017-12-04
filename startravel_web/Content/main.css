@@ -29,8 +29,37 @@ html,body{
 
 
 
+/**
+    Detail images
+*/
+.images-special {
+    display: flex;
+    width:100%;
+    min-height:300px;
+    height:300px;
+}
 
+.images-special>.img {
+    flex: 1;
+    height: 300px;
+    width: 100%;
+    justify-content:center;
+    
+}
+    .images-special > .img > div {
+        display: block;
+      background-size: cover !important;
+      height: 300px;
+    }
 
+@media screen and (max-width:767px){
+	.images-special {
+      display: block;
+      width:100%;
+      min-height:300px;
+      height:auto;
+    }
+}
 
 
 /* 版面設定 */
