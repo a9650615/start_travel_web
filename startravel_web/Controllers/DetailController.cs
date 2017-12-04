@@ -53,6 +53,18 @@ namespace startravel_web.Controllers
            return View(view_data);
         }
 
+
+
+        public async Task<GRPCalendar_result> calendar_reset(string prod_no, string s_month, string e_month)
+        {
+            ApiController api = new ApiController();
+
+            GRPCalendar_PostData grpcalendar_postData = new GRPCalendar_PostData() { prod_no = prod_no, s_month = s_month, e_month = e_month };
+            var grpcalendar_source = await api.GRPCalendar_api(grpcalendar_postData);
+
+            return grpcalendar_source;
+        }
+
       
 	}
 }

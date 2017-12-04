@@ -277,7 +277,7 @@
                     <div class="infoBlock text-right mt--1">
                         訂單總額 @total_prod_amt.ToString("#,#") 元<br>
                         -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
-                        -應付金額 @((total_prod_amt - t_Cash).ToString("##,##")) 元<br />
+                        -應付金額 @((total_prod_amt - t_Cash).ToString("#,#")) 元<br />
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
                         本次結帳金額 <span>@total_this_pay_s</span> 元(含稅) <br />
