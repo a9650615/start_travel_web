@@ -136,7 +136,7 @@
                         
                         
                         //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                        <div class="infoBlock mt-20" data-payOff="@Prod_Amt_i" data-deposit="@Pre_Amt_i" type="deposit">
+                        <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit">
                             <div class="chooseItem-topBlock">
                                 <div class="chooseItem-radiobox">
                                     <input class="star-input" type="radio" id="deposit_@i" name="payment_@i" value="deposit" checked>
