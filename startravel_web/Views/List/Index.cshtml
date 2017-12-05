@@ -155,13 +155,9 @@
         @{
             DateTime grplist_s_data_s = DateTime.ParseExact(Html.DisplayFor(model => model.grplist_postdata.S_DATE_S).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
             DateTime grplist_s_data_e = DateTime.ParseExact(Html.DisplayFor(model => model.grplist_postdata.S_DATE_E).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-            string grplist_city_from = Html.DisplayFor(model => model.grplist_result.Data.prod[0].City_From_Name).ToString();
-
-            string grplist_city_to = Html.DisplayFor(model => model.grplist_result.Data.prod[0].CAT1Name).ToString();
-            if (grplist_city_to.Equals(""))
-            {
-                grplist_city_to = Html.DisplayFor(model => model.grplist_postdata.TravelRegion).ToString();
-            }
+            string grplist_city_from = Model.city_from_name;
+            string grplist_city_to = Model.city_to_name;
+          
 
         }
 
@@ -175,14 +171,14 @@
             <div class="star-container">
                 <div class="searchLine">
                     <i class="glyphicon glyphicon-search"></i>
-                    @grplist_city_from –  @grplist_city_to／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
+                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
                     <a class="searchMoreBtn" href="javascript:;" title="">更換條件</a>
                 </div>
             </div>
         </div>
 
 
-@using (Html.BeginForm("re_search", "List", FormMethod.Get,new{ enctype = "multipart/form-data", id = "searchForm" }))
+@using (Html.BeginForm("re_search", "List", FormMethod.Post,new{ enctype = "multipart/form-data", id = "searchForm" }))
 {
         <!-- 詳細搜尋條件 -->
         <div class="searchCriteria">
@@ -194,6 +190,7 @@
                          
                             @Html.DropDownList("departurelist_item", (IEnumerable<SelectListItem>)ViewBag.departurelistItems, new { id = "departurelist_item", onchange = "" }) 
                             <input type="hidden" id="search_city_from" name="search_city_from" value="">
+                          
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3">
@@ -201,7 +198,8 @@
                             <label>目的地</label>
                        
                             @Html.DropDownList("travelregionlist_item", (IEnumerable<SelectListItem>)ViewBag.grptravelregionlistItems, new { id = "travelregionlist_item", onchange = "" }) 
-                            <input type="hidden" id="search_city_to" name="search_city_to" value="">                          
+                            <input type="hidden" id="search_city_to" name="search_city_to" value="">       
+                                             
                         </div>
                       </div>
 
@@ -250,6 +248,17 @@
                         <div class="searchCriteriaListItem tour_day">
                             <input type="hidden" id="search_tour_day" name="search_tour_day" value="">
                             <span>行程天數：</span>
+
+                            @if (Model.grplist_postdata.tourday == "GE1")
+                            {
+                                <a class="active" href="javascript:;" onclick="search_tour_day_click(this)" title="">不限</a>
+                            }
+                            else
+                            {
+                                <a href="javascript:;" onclick="search_tour_day_click(this)" title="">不限</a>
+                            }
+
+
                             @if(Model.grplist_postdata.tourday=="LE4")
                             {
                                 <a class="active" href="javascript:;" onclick="search_tour_day_click(this)"  title="">4天以下</a>
@@ -277,7 +286,7 @@
                                 <a href="javascript:;" onclick="search_tour_day_click(this)" title="">6天</a>
                             }
    
-                            @if (Model.grplist_postdata.tourday == "GE6")
+                            @if (Model.grplist_postdata.tourday == "GE7")
                             {
                                 <a class="active" href="javascript:;" onclick="search_tour_day_click(this)" title="">7天以上</a>
                             }
@@ -293,7 +302,15 @@
                             <input type="hidden" id="search_stime_s" name="search_stime_s" value="">
                             <input type="hidden" id="search_stime_e" name="search_stime_e" value="">
                             <span>出發時間：</span>
-                            @if (Model.grplist_postdata.S_TIME_S == "000000") 
+                            @if (Model.grplist_postdata.S_TIME_S == "000000" && Model.grplist_postdata.S_TIME_E == "235900")
+                            {
+                                <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">不限</a>
+                            }
+                            else
+                            {
+                                <a href="javascript:;" onclick="search_stime_click(this)" title="">不限</a>
+                            }
+                            @if (Model.grplist_postdata.S_TIME_S == "000000" && Model.grplist_postdata.S_TIME_E== "060000") 
                             { 
                                <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">00:00-06:00</a>
                             }
@@ -301,7 +318,7 @@
                             {
                                 <a href="javascript:;" onclick="search_stime_click(this)" title="">00:00-06:00</a>
                             }
-                            @if (Model.grplist_postdata.S_TIME_S == "060000")
+                            @if (Model.grplist_postdata.S_TIME_S == "060000" && Model.grplist_postdata.S_TIME_E == "120000")
                             {
                                 <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">06:00-12:00</a>
                             }
@@ -309,7 +326,7 @@
                             {
                                 <a href="javascript:;" onclick="search_stime_click(this)" title="">06:00-12:00</a>
                             }
-                            @if (Model.grplist_postdata.S_TIME_S == "120000")
+                            @if (Model.grplist_postdata.S_TIME_S == "120000" && Model.grplist_postdata.S_TIME_E == "180000")
                             {
                                 <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">12:00-18:00</a>
                             }
@@ -317,7 +334,7 @@
                             {
                                 <a href="javascript:;" onclick="search_stime_click(this)" title="">12:00-18:00</a>
                             }
-                            @if (Model.grplist_postdata.S_TIME_S == "180000")
+                            @if (Model.grplist_postdata.S_TIME_S == "180000" && Model.grplist_postdata.S_TIME_E == "235900")
                             {
                                 <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">18:00-24:00</a>
                             }
@@ -332,7 +349,15 @@
                             <input type="hidden" id="search_etime_s" name="search_etime_s" value="">
                             <input type="hidden" id="search_etime_e" name="search_etime_e" value="">
                             <span>回程時間：</span>
-                            @if (Model.grplist_postdata.E_TIME_S == "000000")
+                            @if (Model.grplist_postdata.E_TIME_S == "000000" && Model.grplist_postdata.E_TIME_E == "235900")
+                            {
+                                <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">不限</a>
+                            }
+                            else
+                            {
+                                <a href="javascript:;" onclick="search_etime_click(this)" title="">不限</a>
+                            }
+                            @if (Model.grplist_postdata.E_TIME_S == "000000" && Model.grplist_postdata.E_TIME_E == "060000")
                             {
                                 <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">00:00-06:00</a>
                             }
@@ -340,7 +365,7 @@
                             {
                                 <a href="javascript:;" onclick="search_etime_click(this)" title="">00:00-06:00</a>
                             }
-                            @if (Model.grplist_postdata.E_TIME_S == "060000")
+                            @if (Model.grplist_postdata.E_TIME_S == "060000" && Model.grplist_postdata.E_TIME_E == "120000")
                             {
                                 <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">06:00-12:00</a>
                             }
@@ -348,7 +373,7 @@
                             {
                                 <a href="javascript:;" onclick="search_etime_click(this)" title="">06:00-12:00</a>
                             }
-                            @if (Model.grplist_postdata.E_TIME_S == "120000")
+                            @if (Model.grplist_postdata.E_TIME_S == "120000" && Model.grplist_postdata.E_TIME_E == "180000")
                             {
                                 <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">12:00-18:00</a>
                             }
@@ -356,7 +381,7 @@
                             {
                                 <a href="javascript:;" onclick="search_etime_click(this)" title="">12:00-18:00</a>
                             }
-                            @if (Model.grplist_postdata.E_TIME_S == "180000")
+                            @if (Model.grplist_postdata.E_TIME_S == "180000" && Model.grplist_postdata.E_TIME_E == "235900")
                             {
                                 <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">18:00-24:00</a>
                             }
@@ -480,6 +505,8 @@
                     
                     </div>
                 </div>
+        
+
                 <!-- 灰色區塊開始 -->
                 <div class="star-container hidden-xs">
 
@@ -504,7 +531,7 @@
                                 </div>
                                 <h3>
                                     
-                                     <a href="javascript:;" title=""> @Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item.Prod_Name).ToString()))</a>
+                                     <a title=""> @Html.Raw(Server.HtmlDecode(Html.DisplayFor(modelitem => item.Prod_Name).ToString()))</a>
                              </h3>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-4">
@@ -572,14 +599,14 @@
                                 
                                                            <li>
                                                                    <div class="text-purple text-bold">
-                                                                       <input type="hidden" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
-                                                                       <input type="hidden" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
-                                                                       <input type="hidden" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
-                                                                       <input type="hidden" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
+                                                                        <input type="text" style="display: none" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
+                                                                       <input type="text" style="display: none" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
+                                                                       <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
+                                                                       <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
                                                                      
                                                           @{
                                                              if (int_QTY_KK > 0) {
-                                                           <a href="detail.html" title="">@current_day.ToString("MM/dd(ddd)")</a> @:可報 @int_QTY_KK 位
+                                                           <a  title="">@current_day.ToString("MM/dd(ddd)")</a> @:可報 @int_QTY_KK 位
                                                                if(item_grplist.DEPARTURE_FLAG.Equals("1"))
                                                                { 
                                                                <a class="ensure" href="javascript:;" title="">保出</a>
@@ -610,7 +637,7 @@
 
                                                    if (n == (item.GrpList.Count - 1))
                                                    {
-                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
+                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
                                                                                                                                                        <a class="more-date-more" href="javascript:;" title="">更多</a>
                                                    }
                                                    else
@@ -631,6 +658,7 @@
 
 
                             </div>
+
                             @{
                          string price = Html.DisplayFor(modelitem => item.Price).ToString();
                          int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
@@ -1004,20 +1032,35 @@
             $(th).addClass("active");
 
             var y = $(th).text();
-            var y_s = y.substr(0, 1);
             var final_tour_day_no;
-            // y.substr(0, 1);
-            if (y_s == 4) {
-                final_tour_day_no = "LT" + y_s;
+            if(y=="不限")
+            {
+
+           
+                    final_tour_day_no = "GE1" ;
+        
+
+            }else{
+
+         
+                var y_s = y.substr(0, 1);
+                
+                // y.substr(0, 1);
+                if (y_s == 4) {
+                    final_tour_day_no = "LE" + y_s;
+                }
+                else if (y_s == 7) {
+
+                    final_tour_day_no = "GE" + y_s;
+                } else if(y_s == 5){
+
+                    final_tour_day_no = "EQ" + y_s;
+                } else if(y_s == 6){
+
+                    final_tour_day_no = "EQ" + y_s;
+                }
+
             }
-            else if (y_s == 7) {
-
-                final_tour_day_no = "GT" + y_s;
-            } else {
-
-                final_tour_day_no = "EQ" + y_s;
-            }
-
 
             $('#search_tour_day').val(final_tour_day_no);
             console.log($('#search_tour_day').val());
@@ -1030,18 +1073,29 @@
             $(th).addClass("active");
 
             var y = $(th).text();
-            var stime_NewArray = new Array();
-            stime_NewArray = y.split("-");
 
-            if (stime_NewArray[1] == "24:00") {
-                stime_NewArray[1] = "23:59";
+            if(y=="不限")
+            {
+                $('#search_stime_s').val("00:00");
+                $('#search_stime_e').val("23:59");
+
+
+            }else{
+                var stime_NewArray = new Array();
+                stime_NewArray = y.split("-");
+
+                if (stime_NewArray[1] == "24:00") {
+                    stime_NewArray[1] = "23:59";
+                }
+
+                // y.substr(0, 1);
+                $('#search_stime_s').val(stime_NewArray[0]);
+                $('#search_stime_e').val(stime_NewArray[1]);
+                console.log($('#search_stime_s').val());
+                console.log($('#search_stime_e').val());
+            
             }
 
-            // y.substr(0, 1);
-            $('#search_stime_s').val(stime_NewArray[0]);
-            $('#search_stime_e').val(stime_NewArray[1]);
-            console.log($('#search_stime_s').val());
-            console.log($('#search_stime_e').val());
         }
 
         function search_etime_click(th) {
@@ -1050,19 +1104,29 @@
             $(th).addClass("active");
 
             var y = $(th).text();
-            var etime_NewArray = new Array();
-            etime_NewArray = y.split("-");
 
-            if (etime_NewArray[1] == "24:00")
+            if(y=="不限")
             {
-                etime_NewArray[1] = "23:59";
-            }
+                $('#search_etime_s').val("00:00");
+                $('#search_etime_e').val("23:59");
 
-            // y.substr(0, 1);
-            $('#search_etime_s').val(etime_NewArray[0]);
-            $('#search_etime_e').val(etime_NewArray[1]);
-            console.log($('#search_etime_s').val());
-            console.log($('#search_etime_e').val());
+
+            }else{
+
+                var etime_NewArray = new Array();
+                etime_NewArray = y.split("-");
+
+                if (etime_NewArray[1] == "24:00")
+                {
+                    etime_NewArray[1] = "23:59";
+                }
+
+                // y.substr(0, 1);
+                $('#search_etime_s').val(etime_NewArray[0]);
+                $('#search_etime_e').val(etime_NewArray[1]);
+                console.log($('#search_etime_s').val());
+                console.log($('#search_etime_e').val());
+            }
         }
 
     </script>
@@ -1072,6 +1136,7 @@
     <script type="text/javascript">
     $(document).ready(function () {
 
+  
         ///datepicker
 
         $('#choose-date').click(function () {
@@ -1271,6 +1336,7 @@
         $('#searchForm').submit(function() {
             var city_from = $('#departurelist_item').val();
             var city_to = $('#travelregionlist_item').val();
+          
             var choose_date = $('#choose-date').val();
             var travelkind = $('.TravelKind_select').val();
             var date_NewArray = new Array();
@@ -1288,51 +1354,92 @@
 
             ///************ tour_day
             var tour_day = $('.tour_day').children('.active').text();
-            var tour_day_s = tour_day.substr(0, 1);
             var final_tour_day_no;
+            if(tour_day=="不限")
+            {          
+                final_tour_day_no = "GE1" ;
+            
+            }else{
 
-            if (tour_day_s == 4) {
-                final_tour_day_no = "LE" + tour_day_s;
+           
+
+               var tour_day_s = tour_day.substr(0, 1);
+                
+
+                if (tour_day_s == 4) {
+                    final_tour_day_no = "LE" + tour_day_s;
+                }
+                else if (tour_day_s == 7) {
+
+                   final_tour_day_no = "GE" + tour_day_s;
+               } else if(tour_day_s == 5){
+ 
+                   final_tour_day_no = "EQ" + tour_day_s;
+               } else if(tour_day_s == 6){
+
+                    final_tour_day_no = "EQ" + tour_day_s;
+                }
             }
-            else if (tour_day_s == 7) {
-
-                final_tour_day_no = "GE" + tour_day_s;
-            } else {
-
-                final_tour_day_no = "EQ" + tour_day_s;
-            }
+          
             $('#search_tour_day').val(final_tour_day_no);
             ///************ tour_day
 
             ///************stime
             var stime = $('.stime').children('.active').text();
-            var stime_NewArray = new Array();
-            stime_NewArray = stime.split("-");
+           // var stime_NewArray = new Array();
 
-            if (stime_NewArray[1] == "24:00") {
-                stime_NewArray[1] = "23:59";
+            if(stime=="不限")
+            {
+                $('#search_stime_s').val("00:00");
+                $('#search_stime_e').val("23:59");
+
+
+            }else{
+                var stime_NewArray = new Array();
+                stime_NewArray = stime.split("-");
+
+                if (stime_NewArray[1] == "24:00") {
+                    stime_NewArray[1] = "23:59";
+                }
+
+                // y.substr(0, 1);
+                $('#search_stime_s').val(stime_NewArray[0]);
+                $('#search_stime_e').val(stime_NewArray[1]);
+                console.log($('#search_stime_s').val());
+                console.log($('#search_stime_e').val());
+            
             }
-            // y.substr(0, 1);
-            $('#search_stime_s').val(stime_NewArray[0]);
-            $('#search_stime_e').val(stime_NewArray[1]);
-            console.log($('#search_stime_s').val());
-            console.log($('#search_stime_e').val());
+
+
             ///************stime
 
             ///************etime
             var etime = $('.etime').children('.active').text();
-            var etime_NewArray = new Array();
-            etime_NewArray = etime.split("-");
+            //var etime_NewArray = new Array();
 
-            if (etime_NewArray[1] == "24:00") {
-                etime_NewArray[1] = "23:59";
+            if(etime=="不限")
+            {
+                $('#search_etime_s').val("00:00");
+                $('#search_etime_e').val("23:59");
+
+
+            }else{
+
+                var etime_NewArray = new Array();
+                etime_NewArray = etime.split("-");
+
+                if (etime_NewArray[1] == "24:00")
+                {
+                    etime_NewArray[1] = "23:59";
+                }
+
+                // y.substr(0, 1);
+                $('#search_etime_s').val(etime_NewArray[0]);
+                $('#search_etime_e').val(etime_NewArray[1]);
+                console.log($('#search_etime_s').val());
+                console.log($('#search_etime_e').val());
             }
-
-            // y.substr(0, 1);
-            $('#search_etime_s').val(etime_NewArray[0]);
-            $('#search_etime_e').val(etime_NewArray[1]);
-            console.log($('#search_etime_s').val());
-            console.log($('#search_etime_e').val());
+           
             ///************etime
             ///************order_type
             var current_type = $('.conditions .updown.active').children('span').attr("class");
@@ -1502,11 +1609,10 @@
                                             
                                             <li>
                                                 <div class="text-purple text-bold">
-                                                    <input type="hidden" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
-                                                    <input type="hidden" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
-                                                    <input type="hidden" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
-                                                    <input type="hidden" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
-
+                                                    <input type="text" style="display: none" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
+                                                    <input type="text" style="display: none" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
+                                                    <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
+                                                    <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">s
                                                     @{
                                                         if (int_QTY_KK > 0)
                                                         {

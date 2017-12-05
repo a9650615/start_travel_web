@@ -16,6 +16,7 @@ namespace startravel_web.Controllers
     {
         //
         // GET: /List/
+
         public async Task<ActionResult> Index(string CITY_TO, string TravelRegion, string CITY_FROM, string tourday, string CurrentPage, string PageSize, string S_DATE_S, string S_DATE_E, string S_TIME_S, string S_TIME_E, string E_TIME_S, string E_TIME_E, string TravelKind, string travel_type, string order_type, string Departure)
         {
             
@@ -38,6 +39,9 @@ namespace startravel_web.Controllers
             string view_travel_type;
             string view_order_type;
             int view_Departure ;
+            string view_CITY_TO_NAME="";
+            string view_CITY_FROM_NAME="";
+
 
             if (string.IsNullOrWhiteSpace(CITY_FROM))
             {
@@ -71,7 +75,7 @@ namespace startravel_web.Controllers
 
             if(string.IsNullOrWhiteSpace(tourday))
             {
-                view_tourday = "LE4";
+                view_tourday = "GE1";
             }
             else
             {
@@ -214,6 +218,10 @@ namespace startravel_web.Controllers
                 view_Departure = int.Parse(Departure);
             }
 
+       
+
+          
+
 
           /*  string current_date_test = DateTime.Now.ToString("yyyyMM");
             //string current_date = DateTime.Now.ToString("yyyyMMdd");
@@ -276,6 +284,11 @@ namespace startravel_web.Controllers
             {
                 var item_departure = grpdeparturelist_source.Data[i];
 
+                if (item_departure.CITY_FROM.Equals(view_CITY_FROM))
+                {
+                    view_CITY_FROM_NAME = item_departure.SC_NAME;
+                }
+
 
               grpdeparturelist_item.Add(new SelectListItem()
                    {
@@ -296,6 +309,11 @@ namespace startravel_web.Controllers
             {
                 var item_cat1 = igrptravelregion_source.Data[i];
 
+                if (item_cat1.Cat1Code.Equals(view_TRAVEL_REGION))
+                {
+                    view_CITY_TO_NAME = item_cat1.Cat1Name;
+                }
+
                 grptravelregion_item.Add(new SelectListItem()
                 {
 
@@ -310,6 +328,12 @@ namespace startravel_web.Controllers
                 {
                     var item_cat2 = item_cat1.Cat2List[j];
 
+                    if (item_cat2.Cat2Code.Equals(view_TRAVEL_REGION))
+                    {
+                        view_CITY_TO_NAME = item_cat2.Cat2Name;
+                    }
+
+
                     grptravelregion_item.Add(new SelectListItem()
                     {
 
@@ -323,29 +347,25 @@ namespace startravel_web.Controllers
 
             ViewBag.grptravelregionlistItems = grptravelregion_item;
             //=====build grptravelregion list item
-            if (grplist_source.rCode.Equals("0001") && igrptravelregion_source.rCode.Equals("0001") && grpdeparturelist_source.rCode.Equals("0001"))
-            {
-            list_view_return_data list_view_data = new list_view_return_data { grplist_result = grplist_source, grplist_postdata = grplist_postData, igrptravelregion_result = igrptravelregion_source };
+
+            list_view_return_data list_view_data = new list_view_return_data { grplist_result = grplist_source, grplist_postdata = grplist_postData, igrptravelregion_result = igrptravelregion_source, city_from_name = view_CITY_FROM_NAME, city_to_name = view_CITY_TO_NAME };
 
             return View(list_view_data);
-            }else
-            {
-
-
-
-                list_view_return_data list_view_data = new list_view_return_data { grplist_result = grplist_source, grplist_postdata = grplist_postData, igrptravelregion_result = igrptravelregion_source };
-                return View(list_view_data);
-            }
+        
 
 
           
 
         }
 
-        public ActionResult re_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure, string order_type_1, string research_page, string which_button, string final_prod, string final_grp)
+        [HttpPost]
+        public ActionResult re_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure, string order_type_1, string research_page, string which_button, string final_prod, string final_grp, string search_city_from_name, string search_city_to_name)
         {
             string view_search_city_from = search_city_from;
             string view_search_city_to = search_city_to;
+            string view_search_city_from_name = search_city_from_name;
+            string view_search_city_to_name = search_city_to_name;
+
             string view_search_choose_date_s = search_choose_date_s.Substring(0,10);
             string view_search_choose_date_e = search_choose_date_e.Substring(0,10);
             string view_search_travelkind = search_travelkind;
@@ -404,7 +424,7 @@ namespace startravel_web.Controllers
 
             if (view_which_button.Equals("0"))
             {
-                return RedirectToAction("Index", "List", new { CITY_TO = "", TravelRegion = view_search_city_to, CITY_FROM = view_search_city_from, tourday = view_search_tour_day, CurrentPage = view_currentpage, PageSize = view_pagesize, S_DATE_S = view_search_choose_date_s_d.ToString("yyyyMMdd"), S_DATE_E = view_search_choose_date_e_d.ToString("yyyyMMdd"), S_TIME_S = view_search_stime_s_d.ToString("HHmmss"), S_TIME_E = view_search_stime_e_d.ToString("HHmmss"), E_TIME_S = view_search_etime_s_d.ToString("HHmmss"), E_TIME_E = view_search_etime_e_d.ToString("HHmmss"), TravelKind = search_travelkind, travel_type = view_travel_type, order_type = view_order_type, Departure = view_departure });
+                return RedirectToAction("Index", "List", new { CITY_TO = "", TravelRegion = view_search_city_to, CITY_FROM = view_search_city_from, tourday = view_search_tour_day, CurrentPage = view_currentpage, PageSize = view_pagesize, S_DATE_S = view_search_choose_date_s_d.ToString("yyyyMMdd"), S_DATE_E = view_search_choose_date_e_d.ToString("yyyyMMdd"), S_TIME_S = view_search_stime_s_d.ToString("HHmmss"), S_TIME_E = view_search_stime_e_d.ToString("HHmmss"), E_TIME_S = view_search_etime_s_d.ToString("HHmmss"), E_TIME_E = view_search_etime_e_d.ToString("HHmmss"), TravelKind = search_travelkind, travel_type = view_travel_type, order_type = view_order_type, Departure = view_departure, CITY_TO_NMAE = view_search_city_to_name, CITY_FROM_NMAE = view_search_city_from_name });
             }
             else if (view_which_button.Equals("1"))
             {
@@ -412,7 +432,7 @@ namespace startravel_web.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "List", new { CITY_TO = "", TravelRegion = view_search_city_to, CITY_FROM = view_search_city_from, tourday = view_search_tour_day, CurrentPage = "1", PageSize = view_pagesize, S_DATE_S = view_search_choose_date_s_d.ToString("yyyyMMdd"), S_DATE_E = view_search_choose_date_e_d.ToString("yyyyMMdd"), S_TIME_S = view_search_stime_s_d.ToString("HHmmss"), S_TIME_E = view_search_stime_e_d.ToString("HHmmss"), E_TIME_S = view_search_etime_s_d.ToString("HHmmss"), E_TIME_E = view_search_etime_e_d.ToString("HHmmss"), TravelKind = search_travelkind, travel_type = view_travel_type, order_type = view_order_type, Departure = view_departure });
+                return RedirectToAction("Index", "List", new { CITY_TO = "", TravelRegion = view_search_city_to, CITY_FROM = view_search_city_from, tourday = view_search_tour_day, CurrentPage = "1", PageSize = view_pagesize, S_DATE_S = view_search_choose_date_s_d.ToString("yyyyMMdd"), S_DATE_E = view_search_choose_date_e_d.ToString("yyyyMMdd"), S_TIME_S = view_search_stime_s_d.ToString("HHmmss"), S_TIME_E = view_search_stime_e_d.ToString("HHmmss"), E_TIME_S = view_search_etime_s_d.ToString("HHmmss"), E_TIME_E = view_search_etime_e_d.ToString("HHmmss"), TravelKind = search_travelkind, travel_type = view_travel_type, order_type = view_order_type, Departure = view_departure ,CITY_TO_NMAE = view_search_city_to_name, CITY_FROM_NMAE = view_search_city_from_name});
             }
 
 
@@ -422,12 +442,12 @@ namespace startravel_web.Controllers
           // return View();
         }
 
-        public ActionResult order_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure)
+       /* public ActionResult order_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure)
         {
           
             
             return View();
-        }
+        }*/
 
 	}
 }

@@ -17,7 +17,8 @@ namespace startravel_web.Models
         public GRPList_result grplist_result { get; set; }
         public GRPList_PostData grplist_postdata { get; set; }
         public IGRPTravelRegion_result igrptravelregion_result { get; set; }
-        
+        public string city_from_name { get; set; }
+        public string city_to_name { get; set; }
 
     }
 
