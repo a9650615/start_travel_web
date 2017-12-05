@@ -866,8 +866,8 @@
                                   list_1 += 1;
                             }
                               else {
-                               $(ary_item).animate({ left: "0px" }, 5);
-                               list_1 = 0;
+                              // $(ary_item).animate({ left: "0px" }, 5);
+                               //list_1 = 0;
                            }
                     } else if ( parseInt(NewArray[1]) == 2) {
 
@@ -876,8 +876,8 @@
                                list_2 += 1;
                            }
                            else {
-                               $(ary_item).animate({ left: "0px" }, 5);
-                               list_2 = 0;
+                              // $(ary_item).animate({ left: "0px" }, 5);
+                               //list_2 = 0;
                            }
 
                     } else if ( parseInt(NewArray[1] )== 3) {
@@ -887,8 +887,8 @@
                                list_3 += 1;
                            }
                            else {
-                               $(ary_item).animate({ left: "0px" }, 5);
-                               list_3 = 0;
+                              // $(ary_item).animate({ left: "0px" }, 5);
+                               //list_3 = 0;
                            }
 
                     } else if ( parseInt(NewArray[1]) == 4) {
@@ -898,8 +898,8 @@
                                list_4 += 1;
                            }
                            else {
-                               $(ary_item).animate({ left: "0px" }, 5);
-                               list_4 = 0;
+                             //  $(ary_item).animate({ left: "0px" }, 5);
+                            //   list_4 = 0;
                            }
 
                     } else if ( parseInt(NewArray[1] )== 5) {
@@ -909,8 +909,8 @@
                                list_5 += 1;
                            }
                            else {
-                               $(ary_item).animate({ left: "0px" }, 5);
-                               list_5 = 0;
+                           //    $(ary_item).animate({ left: "0px" }, 5);
+                           //    list_5 = 0;
                            }
 
                        }
@@ -1542,7 +1542,7 @@
             <div class="mobile-searchLine" >
                 <a href="javascript:;" onclick="tweak()" title="" >
                     <i class="glyphicon glyphicon-search"></i>
-                    @grplist_city_from –  @grplist_city_to／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~<br />
+                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~<br />
                     @grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
                 </a>
             </div>
@@ -1641,7 +1641,7 @@
                                                     <input type="text" style="display: none" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
                                                     <input type="text" style="display: none" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
                                                     <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
-                                                    <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">s
+                                                    <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
                                                     @{
                                                         if (int_QTY_KK > 0)
                                                         {
