@@ -675,7 +675,7 @@
                         }
                             <div class="star-searchResultsItemRight col-xs-12 col-sm-3">
                                 <h1>@final_day<small>天</small></h1>
-                                <h2 id="final_price_@number">@price_d.ToString("#,#") <small>元 <font color="red" size="+3">起</font></small></h2>
+                                <h2 class="final_price_@number">@price_d.ToString("#,#") <small>元 <font color="red" size="+3">起</font></small></h2>
                                
                                 <ul>
                                     <li class="qkk_@(i+1)">@qkk_d 人以上成行</li>
@@ -995,7 +995,7 @@
             $(qkk_no).text(current_no_qty_kk+" 人以上成行");
             $(price_no).html(current_no_price+" <small>元</small>");
 
-        
+            console.log(current_no_price);
 
         }
 
