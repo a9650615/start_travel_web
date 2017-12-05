@@ -176,7 +176,7 @@ namespace startravel_web.Controllers
             if (string.IsNullOrWhiteSpace(TravelKind))
             {
 
-                view_TravelKind =1;
+                view_TravelKind =0;
 
             }
             else

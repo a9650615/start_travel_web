@@ -231,8 +231,35 @@
                         <div class="form-group">
                             <label>旅遊形式</label>
                             <input type="hidden" id="search_travelkind" name="search_travelkind" value="">
-                            <select class="TravelKind_select">
-                                <option value="1">團體旅遊</option>
+                            <select class="TravelKind_select" id="travelkind_list">
+                                @if(Model.grplist_postdata.TravelKind==0)
+                                {
+                                    <option selected value="0">不限</option>
+                                }
+                                else
+                                {
+                                     <option value="0">不限</option>
+                                }
+                               
+                                @if (Model.grplist_postdata.TravelKind == 1)
+                                {
+                                     <option selected value="1">團體旅遊</option>
+                                }
+                                else
+                                {
+                                    <option  value="1">團體旅遊</option>
+                                
+                                }
+
+                                @if (Model.grplist_postdata.TravelKind == 2)
+                                {
+                                     <option selected value="2">迷你小團</option>
+                                }
+                                else
+                                {
+                                    <option value="2">迷你小團</option>
+                                }
+                              
                             </select>
                         </div>
                     </div>
