@@ -174,6 +174,7 @@ namespace startravel_web.Models
     public class RoleTypeViewModel
     {
         public String Type_name { get; set; }
+        public String Type_no { get; set; }
         public int Price { get; set; }
     }
     //=====tour1.5=====//

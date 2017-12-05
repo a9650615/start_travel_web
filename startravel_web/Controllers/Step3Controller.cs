@@ -78,6 +78,7 @@ namespace startravel_web.Controllers
                                           string passengerInfo_birthday_array,
                                           string passengerInfo_food_array,
                                           string passengerInfo_prod_sub_array,
+                                          string passengerInfo_room_type_array,
                                           string company_title,
                                           string uniform_numbers,
                                           string recipients,
@@ -302,6 +303,14 @@ namespace startravel_web.Controllers
                 cus_food_count_list[i] = cus_food_array[i];
             }
 
+            //room_type
+            string[] cus_room_type_list = new string[int.Parse(total_people_hidden)];
+            string[] cus_room_type_array = passengerInfo_room_type_array.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
+            {
+                cus_room_type_list[i] = cus_room_type_array[i];
+            }
+
 
             //Response.Write("***********build  cus_itemlist*********" + "<br/>");
             // 
@@ -356,7 +365,7 @@ namespace startravel_web.Controllers
                     PASSPORT_NO = null,
                     PASSPORT_S_DATE = null,
                     PASSPORT_E_DATE = null,
-                    ROOM_COND = "0001",
+                    ROOM_COND = cus_room_type_list[i],
                     ORDER_PROD_SUB = prod_sub_itemlist
 
                 });

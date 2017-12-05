@@ -210,6 +210,7 @@
                     <div class="passengerInfo-title">
                         旅客 @(total_passenger_count+1)<span> @Html.DisplayFor(modelitem => item_s.Type_name).ToString() (@Html.DisplayFor(modelitem => item.Category_name).ToString()) </span>
                     </div>
+                      <input type="hidden" id="room_type_@total_passenger_count" name="room_type_@total_passenger_count" value="@item_s.Type_no">
                         <div class="row">
                             <div class="col-xs-12 col-sm-3">
                                 <div class="form-group">
@@ -662,6 +663,7 @@
             <input type="hidden" id="passengerInfo_birthday_array" name="passengerInfo_birthday_array">
             <input type="hidden" id="passengerInfo_food_array" name="passengerInfo_food_array">
             <input type="hidden" id="passengerInfo_prod_sub_array" name="passengerInfo_prod_sub_array">
+            <input type="hidden" id="passengerInfo_room_type_array" name="passengerInfo_room_type_array">
 
 
 
@@ -742,6 +744,8 @@
             var cus_birthday_array=[];
             var cus_food_array=[];
 
+            var cus_room_type_array=[];
+
 
             //pusb
             var pusb_count=$('#pusb_count_hidden').val();
@@ -768,6 +772,7 @@
                 var passengerInfo_id_no= ".passengerInfo_id_no_"+i;
                 var passengerInfo_birthday_no= ".passengerInfo_birthday_"+i;
                 var passengerInfo_food_no= ".passengerInfo_food_"+i;
+                var passengerInfo_room_type_no= "#room_type_"+i;
 
                 cus_name_c_first_array.push($(passengerInfo_first_c_name_no).val());
                 cus_name_c_last_array.push($(passengerInfo_last_c_name_no).val());
@@ -777,7 +782,7 @@
                 cus_id_array.push($(passengerInfo_id_no).val());
                 cus_birthday_array.push($(passengerInfo_birthday_no).val());
                 cus_food_array.push($(passengerInfo_food_no).val());
-
+                cus_room_type_array.push($(passengerInfo_room_type_no).val())
 
                 //pusb
                 for(var j=0;j<pusb_count;j=j+1)
@@ -845,7 +850,8 @@
             $('#passengerInfo_sex_array').val(cus_sex_array);
             $('#passengerInfo_id_array').val(cus_id_array);
             $('#passengerInfo_birthday_array').val(cus_birthday_array);
-            $('#passengerInfo_food_array').val(cus_food_array);
+            $('#passengerInfo_food_array').val(cus_food_array);      
+            $('#passengerInfo_room_type_array').val(cus_room_type_array);
             $('#passengerInfo_prod_sub_array').val(cus_prod_sub_list);
 
             console.log(cus_name_c_first_array);
