@@ -637,12 +637,14 @@
 
                                                    if (n == (item.GrpList.Count - 1))
                                                    {
-                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
-                                                                                                                                                       <a class="more-date-more" href="javascript:;" title="">更多</a>
+                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>
+                                                       if (item.GrpList.Count > 3)
+                                                       {
+                                                        <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="detail_button_click(this)">更多</a>
+                                                       }
                                                    }
                                                    else
-                              
-                                                    {
+                                                   {
                                                          <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>@:|
                                                     }
                                                     
@@ -1653,7 +1655,7 @@
 
                                     if (n == (item.GrpList.Count - 1))
                                     {
-                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")...</a>
+                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")</a>
                                     }
                                     else
 
@@ -1662,7 +1664,11 @@
                             }
                                 }
                             </div>
-                            <a href="javascript:;" title="">更多</a>
+                            if (item.GrpList.Count > 3)
+                            {
+                            <a  href="javascript:;" id="@(i+1)" title="" onclick="detail_button_click(this)">更多</a>
+                            }
+                          
                         </div>
                     </div>
                     <div class="row star-searchResultsItem-mobile-price">
