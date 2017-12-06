@@ -16,7 +16,7 @@ namespace startravel_web.Controllers
     {
         //
         // GET: /Detail/
-        public async Task<ActionResult> Index(string prod_no, string grp_no)
+        public async Task<ActionResult> Index(string prod_no, string grp_no,string window_open)
         {
             ApiController api = new ApiController();
          //   string prod_no_s ="IGRP000018712";
@@ -48,21 +48,21 @@ namespace startravel_web.Controllers
            var grppriceinfo_source = await api.GRPPriceInfo_api(grppriceinfo_postData);
 
 
-           detail_view_return_data view_data = new detail_view_return_data { grpproductdetail_result = grpsource, grpcalendar_result = grpcalendar_source, grpaddpurchase_result = grpaddpurchase_source, grppriceinfo_result = grppriceinfo_source};
+           detail_view_return_data view_data = new detail_view_return_data { grpproductdetail_result = grpsource, grpcalendar_result = grpcalendar_source, grpaddpurchase_result = grpaddpurchase_source, grppriceinfo_result = grppriceinfo_source,window_open=window_open};
    
            return View(view_data);
         }
 
         [HttpPost]
-        public ActionResult detail_transfer(string prod_no, string grp_no, string action_temp)
+        public ActionResult detail_transfer(string prod_no, string grp_no, string action_temp,string window_open)
         {
             if (action_temp.Equals("0"))
             {
-                return RedirectToAction("Index", "Step1", new { prod_no = prod_no, grp_no = grp_no });
+                return RedirectToAction("Index", "Step1", new { prod_no = prod_no, grp_no = grp_no ,window_open=window_open});
             }
             else
             {
-                return RedirectToAction("Index", "Detail", new { prod_no = prod_no, grp_no = grp_no });
+                return RedirectToAction("Index", "Detail", new { prod_no = prod_no, grp_no = grp_no, window_open = window_open });
             }
             
                      

@@ -370,7 +370,7 @@ namespace startravel_web.Controllers
         }
 
         [HttpPost]
-        public ActionResult re_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure, string order_type_1, string research_page, string which_button, string final_prod, string final_grp, string search_city_from_name, string search_city_to_name)
+        public ActionResult re_search(string search_city_from, string search_city_to, string search_choose_date_s, string search_choose_date_e, string search_travelkind, string search_tour_day, string search_stime_s, string search_stime_e, string search_etime_s, string search_etime_e, string search_is_ensure, string order_type_1, string research_page, string which_button, string final_prod, string final_grp, string search_city_from_name, string search_city_to_name,string window_open )
         {
             string view_search_city_from = search_city_from;
             string view_search_city_to = search_city_to;
@@ -393,7 +393,7 @@ namespace startravel_web.Controllers
             string view_which_button = which_button;
             string view_final_prod = final_prod;
             string view_final_grp = final_grp;
-
+            string view_window_open = window_open;
 
            /* Response.Write("view_search_stime_s：" + view_search_stime_s + "<br/>");
             Response.Write("view_search_stime_e：" + view_search_stime_e + "<br/>");
@@ -439,7 +439,7 @@ namespace startravel_web.Controllers
             }
             else if (view_which_button.Equals("1"))
             {
-                return RedirectToAction("Index", "Detail", new { prod_no = view_final_prod, grp_no = view_final_grp });
+                return RedirectToAction("Index", "Detail", new { prod_no = view_final_prod, grp_no = view_final_grp,window_open=view_window_open });
             }
             else
             {

@@ -28,7 +28,7 @@ namespace startravel_web.Models
         public GRPCalendar_result grpcalendar_result { get; set; }
         public GRPAddPurchase_result grpaddpurchase_result { get; set; }
         public GRPPriceInfo_result grppriceinfo_result { get; set; }
-     
+        public string window_open { get; set; }
 
     }
 

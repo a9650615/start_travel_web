@@ -669,7 +669,7 @@
                                                            <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>
                                                        if (item.GrpList.Count > 3)
                                                        {
-                                                        <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="detail_button_click(this)">更多</a>
+                                                        <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
                                                        }
                                                    }
                                                    else
@@ -715,6 +715,7 @@
                                 <a class="viewItinerary" id="@(i+1)" href="javascript:;"  onclick="detail_button_click(this)" title="">查看行程</a>
                                 <input type="hidden" id="final_prod" name="final_prod" value="">
                                 <input type="hidden" id="final_grp" name="final_grp" value="">
+                                <input type="hidden" id="window_open" name="window_open" value="">
 
                             </div>
                         </div>
@@ -1303,6 +1304,7 @@
         function detail_button_click(th){
 
             $('#which_button').val("1");
+            $('#window_open').val("0");
             // var NewArray = new Array();
             var list_no;
             //NewArray = th.split(",");
@@ -1361,7 +1363,68 @@
 
         }
     
+        function more_button_click(th){
 
+            $('#which_button').val("1");
+            $('#window_open').val("1");
+            // var NewArray = new Array();
+            var list_no;
+            //NewArray = th.split(",");
+            console.log(th);
+
+            list_no=$(th).attr("id");
+
+
+            if(parseInt(list_no)==1)
+            {
+                var prod_value= $('#pord_no_list_1').val();
+                $('#final_prod').val(prod_value);
+
+                var grp_value= $('#grp_no_list_1').val();
+                $('#final_grp').val(grp_value);
+
+            }else if(parseInt(list_no)==2)
+            {
+                var prod_value= $('#pord_no_list_2').val();
+                $('#final_prod').val(prod_value);
+
+                var grp_value= $('#grp_no_list_2').val();
+                $('#final_grp').val(grp_value);
+
+            }else if(parseInt(list_no)==3)
+            {
+                var prod_value= $('#pord_no_list_3').val();
+                $('#final_prod').val(prod_value);
+
+                var grp_value= $('#grp_no_list_3').val();
+                $('#final_grp').val(grp_value);
+            
+            }else if(parseInt(list_no)==4)
+            {
+                var prod_value= $('#pord_no_list_4').val();
+                $('#final_prod').val(prod_value);
+
+                var grp_value= $('#grp_no_list_4').val();
+                $('#final_grp').val(grp_value);
+
+            }else if(parseInt(list_no)==5)
+            {
+                var prod_value= $('#pord_no_list_5').val();
+                $('#final_prod').val(prod_value);
+
+                var grp_value= $('#grp_no_list_5').val();
+                $('#final_grp').val(grp_value);
+
+
+            }
+
+
+            $('#searchForm').submit();
+            console.log($('#final_prod').val());
+            console.log($('#final_grp').val());
+
+
+        }
 
 
         $('#searchForm').submit(function() {
@@ -1695,7 +1758,7 @@
                             </div>
                             @if (item.GrpList.Count > 3)
                             {
-                            <a  href="javascript:;" id="@(i+1)" title="" onclick="detail_button_click(this)">更多</a>
+                            <a  href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
                             }
                           
                         </div>
