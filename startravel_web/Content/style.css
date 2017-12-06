@@ -178,17 +178,19 @@
 	line-height: 30px;
 	padding: 15px;
 	display: inline-block;
-	background-color: #771a7a;
-	color: #ffffff;
+	background-color: #ffd200;
+    color: #771a7a;
 	font-weight: bold;
 	border-radius: 5px;
 	transition: .3s;
+    border: none;
 }
 .research:focus,
 .research:hover{
 	text-decoration: none;
 	opacity: .8;
 	color: #ffffff;
+    background:#771a7a;
 }
 .cancelSearch{
 	font-size: 20px;
@@ -837,7 +839,7 @@
 
 /* 搜尋結果右邊 */
 .star-searchResultsItemRight{
-	border-left: 1px solid #bbbbbb;
+	
 	padding: 40px;
     height: 100%;
 }
@@ -942,6 +944,7 @@
 /* 搜尋結果左邊 */
 .star-searchResultsItemLeft{
 	padding: 10px 10px 10px 50px;
+    border-right: 1px solid #bbbbbb;
 }
 .star-searchResultsItemLeft .number{
 	width: 50px;
