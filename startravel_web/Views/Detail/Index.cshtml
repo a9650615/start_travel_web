@@ -1333,8 +1333,34 @@
 
 
             @{
-                DateTime DUEDAY_PAY = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_PAY).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime DUEDAY_DOC = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_DOC).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                
+                string DUEDAY_PAY_s=Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_PAY).ToString();
+                string DUEDAY_DOC_s = Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_DOC).ToString();
+                string current_daytime_30 = DateTime.Now.AddDays(15).ToString("yyyyMMdd");
+
+                DateTime DUEDAY_PAY;
+                DateTime DUEDAY_DOC;
+                
+                if(DUEDAY_PAY_s.IsEmpty())
+                {
+                    DUEDAY_PAY = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    DUEDAY_PAY = DateTime.ParseExact(DUEDAY_PAY_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+
+
+                if (DUEDAY_DOC_s.IsEmpty())
+                {
+                    DUEDAY_DOC = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                     DUEDAY_DOC = DateTime.ParseExact(DUEDAY_DOC_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                
+             
                 int max_tourer_d = int.Parse(Html.DisplayFor(model => model.grpproductdetail_result.Data.MAX_TOURER).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
             }
