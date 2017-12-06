@@ -64,10 +64,36 @@
 
             @{
                 DateTime order_date_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.ORDER_DATE).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime dueday_pay_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_PAY).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime dueday_doc_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_DOC).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+               // DateTime dueday_pay_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_PAY).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+               // DateTime dueday_doc_d = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_DOC).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 int pre_day_i = int.Parse(Html.DisplayFor(model => model.orderinfomation_result.Data.PRE_DAY).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                 DateTime pre_day_d = order_date_d.AddDays(pre_day_i);
+                string DUEDAY_PAY_s = Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_PAY).ToString();
+                string DUEDAY_DOC_s = Html.DisplayFor(model => model.orderinfomation_result.Data.DUEDAY_DOC).ToString();
+
+                string current_daytime_30 = DateTime.Now.AddDays(15).ToString("yyyyMMdd");
+
+                DateTime dueday_pay_d;
+                DateTime dueday_doc_d;
+
+                if (DUEDAY_PAY_s.IsEmpty())
+                {
+                    dueday_pay_d = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    dueday_pay_d = DateTime.ParseExact(DUEDAY_PAY_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+
+
+                if (DUEDAY_DOC_s.IsEmpty())
+                {
+                    dueday_doc_d = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    dueday_doc_d = DateTime.ParseExact(DUEDAY_DOC_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                }
              }
 
 

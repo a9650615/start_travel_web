@@ -444,7 +444,12 @@
                                                                </div>
                                                              </td>
                                                     
-                                                                     date_arrery_index = date_arrery_index + 1;
+                                                                date_arrery_index = date_arrery_index + 1;
+                                                                if (date_arrery_index==Model.grpcalendar_result.Data.grp_date.Count)
+                                                                {
+                                                                    date_arrery_index = date_arrery_index - 1;
+                                                                }
+                                                               
                                                             }
                                                             else
                                                             {
@@ -583,7 +588,11 @@
                                                     }
                                                 </div>
                                             </div>
-                                            date_arrery_index++;
+                                                    date_arrery_index = date_arrery_index + 1;
+                                                    if (date_arrery_index == Model.grpcalendar_result.Data.grp_date.Count)
+                                                    {
+                                                        date_arrery_index = date_arrery_index - 1;
+                                                    }
                                         }
                                     }
                                     m_current_day = m_current_day.AddDays(1);
@@ -729,6 +738,10 @@
                                                                 </td>
 
                                                                         date_arrery_index = date_arrery_index + 1;
+                                                                        if (date_arrery_index == Model.grpcalendar_result.Data.grp_date.Count)
+                                                                        {
+                                                                            date_arrery_index = date_arrery_index - 1;
+                                                                        }
 
                                                                 }
                                                                 else
