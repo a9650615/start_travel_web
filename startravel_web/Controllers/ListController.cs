@@ -136,6 +136,7 @@ namespace startravel_web.Controllers
             }
             else
             {
+                
                 view_S_TIME_S = S_TIME_S;
             }
 
@@ -218,8 +219,18 @@ namespace startravel_web.Controllers
                 view_Departure = int.Parse(Departure);
             }
 
-       
 
+            if (view_S_TIME_S.Equals("000000") && view_S_TIME_E.Equals("235900"))
+            {
+                view_S_TIME_S = "";
+                view_S_TIME_E = "";
+            }
+
+            if (view_E_TIME_S.Equals("000000") && view_E_TIME_E.Equals("235900"))
+            {
+                view_E_TIME_S = "";
+                view_E_TIME_E = "";
+            }
           
 
 

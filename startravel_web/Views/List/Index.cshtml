@@ -329,7 +329,7 @@
                             <input type="hidden" id="search_stime_s" name="search_stime_s" value="">
                             <input type="hidden" id="search_stime_e" name="search_stime_e" value="">
                             <span>出發時間：</span>
-                            @if (Model.grplist_postdata.S_TIME_S == "000000" && Model.grplist_postdata.S_TIME_E == "235900")
+                            @if (Model.grplist_postdata.S_TIME_S == "" && Model.grplist_postdata.S_TIME_E == "")
                             {
                                 <a class="active" href="javascript:;" onclick="search_stime_click(this)" title="">不限</a>
                             }
@@ -376,7 +376,7 @@
                             <input type="hidden" id="search_etime_s" name="search_etime_s" value="">
                             <input type="hidden" id="search_etime_e" name="search_etime_e" value="">
                             <span>回程時間：</span>
-                            @if (Model.grplist_postdata.E_TIME_S == "000000" && Model.grplist_postdata.E_TIME_E == "235900")
+                            @if (Model.grplist_postdata.E_TIME_S == "" && Model.grplist_postdata.E_TIME_E == "")
                             {
                                 <a class="active" href="javascript:;" onclick="search_etime_click(this)" title="">不限</a>
                             }
