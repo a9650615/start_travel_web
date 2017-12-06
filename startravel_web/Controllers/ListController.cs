@@ -131,7 +131,7 @@ namespace startravel_web.Controllers
             if (string.IsNullOrWhiteSpace(S_TIME_S))
             {
 
-                view_S_TIME_S = "060000";
+                view_S_TIME_S = "000000";
 
             }
             else
@@ -143,7 +143,7 @@ namespace startravel_web.Controllers
             if (string.IsNullOrWhiteSpace(S_TIME_E))
             {
 
-                view_S_TIME_E = "120000";
+                view_S_TIME_E = "235900";
 
             }
             else
@@ -154,7 +154,7 @@ namespace startravel_web.Controllers
             if (string.IsNullOrWhiteSpace(E_TIME_S))
             {
 
-                view_E_TIME_S = "060000";
+                view_E_TIME_S = "000000";
 
             }
             else
@@ -165,7 +165,7 @@ namespace startravel_web.Controllers
             if (string.IsNullOrWhiteSpace(E_TIME_E))
             {
 
-                view_E_TIME_E = "120000";
+                view_E_TIME_E = "235900";
 
             }
             else
