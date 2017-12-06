@@ -798,7 +798,10 @@
             </div>
 
             <script>
-
+                if (@(Model.window_open)) {
+                   $('.travel-calendar-open').hide();
+                    $('.travel-calendar').fadeIn();
+                }
                 /* Date change month*/
 
                 function autoChangeYearDate(yaer, month) {
@@ -942,7 +945,7 @@
                       calendar_NewArray = k.split(",");
                        console.log(calendar_NewArray[0]);
                        console.log(calendar_NewArray[1]);
-   
+
                        $('#prod_no').val(calendar_NewArray[0]);
                        $('#grp_no').val(calendar_NewArray[1]);
 
