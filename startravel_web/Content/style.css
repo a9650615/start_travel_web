@@ -118,7 +118,12 @@
 
 
 
-
+div.datepicker a {
+    color: black !important;
+}
+div.datepicker a:hover {
+    color: #337ab7 !important;
+}
 /* 搜尋條件 */
 .searchCriteria{
 	min-width: 100%;
