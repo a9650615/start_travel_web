@@ -231,15 +231,17 @@
                                 <div class="form-group">
                                     <label>中文姓名 <span class="text-orange">*</span></label>
                                     <div class="star-input-group input-group">
-                                        <input type="text" class="form-control passengerInfo_first_c_name_@total_passenger_count" placeholder="姓" required="required">
-                                        <input type="text" class="form-control passengerInfo_last_c_name_@total_passenger_count" placeholder="名" required="required">
+                                        <input type="text" class="ch_name_1 form-control passengerInfo_first_c_name_@total_passenger_count" placeholder="姓" required="required">
+                                        <input type="text" class="ch_name_2 form-control passengerInfo_last_c_name_@total_passenger_count" placeholder="名" required="required">
+                                        <div class="err-text" id="ch_err">請填寫中文姓名</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>英文姓名</label>
                                     <div class="star-input-group input-group">
-                                        <input type="text" class="form-control passengerInfo_first_e_name_@total_passenger_count" placeholder="姓Last Name">
-                                        <input type="text" class="form-control passengerInfo_last_e_name_@total_passenger_count" placeholder="名First Name">
+                                        <input type="text" class="en_name_1 form-control passengerInfo_first_e_name_@total_passenger_count" placeholder="姓Last Name">
+                                        <input type="text" class="en_name_2 form-control passengerInfo_last_e_name_@total_passenger_count" placeholder="名First Name">
+                                        <div class="err-text" id="en_err">請填寫英文姓名</div>
                                     </div>
                                 </div>
                                 <p class="text-orange">
@@ -248,21 +250,23 @@
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <div class="form-group">
+                                    <label>身分證字號 / 護照號碼 <span class="text-orange">*</span></label>
+                                    <input type="text" class="id_num form-control  passengerInfo_id_no_@total_passenger_count" placeholder="" required>
+                                    <div class="err-text" id="id_err">請填寫身分證字號 / 護照號碼</div>
+                                </div>
+                                <div class="form-group">
                                     <label>性別</label>
-                                    <select class="passengerinfo_sex_@total_passenger_count">
+                                    <select class="passengerinfo_sex_@total_passenger_count sex">
                                         <option value="1">男</option>
                                         <option value="0">女</option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>身分證字號 / 護照號碼 <span class="text-orange">*</span></label>
-                                    <input type="text" class="form-control  passengerInfo_id_no_@total_passenger_count" placeholder="">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <div class="form-group">
                                     <label>出生日期 <span class="text-orange">*</span></label>
-                                    <input type="text" class="form-control  passengerInfo_birthday_@total_passenger_count" placeholder="請輸入西元年/月/日，如1979/05/05">
+                                    <input type="text" class="birthday form-control  passengerInfo_birthday_@total_passenger_count" placeholder="請輸入西元年/月/日，如1979/05/05" required>
+                                    <div id="birth_err" class="err-text"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>特殊飲食</label>
@@ -432,7 +436,6 @@
             <input type="hidden" id="prod_no_hidden" name="prod_no_hidden" value="@Model.grpproductdetail_result.Data.PROD_NO">
             <input type="hidden" id="grp_no_hidden" name="grp_no_hidden" value="@Model.grpproductdetail_result.Data.GRP_NO">
             <input type="hidden" id="member_no_hidden" name="member_no_hidden" value="@Model.member_number">
-
         </div>
     </div>
     <div class="content content-gray">
@@ -455,14 +458,15 @@
                             <div class="form-group">
                                 <label>中文姓名 <span class="text-orange">*</span></label>
                                 <div class="star-input-group input-group">
-                                    <input type="text" class="form-control" id="contact_c_first_name" name="contact_c_first_name" placeholder="姓">
-                                    <input type="text" class="form-control" id="contact_c_last_name" name="contact_c_last_name"  placeholder="名">
+                                    <input type="text" class="form-control cont-name-1" id="contact_c_first_name" name="contact_c_first_name" placeholder="姓">
+                                    <input type="text" class="form-control cont-name-2" id="contact_c_last_name" name="contact_c_last_name"  placeholder="名">
                                 </div>
+                                <div class="err-text">請連寫聯絡資料</div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="row mb-20">
+                    <div class="row mb-20 phone">
                         <div class="col-xs-12 col-sm-12 mb-10">
                             聯絡電話(至少填寫兩個) <span class="text-orange">*</span>
                         </div>
@@ -483,6 +487,9 @@
                                 <label>公司電話 <span class="text-orange">*</span></label>
                                 <input type="text" class="form-control" id="contact_o_phone" name="contact_o_phone" placeholder="">
                             </div>
+                        </div>
+                        <div class="err-text">
+                            至少需填兩組電話
                         </div>
                     </div>
                     
@@ -664,7 +671,7 @@
             <input type="hidden" id="passengerInfo_food_array" name="passengerInfo_food_array">
             <input type="hidden" id="passengerInfo_prod_sub_array" name="passengerInfo_prod_sub_array">
             <input type="hidden" id="passengerInfo_room_type_array" name="passengerInfo_room_type_array">
-
+            <input type="submit" id="subit" style="display: none;" />
 
 
            
@@ -864,9 +871,104 @@
             console.log(cus_food_array);
             console.log(cus_prod_sub_list);
             console.log($('#contact_time').val());
-            $('#orderForm').submit();
+            console.log($('#ch_name_2'))
+            let err = false
+            let id_arr = []
+            $('.err-text').hide()
+            $('.err').removeClass('err')
+            $('.ch_name_1, .ch_name_2').each(function(){
+                if($(this).val() =="" ){
+                    $(this).addClass('err').siblings('.err-text').show()
+                    err = true
+                }
+            })
+
+            $('.en_name_1, .en_name_2').each(function(){
+                if($(this).val() =="" ){
+                    $(this).addClass('err').siblings('.err-text').show()
+                    err = true
+                }
+            })
+
+            $('.id_num').each(function(){
+                if($(this).val() ==""){
+                    $(this).addClass('err').siblings('.err-text').text("請填寫身分證字號").show()
+                    err = true
+                }
+                if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                    $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
+                    err = true
+                }
+                if (id_arr.indexOf($(this).val()) == -1) {
+                    id_arr.push($(this).val())
+                } else {
+                    $(this).addClass('err').siblings('.err-text').text("身分證字號重複").show()
+                    err = true
+                }
+            })
+            $('.birthday').each(function() {
+                if ($(this).val() ==""){
+                    $(this).addClass('err').siblings('.err-text').text("請填寫生日").show()
+                    err = true
+                }
+                else if ($(this).val().search(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/) == -1){
+                    $(this).addClass('err').siblings('.err-text').text("生日格式錯誤,格式YYYY/MM/DD").show()
+                    err = true
+                }
+            })
+            $('.phone').each(function() {
+                let counter = 0
+                $(this).find('input').each(function() {
+                    if($(this).val() == "")
+                    {}
+                    else counter++;
+                })
+                if (counter == 0) {
+                    $(this).find('.err-text').show()
+                    err = true
+                }
+            })
+            if($('.cont-name-1').val() =="") {
+                $('.cont-name-1').parent().siblings('.err-text').show()
+                err= true
+            }
+            if($('.cont-name-2').val() =="") {
+                $('.cont-name-2').parent().siblings('.err-text').show()
+                err= true
+            }
+            //$('#orderForm').submit();
+            if(!err)
+                document.getElementById('subit').click()
             //passengerInfo
         }
+        $('.birthday').change(function() {
+            if ($(this).val() ==""){
+                $(this).addClass('err').siblings('.err-text').text("請填寫生日").show()
+            }
+            else if ($(this).val().search(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/) == -1){
+                $(this).addClass('err').siblings('.err-text').text("生日格式錯誤,格式YYYY/MM/DD").show()
+            } else {$(this).removeClass('err').siblings('.err-text').hide()}
+        })
+        $('.id_num').change(function(){
+            if($(this).val() ==""){
+                $(this).addClass('err').siblings('.err-text').text("請填寫身分證字號").show()
+            }
+            else if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
+            }
+            else { $(this).removeClass('err').siblings('.err-text').hide()}
+        })
+
+        $('.id_num').change(function() {
+            let match = $(this).val().match(/^[A-Z](1|2)\d{8}$/i)
+            if(match)
+                if (match[1]==1) {
+                    $(this).parent().siblings('.form-group').find('.sex').val("1")
+                }
+                if (match[1]==2) {
+                    $(this).parent().siblings('.form-group').find('.sex').val("0")
+                }
+        })
 
         $('#orderForm').submit(function() {
         
@@ -878,6 +980,15 @@
 
 
     </script>
+    <style>
+        .err {
+            border:solid 1px red !important;
+        }
+        .err-text {
+            color: red;
+            display: none;
+        }
+    </style>
 
     <script type="text/javascript">
 
