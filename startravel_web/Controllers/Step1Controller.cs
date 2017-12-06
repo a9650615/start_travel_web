@@ -45,7 +45,7 @@ namespace startravel_web.Controllers
             return View(step1_view_data);
         }
 
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult> Index(detail_view_return_data data)
         {
             ApiController api = new ApiController();
@@ -54,7 +54,7 @@ namespace startravel_web.Controllers
             //string view_prod_no = "IGRP000018191";
             //string view_grp_no = "OKA04IT31617T";
 
-            //***GRPProductDetail_api testing***//
+            //GRPProductDetail_api testing//
 
             GRPProductDetail_PostData grpproductdetail_postData = new GRPProductDetail_PostData() { prod_no = view_prod_no, grp_no = view_grp_no };
             IGRPTrafficInfo_PostData igrptrafficinfo_postData = new IGRPTrafficInfo_PostData() { prod_no = view_prod_no, grp_no = view_grp_no };
@@ -72,7 +72,7 @@ namespace startravel_web.Controllers
 
 
             return View(step1_view_data);
-        }
+        }*/
 
 
      

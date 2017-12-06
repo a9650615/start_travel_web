@@ -53,6 +53,24 @@ namespace startravel_web.Controllers
            return View(view_data);
         }
 
+        [HttpPost]
+        public ActionResult detail_transfer(string prod_no, string grp_no, string action_temp)
+        {
+            if (action_temp.Equals("0"))
+            {
+                return RedirectToAction("Index", "Step1", new { prod_no = prod_no, grp_no = grp_no });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Detail", new { prod_no = prod_no, grp_no = grp_no });
+            }
+            
+                     
+           
+        }
+
+
+
 
 
         public async Task<string> calendar_reset(string prod_no, string s_month, string e_month)

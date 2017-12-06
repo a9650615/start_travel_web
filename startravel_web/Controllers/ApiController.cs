@@ -67,6 +67,7 @@ namespace startravel_web.Controllers
         {
             string targetURI = "https://dtour-api.startravel.com.tw/api/GRPProductDetail";
             HttpClient client = new HttpClient();
+            client.Timeout = TimeSpan.FromMinutes(5);
             JavaScriptSerializer jsonConverter = new JavaScriptSerializer();
             client.MaxResponseContentBufferSize = Int32.MaxValue;
             string json = JsonConvert.SerializeObject(postdata);

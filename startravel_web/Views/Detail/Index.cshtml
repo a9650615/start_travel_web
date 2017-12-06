@@ -40,7 +40,7 @@
     
 </head>
 <body>
-@using (Html.BeginForm("Index", "Step1", FormMethod.Post,new{ enctype = "multipart/form-data", name = "myForm" }))
+@using (Html.BeginForm("detail_transfer", "Detail", FormMethod.Post, new { enctype = "multipart/form-data" , id="transferForm"}))
 {
     <!-- header======================================================================= -->
     <div class="header-02">
@@ -271,7 +271,7 @@
                                 </p>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                                <input type="submit" class="signUpBtn" title="" value="立即報名" />
+                                <input type="button" class="signUpBtn" onclick="signupbtn_click()" title="" value="立即報名" />
                                                                   
                             </div>
                         </div>
@@ -288,7 +288,9 @@
                @Html.HiddenFor(model =>model.grpproductdetail_result.Data.PROD_NO )
                @Html.HiddenFor(model => model.grpproductdetail_result.Data.GRP_NO)
   
-                
+            <input type="hidden" id="prod_no" name="prod_no" value="@Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NO).ToString()">
+            <input type="hidden" id="grp_no" name="grp_no" value="@Html.DisplayFor(model => model.grpproductdetail_result.Data.GRP_NO).ToString()">
+            <input type="hidden" id="action_temp" name="action_temp" value="">
             
 
             @{
@@ -421,7 +423,7 @@
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                               <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
-                                                                    <span class="date active">@date_i</span>
+                                                                    <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
                                                                     <span class="price">@price_grp_i.ToString("#,#") </span>
                                                                   
                                                                      @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -483,25 +485,25 @@
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                               <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
-                                                                    <span class="date active">@date_i</span>
-                                                                    <span class="price">@price_grp_i.ToString("#,#") </span>
-                                                                    
-                                                                     @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
-                                                                     {
-                                                                         if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
-                                                                         {
-                                                                             <span class="quota text-green">可候補</span>
-                                                                         }
-                                                                         else
-                                                                         {
-                                                                             <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
-                                                                         }
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         <a href="javascript:;" class="more">看更多團</a>
-                                                                     }
-                                                               </div>
+                                                                    <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
+                                                                        <span class="price">@price_grp_i.ToString("#,#") </span>
+
+                                                                        @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
+                                                                        {
+                                                                            if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
+                                                                            {
+                                                                                <span class="quota text-green">可候補</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="javascript:;" class="more">看更多團</a>
+                                                                        }
+</div>
                                                              </td>
                                                     
                                                                      date_arrery_index = date_arrery_index + 1;
@@ -561,7 +563,7 @@
                                             int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
                                             <div class="list-style">
-                                                <span class="date">@i 日</span>
+                                                <a href="javascript:;" class="date" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')" s>@i 日</a>
                                                 <span class="price">@price_grp_i.ToString("#,#")</span>
                                                 <div class="float-right">
                                                     @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -643,7 +645,7 @@
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
-                                                                        <span class="date active">@date_i_e</span>
+                                                                        <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
                                                                         <span class="price">@price_grp_i.ToString("#,#") </span>
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -705,7 +707,7 @@
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
-                                                                        <span class="date active">@date_i_e</span>
+                                                                        <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
                                                                         <span class="price">@price_grp_i.ToString("#,#") </span>
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -918,6 +920,36 @@
                         console.log(nowYear, nowMonth)
                     })
                 })
+
+
+                function calendar_number_click(k){
+
+                     var calendar_NewArray = new Array();
+                      calendar_NewArray = k.split(",");
+                       console.log(calendar_NewArray[0]);
+                       console.log(calendar_NewArray[1]);
+   
+                       $('#prod_no').val(calendar_NewArray[0]);
+                       $('#grp_no').val(calendar_NewArray[1]);
+
+                      $('#action_temp').val("1");
+                         $('#transferForm').submit();
+                     }
+
+                    function signupbtn_click(){
+
+                         $('#action_temp').val("0");
+                         $('#transferForm').submit();
+
+                    }
+
+                   $('#transferForm').submit(function() {
+
+                       console.log($('#action_temp').val());
+
+                         return true;
+                    });
+
             </script>
 
 
@@ -1453,7 +1485,7 @@
                 <a class="lightboxOpen-control01" href="javascript:;" title="">價格說明</a>
             </div>
             <div class="col-xs-6">
-                <input type="submit" class="travel-mobile-bottom-signUp-BTN" title="" value="立即報名">
+                <input type="button" class="travel-mobile-bottom-signUp-BTN"  onclick="signupbtn_click()" title="" value="立即報名">
             </div>
         </div>
     </div>
@@ -1834,7 +1866,7 @@
                 <li class="fixed-menu-4"><a href="#travel-cost">費用<span class="hidden-xs">包含</span></a></li>
                 <li class="fixed-menu-5"><a href="#travel-description"><span class="hidden-xs">作業</span>說明</a></li>
             </ul>
-            <input type="submit" class="travel-innerMenu-fixed-signUpBtn" title="" value="立即報名">
+            <input type="button" class="travel-innerMenu-fixed-signUpBtn"  onclick="signupbtn_click()" title="" value="立即報名">
 
         </div>
     </div>
