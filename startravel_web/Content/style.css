@@ -816,6 +816,7 @@
 	position: relative;
 	transition: .3s;
 	margin-bottom: 10px;
+    height: auto;
 }
 .star-searchResultsItem:hover{
 	border-color: #771a7a;
@@ -837,7 +838,8 @@
 /* 搜尋結果右邊 */
 .star-searchResultsItemRight{
 	border-left: 1px solid #bbbbbb;
-	padding-right: 30px;
+	padding: 40px;
+    height: 100%;
 }
 .star-searchResultsItemRight h1{
 	font-size: 48px;
