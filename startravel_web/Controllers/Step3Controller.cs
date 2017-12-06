@@ -207,12 +207,12 @@ namespace startravel_web.Controllers
 
             }
 
-          
+           string[] total_correspond_count_list={} ;
 
-
-        
-            string[] total_correspond_count_list = total_prod_sub_s.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-
+            if(total_prod_sub_number>0)
+            {
+                total_correspond_count_list = total_prod_sub_s.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            }
 
 
 
@@ -321,8 +321,12 @@ namespace startravel_web.Controllers
 
                 List<OrderGrpCreateProdSubModel_param> prod_sub_itemlist = new List<OrderGrpCreateProdSubModel_param>();
                 //string[] everyone_cus_prod_sub_count_list = new string[int.Parse(total_prod_sub_number)];
-                string[] everyone_cus_prod_sub_array = cus_prod_sub_count_list[i].ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
+                string[] everyone_cus_prod_sub_array = { };
+                if (total_prod_sub_number>0)
+                {
+                    everyone_cus_prod_sub_array = cus_prod_sub_count_list[i].ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                }
 
                 for (int j = 0; j < total_prod_sub_number; j = j + 1)
                 {
