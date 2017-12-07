@@ -915,9 +915,11 @@
                     $(this).addClass('err').siblings('.err-text').text("請填寫身分證字號").show()
                     err = true
                 }
-                if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
-                    $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
-                    err = true
+                else if (isNaN(parseInt($(this).val().slice(0,1)))) {
+                    if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                        $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
+                        err = true
+                    }
                 }
                 if (id_arr.indexOf($(this).val()) == -1) {
                     id_arr.push($(this).val())
@@ -973,21 +975,28 @@
             if($(this).val() ==""){
                 $(this).addClass('err').siblings('.err-text').text("請填寫身分證字號").show()
             }
-            else if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
-                $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
+            else if (isNaN(parseInt($(this).val().slice(0,1)))) {
+                if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                    $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
+                }
+                else {
+                    $(this).removeClass('err').siblings('.err-text').hide()
+                }
             }
             else { $(this).removeClass('err').siblings('.err-text').hide()}
         })
 
         $('.id_num').change(function() {
             let match = $(this).val().match(/^[A-Z](1|2)\d{8}$/i)
-            if(match)
+
+            if(match){
                 if (match[1]==1) {
                     $(this).parent().siblings('.form-group').find('.sex').val("1")
                 }
                 if (match[1]==2) {
                     $(this).parent().siblings('.form-group').find('.sex').val("0")
                 }
+            }
         })
 
         $('#orderForm').submit(function() {

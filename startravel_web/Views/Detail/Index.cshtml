@@ -923,7 +923,8 @@
             </div>
 
             <script>
-                if (@(Model.window_open)) {
+                let get = parseInt('@(Model.window_open)')
+                if (!isNaN(get)) {
                    $('.travel-calendar-open').hide();
                     $('.travel-calendar').fadeIn();
                 }
@@ -954,7 +955,7 @@
                         console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
                         console.log(val.Grp)
                         if (val.S_date.includes(dateStr))
-                            $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_hl<=0?``:`<span class="quota text-green">可候補</span>`}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+                            $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
                     })
                 }
 
@@ -973,7 +974,7 @@
                             let date_data = findGrpData(`${date[0]}${format(date[1])}${format(day)}`, data.Data.grp_date)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_hl<=0?"":`<span class="quota text-green">可候補</span>`}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
+                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
 
                             }
                             else {
@@ -989,7 +990,7 @@
                             let date_data = findGrpData(`${nextDate[0]}${format(nextDate[1])}${format(day)}`, data.Data.grp_date)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_hl<=0?"":`<span class="quota text-green">可候補</span>`}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
+                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
 
                             }
                             else {
@@ -1077,6 +1078,7 @@
                       $('#action_temp').val("1");
                          $('#transferForm').submit();
                      }
+
 
                     function signupbtn_click(){
 
