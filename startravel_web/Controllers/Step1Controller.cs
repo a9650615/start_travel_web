@@ -31,8 +31,7 @@ namespace startravel_web.Controllers
             IGRPTrafficInfo_PostData igrptrafficinfo_postData = new IGRPTrafficInfo_PostData() { prod_no = view_prod_no, grp_no = view_grp_no };
             GRPPriceInfo_PostData grppriceinfo_postData = new GRPPriceInfo_PostData() { prod_no = view_prod_no, grp_no = view_grp_no };
 
-
-
+          
             var grpsource = await api.GRPProductDetail_api(grpproductdetail_postData);
             var igrptrafficinfo_source = await api.IGRPTrafficInfo_api(igrptrafficinfo_postData);
             var grppriceinfo_source = await api.GRPPriceInfo_api(grppriceinfo_postData);
@@ -41,6 +40,8 @@ namespace startravel_web.Controllers
             step1_view_return_data step1_view_data = new step1_view_return_data { grpproductdetail_result = grpsource, igrptrafficinfo_result = igrptrafficinfo_source, grppriceinfo_result = grppriceinfo_source };
 
             /////uututut
+         
+
 
             return View(step1_view_data);
         }

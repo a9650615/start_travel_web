@@ -24,16 +24,16 @@ namespace startravel_web.Controllers
             Response.Write("view_prod_no：" + view_prod_no + "<br/>");
             Response.Write("room_count_name：" + room_count_name + "<br/>");*/
 
-            string member_number_s = member_number;
+           string member_number_s = member_number;
             string view_prod_no_s = view_prod_no;
             string view_grp_no_s = view_grp_no;
             string room_count_name_s = room_count_name;
 
 
-             //string member_number_s = "MEM0000000028";
-             //string view_prod_no_s = "IGRP000011159";
-             //string view_grp_no_s = "TYO05ITC0717T";
-             //string room_count_name_s="1,1,0,0,0,0";
+             /*string member_number_s = "MEM0000000028";
+             string view_prod_no_s = "IGRP000011159";
+             string view_grp_no_s = "TYO05ITC0717T";
+             string room_count_name_s="1,1,0,0,0,0";*/
             string psub_list = "";
             string visa_list =  "";
             string insu_list = "";

@@ -221,7 +221,7 @@
                                 <div class="joinTheList">
                                     <input class="star-input" type="checkbox" id="add_@(total_passenger_count)" name="add_@(total_passenger_count)" value="0" onclick="add_passengerlist('@Html.DisplayFor(modelitem => total_passenger_count)')">
                                     <label for="add_@(total_passenger_count)"></label>
-                                    <a href="javascript:;" title="">加入常用旅客名單</a>
+                                    <a title="">加入常用旅客名單</a>
 
                                 </div>
                             </div>
@@ -672,6 +672,7 @@
             <input type="hidden" id="passengerInfo_food_array" name="passengerInfo_food_array">
             <input type="hidden" id="passengerInfo_prod_sub_array" name="passengerInfo_prod_sub_array">
             <input type="hidden" id="passengerInfo_room_type_array" name="passengerInfo_room_type_array">
+            <input type="hidden" id="passengerInfo_add_commom_list_array" name="passengerInfo_add_commom_list_array">
             <input type="submit" id="subit" style="display: none;" />
 
 
@@ -770,6 +771,7 @@
             var cus_id_array=[];
             var cus_birthday_array=[];
             var cus_food_array=[];
+            var cus_add_common_list=[];
 
             var cus_room_type_array=[];
 
@@ -800,6 +802,7 @@
                 var passengerInfo_birthday_no= ".passengerInfo_birthday_"+i;
                 var passengerInfo_food_no= ".passengerInfo_food_"+i;
                 var passengerInfo_room_type_no= "#room_type_"+i;
+                var passengerInfo_add_common_list= "#add_"+i;
 
                 cus_name_c_first_array.push($(passengerInfo_first_c_name_no).val());
                 cus_name_c_last_array.push($(passengerInfo_last_c_name_no).val());
@@ -810,7 +813,7 @@
                 cus_birthday_array.push($(passengerInfo_birthday_no).val());
                 cus_food_array.push($(passengerInfo_food_no).val());
                 cus_room_type_array.push($(passengerInfo_room_type_no).val())
-
+                cus_add_common_list.push($(passengerInfo_add_common_list).val())
                 //pusb
                 for(var j=0;j<pusb_count;j=j+1)
                 {
@@ -870,6 +873,8 @@
             $('#contact_time').val(contact_time_value);
 
 
+            //add cus_list
+
             $('#passengerInfo_first_c_name_array').val(cus_name_c_first_array);
             $('#passengerInfo_last_c_name_array').val(cus_name_c_last_array);
             $('#passengerInfo_first_e_name_array').val(cus_name_e_first_array);
@@ -880,6 +885,7 @@
             $('#passengerInfo_food_array').val(cus_food_array);      
             $('#passengerInfo_room_type_array').val(cus_room_type_array);
             $('#passengerInfo_prod_sub_array').val(cus_prod_sub_list);
+            $('#passengerInfo_add_commom_list_array').val(cus_add_common_list)
 
             console.log(cus_name_c_first_array);
             console.log(cus_name_c_last_array);

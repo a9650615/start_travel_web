@@ -205,6 +205,22 @@ namespace startravel_web.Controllers
             return collection_jobj;
         }
 
+        //member_1.14 Task<PassengerContacts_get_result>
+        public async Task<PassengerContacts_post_result> PassengerContacts_post_api(PassengerContacts_post_PostData postdata)
+        {
+            string targetURI = "https://dmember-api.startravel.com.tw/api/PassengerContacts";
+            HttpClient client = new HttpClient();
+            client.MaxResponseContentBufferSize = Int32.MaxValue;
+            string json = JsonConvert.SerializeObject(postdata);
+            HttpContent contentPost = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(targetURI, contentPost).Result;
+            var collection = response.Content.ReadAsStringAsync().Result;
+            var collection_jobj = JsonConvert.DeserializeObject<PassengerContacts_post_result>(collection);
+            //Response.Write("PROD_NO：" + response + "<br/>");
+            return collection_jobj;
+        }
+
+
         //order_1.2 
         public async Task<PaymentOrder_result> PaymentOrder_api(PaymentOrder_PostData postdata)
         {

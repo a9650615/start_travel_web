@@ -650,6 +650,22 @@ namespace startravel_web.Models
         public String BIRTHDAY { get; set; }
       
     }
+
+    public class PassengerContacts_post_result
+    {
+        public PassengerContactsAddViewModel Data { get; set; }
+        public DateTime TokenExpires { get; set; }
+        public String rCode { get; set; }
+        public String rCodeDesc { get; set; }
+
+    }
+    public class PassengerContactsAddViewModel
+    {
+        public enum status { }
+       
+    }
+   
+
     //member 1.13
 
     //order_1.2

@@ -98,7 +98,8 @@ namespace startravel_web.Controllers
                                           string insu_array_hidden,
                                           string prod_no_hidden,
                                           string grp_no_hidden,
-                                          string member_no_hidden
+                                          string member_no_hidden,
+                                          string passengerInfo_add_commom_list_array
 
               )
         {
@@ -295,7 +296,7 @@ namespace startravel_web.Controllers
                 cus_birthday_count_list[i] = cus_birthday_transfer.ToString("yyyyMMdd");
             }
 
-            //birthday
+            //food
             string[] cus_food_count_list = new string[int.Parse(total_people_hidden)];
             string[] cus_food_array = passengerInfo_food_array.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
@@ -309,6 +310,39 @@ namespace startravel_web.Controllers
             for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
             {
                 cus_room_type_list[i] = cus_room_type_array[i];
+            }
+
+
+            //add_coommon_list
+            string[] cus_add_common_list = new string[int.Parse(total_people_hidden)];
+            string[] cus_add_common_array = passengerInfo_add_commom_list_array.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
+            {
+                cus_add_common_list[i] = cus_add_common_array[i];
+            }
+
+            //build common list//
+            for (int i = 0; i < int.Parse(total_people_hidden); i = i + 1)
+            {
+
+                if(cus_add_common_list[i].Equals("1"))
+                {
+                     PassengerContacts_post_PostData passengercontacts_postData = new PassengerContacts_post_PostData()
+                    {
+                     member_no =member_no_hidden,
+                     id_no =cus_id_count_list[i],
+                     sex = cus_sex_count_list[i] ,
+                      name_c_first =cus_first_c_name_count_list[i] ,
+                     name_c_last =cus_last_c_name_count_list[i] ,
+                     name_e_first=cus_first_e_name_count_list[i] ,
+                      name_e_last =cus_last_e_name_count_list[i] ,
+                     birthday = cus_birthday_count_list[i]
+
+                    };
+
+                     var passengercontacts_source = await api.PassengerContacts_post_api(passengercontacts_postData);
+
+                 }
             }
 
 
@@ -427,7 +461,7 @@ namespace startravel_web.Controllers
             {
                 return View();
             }
-
+           // return RedirectToAction("Index", "Step3", new { order_number = ordergrpcreate_source.Data.ORDER_NO, member_number = member_no_hidden });
 
            
         }
