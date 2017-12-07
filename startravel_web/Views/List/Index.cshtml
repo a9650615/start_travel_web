@@ -616,8 +616,16 @@
                                                     string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO_NAME).ToString();
                                                     string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
                                                     string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
+
+                                                    // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                                    //string s_QTY_KK = item_grplist.QTY_KK.ToString("");
+
+                                                    int int_QTY_KK = Decimal.ToInt32(item_grplist.QTY_KK);
+                                                    if(int_QTY_KK<0)
+                                                    {
+                                                        int_QTY_KK = 0; 
+                                                    }
                                 
-                                                    int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                     int int_Price = int.Parse(Html.DisplayFor(modelitem => item_grplist.Price).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
                                                     string qty_kk_s = int_QTY_KK.ToString("#,#");
@@ -694,9 +702,14 @@
                          string price = Html.DisplayFor(modelitem => item.Price).ToString();
                          int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
-                         string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
+                        // string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
 
-                         int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        // int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                         int qkk_d = Decimal.ToInt32(item.GrpList[0].QTY_KK);
+                         if(qkk_d<0)
+                         {
+                             qkk_d = 0;
+                         }
 
                          DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                          DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
@@ -1615,10 +1628,17 @@
             @for (int i = 0; i < Model.grplist_result.Data.prod.Count; i = i + 1)
             {
                 var item = Model.grplist_result.Data.prod[i];
-                string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
+                //string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
                 int number = i + 1;
 
-                int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                //int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                //int qkk_d = Convert.ToInt32(qkk, 10);
+                int qkk_d = Decimal.ToInt32(item.GrpList[0].QTY_KK);
+                if (qkk_d < 0)
+                {
+                    qkk_d = 0;
+                }
+                
                 DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
@@ -1692,7 +1712,14 @@
                                             string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
 
 
-                                            int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                           // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                           // int int_QTY_KK = Convert.ToInt32(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), 10);
+                                            int int_QTY_KK = Decimal.ToInt32(item_grplist.QTY_KK);
+                                            if (int_QTY_KK < 0)
+                                            {
+                                                int_QTY_KK = 0;
+                                            }
+                                            
                                             int int_Price = int.Parse(Html.DisplayFor(modelitem => item_grplist.Price).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
                                             string qty_kk_s = int_QTY_KK.ToString("#,#");

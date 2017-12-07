@@ -233,7 +233,12 @@ namespace startravel_web.Controllers
             }
           
 
+            /*test*/
+           // int int_QTY_KK = int.Parse("-2", System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+           /* int int_QTY_KK = Convert.ToInt32("-2", 10); ;
+           
 
+            Response.Write("int_QTY_KK：" + int_QTY_KK + "<br/>");*/
           /*  string current_date_test = DateTime.Now.ToString("yyyyMM");
             //string current_date = DateTime.Now.ToString("yyyyMMdd");
             DateTime current_date_d_test = DateTime.ParseExact(current_date_test, "yyyyMM", System.Globalization.CultureInfo.InvariantCulture);

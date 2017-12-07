@@ -226,10 +226,18 @@
 
 
             @{
-                string qty_kk = Html.DisplayFor(model => model.grpproductdetail_result.Data.QTY_KK).ToString();
+               // string qty_kk = Html.DisplayFor(model => model.grpproductdetail_result.Data.QTY_KK).ToString();
                 string price = Html.DisplayFor(model => model.grpproductdetail_result.Data.PRICE).ToString();
                 string pre_amt = Html.DisplayFor(model => model.grpproductdetail_result.Data.PRE_AMT).ToString();
-                int qty_kk_d = int.Parse(qty_kk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+
+                //int qty_kk_d = int.Parse(qty_kk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+              //  int qty_kk_d = Convert.ToInt32(qty_kk, 10);
+                int qty_kk_d = Decimal.ToInt32(Model.grpproductdetail_result.Data.QTY_KK);
+                if (qty_kk_d < 0)
+                {
+                    qty_kk_d = 0;
+                }
+                
                 int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                 int pre_amt_d = int.Parse(pre_amt, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                 }
@@ -422,6 +430,16 @@
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                                               // int qty_kk_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString(), 10);
+                                                                //int qty_hl_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl).ToString(), 10);
+                                                                int qty_kk_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk);
+                                                                int qty_hl_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl);
+                                                                
+                                                                if (qty_kk_i < 0)
+                                                                {
+                                                                    qty_kk_i = 0;
+                                                                }
+                                                                
                                                               <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
@@ -429,13 +447,21 @@
                                                                   
                                                                      @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                                      {
-                                                                         if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
+                                                                         if (qty_kk_i==0)
                                                                          {
-                                                                             <span class="quota text-green">可候補</span>
+                                                                             
+                                                                             if(qty_hl_i>0)
+                                                                             { 
+                                                                               <span class="quota text-green">可候補</span>
+                                                                             }
+                                                                             else
+                                                                             {
+                                                                                 <span class="quota text-green">關團</span>
+                                                                             }
                                                                          }
                                                                          else
                                                                          {
-                                                                             <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
+                                                                             <span class="quota text-orange">僅剩@(qty_kk_i.ToString())位</span>
                                                                          }
                                                                      }
                                                                      else
@@ -489,6 +515,15 @@
 
                                                                     string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                                                   // int qty_kk_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString(), 10);
+                                                                    //int qty_hl_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl).ToString(), 10);
+                                                                    int qty_kk_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk);
+                                                                    int qty_hl_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl);
+                                                                    if (qty_kk_i < 0)
+                                                                    {
+                                                                        qty_kk_i = 0;
+                                                                    }
+                                                                    
                                                               <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
                                                                     <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
@@ -496,13 +531,21 @@
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                                         {
-                                                                            if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
-                                                                            {
-                                                                                <span class="quota text-green">可候補</span>
-                                                                            }
+                                                                            if (qty_kk_i==0)
+                                                                         {
+                                                                             
+                                                                                if(qty_hl_i>0)
+                                                                                 { 
+                                                                                     <span class="quota text-green">可候補</span>
+                                                                                   }
+                                                                                    else
+                                                                                  {
+                                                                                      <span class="quota text-green">關團</span>
+                                                                                   }
+                                                                               }
                                                                             else
                                                                             {
-                                                                                <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
+                                                                                <span class="quota text-orange">僅剩@(qty_kk_i.ToString())位</span>
                                                                             }
                                                                         }
                                                                         else
@@ -567,6 +610,14 @@
 
                                             string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                             int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                           // int qty_kk_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString(), 10);
+                                            //int qty_hl_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl).ToString(), 10);
+                                            int qty_kk_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk);
+                                            int qty_hl_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl);
+                                            if (qty_kk_i < 0)
+                                            {
+                                                qty_kk_i = 0;
+                                            }
 
                                             <div class="list-style">
                                                 <a href="javascript:;" class="date" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')" s>@i 日</a>
@@ -574,14 +625,21 @@
                                                 <div class="float-right">
                                                     @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                     {
-                                                        if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
-                                                        {
-                                                            <span class="quota text-green">可候補</span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
-                                                        }
+                                                           if (qty_kk_i==0)
+                                                           {                      
+                                                                if(qty_hl_i>0)
+                                                                { 
+                                                                    <span class="quota text-green">可候補</span>
+                                                                }
+                                                                 else
+                                                                 {
+                                                                    <span class="quota text-green">關團</span>
+                                                                 }
+                                                            }
+                                                            else
+                                                            {
+                                                               <span class="quota text-orange">僅剩@(qty_kk_i.ToString())位</span>
+                                                             }
                                                     }
                                                     else
                                                     {
@@ -653,6 +711,15 @@
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                 int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                                                //int qty_kk_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString(), 10);
+                                                                //int qty_hl_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl).ToString(), 10);
+                                                                int qty_kk_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk);
+                                                                int qty_hl_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl);
+                                                                if (qty_kk_i < 0)
+                                                                {
+                                                                    qty_kk_i = 0;
+                                                                }
+                                                                
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
@@ -660,16 +727,21 @@
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                                         {
-                                                                            if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
-                                                                            {
-                                                                                <span class="quota text-green">可候補</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
-                                                                            }
-                                                                        }
-                                                                        else
+                                                                               if (qty_kk_i==0)
+                                                                               {                      
+                                                                                    if(qty_hl_i>0)
+                                                                                   { 
+                                                                                        <span class="quota text-green">可候補</span>
+                                                                                    }
+                                                                                     else
+                                                                                     {
+                                                                                       <span class="quota text-green">關團</span>
+                                                                                       }
+                                                                                 }else
+                                                                              {
+                                                                                      <span class="quota text-orange">僅剩@(qty_kk_i.ToString())位</span>
+                                                                               }
+                                                                        } else
                                                                         {
                                                                             <a href="javascript:;" class="more">看更多團</a>
                                                                         }
@@ -715,6 +787,14 @@
                                                                 {
                                                                     string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
                                                                     int price_grp_i = int.Parse(price_grp, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                                                    //int qty_kk_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString(), 10);
+                                                                    //int qty_hl_i = Convert.ToInt32(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl).ToString(), 10);
+                                                                    int qty_kk_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk);
+                                                                    int qty_hl_i = Decimal.ToInt32(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_hl);
+                                                                    if (qty_kk_i < 0)
+                                                                    {
+                                                                        qty_kk_i = 0;
+                                                                    }
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
                                                                         <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
@@ -722,14 +802,20 @@
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                                         {
-                                                                            if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString().Equals("0"))
-                                                                            {
-                                                                                <span class="quota text-green">可候補</span>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <span class="quota text-orange">僅剩 @Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Qty_kk).ToString()位</span>
-                                                                            }
+                                                                             if (qty_kk_i==0)
+                                                                               {                      
+                                                                                    if(qty_hl_i>0)
+                                                                                   { 
+                                                                                        <span class="quota text-green">可候補</span>
+                                                                                    }
+                                                                                     else
+                                                                                     {
+                                                                                       <span class="quota text-green">關團</span>
+                                                                                       }
+                                                                                 }else
+                                                                              {
+                                                                                      <span class="quota text-orange">僅剩@(qty_kk_i.ToString())位</span>
+                                                                               }
                                                                         }
                                                                         else
                                                                         {
