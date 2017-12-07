@@ -286,38 +286,38 @@ $(function(){
 　　}
 
     
-　　if($this_Top > 850){
+　　if($this_Top > $('#travel-traffic').position().top){
 　　　$('.fixed-menu-1').addClass('active');
 　　}
-    if($this_Top > 1200 ){
+    if($this_Top > $('#travel-characteristics').position().top ){
 　　　$('.fixed-menu-1').removeClass('active');
 　　　$('.fixed-menu-2').addClass('active');
     }
-    if($this_Top > 1700 ){
+    if ($this_Top > $('#travel-itinerary').position().top) {
 　　　$('.fixed-menu-2').removeClass('active');
 　　　$('.fixed-menu-3').addClass('active');
     }
-    if($this_Top > 2500 ){
+    if ($this_Top > $('#travel-cost').position().top) {
 　　　$('.fixed-menu-3').removeClass('active');
 　　　$('.fixed-menu-4').addClass('active');
     }
-    if($this_Top > 3000 ){
+    if ($this_Top > $('#travel-description').position().top) {
 　　　$('.fixed-menu-4').removeClass('active');
 　　　$('.fixed-menu-5').addClass('active');
     }
-    if($this_Top < 3000 ){
+    if ($this_Top < $('#travel-description').position().top) {
 　　　$('.fixed-menu-5').removeClass('active');
     }
-    if($this_Top < 2500 ){
+    if ($this_Top < $('#travel-cost').position().top) {
 　　　$('.fixed-menu-4').removeClass('active');
     }
-    if($this_Top < 1700 ){
+    if ($this_Top < $('#travel-itinerary').position().top) {
 　　　$('.fixed-menu-3').removeClass('active');
     }
-    if($this_Top < 1200 ){
+    if ($this_Top < $('#travel-characteristics').position().top) {
 　　　$('.fixed-menu-2').removeClass('active');
     }
-　　if($this_Top < 850){
+    if ($this_Top < $('#travel-traffic').position().top) {
 　　　$('.fixed-menu-1').removeClass('active');
 　　}
 
