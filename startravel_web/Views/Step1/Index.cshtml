@@ -140,13 +140,12 @@
                          }
                         @foreach (var item in Model.grppriceinfo_result.Data)
                         {
-                                i = 0;
-                                int role_type_count = Model.grppriceinfo_result.Data.Count;
-                                int length = item.Role_Type.Count;
-                                foreach (var item_s in item.Role_Type)
-                                {
-
-                                <tr>
+                            i = 0;
+                            int role_type_count = Model.grppriceinfo_result.Data.Count;
+                            int length = item.Role_Type.Count;
+                            foreach (var item_s in item.Role_Type)
+                            {
+                                <tr class="rooms" data-qtya="@item.Role_Type[i].COND_QTYA" data-qtyb="@item.Role_Type[i].COND_QTYB" data-qtyc="@item.Role_Type[i].COND_QTYC">
                                                 @{ if (i == 0)
                                                 {
                                                 <td rowspan="@length" style="border-right: 1px solid #dddddd; text-align: center;">@Html.DisplayFor(modelitem => item.Category_name)</td>
@@ -638,31 +637,68 @@
 
            
         <script>
+            let leftNum = parseInt(@Model.grpproductdetail_result.Data.QTY_KK);
+            let alternate = 0;
+            let leftAllNum = leftNum || alternate;
+            function beforeLoginCheck() {
+                let hasAdult = false
+                let totalNum = 0
+                let noBed = 0
+                let pass = true
+                $('.rooms[data-qtya=1][data-qtyc=0]').each(function() {
+                    if($(this).find('select').val()!="0") {
+                        noBed++
+                    }
+                })
+
+                $('.rooms').each(function() {
+                    totalNum += parseInt($(this).find('select').val())
+                })
+
+                $('.rooms[data-qtya=1]').each(function() {
+                    if($(this).find('select').val()!="0") {
+                        hasAdult = true
+                    }
+                })
+                if (!hasAdult) {
+                    alert("至少需一位成人")
+                    pass = false
+                } else if (noBed > 1) {
+                    alert("成人最多只能帶一個不佔床")
+                    pass = false
+                } else if (totalNum > leftAllNum) {
+                    alert("剩餘訂購人數不足")
+                    pass = false
+                }
+                //console.log(hasAdult)
+                //console.log(totalNum)
+                //console.log(noBed)
+                return pass
+            }
 
             function loginfuction(){
-            
-                var user_name = $('#user_name').val();
-                var user_passwd = $('#user_passwd').val();
-                var checked_box_value=  $('#read').is(':checked');
 
-                if ((user_name=="" )|| (user_passwd==""))
-                {
-                    alert( "身分證字號或密碼為空");
+                if (beforeLoginCheck()) {
+                    var user_name = $('#user_name').val();
+                    var user_passwd = $('#user_passwd').val();
+                    var checked_box_value=  $('#read').is(':checked');
 
-                    console("null");
-                  //  return RedirectToAction("Index", "Step1", new { prod_no = view_prod_no, grp_no = view_grp_no });
-                }else if(checked_box_value==false){
+                    if ((user_name=="" )|| (user_passwd==""))
+                    {
+                        alert( "身分證字號或密碼為空");
 
-                    alert( "請勾選訂購須知");
+                    }else if(checked_box_value==false){
+                      alert( "請勾選訂購須知");
 
-                }else{
-                    
-                    $('#myform').submit();
+                    }else{
 
+                        $('#myform').submit();
+
+                    }
                 }
-            
-            
-            
+
+
+
             }
 
 
