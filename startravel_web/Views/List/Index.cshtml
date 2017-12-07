@@ -157,7 +157,7 @@
             DateTime grplist_s_data_e = DateTime.ParseExact(Html.DisplayFor(model => model.grplist_postdata.S_DATE_E).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
             string grplist_city_from = Model.city_from_name;
             string grplist_city_to = Model.city_to_name;
-          
+
 
         }
 
@@ -177,7 +177,11 @@
             </div>
         </div>
 
-
+        @{ 
+            int Search_result_total = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.Total).ToString());
+            int Search_result_pagesize = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.PageSize).ToString());
+            int Search_result_currentpage = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString());
+        }
 @using (Html.BeginForm("re_search", "List", FormMethod.Post,new{ enctype = "multipart/form-data", id = "searchForm" }))
 {
         <!-- 詳細搜尋條件 -->
@@ -429,25 +433,22 @@
                     </div>
                 </div>
             </div>
-
-            if (Model.grplist_result.rCode.Equals("0001"))
-            {
-                int Search_result_total = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.Total).ToString());
-                int Search_result_pagesize = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.PageSize).ToString());
-                int Search_result_currentpage = Int32.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString());
-                //int Search_result_currentpage = int.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString(), System.Globalization.NumberStyles.AllowDecimalPoint);
-                // string Search_result_total = Html.DisplayFor(model => model.grplist_result.Data.Total).ToString();
-
-                int total_page = 0;
-
-                if (Search_result_total % Search_result_pagesize == 0)
+                if (Model.grplist_result.rCode.Equals("0001"))
                 {
-                    total_page = Search_result_total / Search_result_pagesize;
-                }
-                else
-                {
-                    total_page = (Search_result_total / Search_result_pagesize) + 1;
-                }
+                    //int Search_result_currentpage = int.Parse(Html.DisplayFor(model => model.grplist_result.Data.CurrentPage).ToString(), System.Globalization.NumberStyles.AllowDecimalPoint);
+                    // string Search_result_total = Html.DisplayFor(model => model.grplist_result.Data.Total).ToString();
+
+                    int total_page = 0;
+
+
+                    if (Search_result_total % Search_result_pagesize == 0)
+                    {
+                        total_page = Search_result_total / Search_result_pagesize;
+                    }
+                    else
+                    {
+                        total_page = (Search_result_total / Search_result_pagesize) + 1;
+                    }
                    <!-- 搜尋比數與排列 -->
 
 
@@ -754,19 +755,19 @@
                 <!-- 頁碼 -->
                     <input type="hidden" id="research_page" name="research_page" value="">
                    <ul class="star-pager pager hidden-xs">
-                    <li><a href="javascript:;" onclick="left_button_click()"></a></li>
+                    <li><a href="javascript:;" onclick="left_button_click()"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
 
                  @for (i = 0; i < total_page;i=i+1 ){
                       if(Search_result_currentpage==i+1)
                       {
-                          <li class="page active @(i+1)" ><a href="javascript:;" onclick="page_button_click(this)">@(i + 1)</a></li>
+                          <li class="page active page_@(i+1)" ><a href="javascript:;" onclick="page_button_click(this)">@(i + 1)</a></li>
                       }
                       else
                       {
-                        <li class="page @(i+1)"> <a href="javascript:;" onclick="page_button_click(this)">@(i + 1)</a></li>
+                        <li class="page page_@(i+1)"> <a href="javascript:;" onclick="page_button_click(this)">@(i + 1)</a></li>
                       }
                  }
-                    <li><a href="javascript:;" onclick="right_button_click()"></a></li>
+                    <li><a href="javascript:;" onclick="right_button_click()"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
                 </ul>
 
                   <script>
@@ -815,7 +816,39 @@
 	                </div>
 
           }
-       
+      
+     <script>
+         /* cahgne page indicator */
+         let show = 5;
+         let page = Math.ceil(@((Search_result_total / Search_result_pagesize)+1) / 5);
+         console.log(page)
+         let totalLength = $('.page').length
+         let maxPage = Math.ceil(totalLength/5)
+         function update_page() {
+             let end = (page * show);
+             let start = (end - show + 1) < 1? 1: (end-show + 1)
+            $('.page').hide()
+             $('.page').each(function() {
+                 for(let i = start; i<=end; i++) {
+                     $('.page').eq(i-1).show()
+                 }
+             })
+         }
+
+         function left_button_click() {
+             if (page > 1)
+                 page --
+             update_page()
+         }
+
+         function right_button_click() {
+             if (page < maxPage)
+                 page ++
+             update_page()
+         }
+
+         update_page()
+     </script>
 
 
     <script>
