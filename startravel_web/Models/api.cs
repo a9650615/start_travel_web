@@ -110,6 +110,7 @@ namespace startravel_web.Models
         public string Prod_Name { get; set; }
         public string Image_URL { get; set; }
         public string Prod_Type1 { get; set; }
+        public string Tourdays { get; set; }
         public decimal Price { get; set; }
         public decimal Price_Agt { get; set; }
         public string City_From_Name { get; set; }

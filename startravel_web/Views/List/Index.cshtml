@@ -542,24 +542,27 @@
                 <!-- 結果列表 -->
                 <div class="searchResultsList">
 
-                            @{int i = 0;
+                            @{
+                                int i = 0;
                               int page_size = Model.grplist_result.Data.PageSize;
                               int current_page = Model.grplist_result.Data.CurrentPage;
+                              int number;
                               
+                              int shift= page_size*(current_page - 1);
                               }
 
                @for (i = 0; i < Model.grplist_result.Data.prod.Count;i=i+1 )
                 {
 
                     var item= Model.grplist_result.Data.prod[i];
-                    int number=i+1;
+                     number=i+1;
                    
                 <!-- 第一筆 -->
                 <div class="star-searchResultsItem">
                         <div class="row">
                             <div class="star-searchResultsItemLeft col-xs-12 col-sm-9">
                                 <div class="number">
-                                    <span>@(number + page_size * (current_page - 1))</span>
+                                    <span>@(number + shift)</span>
                                     <input type="hidden" id="pord_no_list_@number" name="prod_no_list_@number" value="@item.GrpList[0].Prod_NO">
                                     <input type="hidden" id="grp_no_list_@number" name="grp_no_list_@number" value="@item.GrpList[0].GRP_NO">
                                 </div>
@@ -716,14 +719,14 @@
                              qkk_d = 0;
                          }
 
-                         DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                         DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        // DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        // DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
-                         TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
-                         int final_day=different_s_tour.Days+1;
+                         //TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
+                         //int final_day=different_s_tour.Days+1;
                         }
                             <div class="star-searchResultsItemRight col-xs-12 col-sm-3">
-                                <h1>@final_day<small>天</small></h1>
+                                <h1>@item.Tourdays<small>天</small></h1>
                                 <h2 class="final_price_@number">@price_d.ToString("#,#") <small>元起</small></h2>
                                
                                 <ul>
@@ -1644,11 +1647,11 @@
                     qkk_d = 0;
                 }
                 
-                DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                //DateTime s_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                //DateTime e_date = DateTime.ParseExact(Html.DisplayFor(modelitem => item.GrpList[0].FlyList[1].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 
-                TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
-                int final_day = different_s_tour.Days + 1;
+               // TimeSpan different_s_tour = new TimeSpan(e_date.Ticks - s_date.Ticks);
+                //int final_day = different_s_tour.Days + 1;
                 string price = Html.DisplayFor(modelitem => item.Price).ToString();
                 int price_d = int.Parse(price, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
         <!-- 第一筆 -->
@@ -1662,7 +1665,7 @@
                             <span>@(i + 1)</span>
                         </div>
                         <div class="col-xs-6 star-searchResultsItem-mobile-textR">
-                            <h1>@final_day<small>天</small></h1>
+                            <h1>@item.Tourdays<small>天</small></h1>
                             <ul>
                                 <li class="qkk_@(i + 1)">@qkk_d 人以上成行</li>
                                 <li>送旅遊金</li>
