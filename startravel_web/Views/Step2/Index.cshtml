@@ -283,7 +283,7 @@
                         </div>
 
                         <span class="text-bold h3">加購商品</span>
-                        @if (total_passenger_count==9)
+                        @if ((x+y+k)==0)
                         {
                         <div class="addAllbtn">
                             <input class="star-input" type="checkbox" id="addAll"  onclick="addall_click()" >
@@ -297,7 +297,7 @@
                     <input type="hidden" id="addallcost_hidden_@total_passenger_count" name="addallcost_hidden_@total_passenger_count" value="0">
 
                         <div class="pl-15 pr-15 mt-20 mb-20">
-                            <div class="star-panel-group panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+                            <div class="star-panel-group panel-group add_panel add_pannel_@total_passenger_count" id="accordion3" role="tablist" aria-multiselectable="true">
 
 
                                  @if (Model.pusb_count>0)
@@ -1121,12 +1121,37 @@
 
 
 
+        $('#accordion3.add_pannel_0 input').change(function() {
+            console.log('ww')
+            if($('#addAll').is(':checked')) {
+                addall_click()
+            }
+        })
 
+        $('.add_panel:not(.add_pannel_0) input').change(function() {
+            $('#addAll').prop('checked', false)
+        })
 
 
         function addall_click(){
+            let getter = $('#accordion3.add_pannel_0 input')
+            if ($('#addAll').is(':checked')) {
+                $('.add_panel:not(.add_pannel_0)').each(function() {
+                    let t = this
+                    getter.each(function(i) {
+                        if ($(this).is(':checked') != $(t).find('input').eq(i).is(':checked'))
+                            $(t).find('input').eq(i).click()
+                        //$(t).find('input').eq(i).prop('checked', $(this).is(':checked')).change()
+                        //if ($(this).is(':checked'))
+                        //    $(t).find('input').eq(i).prop('checked', true)
+                        //else 
+                        //    $(t).find('input').eq(i).prop('checked', false)
+                    })
+                    $('#addAll').prop('checked', true)
+                })
+            }
 
-            var total_people_count=$('#total_people_hidden').val();
+            /*var total_people_count=$('#total_people_hidden').val();
             var pusb_count=$('#pusb_count_hidden').val();
             var visa_count=$('#visa_count_hidden').val();
             var insu_count=$('#insu_count_hidden').val();
@@ -1254,7 +1279,7 @@
                 $('#addAll').removeAttr('checked');
                 $('#addall_hidden').val("0");
             }
-           
+           */
         }
 
     </script>
