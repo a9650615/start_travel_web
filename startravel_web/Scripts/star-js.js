@@ -272,8 +272,9 @@ $(function(){
 
 //innerMenu
 $(function(){
-　$(window).load(function(){
-　　$(window).bind('scroll resize', function(){
+    $(window).load(function () {
+    if ($('#travel-traffic').position())
+    $(window).bind('scroll resize', function () {
 　　var $this = $(this);
 　　var $this_Top=$this.scrollTop();
 
@@ -284,7 +285,6 @@ $(function(){
 　　if($this_Top > 850){
 　　　$('#travel-innerMenu-fixed').stop().animate({top:"0px"});
 　　}
-
     
 　　if($this_Top > $('#travel-traffic').position().top){
 　　　$('.fixed-menu-1').addClass('active');
