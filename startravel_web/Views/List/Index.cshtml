@@ -542,19 +542,24 @@
                 <!-- 結果列表 -->
                 <div class="searchResultsList">
 
-                            @{int i=0;}
+                            @{int i = 0;
+                              int page_size = Model.grplist_result.Data.PageSize;
+                              int current_page = Model.grplist_result.Data.CurrentPage;
+                              
+                              }
 
                @for (i = 0; i < Model.grplist_result.Data.prod.Count;i=i+1 )
                 {
 
                     var item= Model.grplist_result.Data.prod[i];
                     int number=i+1;
+                   
                 <!-- 第一筆 -->
                 <div class="star-searchResultsItem">
                         <div class="row">
                             <div class="star-searchResultsItemLeft col-xs-12 col-sm-9">
                                 <div class="number">
-                                    <span>@(number +Model.grplist_postdata.PageSize*(Model.grplist_postdata.CurrentPage-1))</span>
+                                    <span>@(number + page_size * (current_page - 1))</span>
                                     <input type="hidden" id="pord_no_list_@number" name="prod_no_list_@number" value="@item.GrpList[0].Prod_NO">
                                     <input type="hidden" id="grp_no_list_@number" name="grp_no_list_@number" value="@item.GrpList[0].GRP_NO">
                                 </div>

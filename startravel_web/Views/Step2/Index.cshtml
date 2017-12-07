@@ -219,8 +219,8 @@
                             </div>
                             <div class="col-xs-12 col-sm-3">
                                 <div class="joinTheList">
-                                    <input class="star-input" type="checkbox" id="add" name="payment_@total_passenger_count" value="deposit">
-                                    <label for="add"></label>
+                                    <input class="star-input" type="checkbox" id="add_@(total_passenger_count)" name="add_@(total_passenger_count)" value="0" onclick="add_passengerlist('@Html.DisplayFor(modelitem => total_passenger_count)')">
+                                    <label for="add_@(total_passenger_count)"></label>
                                     <a href="javascript:;" title="">加入常用旅客名單</a>
 
                                 </div>
@@ -736,6 +736,25 @@
                   $('#contact_email').val(member_email);
             }
             //co Session["user_name"];
+        }
+
+        function add_passengerlist(k){
+
+            var add_passenger_no="#add_"+k;
+            console.log(add_passenger_no);
+            current_state=   $(add_passenger_no).val();
+            if(current_state=="0")
+            {
+                $(add_passenger_no).val("1");
+
+            }else{
+
+                $(add_passenger_no).val("0");
+
+            }
+          
+            console.log(  $(add_passenger_no).val());
+
         }
 
 

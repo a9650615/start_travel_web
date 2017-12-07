@@ -426,6 +426,8 @@
                                                             date_i = i * 7 + (j + 1) - s_month_first_d_int;
                                                             string current_day_s = s_current_day.ToString("yyyyMMdd");
                                                        
+                                                           if (date_arrery_index < grp_date_number)
+                                                            {
                                                             if (current_day_s.Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
@@ -472,12 +474,12 @@
                                                              </td>
                                                     
                                                                 date_arrery_index = date_arrery_index + 1;
-                                                                if (date_arrery_index==Model.grpcalendar_result.Data.grp_date.Count)
+                                                                if (date_arrery_index == grp_date_number)
                                                                 {
-                                                                    date_arrery_index = date_arrery_index - 1;
+                                                                    date_arrery_index = grp_date_number - 1;
                                                                 }
-                                                               
-                                                            }
+
+                                                            } // if (current_day_s.Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
                                                             else
                                                             {
                                                                 <td class="date-@(i * 7 + ( j + 1 ))">
@@ -486,12 +488,24 @@
                                                                </div>
                                                              </td>
                                                             }
-
+                                                              }
+                                                            else  //  if (date_arrery_index < grp_date_number)
+                                                            {
+                                                                <td class="date-@(i * 7 + ( j + 1 ))">
+                                                                    <div class="travel-calendar-date">
+                                                                        <span class="date">@date_i</span>
+                                                                    </div>
+                                                                </td>
+                                                            }
+                                                            
+                                                            
+                                                            
                                                             start_flag = 1;
                                                             s_current_day = s_current_day.AddDays(1);
-
+                                                            
+                                                          
                                                         }
-                                                        else
+                                                        else // if (j == s_month_first_d_int)
                                                         {
                                                             <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
@@ -499,13 +513,11 @@
                                                                </div>
                                                              </td>
                                                         }
-
-                                                    }
-                                                    else
-                                                    {
+                                                   } else  //if((start_flag)
+                                                   {
                                                         date_i = i * 7 + (j + 1) - s_month_first_d_int;
                                                         string current_day_s = s_current_day.ToString("yyyyMMdd");
-
+                                                       
                                                         if (date_i < s_month_days + 1)
                                                         {
                                                             if (date_arrery_index < grp_date_number)
@@ -552,12 +564,17 @@
                                                                         {
                                                                             <a href="javascript:;" class="more">看更多團</a>
                                                                         }
-</div>
+                                                                </div>
                                                              </td>
                                                     
-                                                                     date_arrery_index = date_arrery_index + 1;
+                                                                   
+                                                                        date_arrery_index = date_arrery_index + 1;
+                                                                        if (date_arrery_index == grp_date_number)
+                                                                        {
+                                                                            date_arrery_index = grp_date_number - 1;
+                                                                        }
                                                                 }
-                                                                else
+                                                                else  //  if (current_day_s.Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
                                                                 {
                                                                 <td class="date-@(i * 7 + ( j + 1 ))">
                                                                 <div class="travel-calendar-date">
@@ -566,7 +583,7 @@
                                                                 </td>
                                                                 }
                                                             }
-                                                            else
+                                                            else  //  if (date_arrery_index < grp_date_number)
                                                             {
                                                                 <td class="date-@(i * 7 + ( j + 1 ))">
                                                                     <div class="travel-calendar-date">
@@ -578,7 +595,7 @@
 
                                                             s_current_day = s_current_day.AddDays(1);
                                                         }
-                                                        else
+                                                        else // if (date_i < s_month_days + 1)
                                                         {
 
                                                               <td class="date-@(i * 7 + ( j + 1 ))">
@@ -648,10 +665,11 @@
                                                 </div>
                                             </div>
                                                     date_arrery_index = date_arrery_index + 1;
-                                                    if (date_arrery_index == Model.grpcalendar_result.Data.grp_date.Count)
+                                                    if (date_arrery_index == grp_date_number)
                                                     {
-                                                        date_arrery_index = date_arrery_index - 1;
+                                                        date_arrery_index = grp_date_number - 1;
                                                     }
+                                                               
                                         }
                                     }
                                     m_current_day = m_current_day.AddDays(1);
@@ -707,6 +725,8 @@
                                                             date_i_e = i * 7 + (j + 1) - e_month_first_d_int;
                                                             string current_day_e = e_current_day.ToString("yyyyMMdd");
 
+                                                           if (date_arrery_index < grp_date_number)
+                                                           {
                                                             if (current_day_e.Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
                                                             {
                                                                 string price_grp = Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Price).ToString();
@@ -748,10 +768,16 @@
                                                                     </div>
                                                                 </td>
 
+                                                                      
                                                                         date_arrery_index = date_arrery_index + 1;
+                                                                        if (date_arrery_index == grp_date_number)
+                                                                        {
+                                                                            date_arrery_index = grp_date_number - 1;
+                                                                        }
+                                                               
 
                                                             }
-                                                            else
+                                                            else// if (current_day_e.Equals(Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].S_date).ToString()))
                                                             {
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
@@ -759,12 +785,24 @@
                                                                     </div>
                                                                 </td>
                                                             }
+                                                            
+                                                            }
+                                                            else  //  if (date_arrery_index < grp_date_number)
+                                                            {
+                                                                <td class="date-@(i * 7 + ( j + 1 ))">
+                                                                    <div class="travel-calendar-date">
+                                                                        <span class="date">@date_i</span>
+                                                                    </div>
+                                                                </td>
+                                                            }
 
                                                             start_flag_e = 1;
                                                             e_current_day = e_current_day.AddDays(1);
 
+                                                           //   }
+                                                           
                                                         }
-                                                        else
+                                                        else //if (j == e_month_first_d_int)
                                                         {
                                                             <td class="date-@(i * 7 + (j + 1))">
                                                                 <div class="travel-calendar-date">
@@ -774,7 +812,7 @@
                                                         }
 
                                                     }
-                                                    else
+                                                    else  // if (start_flag_e == 0)
                                                     {
                                                         date_i_e = i * 7 + (j + 1) - e_month_first_d_int;
                                                         string current_day_e = e_current_day.ToString("yyyyMMdd");
@@ -825,10 +863,11 @@
                                                                 </td>
 
                                                                         date_arrery_index = date_arrery_index + 1;
-                                                                        if (date_arrery_index == Model.grpcalendar_result.Data.grp_date.Count)
+                                                                        if (date_arrery_index == grp_date_number)
                                                                         {
-                                                                            date_arrery_index = date_arrery_index - 1;
+                                                                            date_arrery_index = grp_date_number - 1;
                                                                         }
+                                                               
 
                                                                 }
                                                                 else

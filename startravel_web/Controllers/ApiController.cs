@@ -80,7 +80,24 @@ namespace startravel_web.Controllers
         }
 
         //tour_1.7
-        public async Task<GRPCalendar_result> GRPCalendar_api(GRPCalendar_PostData postdata)
+       // public async Task<GRPCalendar_result> GRPCalendar_api(GRPCalendar_PostData postdata)
+        public async Task<JObject> GRPCalendar_api_test(GRPCalendar_PostData postdata)
+        {
+            string targetURI = "https://dtour-api.startravel.com.tw/api/GRPCalendar";
+            HttpClient client = new HttpClient();
+            client.MaxResponseContentBufferSize = Int32.MaxValue;
+            string json = JsonConvert.SerializeObject(postdata);
+            HttpContent contentPost = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(targetURI, contentPost).Result;
+            var collection = response.Content.ReadAsStringAsync().Result;
+            //var collection_jobj = JsonConvert.DeserializeObject<GRPCalendar_result>(collection);
+            var collection_jobj = JsonConvert.DeserializeObject<JObject>(collection);
+            return collection_jobj;
+          
+        }
+
+         public async Task<GRPCalendar_result> GRPCalendar_api(GRPCalendar_PostData postdata)
+        //public async Task<JObject> GRPCalendar_api(GRPCalendar_PostData postdata)
         {
             string targetURI = "https://dtour-api.startravel.com.tw/api/GRPCalendar";
             HttpClient client = new HttpClient();
@@ -90,8 +107,9 @@ namespace startravel_web.Controllers
             HttpResponseMessage response = client.PostAsync(targetURI, contentPost).Result;
             var collection = response.Content.ReadAsStringAsync().Result;
             var collection_jobj = JsonConvert.DeserializeObject<GRPCalendar_result>(collection);
+            //var collection_jobj = JsonConvert.DeserializeObject<JObject>(collection);
             return collection_jobj;
-          
+
         }
 
         //tour_1.8
