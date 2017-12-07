@@ -178,6 +178,9 @@ namespace startravel_web.Models
         public String Type_name { get; set; }
         public String Type_no { get; set; }
         public int Price { get; set; }
+        public int COND_QTYA { get; set; }
+        public int COND_QTYB { get; set; }
+        public int COND_QTYC { get; set; }
     }
     //=====tour1.5=====//
 

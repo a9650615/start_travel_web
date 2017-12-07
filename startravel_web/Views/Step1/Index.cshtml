@@ -85,7 +85,9 @@
                 DateTime igrptraffic_s_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-            }
+
+                
+              }
 
 
             @Html.HiddenFor(model => model.grpproductdetail_result.Data.PROD_NO)
