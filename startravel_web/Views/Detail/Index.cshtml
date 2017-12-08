@@ -709,7 +709,8 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        i = 0; j = 0;
+                                        i = 0;
+                                        j = 0;
                                         int start_flag_e = 0;
                                         int date_i_e = 0;
 
@@ -835,7 +836,7 @@
                                                                     }
                                                                 <td class="date-@(i * 7 + (j + 1))">
                                                                     <div class="travel-calendar-date">
-                                                                        <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
+                                                                        <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i_e</a>
                                                                         <span class="price">@price_grp_i.ToString("#,#") </span>
 
                                                                         @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -923,41 +924,41 @@
             </div>
 
             <script>
-                let get = parseInt('@(Model.window_open)')
-                if (!isNaN(get)) {
-                   $('.travel-calendar-open').hide();
-                    $('.travel-calendar').fadeIn();
-                }
-                /* Date change month*/
+    let get = parseInt('@(Model.window_open)')
+    if (!isNaN(get)) {
+        $('.travel-calendar-open').hide();
+        $('.travel-calendar').fadeIn();
+    }
+    /* Date change month*/
 
-                function autoChangeYearDate(yaer, month) {
-                    if (month<=0)
-                        return [yaer-1, 12]
-                    if (month > 12)
-                        return [yaer+1, 1]
+    function autoChangeYearDate(yaer, month) {
+        if (month<=0)
+            return [yaer-1, 12]
+        if (month > 12)
+            return [yaer+1, 1]
 
-                    return [yaer, month]
-                }
+        return [yaer, month]
+    }
 
-                function findGrpData(date, grpData) {
-                    let data = grpData.filter((data) => data.S_date==date)
+    function findGrpData(date, grpData) {
+        let data = grpData.filter((data) => data.S_date==date)
 
-                    if(data.length)
-                        return data[0].Grp
+        if(data.length)
+            return data[0].Grp
 
-                    return []
-                }
-                function updateMobilDate(data, date) {
-                    let dateStr = `${date[0]}${format(date[1])}`
-                    $('.content-mobile').html("")
-                    console.log(data)
-                    data.forEach(function (val) {
-                        console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
-                        console.log(val.Grp)
-                        if (val.S_date.includes(dateStr))
-                            $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+        return []
+    }
+    function updateMobilDate(data, date) {
+        let dateStr = `${date[0]}${format(date[1])}`
+        $('.content-mobile').html("")
+        console.log(data)
+        data.forEach(function (val) {
+            console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
+            console.log(val.Grp)
+            if (val.S_date.includes(dateStr))
+                $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
                     })
-                }
+                    }
 
                 function updateFullDate(data, date) {
                     let table1 = $('.table-responsive').eq(0)
@@ -974,61 +975,63 @@
                             let date_data = findGrpData(`${date[0]}${format(date[1])}${format(day)}`, data.Data.grp_date)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
+                                $(this).html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
 
-                            }
+                                }
                             else {
-                                $(this).html(`<span class="date active">${day}</span>`)
+                                $(this).html(`<span class="date ">${day}</span>`)
                             }
                         }
-                        else
+                    else
                             $(this).html("")
-                    })
+                })
                     table2.find('tbody td').each(function() {
                         let day = parseInt($(this).attr("class").replace("date-", "")) - start2
                         if (day <= end2 && day > 0){
                             let date_data = findGrpData(`${nextDate[0]}${format(nextDate[1])}${format(day)}`, data.Data.grp_date)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).html(`<span class="date active">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
+                                $(this).html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}`)
 
-                            }
+                                }
                             else {
-                                $(this).html(`<span class="date active">${day}</span>`)
+                                $(this).html(`<span class="date ">${day}</span>`)
                             }
                         }
-                        else
+                    else
                             $(this).html("")
-                    })
-                }
+    })
+    }
 
                 function updateHeader(year, month) {
                     let date_1 = autoChangeYearDate(year, month)
                     let date_2 = autoChangeYearDate(year, month + 1)
                     $('#tb-1-h').text(`${date_1[0]}年${date_1[1]}月`)
                     $('#tb-2-h').text(`${date_2[0]}年${date_2[1]}月`)
-                }
+    }
 
                 function format(num) {
                     return num<10 ? "0" + num: num
-                }
+                    }
 
                 function getDate(date) {
                     let lastDate = autoChangeYearDate(date[0], date[1])
                     let nextDate = autoChangeYearDate(date[0], date[1]+2)
 
                     return fetch(`Detail/calendar_reset?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&s_month=${lastDate[0]}${format(lastDate[1])}&e_month=${nextDate[0]}${format(nextDate[1])}`, {
-                        method: 'GET'
-                    })
+    method: 'GET'
+    })
                     .then(function(response) {
                         return response.json();
-                    })
+                        })
 
-                }
+                        }
 
                 $(document).ready(() => {
-                    let nowYear = new Date().getFullYear()
-                    let nowMonth = new Date().getMonth() + 1
+                    let nowYear = new Date("@igrptraffic_s.ToString("yyyy/MM")").getFullYear()
+                    let nowMonth = new Date("@igrptraffic_s.ToString("yyyy/MM")").getMonth() + 1
+
+                    console.log(nowYear,nowMonth)
 
                     $('#date-1-go-back').click(() => {
                         let changedDate = autoChangeYearDate(nowYear, nowMonth-1)
