@@ -616,15 +616,7 @@
                                                     var item_grplist= item.GrpList[j];
                                                     string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
                                                     DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                                                 //   DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                                 //   DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                                   
-                                                    //string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO_NAME).ToString();
-                                                    
-                                                   // string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
-                                                 
-                                                    
-                                                    //string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
+                                             
 
                                                     //add transferinfo 
                                                     int transfer_all_count = item_grplist.FlyList.Count;
@@ -1777,19 +1769,30 @@
                                             var item_grplist = item.GrpList[j];
                                             string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
                                             DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                                           // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                                            DateTime s_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            DateTime s_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            string s_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_FROM_NAME).ToString();
-                                            string s_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[0].CITY_TO_NAME).ToString();
+                                            // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                                            int transfer_all_count = item_grplist.FlyList.Count;
+                                            int transfer_times_half = transfer_all_count / 2;
+                                            int transfer_times = transfer_times_half - 1;
+
+
+                                            //from info
                                             string s_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[0].AIR_NAME).ToString();
-                                            string s_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[0].FLY_NO).ToString();
-                                            DateTime e_depart_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            DateTime e_arrive_time = DateTime.ParseExact(Html.DisplayFor(modelitem => item_grplist.FlyList[1].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                                            string e_city_from = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_FROM_NAME).ToString();
-                                            string e_city_to = Html.DisplayFor(modelitem => item_grplist.FlyList[1].CITY_TO_NAME).ToString();
-                                            string e_air_name = Html.DisplayFor(modelitem => item_grplist.FlyList[1].AIR_NAME).ToString();
-                                            string e_fly_no = Html.DisplayFor(modelitem => item_grplist.FlyList[1].FLY_NO).ToString();
+                                            string s_city_from = item_grplist.FlyList[0].CITY_FROM_NAME.ToString();
+                                            //DateTime s_depart_date = DateTime.ParseExact( item_grplist.FlyList[0].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                            DateTime s_depart_time = DateTime.ParseExact(item_grplist.FlyList[0].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
+                                            string s_city_to = item_grplist.FlyList[transfer_times_half - 1].CITY_TO_NAME.ToString();
+                                            // DateTime s_arrive_date = DateTime.ParseExact(item_grplist.FlyList[transfer_times_half - 1].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                            DateTime s_arrive_time = DateTime.ParseExact(item_grplist.FlyList[transfer_times_half - 1].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
+                                            //to info
+                                            string e_air_name = item_grplist.FlyList[transfer_times_half].AIR_NAME.ToString();
+                                            string e_city_from = item_grplist.FlyList[transfer_times_half].CITY_FROM_NAME.ToString();
+                                            DateTime e_depart_time = DateTime.ParseExact(item_grplist.FlyList[transfer_times_half].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
+                                            string e_city_to = item_grplist.FlyList[transfer_all_count - 1].CITY_TO_NAME.ToString();
+                                            DateTime e_arrive_time = DateTime.ParseExact(item_grplist.FlyList[transfer_all_count - 1].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
 
 
                                            // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
@@ -1830,13 +1833,26 @@
                                                 }
                                                     }
                                                 </div>
-                                                <div>
-                                                    @s_depart_time.ToString("HH:mm") @s_city_from <br>
-                                                    @s_arrive_time.ToString("HH:mm")@s_city_to  @s_air_name
-                                                </div>
-                                                <div>
-                                                    @e_depart_time.ToString("HH:mm") @e_city_from/@e_arrive_time.ToString("HH:mm")@e_city_to  @e_air_name
-                                                </div>
+                                                @if (transfer_times > 0)
+                                                {
+                                                    <div>
+                                                        @(s_air_name)(轉機@(transfer_times)次)-@s_depart_time.ToString("HH:mm")@s_city_from/@s_arrive_time.ToString("HH:mm")@s_city_to
+                                                    </div>
+                                                    <div>
+                                                        @(e_air_name)(轉機@(transfer_times)次)-@e_depart_time.ToString("HH:mm")@e_city_from/@e_arrive_time.ToString("HH:mm")@e_city_to
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div>
+                                                        @(s_air_name)-@s_depart_time.ToString("HH:mm")@s_city_from/@s_arrive_time.ToString("HH:mm")@s_city_to
+                                                    </div>
+                                                    <div>
+                                                        @(e_air_name)-@e_depart_time.ToString("HH:mm")@e_city_from/@e_arrive_time.ToString("HH:mm")@e_city_to
+                                                    </div>
+
+                                                }
+                                                
                                             </li>
                                                         }
                                         <!--選項區-->
