@@ -956,7 +956,7 @@
             console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
             console.log(val.Grp)
             if (val.S_date.includes(dateStr))
-                $('.content-mobile').append(`<div class="list-style"><span class="date">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+                $('.content-mobile').append(`<div class="list-style"><span class="date" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${val.Grp[0].Grp_no}')">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
                     })
                     }
 
