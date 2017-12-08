@@ -817,6 +817,8 @@ namespace startravel_web.Models
 
      public class OrderTrafficViewModel
      {
+         public String CNAME_FROM { get; set; }
+         public String CNAME_TO { get; set; }
          public String SEQNO { get; set; }
          public String DEPART_TIME { get; set; }
          public String ARRIVE_TIME { get; set; }

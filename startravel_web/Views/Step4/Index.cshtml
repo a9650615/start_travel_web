@@ -246,11 +246,11 @@
 
                 @{
                     
-                    DateTime depart_time_s = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime arrive_time_s = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].ARRIVE_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime depart_time_e = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                    DateTime arrive_time_e = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].ARRIVE_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                    
+                   //DateTime depart_time_e = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].DEPART_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    //DateTime arrive_time_e = DateTime.ParseExact(Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].ARRIVE_TIME).ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    int transfer_all_count = Model.orderinfomation_result.Data.OrderTraffic.Count;
+                    int transfer_times_half = transfer_all_count / 2;
+                    int transfer_times = transfer_times_half - 1;
                     
                 }
 
@@ -271,23 +271,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @for (int i = 0; i < transfer_all_count;i=i+1)
+                                {
+                                    DateTime depart_time_s = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].DEPART_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                    DateTime arrive_time_s = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].ARRIVE_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    
+                                    
+                                    
                                 <tr>
                                     <td>@depart_time_s.ToString("yyyy/MM/dd")<br>@depart_time_s.ToString("HH:mm")</td>
                                     <td>@arrive_time_s.ToString("yyyy/MM/dd")<br>@arrive_time_s.ToString("HH:mm")</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].AIR_NAME).ToString()<br>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].FLY_NO).ToString()</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].CITY_FROM).ToString()</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].CITY_TO).ToString()</td>
+                                    <td>@Model.orderinfomation_result.Data.OrderTraffic[i].AIR_NAME.ToString()<br>@Model.orderinfomation_result.Data.OrderTraffic[i].FLY_NO.ToString()</td>
+                                    <td>@Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_FROM.ToString()</td>
+                                    <td>@Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_TO.ToString()</td>
                                 </tr>
-                                <tr>
-                                    <td>2017/10/21<br>@depart_time_e.ToString("HH:mm")</td>
-                                    <td>2017/10/21<br>@arrive_time_e.ToString("HH:mm")</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].AIR_NAME).ToString()<br>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].FLY_NO).ToString()</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].CITY_FROM).ToString()</td>
-                                    <td>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].CITY_TO).ToString()</td>
-                                </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
+
+                    @for (int i = 0; i < transfer_times_half; i = i + 1)
+                    {
+                        DateTime depart_time_s = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].DEPART_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        DateTime arrive_time_s = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].ARRIVE_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    
+                        
                     <div class="table-mobile infoBlock">
                         <span class="text-purple">去程</span>
                         <div class="orderDetails-mobile mt-10">
@@ -312,7 +320,7 @@
                                     班次
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].AIR_NAME).ToString()<br>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].FLY_NO).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].AIR_NAME.ToString()<br>@Model.orderinfomation_result.Data.OrderTraffic[i].FLY_NO.ToString()
                                 </div>
                             </div>
                             <div class="row">
@@ -320,7 +328,7 @@
                                     起飛地
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].CITY_FROM).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_FROM.ToString()
                                 </div>
                             </div>
                             <div class="row">
@@ -328,11 +336,19 @@
                                     抵達地
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[0].CITY_TO).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_TO.ToString()
                                 </div>
                             </div>
                         </div>
                     </div>
+                    }
+
+                   @for (int i = transfer_times_half; i < transfer_all_count; i = i + 1)
+                    {
+                        DateTime depart_time_e = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].DEPART_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        DateTime arrive_time_e = DateTime.ParseExact(Model.orderinfomation_result.Data.OrderTraffic[i].ARRIVE_TIME.ToString(), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
+
                     <div class="table-mobile infoBlock mt--1">
                         <span class="text-purple">回程</span>
                         <div class="orderDetails-mobile mt-10">
@@ -357,7 +373,7 @@
                                     班次
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].AIR_NAME).ToString()<br>@Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].FLY_NO).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].AIR_NAME.ToString()<br>@Model.orderinfomation_result.Data.OrderTraffic[i].FLY_NO.ToString()
                                 </div>
                             </div>
                             <div class="row">
@@ -365,7 +381,7 @@
                                     起飛地
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].CITY_FROM).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_FROM.ToString()
                                 </div>
                             </div>
                             <div class="row">
@@ -373,14 +389,16 @@
                                     抵達地
                                 </div>
                                 <div class="col-xs-6 text-right pr-0">
-                                    @Html.DisplayFor(model => model.orderinfomation_result.Data.OrderTraffic[1].CITY_TO).ToString()
+                                    @Model.orderinfomation_result.Data.OrderTraffic[i].CNAME_TO.ToString()
                                 </div>
                             </div>
                         </div>
                     </div>
+                       
+                    }
                 </div>
 
-
+               
 
 
 
