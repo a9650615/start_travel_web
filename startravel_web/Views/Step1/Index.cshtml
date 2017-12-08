@@ -79,15 +79,20 @@
 
 
             @{
-                DateTime igrptraffic_s = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                /*DateTime igrptraffic_s = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_s_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_s_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                */
                 int transfer_all_count = Model.grpproductdetail_result.Data.TrafficList.Count;
                 int transfer_times_half = transfer_all_count / 2;
                 int transfer_times = transfer_times_half - 1;
+
+                DateTime igrptraffic_s = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime igrptraffic_e = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[transfer_all_count-1].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                
                 
               }
 
