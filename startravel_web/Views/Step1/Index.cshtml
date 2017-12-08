@@ -85,7 +85,9 @@
                 DateTime igrptraffic_s_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_d = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].depart_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e_a = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].arrive_time).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
-
+                int transfer_all_count = Model.grpproductdetail_result.Data.TrafficList.Count;
+                int transfer_times_half = transfer_all_count / 2;
+                int transfer_times = transfer_times_half - 1;
                 
               }
 
@@ -99,15 +101,65 @@
                     @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NAME).ToString()))
                     <div class="orderInfo-block-1">
                         <div>行程日期｜</div>
-                        <div>@igrptraffic_s.ToString("MM/dd") (@igrptraffic_s.ToString("ddd")) ～ @igrptraffic_e.ToString("MM/dd") (@igrptraffic_e.ToString("ddd")) </div>
+                        <div>@igrptraffic_s.ToString("MM/dd(ddd)")～@igrptraffic_e.ToString("MM/dd(ddd)")</div>
                     </div>
                     <div class="orderInfo-block-1">
                         <div>交通資訊｜</div>
                         <div>
                             航班參考<br>
-                            去程：@igrptraffic_s_d.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].city_from_name).ToString() @igrptraffic_s_a.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].city_to_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].air_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].air_no).ToString() <br>
-                            回程：@igrptraffic_e_d.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].city_from_name).ToString() @igrptraffic_e_a.ToString("HH:mm") @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].city_to_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].air_name).ToString() @Html.DisplayFor(model => model.igrptrafficinfo_result.Data[1].air_no).ToString()
+                            @for (int j = 0; j < transfer_times_half; j = j + 1)
+                            {
 
+
+                                DateTime DATE_AT_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                DateTime DEPARRT_TIME_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                DateTime ARRIVE_TIME_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                string AIR_NAME_s = Model.grpproductdetail_result.Data.TrafficList[j].AIR_NAME.ToString();
+                                string FLY_NO_s = Model.grpproductdetail_result.Data.TrafficList[j].FLY_NO.ToString();
+                                string CITY_FROM_s = Model.grpproductdetail_result.Data.TrafficList[j].CITY_FROM_NAME.ToString();
+                                string CITY_TO_s = Model.grpproductdetail_result.Data.TrafficList[j].CITY_TO_NAME.ToString();
+
+
+                                if (j == 0)
+                                {
+
+                                    <font>去程:@DEPARRT_TIME_s.ToString("HH:mm") @CITY_FROM_s @ARRIVE_TIME_s.ToString("HH:mm") @CITY_TO_s @AIR_NAME_s @FLY_NO_s</font>
+                                }
+                                else
+                                {
+                                    <br>　　@:轉機:@CITY_FROM_s <br>
+                                    <font>　　@DEPARRT_TIME_s.ToString("HH:mm") @CITY_FROM_s @ARRIVE_TIME_s.ToString("HH:mm") @CITY_TO_s @AIR_NAME_s @FLY_NO_s</font>
+                                }
+
+                            }
+
+                            @for (int j= transfer_times_half; j< transfer_all_count; j = j + 1)
+                            {
+
+
+                                DateTime DATE_AT_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                DateTime DEPARRT_TIME_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                DateTime ARRIVE_TIME_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[j].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                                string AIR_NAME_e = Model.grpproductdetail_result.Data.TrafficList[j].AIR_NAME.ToString();
+                                string FLY_NO_e = Model.grpproductdetail_result.Data.TrafficList[j].FLY_NO.ToString();
+                                string CITY_FROM_e = Model.grpproductdetail_result.Data.TrafficList[j].CITY_FROM_NAME.ToString();
+                                string CITY_TO_e = Model.grpproductdetail_result.Data.TrafficList[j].CITY_TO_NAME.ToString();
+
+
+                                if (j == transfer_times_half)
+                                {
+                                    <br>
+                                    <br>
+                                    <font>回程:@DEPARRT_TIME_e.ToString("HH:mm") @CITY_FROM_e @ARRIVE_TIME_e.ToString("HH:mm") @CITY_TO_e @AIR_NAME_e @FLY_NO_e</font>
+                                }
+                                else
+                                {
+                                    <br>　　@:轉機:@CITY_FROM_e <br>
+                                    <font>　　@DEPARRT_TIME_e.ToString("HH:mm") @CITY_FROM_e @ARRIVE_TIME_e.ToString("HH:mm") @CITY_TO_e @AIR_NAME_e @FLY_NO_e</font>
+                                }
+
+                            }
+                              
                         </div>
                     </div>
                     <div class="orderInfo-block-1">
