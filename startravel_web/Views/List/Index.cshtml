@@ -820,7 +820,7 @@
      <script>
          /* cahgne page indicator */
          let show = 5;
-         let page = Math.ceil(@((Search_result_total / Search_result_pagesize)+1) / 5);
+         let page = Math.ceil(@Search_result_currentpage / 5);
          console.log(page)
          let totalLength = $('.page').length
          let maxPage = Math.ceil(totalLength/5)
