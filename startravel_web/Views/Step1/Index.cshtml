@@ -701,10 +701,17 @@
                 let hasAdult = false
                 let totalNum = 0
                 let noBed = 0
+                let adultHasBed = 0
                 let pass = true
-                $('.rooms[data-qtya=1][data-qtyc=0]').each(function() {
+                $('.rooms[data-qtyc=0]').each(function() {
                     if($(this).find('select').val()!="0") {
-                        noBed++
+                        noBed+=parseInt($(this).find('select').val())
+                    }
+                })
+
+                $('.rooms[data-qtya=1]').each(function() {
+                    if($(this).find('select').val()!="0") {
+                        adultHasBed+=parseInt($(this).find('select').val())
                     }
                 })
 
@@ -717,11 +724,13 @@
                         hasAdult = true
                     }
                 })
+
+                console.log(noBed, adultHasBed)
                 if (!hasAdult) {
                     alert("至少需一位成人")
                     pass = false
-                } else if (noBed > 1) {
-                    alert("成人最多只能帶一個不佔床")
+                } else if (noBed > adultHasBed) {
+                    alert("不占床人數須小於成人占床數")
                     pass = false
                 } else if (totalNum > leftAllNum) {
                     alert("剩餘訂購人數不足")
