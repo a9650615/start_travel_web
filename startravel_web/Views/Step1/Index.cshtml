@@ -324,14 +324,14 @@
                 var item = Model.grppriceinfo_result.Data[i];
                 foreach (var item_s in item.Role_Type)
                 {
-                     ii++;
+                    ii++;
                 <div class="gray-block">
                     @Html.DisplayFor(modelitem => item.Category_name)
                 </div>
                 <div class="order-mobile">
                     <form>
                         
-                        <div class="row">
+                        <div  class="rooms row" data-qtya="@item_s.COND_QTYA" data-qtyb="@item_s.COND_QTYB" data-qtyc="@item_s.COND_QTYC">
                             <div class="col-xs-5 text-right pt-10 pb-10">
                                 入住人數
                             </div>
