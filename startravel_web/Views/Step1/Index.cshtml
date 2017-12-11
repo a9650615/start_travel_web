@@ -325,16 +325,30 @@
              @for (i = 0; i < Model.grppriceinfo_result.Data.Count;i=i+1 )
             {
                 var item = Model.grppriceinfo_result.Data[i];
+                int header_counter = 0;
                 foreach (var item_s in item.Role_Type)
                 {
                     ii++;
-                <div class="gray-block">
-                    @Html.DisplayFor(modelitem => item.Category_name)
-                </div>
+                    if (header_counter == 0) { 
+                    <div class="gray-block">
+                        @Html.DisplayFor(modelitem => item.Category_name)
+                    </div>
+                    }
+                    header_counter++;
                 <div class="order-mobile">
                     <form>
                         
-                        <div  class="rooms row" data-qtya="@item_s.COND_QTYA" data-qtyb="@item_s.COND_QTYB" data-qtyc="@item_s.COND_QTYC">
+                       
+                        <div class="row">
+                            <div class="col-xs-5 text-right">
+                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / 含稅售價
+                            </div>
+                            <div class="col-xs-7">
+                                <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("#,#")</span>元
+                            </div>
+                        </div>
+                        
+                        <div class="rooms row" data-qtya="@item_s.COND_QTYA" data-qtyb="@item_s.COND_QTYB" data-qtyc="@item_s.COND_QTYC">
                             <div class="col-xs-5 text-right pt-10 pb-10">
                                 入住人數
                             </div>
@@ -352,17 +366,7 @@
                                     <option value="9">9人</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-5 text-right">
-                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / 含稅售價
-                            </div>
-                            <div class="col-xs-7">
-                                <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("#,#")</span>元
-                            </div>
-                        </div>
-                        
-                        
+                        </div> 
                     </form>               
                 </div>
                 }
