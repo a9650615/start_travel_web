@@ -269,7 +269,10 @@
 
                 DateTime igrptraffic_s = DateTime.ParseExact( Model.grpproductdetail_result.Data.TrafficList[0].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime igrptraffic_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[transfer_times_half].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                
+                string igrptraffic_ss = igrptraffic_s.ToString("yyyy/MM/dd(ddd)");
+                igrptraffic_ss = igrptraffic_ss.Replace("週", "");
+                string igrptraffic_es = igrptraffic_e.ToString("yyyy/MM/dd(ddd)");
+                igrptraffic_es = igrptraffic_es.Replace("週", "");
             }
 
             <!-- 行程3點 -->
@@ -280,8 +283,8 @@
                             <img class="img-responsive" src="~/Content/images/icon-calendar.png" alt="">
                         </div>
                         <div class="travel-3block-text mt-20">
-                            出發：@igrptraffic_s.ToString("yyyy/MM/dd(ddd)")<br>
-                            回程：@igrptraffic_e.ToString("yyyy/MM/dd(ddd)")
+                            出發：@igrptraffic_ss<br>
+                            回程：@igrptraffic_es
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4">

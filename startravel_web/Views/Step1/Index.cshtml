@@ -91,8 +91,11 @@
                 int transfer_times = transfer_times_half - 1;
 
                 DateTime igrptraffic_s = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[0].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime igrptraffic_e = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[transfer_all_count-1].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                
+                DateTime igrptraffic_e = DateTime.ParseExact(Html.DisplayFor(model => model.igrptrafficinfo_result.Data[transfer_all_count - 1].date_at).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                string igrptraffic_ss = igrptraffic_s.ToString("MM/dd(ddd)");
+                igrptraffic_ss = igrptraffic_ss.Replace("週", "");
+                string igrptraffic_es = igrptraffic_e.ToString("MM/dd(ddd)");
+                igrptraffic_es = igrptraffic_es.Replace("週", "");
                 
               }
 
@@ -106,7 +109,7 @@
                     @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NAME).ToString()))
                     <div class="orderInfo-block-1">
                         <div>行程日期｜</div>
-                        <div>@igrptraffic_s.ToString("MM/dd(ddd)")～@igrptraffic_e.ToString("MM/dd(ddd)")</div>
+                        <div>@igrptraffic_ss～@igrptraffic_es</div>
                     </div>
                     <div class="orderInfo-block-1">
                         <div>交通資訊｜</div>

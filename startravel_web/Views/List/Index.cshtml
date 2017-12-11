@@ -159,7 +159,10 @@
             string grplist_city_to = Model.city_to_name;
             int Search_result_pagesize = Int32.Parse(Html.DisplayFor(model => model.grplist_postdata.PageSize).ToString());
             int Search_result_currentpage = Int32.Parse(Html.DisplayFor(model => model.grplist_postdata.CurrentPage).ToString());
-
+            string grplist_s_data_ss = grplist_s_data_s.ToString("yyyy/MM/dd(ddd)");
+            string grplist_s_data_es = grplist_s_data_e.ToString("yyyy/MM/dd(ddd)");
+            grplist_s_data_ss = grplist_s_data_ss.Replace("週", "");
+            grplist_s_data_es = grplist_s_data_es.Replace("週", "");
         }
 
     
@@ -172,7 +175,7 @@
             <div class="star-container">
                 <div class="searchLine">
                     <i class="glyphicon glyphicon-search"></i>
-                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
+                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_ss~@grplist_s_data_es
                     <a class="searchMoreBtn" href="javascript:;" title="">更換條件</a>
                 </div>
             </div>
@@ -201,13 +204,15 @@
                             @Html.DropDownList("travelregionlist_item", (IEnumerable<SelectListItem>)ViewBag.grptravelregionlistItems, new { id = "travelregionlist_item", onchange = "" }) 
                             <input type="hidden" id="search_city_to" name="search_city_to" value="">       
                                              
+                            
+
                         </div>
                       </div>
 
                     <div class="col-xs-12 col-sm-4">
                         <div class="form-group">
                             <label>出發區間</label>
-                            <input class="form-control" type="text" id="choose-date" value="@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~@grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")">
+                            <input class="form-control" type="text" id="choose-date" value="@grplist_s_data_ss~@grplist_s_data_es">
                             <input type="hidden" id="search_choose_date_s" name="search_choose_date_s" value="">
                             <input type="hidden" id="search_choose_date_e" name="search_choose_date_e" value="">
                              
@@ -616,7 +621,8 @@
                                                     var item_grplist= item.GrpList[j];
                                                     string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
                                                     DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                                             
+                                                    string current_day_s = current_day.ToString("MM/dd(ddd)");
+                                                    current_day_s = current_day_s.Replace("週", "");
 
                                                     //add transferinfo 
                                                     int transfer_all_count = item_grplist.FlyList.Count;
@@ -670,12 +676,12 @@
                                                                      
                                                           @{
                                                              if (int_QTY_KK > 0) {
-                                                           <a  title="">@current_day.ToString("MM/dd(ddd)")</a> @:可報 @int_QTY_KK 位
+                                                           <a  title="">@current_day_s</a> @:可報 @int_QTY_KK 位
                                                                if(item_grplist.DEPARTURE_FLAG.Equals("1"))
                                                                { 
                                                                <a class="ensure" href="javascript:;" title="">保出</a>
                                                                 }
-                                                               }else{ <a href="detail.html" title="">@current_day.ToString("MM/dd(ddd)")</a>  @: 關團
+                                                               }else{ <a href="detail.html" title="">@current_day_s</a>  @: 關團
                                                                 } 
                                                                 } </div>
                                                                 @if(transfer_times>0)
@@ -711,10 +717,12 @@
                                                       var item_grplist_s = item.GrpList[n];
                                                       string string_s_date = Html.DisplayFor(modelitem => item_grplist_s.S_DATE).ToString();
                                                     DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-
+                                                    string current_day_s = current_day.ToString("MM/dd(ddd)");
+                                                    current_day_s = current_day_s.Replace("週", "");
+                                                    
                                                    if (n == (item.GrpList.Count - 1))
                                                    {
-                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>
+                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>
                                                        if (item.GrpList.Count > 3)
                                                        {
                                                         <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
@@ -722,7 +730,7 @@
                                                    }
                                                    else
                                                    {
-                                                         <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>@:|
+                                                         <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
                                                     }
                                                     
                                                     
@@ -1283,8 +1291,9 @@
                     startDate = new Date(new Date().toDateString())
                     $('#widgetCalendar').DatePickerSetDate(startDate, true)
                 }
-                console.log(formated)
+
                 let format = $('#widgetCalendar').DatePickerGetDate(true);
+                console.log(format)
                 $('#choose-date').val(format.join('~'));
             }
 
@@ -1692,8 +1701,8 @@
             <div class="mobile-searchLine" >
                 <a href="javascript:;" onclick="tweak()" title="" >
                     <i class="glyphicon glyphicon-search"></i>
-                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_s.ToString("yyyy/MM/dd(ddd)")~<br />
-                    @grplist_s_data_e.ToString("yyyy/MM/dd(ddd)")
+                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_ss~<br />
+                    @grplist_s_data_es
                 </a>
             </div>
 
@@ -1769,6 +1778,8 @@
                                             var item_grplist = item.GrpList[j];
                                             string string_s_date = Html.DisplayFor(modelitem => item_grplist.S_DATE).ToString();
                                             DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                            string current_day_s = current_day.ToString("MM/dd(ddd)");
+                                            current_day_s = current_day_s.Replace("週", "");
                                             // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                             int transfer_all_count = item_grplist.FlyList.Count;
                                             int transfer_times_half = transfer_all_count / 2;
@@ -1820,7 +1831,7 @@
                                                     @{
                                                         if (int_QTY_KK > 0)
                                                         {
-                                                            <a  title="">@current_day.ToString("MM/dd(ddd)")</a>  @:可報 @int_QTY_KK 位
+                                                            <a  title="">@current_day_s</a>  @:可報 @int_QTY_KK 位
                                                     if (item_grplist.DEPARTURE_FLAG.Equals("1"))
                                                             {
                                                                 <a class="ensure" href="javascript:;" title="">保出</a>
@@ -1868,15 +1879,18 @@
                                     var item_grplist_s = item.GrpList[n];
                                     string string_s_date = Html.DisplayFor(modelitem => item_grplist_s.S_DATE).ToString();
                                     DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-
+                                    string current_day_s = current_day.ToString("MM/dd(ddd)");
+                                    current_day_s = current_day_s.Replace("週", "");
+                                    
+                                    
                                     if (n == (item.GrpList.Count - 1))
                                     {
-                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day.ToString("MM/dd(ddd)")</a>
+                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day_s</a>
                                     }
                                     else
 
                                     {
-                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day.ToString("MM/dd(ddd)")</a>@:|
+                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
                             }
                                 }
                             </div>
