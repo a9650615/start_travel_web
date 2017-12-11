@@ -424,7 +424,7 @@
                    <input type="hidden" id="which_button" name="which_button" value="">
                     <div style="text-align: right;">
                         <a class="cancelSearch" href="javascript:;" title="">
-                            取消
+                            清除條件
                         </a>
                        <input type="submit" class="research" title="" onclick="research_button_click()" value="重新搜尋" />
                     </div>
@@ -1283,7 +1283,7 @@
                     startDate = new Date(new Date().toDateString())
                     $('#widgetCalendar').DatePickerSetDate(startDate, true)
                 }
-
+                console.log(formated)
                 let format = $('#widgetCalendar').DatePickerGetDate(true);
                 $('#choose-date').val(format.join('~'));
             }
