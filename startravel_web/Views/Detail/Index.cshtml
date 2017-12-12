@@ -895,7 +895,7 @@
                     </a>
                 </div>
             </div>
-
+            <input type="hidden" id="more_grp_no" name="more_grp_no" value="">
             <script>
     let get = parseInt('@(Model.window_open)')
     if (!isNaN(get)) {
@@ -946,8 +946,10 @@
                         let day = parseInt($(this).attr("class").replace("date-", "")) - start1
                         if (day <= end1 && day > 0){
                             let date_test=date[0];
-                             console.log(date_test)
+
                             let date_data = findGrpData(`${date[0]}${format(date[1])}${format(day)}`, data.Data.grp_date)
+                            //  console.log(`${date[0]}${format(date[1])}${format(day)}`)
+                            let dateString = date[0] + '' + format(date[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
                                 $(this).attr('data-active', 'active').html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${ date_data.S_date}">看更多團</a>`:""}`)
@@ -964,6 +966,7 @@
                         let day = parseInt($(this).attr("class").replace("date-", "")) - start2
                         if (day <= end2 && day > 0){
                             let date_data = findGrpData(`${nextDate[0]}${format(nextDate[1])}${format(day)}`, data.Data.grp_date)
+                                 let dateString = nextDate[0]+ '' + format(nextDate[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
                                 $(this).attr('data-active', 'active').html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${date_data.S_date}">看更多團</a>`:""}`)
@@ -988,20 +991,20 @@
 
                 function format(num) {
                     return num<10 ? "0" + num: num
-                    }
+                }
 
                 function getDate(date) {
                     let lastDate = autoChangeYearDate(date[0], date[1])
                     let nextDate = autoChangeYearDate(date[0], date[1]+2)
 
                     return fetch(`Detail/calendar_reset?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&s_month=${lastDate[0]}${format(lastDate[1])}&e_month=${nextDate[0]}${format(nextDate[1])}`, {
-    method: 'GET'
+                            method: 'GET'
     })
                     .then(function(response) {
                         return response.json();
                         })
 
-                        }
+    }
 
                 $(document).ready(() => {
                     $('.lightbox-moreGroup-open').bind('click', more_lightBox);
@@ -1020,8 +1023,7 @@
                             updateFullDate(res, autoChangeYearDate(nowYear, nowMonth))
                         })
                         console.log(nowYear, nowMonth)
-
-                })
+                    })
                     $('#date-1-go-back').parent().click((e) =>e.preventDefault())
                     $('#date-2-go-next').parent().click((e) =>e.preventDefault())
                     $('#date-1-go-next').click(function(e) {
@@ -1042,38 +1044,39 @@
                         updateHeader(nowYear, nowMonth)
                         getDate(changedDate).then((res) => {
                             updateFullDate(res, autoChangeYearDate(nowYear, nowMonth))
-                        })
+                         })
                         console.log(nowYear, nowMonth)
                     })
                 })
 
                 function more_lightBox () {
                      $('.lightbox-moreGroup').fadeIn();
-                      
+                      var grp_s_date= $("#more_grp_no").val();
+                          console.log(grp_s_date);
                      $.ajax({
-                               url: 'Detail/more_lightingbox_click?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&date=@(Model.grpproductdetail_result.Data.S_DATE)',
-                               method: 'get',
-                              success: function(req) {
-		                          //console.log(req)
-                                let data = JSON.parse(req)
-                                data = data.Data
-                                      
+                                       url: 'Detail/more_lightingbox_click?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&date='+grp_s_date,
+                                   method: 'get',
+                                   success: function(req) {
+		                              //console.log(req)
+                                     let data = JSON.parse(req)
+                                     data = data.Data
 
-                                     // prod_name
-                                    $('.content-wrapper').html('');
-                                   // console.log(data.Data[0])
-                                   $('.prod_name').html(data[0].PROD_NAME);
 
-                                    var s_date=data[0].S_DATE;
-                                   //  var s_date_s=s_date.substr(0,4)+"/"+s_date.substr(4,2)+"/"s_date.substr(6,2);
-                                   $('.prod_date').html(s_date);
-                                       
-                                for(let i in data) {
+		                                  // prod_name
+                                         $('.content-wrapper').html('');
+		                                  // console.log(data.Data[0])
+                                        $('.prod_name').html(data[0].PROD_NAME);
+
+                                         var s_date=data[0].S_DATE;
+		                                  //  var s_date_s=s_date.substr(0,4)+"/"+s_date.substr(4,2)+"/"s_date.substr(6,2);
+                                        $('.prod_date').html(s_date);
+
+                                     for(let i in data) {
                                       $('.content-wrapper').append("");
-                                }
-		                              //$('.lightbox-moreGroup .prod_name').html(data[0].PROD_NAME);
-		                      }
-                     })
+                                      }
+		                                  //$('.lightbox-moreGroup .prod_name').html(data[0].PROD_NAME);
+		                              }
+                               })
 
 
 
@@ -1103,15 +1106,18 @@
 
                    function  more_get_grp_no(th){
 
-                       console.log(th);
-                    }
+                       //console.log(th);
+                       var grp_no_more=$(th).attr("id");
+                       //console.log(grp_no_more);
+                       $("#more_grp_no").val(grp_no_more);
+                   }
 
                    $('#transferForm').submit(function() {
 
                        console.log($('#action_temp').val());
 
                          return true;
-                    });
+                       });
 
             </script>
 
@@ -1131,7 +1137,7 @@
             </div>
 
             @{
-                /*DateTime DATE_AT_s = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                        /*DateTime DATE_AT_s = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DATE_AT).ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime DEPARRT_TIME_s = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].DEPARRT_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime ARRIVE_TIME_s = DateTime.ParseExact(Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].ARRIVE_TIME).ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                 string AIR_NAME_s = Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[0].AIR_NAME).ToString();
@@ -1148,9 +1154,9 @@
                 string CITY_FROM_e = Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[1].CITY_FROM).ToString();      
                 string CITY_TO_e = Html.DisplayFor(model => model.grpproductdetail_result.Data.TrafficList[1].CITY_TO).ToString();*/
 
-                //int transfer_all_count = Model.grpproductdetail_result.Data.TrafficList.Count;
-                //int transfer_times_half = transfer_all_count / 2;
-               // int transfer_times = transfer_times_half - 1;
+                                        //int transfer_all_count = Model.grpproductdetail_result.Data.TrafficList.Count;
+                                        //int transfer_times_half = transfer_all_count / 2;
+                                        // int transfer_times = transfer_times_half - 1;
                 
                 
             }
@@ -1170,8 +1176,8 @@
                         <p>
                             @for (i = 0; i < transfer_times_half; i = i + 1)
                             {
-                                 
-                               
+
+
                                 DateTime DATE_AT_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                                 DateTime DEPARRT_TIME_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                 DateTime ARRIVE_TIME_s = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
@@ -1179,20 +1185,20 @@
                                 string FLY_NO_s = Model.grpproductdetail_result.Data.TrafficList[i].FLY_NO.ToString();
                                 string CITY_FROM_s = Model.grpproductdetail_result.Data.TrafficList[i].CITY_FROM_NAME.ToString();
                                 string CITY_TO_s = Model.grpproductdetail_result.Data.TrafficList[i].CITY_TO_NAME.ToString();
-                              
+
 
                                 if (i == 0)
                                 {
                                     
                                   <font>  @DATE_AT_s.ToString("yyyy/MM/dd") @DEPARRT_TIME_s.ToString("HH:mm")-@(ARRIVE_TIME_s.ToString("HH:mm")) @AIR_NAME_s @FLY_NO_s @CITY_FROM_s→@CITY_TO_s</font>
-                                 }
+                                }
                                 else
                                 {
                                     <br> @CITY_FROM_s @:/ 轉機 <br>
                                   <font>  @DATE_AT_s.ToString("yyyy/MM/dd") @DEPARRT_TIME_s.ToString("HH:mm")-@(ARRIVE_TIME_s.ToString("HH:mm")) @AIR_NAME_s @FLY_NO_s @CITY_FROM_s→@CITY_TO_s</font>
                                 }
-                                       
-                               }
+
+                            }
                            </p>
                    </div>
                 </div>
@@ -1206,7 +1212,7 @@
                             {
 
 
-                                DateTime DATE_AT_e= DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                                DateTime DATE_AT_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].DATE_AT.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                                 DateTime DEPARRT_TIME_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].DEPARRT_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                 DateTime ARRIVE_TIME_e = DateTime.ParseExact(Model.grpproductdetail_result.Data.TrafficList[i].ARRIVE_TIME.ToString(), "HHmmss", System.Globalization.CultureInfo.InvariantCulture);
                                 string AIR_NAME_e = Model.grpproductdetail_result.Data.TrafficList[i].AIR_NAME.ToString();
@@ -1396,11 +1402,11 @@
                 <p class="travel-itinerary-icon">行程圖示說明：●下車照相 ◎入內參觀 ★特殊安排 ◆特別餐食 △特殊交通工具</p>
 
                 @{
-                    int data_list_number = 0;    
+                                            int data_list_number = 0;    
                 }
                 @foreach (var item in Model.grpproductdetail_result.Data.DateList)
                 {
-                    data_list_number=data_list_number+1;
+                    data_list_number = data_list_number + 1;
                  <!-- Day01 -->
                 <div class="travel-itinerary-day">
                     <div class="travel-itinerary-daycontent">
@@ -1461,9 +1467,9 @@
       
                            @{ data_list_number = 0; }
                          @foreach (var item in Model.grpproductdetail_result.Data.DateList)
-                        {
+                         {
                             <!-- Day01 -->
-                            data_list_number = data_list_number + 1;
+                             data_list_number = data_list_number + 1;
                             <div class="travel-itinerary-day">
                                 <div class="travel-itinerary-daycontent">
                                     <div class="travel-itinerary-title">
@@ -1524,7 +1530,7 @@
                     <div class="travel-optional-title">自費項目</div>
                     <div class="travel-optional-content">
                         
-                        @for (var k=0; k < Model.grpaddpurchase_result.Data.Count;k=k+1 )
+                        @for (var k = 0; k < Model.grpaddpurchase_result.Data.Count; k = k + 1)
                         {
                             var item = Model.grpaddpurchase_result.Data[k];
                             
@@ -1590,7 +1596,7 @@
                                 <div class="travel-optional-title">自費項目</div>
                                 <div class="travel-optional-content">
 
-                        @for (var k=0; k < Model.grpaddpurchase_result.Data.Count;k=k+1 )
+                        @for (var k = 0; k < Model.grpaddpurchase_result.Data.Count; k = k + 1)
                         {
                             var item = Model.grpaddpurchase_result.Data[k];      
                                     <div class="row mb-10">
@@ -1634,34 +1640,34 @@
 
             @{
                 
-                string DUEDAY_PAY_s=Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_PAY).ToString();
-                string DUEDAY_DOC_s = Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_DOC).ToString();
-                string current_daytime_30 = DateTime.Now.AddDays(15).ToString("yyyyMMdd");
+                        string DUEDAY_PAY_s = Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_PAY).ToString();
+                        string DUEDAY_DOC_s = Html.DisplayFor(model => model.grpproductdetail_result.Data.DUEDAY_DOC).ToString();
+                        string current_daytime_30 = DateTime.Now.AddDays(15).ToString("yyyyMMdd");
 
-                DateTime DUEDAY_PAY;
-                DateTime DUEDAY_DOC;
-                
-                if(DUEDAY_PAY_s.IsEmpty())
-                {
-                    DUEDAY_PAY = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                    DUEDAY_PAY = DateTime.ParseExact(DUEDAY_PAY_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                }
+                        DateTime DUEDAY_PAY;
+                        DateTime DUEDAY_DOC;
+
+                        if (DUEDAY_PAY_s.IsEmpty())
+                        {
+                            DUEDAY_PAY = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            DUEDAY_PAY = DateTime.ParseExact(DUEDAY_PAY_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        }
 
 
-                if (DUEDAY_DOC_s.IsEmpty())
-                {
-                    DUEDAY_DOC = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                     DUEDAY_DOC = DateTime.ParseExact(DUEDAY_DOC_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-                }
-                
-             
-                int max_tourer_d = int.Parse(Html.DisplayFor(model => model.grpproductdetail_result.Data.MAX_TOURER).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        if (DUEDAY_DOC_s.IsEmpty())
+                        {
+                            DUEDAY_DOC = DateTime.ParseExact(current_daytime_30, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            DUEDAY_DOC = DateTime.ParseExact(DUEDAY_DOC_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        }
+
+
+                        int max_tourer_d = int.Parse(Html.DisplayFor(model => model.grpproductdetail_result.Data.MAX_TOURER).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
             }
 
@@ -2014,13 +2020,13 @@
 
                                  @foreach (var item in Model.grppriceinfo_result.Data)
                                  {
-                                      foreach (var item_s in item.Role_Type)
-                                      {
-                                          if(item_s.Price!=0)
-                                          {
+                                     foreach (var item_s in item.Role_Type)
+                                     {
+                                         if (item_s.Price != 0)
+                                         {
                                              <td>@Html.DisplayFor(modelitem => item.Category_name)<br>@Html.DisplayFor(modelitem_s => item_s.Type_name)</td>
-                                          }
-                                      }
+                                         }
+                                     }
                                  }
                             </tr>
                             <tr>
@@ -2028,10 +2034,10 @@
                                 {
                                     foreach (var item_s in item.Role_Type)
                                     {
-                                         if(item_s.Price!=0)
-                                          {
+                                        if (item_s.Price != 0)
+                                        {
                                          <td>@item_s.Price.ToString("#,#")</td>
-                                          }
+                                        }
                                     }
                                 }
                                
