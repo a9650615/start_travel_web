@@ -1410,9 +1410,10 @@
         }
 
         function to_page(index) {
-            $('#research_page').val(index);
-            $('.star-pager').find('.active').children('a')
-            page_button_click($('.star-pager').find('.active').children('a'));
+            //$('#research_page').val(index);
+            //$('.star-pager').find('.active').children('a')
+            console.log($('.star-pager .page').eq(index).children('a'))
+            page_button_click($('.star-pager .page').eq(index-1).children('a'));
             //$('#searchForm').submit();
         }
 
