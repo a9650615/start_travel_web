@@ -8,12 +8,6 @@
 
 /* 搜尋結果頁================================================================ */
 
-.date {
-    cursor:pointer;
-
-
-}
-
 .changer.disable > a {
     cursor: not-allowed;
     border: 1px solid #bbbbbb !important;
@@ -97,8 +91,27 @@
 	text-decoration: none;
 }
 
+/* date table td*/
+.date {
+    cursor: default;
+}
+.travel-calendar table td[data-active=active] a, .travel-calendar table td[data-active=active] span.date {
+    color: black !important;
+}
+.travel-calendar table td[data-active=active] {
+    background: #dcbfef;
+    cursor: pointer;
+    transition: background .5s ease;
+}
 
+.travel-calendar table td[data-active=active]:hover {
+    color: white !important;
+    background: #7e3aaa;
+}
 
+.travel-calendar table td[data-active=active]:hover a {
+    color: white !important;
+}
 
 /* Date Picker Mobile*/
 @media screen and (max-width: 767px) {
@@ -1747,7 +1760,7 @@ div.datepicker a:hover {
 	line-height: 20px;
 }
 .travel-calendar table>tbody>tr>td .date.active{
-	color: #000000;
+	/*color: #000000;*/
 }
 .travel-calendar table>tbody>tr>td .price{
 	display: block;
