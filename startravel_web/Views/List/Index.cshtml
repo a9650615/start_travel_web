@@ -457,8 +457,15 @@
                         total_page = (Search_result_total / Search_result_pagesize) + 1;
                     }
                    <!-- 搜尋比數與排列 -->
-
-
+                <div class="content-mobile">
+                    <div class="mobile-searchLine">
+                        <a href="javascript:;" onclick="tweak()" title="">
+                            <i class="glyphicon glyphicon-search"></i>
+                            @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_ss~<br />
+                            @grplist_s_data_es
+                        </a>
+                    </div>
+                </div>
                 <input type="hidden" id="order_type_1" name="order_type_1" value="">
                 <div class="conditions star-container">
                     <div class="row">
@@ -1713,13 +1720,7 @@
         {
         <!-- 手機版============================================================================= -->
         <div class="content content-white content-mobile">
-            <div class="mobile-searchLine" >
-                <a href="javascript:;" onclick="tweak()" title="" >
-                    <i class="glyphicon glyphicon-search"></i>
-                    @(grplist_city_from)–@(grplist_city_to)／出發區間：@grplist_s_data_ss~<br />
-                    @grplist_s_data_es
-                </a>
-            </div>
+            
 
             @for (int i = 0; i < Model.grplist_result.Data.prod.Count; i = i + 1)
             {
