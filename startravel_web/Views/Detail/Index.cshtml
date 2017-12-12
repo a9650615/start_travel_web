@@ -952,7 +952,7 @@
             console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
             console.log(val.Grp)
             if (val.S_date.includes(dateStr)) {
-                let ele = $(`<div class="list-style"><span class="date" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${val.Grp[0].Grp_no}')">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${val.S_date}">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+                let ele = $(`<div class="list-style"><span class="date" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${val.Grp[0].Grp_no}')">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${val.S_date}">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?`<span class='quota text-green'>關團</span>`:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
                 if(val.Qty_kk == 0 && val.Qty_hl <= 0) {
                     $(ele).prop('onclick', null)
                 }
@@ -981,7 +981,7 @@
                             let dateString = date[0] + '' + format(date[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${ date_data.S_date}">看更多團</a>`:""}`)
+                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"<span class='quota text-green'>關團</span>":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${ date_data.S_date}">看更多團</a>`:""}`)
                                 if (dd.Qty_kk == 0 && dd.Qty_hl <= 0)
                                     $(this).find('.price').prop('onclick', null)
                             }
@@ -999,7 +999,7 @@
                                  let dateString = nextDate[0]+ '' + format(nextDate[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${date_data.S_date}">看更多團</a>`:""}`)
+                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?`<span class="quota text-green">關團</span>`:`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${date_data.S_date}">看更多團</a>`:""}`)
                                 if (dd.Qty_kk == 0 && dd.Qty_hl <= 0)
                                     $(this).find('.price').prop('onclick', null)
                                 }
