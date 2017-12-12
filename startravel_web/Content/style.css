@@ -96,21 +96,16 @@
     cursor: default;
 }
 .travel-calendar table td[data-active=active] a, .travel-calendar table td[data-active=active] span.date {
-    color: black !important;
+    color: #601986 !important;
 }
 .travel-calendar table td[data-active=active] {
-    background: #dcbfef;
     cursor: pointer;
-    transition: background .5s ease;
+    transition: all .5s ease;
 }
 
 .travel-calendar table td[data-active=active]:hover {
-    color: white !important;
-    background: #7e3aaa;
-}
-
-.travel-calendar table td[data-active=active]:hover a {
-    color: white !important;
+    border: #601986 solid 3px;
+    box-sizing: border-box;
 }
 
 /* Date Picker Mobile*/
