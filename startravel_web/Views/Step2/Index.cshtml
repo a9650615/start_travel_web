@@ -104,8 +104,8 @@
                 string[] psub_list = Html.DisplayFor(model => model.psub_list).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                 string[] insu_list = Html.DisplayFor(model => model.insu_list).ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
-             
 
+                string[] member_list = Model.member_info.ToString().Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
             }
 
@@ -496,6 +496,7 @@
             <input type="hidden" id="prod_no_hidden" name="prod_no_hidden" value="@Model.grpproductdetail_result.Data.PROD_NO">
             <input type="hidden" id="grp_no_hidden" name="grp_no_hidden" value="@Model.grpproductdetail_result.Data.GRP_NO">
             <input type="hidden" id="member_no_hidden" name="member_no_hidden" value="@Model.member_number">
+            <input type="hidden" id="member_id_no_hidden" name="member_id_no_hidden" value="@member_list[2]">
         </div>
     </div>
     <div class="content content-gray">

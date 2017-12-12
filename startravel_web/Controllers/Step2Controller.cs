@@ -297,7 +297,7 @@ namespace startravel_web.Controllers
                     }
 
 
-                    string ary_member_info = loginverify_source.Data.MEMBER_NAME + "," + loginverify_source.Data.EMAIL;
+                    string ary_member_info = loginverify_source.Data.MEMBER_NAME + "," + loginverify_source.Data.EMAIL + "," + loginverify_source.Data.ID_NO;
 
 
                     step2_view_return_data step2_view_data = new step2_view_return_data
@@ -439,7 +439,8 @@ namespace startravel_web.Controllers
                                             string insu_array_hidden,
                                             string prod_no_hidden,
                                             string grp_no_hidden,
-                                            string member_no_hidden
+                                            string member_no_hidden,
+                                            string member_id_no_hidden
 
                 )
             {
@@ -725,7 +726,7 @@ namespace startravel_web.Controllers
                      ORDER_CONTACT_NO =member_no_hidden,
                      ORDER_CONTACT_TYPE =null,
                      ORDER_CONTACT_NAME =contact_c_first_name+""+contact_c_last_name,
-                     ORDER_CONTACT_ID = "A180352504",
+                     ORDER_CONTACT_ID = member_id_no_hidden,
                      ORDER_CONTACT_TEL1 =contact_h_phone,
                      ORDER_CONTACT_TEL2 =contact_o_phone,
                      ORDER_CONTACT_MOBIL = contact_mobile,

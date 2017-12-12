@@ -1710,17 +1710,13 @@
                     (處理規定說明)<br>
                     1.成行人數 : @min_tourer_d.ToString()人以上成團     本團最大團員數 : @max_tourer_d.ToString()人<br>
                     2.訂金金額 : @pre_amt_d 元<br>
-                    3.訂金繳交期限 : 訂單成立後 @Html.DisplayFor(model => model.grpproductdetail_result.Data.PRE_DAY).ToString()日<br>
-                    4.尾款繳交期限 : @DUEDAY_PAY.ToString("yyyy/MM/dd")<br>
-                    5.證件繳交期限 : @DUEDAY_DOC.ToString("yyyy/MM/dd")<br>
-                    <br>
-                    (費用包含)<br>
-                        @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_CONTRAIN).ToString()))<br>
+                    3.尾款繳交期限 : @DUEDAY_PAY.ToString("yyyy/MM/dd")<br>
+                    4.證件繳交期限 : @DUEDAY_DOC.ToString("yyyy/MM/dd")<br>
                     <br>
                     (費用不包含)<br>
                         @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_NOT_CONTRAIN).ToString()))<br>
                     <br>
-                    (其他)<br>
+                    (備註)<br>
                     @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NOTE).ToString()))<br>
                 </p>
             </div>
@@ -1751,9 +1747,6 @@
                                 4.證件繳交期限 : @DUEDAY_DOC.ToString("yyyy/MM/dd")<br>
                             </p>
                             <p>
-                                <br>
-                                (費用包含)<br>
-                                    <p>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_CONTRAIN).ToString()))<br></p>
                                 <br>
                                 (費用不包含)<br>
                                    <p>@Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.FEE_NOT_CONTRAIN).ToString()))</p>
