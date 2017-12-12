@@ -95,7 +95,7 @@
 .date {
     cursor: default;
 }
-.travel-calendar table td[data-active=active] a, .travel-calendar table td[data-active=active] span.date {
+.travel-calendar table td[data-active=active] a, .travel-calendar table td[data-active=active][data-select=select] span {
     color: #601986 !important;
 }
 .travel-calendar table td[data-active=active] {
@@ -104,7 +104,7 @@
 }
 
 .travel-calendar table td[data-active=active]:hover {
-    border: #601986 solid 3px;
+    border: #aaa solid 3px;
     box-sizing: border-box;
 }
 
