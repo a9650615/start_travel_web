@@ -793,7 +793,7 @@
                 <!-- 頁碼 -->
                     <input type="hidden" id="research_page" name="research_page" value="">
                    <ul class="star-pager pager hidden-xs">
-                    <li><a href="javascript:;" onclick="left_button_click()"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                    <li class="changer go-back"><a href="javascript:;" onclick="left_button_click()"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
 
                  @for (i = 0; i < total_page;i=i+1 ){
                       if(Search_result_currentpage==i+1)
@@ -805,7 +805,7 @@
                         <li class="page page_@(i+1)"> <a href="javascript:;" onclick="page_button_click(this)">@(i + 1)</a></li>
                       }
                  }
-                    <li><a href="javascript:;" onclick="right_button_click()"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                    <li class="changer go-next"><a href="javascript:;" onclick="right_button_click()"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
                 </ul>
 
                   <script>
@@ -853,36 +853,51 @@
 	                	</div>	
 	                </div>
 
-          }
-      
+                                }
+
      <script>
          /* cahgne page indicator */
          let show = 5;
-         let page = Math.ceil(@Search_result_currentpage / 5);
-         console.log(page)
+         let startPage = @Search_result_currentpage;
+         //console.log(page)
          let totalLength = $('.page').length
-         let maxPage = Math.ceil(totalLength/5)
          function update_page() {
-             let end = (page * show);
-             let start = (end - show + 1) < 1? 1: (end-show + 1)
-            $('.page').hide()
-             $('.page').each(function() {
-                 for(let i = start; i<=end; i++) {
-                     $('.page').eq(i-1).show()
-                 }
-             })
+             let start = (startPage - Math.floor(show/2)) < 1? 1: (startPage - Math.floor(show/2))
+             let end = (start+show-1);
+             if (end >= totalLength) {
+                 start -= (end - totalLength)
+                 end = totalLength
+             }
+             $('.page').hide().removeClass('active').eq(startPage-1).addClass('active')
+             for(let i = start; i<=end; i++) {
+                 $('.page').eq(i-1).show()
+             }
+
+             if (startPage >= totalLength) {
+                 $('.go-next').addClass('disable')
+             }
+
+             if (startPage <= 1) {
+                 $('.go-back').addClass('disable')
+             }
          }
 
          function left_button_click() {
-             if (page > 1)
-                 page --
-             update_page()
+             $('.go-back').removeClass('dsiable')
+             if (startPage > 1)
+                 //startPage--
+                 to_page(--startPage)
+             //    startPage --
+             //update_page()
          }
 
          function right_button_click() {
-             if (page < maxPage)
-                 page ++
-             update_page()
+             $('.go-next').removeClass('dsiable')
+             if (startPage < totalLength)
+                 //startPage++
+                 to_page(++startPage)
+             //    startPage ++
+             //update_page()
          }
 
          update_page()
@@ -1389,7 +1404,7 @@
 
         function to_page(index) {
             $('#research_page').val(index);
-            $('.star-pager').find('.active').children('a').text(index)
+            $('.star-pager').find('.active').children('a')
             page_button_click($('.star-pager').find('.active').children('a'));
             //$('#searchForm').submit();
         }
