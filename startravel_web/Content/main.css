@@ -683,8 +683,8 @@ html .ui-button.ui-state-disabled:active {
 	}
 	.lightboxOpen .lightbox-box .lightbox-content{
 		max-height: auto;
-		height: auto;
-		overflow: visible;
+		height: calc(100% - 53px);
+		overflow: auto;
 	}
 }
 .lightboxOpen .lightbox-box p a{
