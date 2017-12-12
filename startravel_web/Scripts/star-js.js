@@ -277,7 +277,7 @@ $(function(){
     if ($('#travel-traffic').position())
     $(window).bind('scroll resize', function () {
 　　var $this = $(this);
-　　var $this_Top=$this.scrollTop();
+　　var $this_Top=$this.scrollTop() + 100;
 
 　　//當高度小於100時，關閉區塊 
 　　if($this_Top < 850){
@@ -286,41 +286,42 @@ $(function(){
 　　if($this_Top > 850){
 　　　$('#travel-innerMenu-fixed').stop().animate({top:"0px"});
 　　}
-    
-　　if($this_Top > $('#travel-traffic').position().top){
-　　　$('.fixed-menu-1').addClass('active');
-　　}
-    if($this_Top > $('#travel-characteristics').position().top ){
-　　　$('.fixed-menu-1').removeClass('active');
-　　　$('.fixed-menu-2').addClass('active');
-    }
-    if ($this_Top > $('#travel-itinerary').position().top) {
-　　　$('.fixed-menu-2').removeClass('active');
-　　　$('.fixed-menu-3').addClass('active');
-    }
-    if ($this_Top > $('#travel-cost').position().top) {
-　　　$('.fixed-menu-3').removeClass('active');
-　　　$('.fixed-menu-4').addClass('active');
-    }
-    if ($this_Top > $('#travel-description').position().top) {
-　　　$('.fixed-menu-4').removeClass('active');
-　　　$('.fixed-menu-5').addClass('active');
-    }
-    if ($this_Top < $('#travel-description').position().top) {
-　　　$('.fixed-menu-5').removeClass('active');
-    }
-    if ($this_Top < $('#travel-cost').position().top) {
-　　　$('.fixed-menu-4').removeClass('active');
-    }
-    if ($this_Top < $('#travel-itinerary').position().top) {
-　　　$('.fixed-menu-3').removeClass('active');
-    }
-    if ($this_Top < $('#travel-characteristics').position().top) {
-　　　$('.fixed-menu-2').removeClass('active');
-    }
-    if ($this_Top < $('#travel-traffic').position().top) {
-　　　$('.fixed-menu-1').removeClass('active');
-　　}
+    $('#travel-innerMenu-fixed li').removeClass('active')
+　　//if($this_Top > $('#travel-traffic').position().top){
+  　　//}
+  if($this_Top < $('#travel-characteristics').offset().top ){
+    $('.fixed-menu-1').addClass('active');
+  }
+  else if ($this_Top < $('#travel-itinerary').offset().top) {
+    　　　$('.fixed-menu-2').addClass('active');
+    // 　　　$('.fixed-menu-2').removeClass('active');
+  }
+  else if ($this_Top < $('#travel-cost').offset().top) {
+    　　　$('.fixed-menu-3').addClass('active');
+    // 　　　$('.fixed-menu-3').removeClass('active');
+  }
+  else if ($this_Top < $('#travel-description').offset().top) {
+    　　　$('.fixed-menu-4').addClass('active');
+    // 　　　$('.fixed-menu-4').removeClass('active');
+  } else {
+
+    $('.fixed-menu-5').addClass('active');
+  }
+//     if ($this_Top < $('#travel-description').position().top) {
+// 　　　$('.fixed-menu-5').removeClass('active');
+//     }
+//     if ($this_Top < $('#travel-cost').position().top) {
+// 　　　$('.fixed-menu-4').removeClass('active');
+//     }
+//     if ($this_Top < $('#travel-itinerary').position().top) {
+// 　　　$('.fixed-menu-3').removeClass('active');
+//     }
+//     if ($this_Top < $('#travel-characteristics').position().top) {
+// 　　　$('.fixed-menu-2').removeClass('active');
+//     }
+//     if ($this_Top < $('#travel-traffic').position().top) {
+// 　　　$('.fixed-menu-1').removeClass('active');
+// 　　}
 
 
 　　}).scroll();
