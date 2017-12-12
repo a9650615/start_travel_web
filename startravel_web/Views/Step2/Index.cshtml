@@ -1029,6 +1029,9 @@
             //$('#orderForm').submit();
             if(!err)
                 document.getElementById('subit').click()
+            else {
+                $("html, body").animate({ scrollTop: $('.err').eq(0).offset().top }, 600);
+            }
             //passengerInfo
         }
         $('.birthday').change(function() {
