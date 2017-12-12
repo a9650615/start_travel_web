@@ -333,6 +333,8 @@
                 grp_date_number = Model.grpcalendar_result.Data.grp_date.Count;
    
                 
+                DateTime s_month_next=s_month.AddMonths(1);
+                DateTime s_month_prev=s_month.AddMonths(-1);
            }
 
 
@@ -352,11 +354,12 @@
                                 <thead>
                                     <tr>
                                         <th colspan="7" class="month">
-                                            <a class="month-prev" href="javascript:;" title="">
-                                                <i class="glyphicon glyphicon-chevron-left" id="date-1-go-back"></i>
+                                            <a class="month-prev" href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpproductdetail_result.Data.GRP_NO&window_open=1&s_date=@s_month_prev.ToString("yyyyMMdd")" title=" ">
+                                                <i class=" glyphicon glyphicon-chevron-left" id="date-1-go-back">
+                                                </i>
                                             </a>
                                             <span id="tb-1-h">@s_month.GetDateTimeFormats('y')[0].ToString()</span>
-                                            <a class="month-next hidden-lg hidden-md" href="javascript:;" title="">
+                                            <a class="month-next hidden-lg hidden-md" href="" title="">
                                                 <i class="glyphicon glyphicon-chevron-right" id="date-1-go-next"></i>
                                             </a>
                                         </th>
@@ -410,7 +413,7 @@
 
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_s? "select": "")">
                         <div class="travel-calendar-date">
-                            <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
+                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")" class="date active">@date_i</a>
                             <span class="price">@price_grp_i.ToString("#,#") </span>
 
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -505,7 +508,7 @@
 
                                                                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_s? "select": "")">
                                                                         <div class="travel-calendar-date">
-                                                                            <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
+                                                                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")"  class=" date active">@date_i</a>
                                                                             <span class="price">@price_grp_i.ToString("#,#") </span>
 
                                                                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -659,7 +662,7 @@
                                                 <i class="glyphicon glyphicon-chevron-left" id="date-2-go-back"></i>
                                             </a>
                                             <span id="tb-2-h">@e_month.GetDateTimeFormats('y')[0].ToString()</span>
-                                            <a class="month-next" href="javascript:;" title="">
+                                            <a class="month-next" href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpproductdetail_result.Data.GRP_NO&window_open=1&s_date=@s_month_next.ToString("yyyyMMdd")" title="">
                                                 <i class="glyphicon glyphicon-chevron-right" id="date-2-go-next"></i>
                                             </a>
                                         </th>
@@ -710,7 +713,7 @@
 
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_e ? "select" : "")">
                         <div class="travel-calendar-date">
-                            <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i</a>
+                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e " class=" date active">@date_i</a>
                             <span class="price">@price_grp_i.ToString("#,#") </span>
 
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -805,7 +808,7 @@
                     }
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_e? "select": "")">
                         <div class="travel-calendar-date">
-                            <a href="javascript:;" class="date active" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')">@date_i_e</a>
+                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e" class=" date active">@date_i_e</a>
                             <span class="price">@price_grp_i.ToString("#,#") </span>
 
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
@@ -1007,7 +1010,8 @@
 
                     console.log(nowYear,nowMonth)
 
-                    $('#date-1-go-back').click(() => {
+                    $('#date-1-go-back').click((e) => {
+                        e.preventDefault();
                         let changedDate = autoChangeYearDate(nowYear, nowMonth-1)
                         nowYear = changedDate[0]
                         nowMonth = changedDate[1]
@@ -1017,9 +1021,11 @@
                         })
                         console.log(nowYear, nowMonth)
 
-                    })
-
-                    $('#date-1-go-next').click(function() {
+                })
+                    $('#date-1-go-back').parent().click((e) =>e.preventDefault())
+                    $('#date-2-go-next').parent().click((e) =>e.preventDefault())
+                    $('#date-1-go-next').click(function(e) {
+                        e.preventDefault();
                         let changedDate = autoChangeYearDate(nowYear, nowMonth+1)
                         nowYear = changedDate[0]
                         nowMonth = changedDate[1]
@@ -1085,7 +1091,7 @@
 
                       $('#action_temp').val("1");
                          $('#transferForm').submit();
-                     }
+                }
 
 
                     function signupbtn_click(){

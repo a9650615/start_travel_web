@@ -16,7 +16,7 @@ namespace startravel_web.Controllers
     {
         //
         // GET: /Detail/
-        public async Task<ActionResult> Index(string prod_no, string grp_no,string window_open)
+        public async Task<ActionResult> Index(string prod_no, string grp_no,string window_open,string s_date)
         {
             ApiController api = new ApiController();
          //   string prod_no_s ="IGRP000018712";
@@ -25,13 +25,19 @@ namespace startravel_web.Controllers
             
            string prod_no_s = prod_no;
             string grp_no_s = grp_no;
+             string current_date=s_date;
            // string travel_region_s=TravelRegion;
             
             //***GRPProductDetail_api testing***//
             GRPProductDetail_PostData grpproductdetail_postData = new GRPProductDetail_PostData() { prod_no = prod_no_s, grp_no = grp_no_s };
             var grpsource = await api.GRPProductDetail_api(grpproductdetail_postData);
 
-            string current_date = grpsource.Data.S_DATE;
+            if (string.IsNullOrWhiteSpace(current_date))
+            {
+                current_date = grpsource.Data.S_DATE;
+            }
+
+           
             //DateTime current_date_d = DateTime.ParseExact(current_date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
             //string current_date = DateTime.Now.ToString("yyyyMMdd");
             DateTime current_date_d = DateTime.ParseExact(current_date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
