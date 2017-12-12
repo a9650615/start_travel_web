@@ -131,6 +131,8 @@ namespace startravel_web.Models
         public decimal Price { get; set; }
         public decimal Price_AGT { get; set; }
         public string DEPARTURE_FLAG { get; set; }
+        public decimal MIN_Tourer{ get; set; }
+        public decimal MAX_Tourer { get; set; }
         public List<GRPFlyInfoViewModel> FlyList { get; set; }
     }
 

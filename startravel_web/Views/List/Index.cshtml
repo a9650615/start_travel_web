@@ -659,7 +659,7 @@
                                 
                                                     // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                                     //string s_QTY_KK = item_grplist.QTY_KK.ToString("");
-
+                                                    int int_MIN_TOUR = Decimal.ToInt32(item_grplist.MIN_Tourer);
                                                     int int_QTY_KK = Decimal.ToInt32(item_grplist.QTY_KK);
                                                     if(int_QTY_KK<0)
                                                     {
@@ -678,7 +678,7 @@
                                                                    <div class="text-purple text-bold">
                                                                         <input type="text" style="display: none" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
                                                                        <input type="text" style="display: none" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
-                                                                       <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
+                                                                       <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@int_MIN_TOUR.ToString()">
                                                                        <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
                                                                      
                                                           @{
@@ -760,7 +760,7 @@
                         // string qkk = Html.DisplayFor(modelitem => item.GrpList[0].QTY_KK).ToString();
 
                         // int qkk_d = int.Parse(qkk, System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                         int qkk_d = Decimal.ToInt32(item.GrpList[0].QTY_KK);
+                         int qkk_d = Decimal.ToInt32(item.GrpList[0].MIN_Tourer);
                          if(qkk_d<0)
                          {
                              qkk_d = 0;
@@ -1825,6 +1825,7 @@
 
                                            // int int_QTY_KK = int.Parse(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                                            // int int_QTY_KK = Convert.ToInt32(Html.DisplayFor(modelitem => item_grplist.QTY_KK).ToString(), 10);
+                                            int int_MIN_TOUR = Decimal.ToInt32(item_grplist.MIN_Tourer);
                                             int int_QTY_KK = Decimal.ToInt32(item_grplist.QTY_KK);
                                             if (int_QTY_KK < 0)
                                             {
@@ -1843,7 +1844,7 @@
                                                 <div class="text-purple text-bold">
                                                     <input type="text" style="display: none" id="every_pord_no_@(number)_@j" name="every_pord_no_@(number)_@j" value="@item_grplist.Prod_NO">
                                                     <input type="text" style="display: none" id="every_grp_no_@(number)_@j" name="every_grp_no_@(number)_@j" value="@item_grplist.GRP_NO">
-                                                    <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@qty_kk_s">
+                                                    <input type="text" style="display: none" id="every_qty_kk_@(number)_@j" name="every_qty_kk_@(number)_@j" value="@int_MIN_TOUR.ToString()">
                                                     <input type="text" style="display: none" id="every_price_@(number)_@j" name="every_price_@(number)_@j" value="@Price_s">
                                                     @{
                                                         if (int_QTY_KK > 0)
