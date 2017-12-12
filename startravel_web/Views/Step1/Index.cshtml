@@ -341,10 +341,10 @@
                        
                         <div class="row">
                             <div class="col-xs-5 text-right">
-                                @Html.DisplayFor(modelitem_s => item_s.Type_name) / 含稅售價
+                                @Html.DisplayFor(modelitem_s => item_s.Type_name)
                             </div>
                             <div class="col-xs-7">
-                                <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("#,#")</span>元
+                                <span class="text-orange2">@Int32.Parse(Html.DisplayFor(modelitem_s => item_s.Price).ToString()).ToString("#,#")</span>元 <span style="float: right;">(含稅)</span>
                             </div>
                         </div>
                         
