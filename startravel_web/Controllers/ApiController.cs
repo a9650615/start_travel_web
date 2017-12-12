@@ -143,7 +143,21 @@ namespace startravel_web.Controllers
 
         }
 
+        //tour_1.11
+        public async Task<JObject> GRPCalendarInfoList_api(GRPCalendarInfoList_PostData postdata)
+        {
+            string targetURI = "https://dtour-api.startravel.com.tw/api/GRPCalendarInfoList";
+            string final_URI = targetURI + "?prod_no=" + postdata.prod_no + "&date=" + postdata.date;
+            HttpClient client = new HttpClient();
+            client.MaxResponseContentBufferSize = Int32.MaxValue;
 
+            var response = client.GetAsync(final_URI).Result;
+            var collection = response.Content.ReadAsStringAsync().Result;
+            var collection_jobj = JsonConvert.DeserializeObject<JObject>(collection);
+            return collection_jobj;
+           // Response.Write("PROD_NO：" + response + "<br/>");
+          
+        }
         //tour_1.12
         public async Task<IGRPTravelRegion_result> IGRPTravelRegion_api()
         {

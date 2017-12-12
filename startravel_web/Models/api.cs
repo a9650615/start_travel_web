@@ -339,6 +339,49 @@ namespace startravel_web.Models
     }
 
     //=====tour1.9=====//
+    //=====tour1.11=====//
+
+    public class GRPCalendarInfoList_result
+    {
+        public List<GRPCalendarInfoListViewModel> Data { get; set; }
+        public String rCode { get; set; }
+        public String rCodeDesc { get; set; }
+        public DateTime TokenExpires { get; set; }
+    }
+
+    public class GRPCalendarInfoListViewModel
+    {
+        public String PROD_NAME { get; set; }
+        public String CAT_1 { get; set; }
+        public String CAT_2 { get; set; }
+        public String CITY_FROM { get; set; }
+        public String CITY_TO { get; set; }
+        public String CITY_FROM_NAME { get; set; }
+        public String CITY_TO_NAME { get; set; }
+        public String CAT1NAME { get; set; }
+        public String CAT2NAME { get; set; }
+        public List<GRPFlyInfoViewModel> TrafficList { get; set; }
+        public String PROD_NO { get; set; }
+        public String GRP_NO { get; set; }
+        public String S_DATE { get; set; }
+        public String E_DATE { get; set; }
+        public decimal PRICE { get; set; }
+        public decimal PRE_AMT { get; set; }
+        public String PRE_DAY { get; set; }
+        public String DUEDAY_PAY { get; set; }
+        public String DUEDAY_DOC { get; set; }
+        public decimal MIN_TOURER { get; set; }
+        public decimal MAX_TOURER { get; set; }
+        public decimal QTY_KK_ORG { get; set; }
+        public decimal QTY_KK { get; set; }
+        public decimal QTY_HL { get; set; }
+        public decimal DEPARTURE_FLAG { get; set; }
+
+    }
+
+
+
+    //=====tour1.11=====//
 
 
     //=====tour1.12=====//

@@ -217,9 +217,10 @@ $(function(){
   $('.lightboxOpen-control04').click(function(){
     $('.lightboxOpen04').fadeIn();
   });
-  $('.lightbox-moreGroup-open').click(function(){
+  /*$('.lightbox-moreGroup-open').click(function(){
     $('.lightbox-moreGroup').fadeIn();
   });
+  */
   $('.lightboxClose').click(function(){
     $('.lightboxOpen').fadeOut();
   });

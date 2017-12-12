@@ -93,6 +93,19 @@ namespace startravel_web.Controllers
             return json;
         }
 
+        public async Task<string> more_lightingbox_click(string prod_no, string date)
+        {
+            ApiController api = new ApiController();
+
+            GRPCalendarInfoList_PostData grpcalendarinfolist_postData = new GRPCalendarInfoList_PostData() { prod_no = prod_no, date = date };
+            var grpcalendarinfolist_source = await api.GRPCalendarInfoList_api(grpcalendarinfolist_postData);
+
+            string json = JsonConvert.SerializeObject(grpcalendarinfolist_source);
+
+            return json;
+        }
+
+
       
 	}
 }
