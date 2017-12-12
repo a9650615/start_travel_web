@@ -413,9 +413,12 @@
 
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_s? "select": "")">
                         <div class="travel-calendar-date">
-                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")" class="date active">@date_i</a>
-                            <span class="price">@price_grp_i.ToString("#,#") </span>
-
+                            <a class="date active">@date_i</a>
+                            @if (qty_kk_i == 0 && qty_hl_i <= 0) {
+                                <span class="price">@price_grp_i.ToString("#,#") </span>
+                            } else {
+                                <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")" class="price">@price_grp_i.ToString("#,#") </a>
+                            }
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                             {
                                 if (qty_kk_i == 0)
@@ -508,9 +511,13 @@
 
                                                                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_s? "select": "")">
                                                                         <div class="travel-calendar-date">
-                                                                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")"  class=" date active">@date_i</a>
-                                                                            <span class="price">@price_grp_i.ToString("#,#") </span>
+                                                                            <a  class=" date active">@date_i</a>
+                                                                            @if (qty_kk_i == 0 && qty_hl_i <= 0) {
+                                                                                <span class="price">@price_grp_i.ToString("#,#") </span>
+                                                                            } else {
+                                                                                <a  href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@s_current_day.ToString("yyyyMMdd")" class="price">@price_grp_i.ToString("#,#") </a>
 
+                                                                            }
                                                                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                                             {
                                                                                 if (qty_kk_i == 0)
@@ -607,8 +614,14 @@
                                             }
 
                                             <div class="list-style">
-                                                <a href="javascript:;" class="date" onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')" s>@i 日</a>
-                                                <span class="price">@price_grp_i.ToString("#,#")</span>
+                                                <a href="javascript:;" class="date" >@i 日</a>
+                                                @if (qty_kk_i==0 &&qty_hl_i <= 0 ) {
+                                                    <span class="price">@price_grp_i.ToString("#,#")</span>
+                                                    
+                                                } else {
+                                                    <a onclick="calendar_number_click('@(Model.grpcalendar_result.Data.Prod_no),@(Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no)')" class="price">@price_grp_i.ToString("#,#")</a>
+
+                                                }
                                                 <div class="float-right">
                                                     @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                                                     {
@@ -713,9 +726,14 @@
 
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_e ? "select" : "")">
                         <div class="travel-calendar-date">
-                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e " class=" date active">@date_i</a>
-                            <span class="price">@price_grp_i.ToString("#,#") </span>
+                            <a class=" date active">@date_i</a>
+                            @if (qty_kk_i == 0 && qty_hl_i <= 0) {
+                                <span class="price">@price_grp_i.ToString("#,#") </span>
 
+                            } else {
+                                <a  href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e " class="price">@price_grp_i.ToString("#,#") </a>
+
+                            }
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                             {
                                 if (qty_kk_i == 0)
@@ -808,9 +826,14 @@
                     }
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_e? "select": "")">
                         <div class="travel-calendar-date">
-                            <a href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e" class=" date active">@date_i_e</a>
-                            <span class="price">@price_grp_i.ToString("#,#") </span>
+                            <a class=" date active">@date_i_e</a>
+                            @if (qty_kk_i == 0 && qty_hl_i <= 0) {
+                                <span class="price">@price_grp_i.ToString("#,#") </span>
 
+                            } else {
+                                <a  href="?prod_no=@Model.grpproductdetail_result.Data.PROD_NO&grp_no=@Model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp[0].Grp_no&window_open=1&s_date=@current_day_e" class="price">@price_grp_i.ToString("#,#") </a>
+
+                            }
                             @if (Html.DisplayFor(model => model.grpcalendar_result.Data.grp_date[date_arrery_index].Grp_count).ToString().Equals("1"))
                             {
                                 if (qty_kk_i == 0)
@@ -928,9 +951,15 @@
         data.forEach(function (val) {
             console.log(val.S_date, dateStr,val.S_date.includes(dateStr))
             console.log(val.Grp)
-            if (val.S_date.includes(dateStr))
-                $('.content-mobile').append(`<div class="list-style"><span class="date" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${val.Grp[0].Grp_no}')">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${val.S_date}">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
-                    })
+            if (val.S_date.includes(dateStr)) {
+                let ele = $(`<div class="list-style"><span class="date" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${val.Grp[0].Grp_no}')">${val.S_date.replace(dateStr,"")} 日</span>${val.Grp[0].Price}<div class="float-right">${val.Grp.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${val.S_date}">看更多團</a>`:""}${val.Grp[0].Qty_kk==0&&val.Grp[0].Qty_hl>0?`<span class="quota text-green">可候補</span>`:``}${val.Grp[0].Qty_kk<=0?``:`<span class="quota text-orange">僅剩 ${val.Grp[0].Qty_kk}位</span>`}</div></div>`)
+                if(val.Qty_kk == 0 && val.Qty_hl <= 0) {
+                    $(ele).prop('onclick', null)
+                }
+                $('.content-mobile').append(ele)
+            }
+
+            })
                     }
 
                 function updateFullDate(data, date) {
@@ -952,9 +981,10 @@
                             let dateString = date[0] + '' + format(date[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).attr('data-active', 'active').html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${ date_data.S_date}">看更多團</a>`:""}`)
-
-                                }
+                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${ date_data.S_date}">看更多團</a>`:""}`)
+                                if (dd.Qty_kk == 0 && dd.Qty_hl <= 0)
+                                    $(this).find('.price').prop('onclick', null)
+                            }
                             else {
                                 $(this).attr('data-active', '').html(`<span class="date ">${day}</span>`)
                             }
@@ -969,8 +999,9 @@
                                  let dateString = nextDate[0]+ '' + format(nextDate[1]) + format(day)
                             if (date_data.length) {
                                 let dd = date_data[0]
-                                $(this).attr('data-active', 'active').html(`<span class="date active" onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')">${day}</span><span class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${date_data.S_date}">看更多團</a>`:""}`)
-
+                                $(this).attr('data-active', 'active').html(`<span class="date active">${day}</span><span onclick="calendar_number_click('@Model.grpproductdetail_result.Data.PROD_NO,${dd.Grp_no}')" class="price">${dd.Price}</span>${dd.Qty_kk==0&&dd.Qty_hl>0?`<span class="quota text-green">可候補</span>`:""}${dd.Qty_kk<=0?"":`<span class="quota text-orange">僅剩 ${dd.Qty_kk}</span>`}${date_data.length>1?`<a href="javascript:;" class="more lightbox-moreGroup-open" onclick="more_get_grp_no(this)" id="${date_data.S_date}">看更多團</a>`:""}`)
+                                if (dd.Qty_kk == 0 && dd.Qty_hl <= 0)
+                                    $(this).find('.price').prop('onclick', null)
                                 }
                             else {
                                 $(this).attr('data-active', '').html(`<span class="date ">${day}</span>`)
@@ -987,6 +1018,7 @@
                     let date_2 = autoChangeYearDate(year, month + 1)
                     $('#tb-1-h').text(`${date_1[0]}年${date_1[1]}月`)
                     $('#tb-2-h').text(`${date_2[0]}年${date_2[1]}月`)
+                    $('td[data-select=select]').attr('data-select', '')
     }
 
                 function format(num) {
