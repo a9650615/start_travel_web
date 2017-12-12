@@ -35,13 +35,13 @@ html,body{
 .images-special {
     display: flex;
     width:100%;
-    min-height:300px;
-    height:300px;
+    min-height:160px;
+    margin-bottom: 20px;
 }
 
 .images-special>.img {
     flex: 1;
-    height: 300px;
+    height: 160px;
     width: 100%;
     justify-content:center;
     
