@@ -726,6 +726,7 @@ namespace startravel_web.Models
 
     public class PaymentOrderViewModel
     {
+        public String Cust_ID { get; set; }
         public String Order_No { get; set; }
         public int Lst_SeqNo { get; set; }
         public String Prod_Type1 { get; set; }
