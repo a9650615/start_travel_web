@@ -43,7 +43,7 @@
 @using (Html.BeginForm("detail_transfer", "Detail", FormMethod.Post, new { enctype = "multipart/form-data" , id="transferForm"}))
 {
     <!-- header======================================================================= -->
-    <div class="header-02">
+    <div class="header-02 no-print">
         <div class="header-02-mobile">
             <a href="javascript:;">
                 <img class="img-responsive" src="~/Content/images/logo-text.png" alt="">
@@ -682,7 +682,7 @@
                     <span>查看更多出發日期</span>
                 </a>
             </div>
-            <div class="travel-calendar">
+            <div class="travel-calendar no-print">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="table-responsive">
@@ -2225,7 +2225,7 @@
 
 
     <!-- footer======================================================================= -->
-    <div class="footer">
+    <div class="footer no-print">
         <!-- award -->
         <div class="footerAward">
             <div class="star-container">
