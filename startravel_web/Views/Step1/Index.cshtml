@@ -252,6 +252,38 @@
                 </table>
             </div>
             <script>
+
+                $(document).ready(() => {
+
+                 var total_count = 0;
+                var total_cost = 0;
+                var current_cost = 0;
+                var current_count = 0;
+                $('.table-responsive .star-select2').each(function () {
+                    total_count += parseInt($(this).val());
+                    current_count = parseInt($(this).val());
+                    current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
+                    total_cost += current_count * current_cost;
+                });
+                var ary_room=[];
+                    
+                $('.table-responsive .star-select2').each(function () {
+                    ary_room.push($(this).val());
+
+
+                });
+                   
+                  
+                $('#room_count').val(ary_room);
+                    
+                // total_cost = $(this).text()
+                      
+                console.log(total_cost);
+                $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
+                $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
+                });
+
+
                 function droplist_select() {
                     var total_count = 0;
                     var total_cost = 0;

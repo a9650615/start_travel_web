@@ -341,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                      @if (Model.pusb_count != 0 && Model.visa_count != 0 && Model.insu_count != 0)
+                      @if (Model.pusb_count > 0 || Model.visa_count > 0 || Model.insu_count > 0)
                      {
                         <span class="text-bold h3">加購商品</span>
                         if (total_passenger_count == 0)
@@ -747,7 +747,7 @@
 
             <!-- 下一步 -->
             <div class="goNext mb-20 hidden-xs">
-                <a class="goBackBtn" href="javascript:;" title="">
+                <a class="goBackBtn" href="javascript:;" onclick="javascript :history.back(-1);" title="">
                     上一步
                 </a>
                 <a class="goNextBtn" href="javascript:;" title="" onclick="order_click('@Html.DisplayFor(modelitem => total_passenger_count)')">
