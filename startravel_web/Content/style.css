@@ -2330,3 +2330,15 @@ div.datepicker a:hover {
 
 
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+
+    .show-on-print {
+        display: block;
+    }
+}
