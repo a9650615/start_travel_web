@@ -325,7 +325,7 @@
                         $(this).parents('.infoBlock').attr('type', $(this).attr('value'))
                         //$(`input[name=${$(this).attr('name')}]`).checked(false)
                     })
-                    $('input[name=payment4]').change(updateTCashInput)
+                    $('input[name=payment4]').change(function() {updateTCashInput(); count_data(); })
                     updateTCashInput()
                     count_data()
                 })
@@ -348,8 +348,6 @@
                     if ($('input[type=radio][name=payment4]:checked').attr('data-deposit') == 'true') {
                         $('#t_cash').val(0).prop('disabled', 'disabled')
                     }
-
-                    count_data()
                 }
 
                 let count_data = function() {
