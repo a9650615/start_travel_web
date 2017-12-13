@@ -89,7 +89,10 @@
                 <a class="paymentTermNotice lightboxOpen-control04" href="javascript:;" title="">付款期限注意事項</a>
                 <form method="post" action="/tour/Step3_1/Index" id="main-form">
                     <input type="hidden" value="@Model.order_no" name="order_no_hidden">
-                    @{ int i;}
+                    @{ 
+                        int i;
+                        bool hasOwner = false;
+                    }
                     @for (i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
                     {
                         var item = Model.paymentorder_result.Data[i];
@@ -103,10 +106,10 @@
                         int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int UnPayAmt_i = int.Parse(Html.DisplayFor(modelitem => item.UnPayAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
-                        
-                        
-                        
-                        
+
+
+
+
                         int total_order_prod_sub = 0;
 
                         for (int k = 0; k < item.OrderProdSub.Count; k = k + 1)
@@ -118,10 +121,10 @@
 
                         }
 
-                      //  UnPayAmt_i = UnPayAmt_i;
+                        //  UnPayAmt_i = UnPayAmt_i;
 
                         Prod_Amt_i = Prod_Amt_i - total_order_prod_sub;
-                        
+
                         string Prod_Amt_s = Prod_Amt_i.ToString("#,#");
                         string total_order_prod_sub_s = total_order_prod_sub.ToString("#,#");
                         string Pre_Amt_s = Pre_Amt_i.ToString("#,#");
@@ -133,11 +136,14 @@
                         Pre_Amt_s = Pre_Amt_s == "" ? "0" : Pre_Amt_s;
                         PaidAmt_s = PaidAmt_s == "" ? "0" : PaidAmt_s;
                         UnPayAmt_s = UnPayAmt_s == "" ? "0" : UnPayAmt_s;
-                        
-                        
-                        
+                        string UserId = item.Cust_ID;
+                        if (UserId == Model.member_id_no) {
+                            hasOwner = true;
+                        }
+
+
                         //DateTime paydeadtime = DateTime.ParseExact(Html.DisplayFor(modelitem => item.PayDeadlineTime).ToString(), "yyyy-MM-dd'T'HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                        <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit">
+                        <div class="infoBlock mt-20" data-payOff="@(Prod_Amt_i+total_order_prod_sub)" data-deposit="@Pre_Amt_i" type="deposit" data-owner="@(UserId == Model.member_id_no? "true": "false")">
                             <div class="chooseItem-topBlock">
                                 <div class="chooseItem-radiobox">
                                     <input class="star-input" type="radio" id="deposit_@i" name="payment_@i" value="deposit" checked>
@@ -296,14 +302,13 @@
             </div>
 
             <script>
+                let hasOwner = @(hasOwner?"true":"false");
                 $(document).ready(function() {
                     $('.chooseItem-radiobox>label').click(function () {
                         $(this).parents('.infoBlock').attr('type', $(this).siblings('.star-input').eq(0).val())
                         count_data()
                     })
-                    if (@tcashavbl_i.ToString() <= 0) {
-                        $('#t_cash').val(0).attr('disabled','disabled')
-                    }
+
                     $('#t_cash').keyup(function(){
                         count_data()
                         $('#t-cash').val($('#t_cash').val() || 0)
@@ -320,15 +325,34 @@
                         $(this).parents('.infoBlock').attr('type', $(this).attr('value'))
                         //$(`input[name=${$(this).attr('name')}]`).checked(false)
                     })
+                    $('input[name=payment4]').change(updateTCashInput)
                     count_data()
+                    updateTCashInput()
                 })
 
                 //setInterval(() => {
                 //    count_data()
                 //}, 1000)
 
+                let updateTCashInput = function() {
+                    console.log($('input[type=radio][name=payment4]:checked').attr('data-deposit'))
+                    if (@tcashavbl_i.ToString() <= 0) {
+                        $('#t_cash').val(0).attr('disabled','disabled')
+                    }
+                    if (hasOwner && $('.infoBlock[data-owner=true]').attr('type') == 'payOff') {
+                        $('#t_cash').prop('disabled', null)
+                    } else {
+                        $('#t_cash').val(0).attr('disabled','disabled')
+                    }
+
+                    if ($('input[type=radio][name=payment4]:checked').attr('data-deposit') == 'true') {
+                        $('#t_cash').prop('disabled', 'disabled')
+                    }
+                }
+
                 let count_data = function() {
                     let total = 0
+                    updateTCashInput()
                     $('.infoBlock').each(function () {
                         if ($(this).attr('type'))
                             total += Number($(this).attr('data-' + $(this).attr('type')))
@@ -349,7 +373,7 @@
                     if (!newWindow){
                         return false;
                     }
-    
+
                     var html = "";
                     html += "<html><head></head><body><form id='formid' method='post' action='"    + url + "'>";
                     if (keys && values && (keys.length == values.length)){
@@ -413,7 +437,7 @@
                            
                             var item_4_b = Model.orderinstallment_result.Data[i];
                             <div>
-                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="@payment_method" data-pay="true">
+                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="@payment_method" data-pay="true" data-deposit="true">
                                 <label for="_pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_4_b.PMCH_NAME).ToString()
                             </div>
                             payment_method++;
