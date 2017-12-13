@@ -326,8 +326,8 @@
                         //$(`input[name=${$(this).attr('name')}]`).checked(false)
                     })
                     $('input[name=payment4]').change(updateTCashInput)
-                    count_data()
                     updateTCashInput()
+                    count_data()
                 })
 
                 //setInterval(() => {
@@ -348,6 +348,8 @@
                     if ($('input[type=radio][name=payment4]:checked').attr('data-deposit') == 'true') {
                         $('#t_cash').val(0).prop('disabled', 'disabled')
                     }
+
+                    count_data()
                 }
 
                 let count_data = function() {
