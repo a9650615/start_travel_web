@@ -341,9 +341,10 @@
                                 </div>
                             </div>
                         </div>
-
+                      @if (Model.pusb_count != 0 && Model.visa_count != 0 && Model.insu_count != 0)
+                     {
                         <span class="text-bold h3">加購商品</span>
-                        @if (total_passenger_count == 0)
+                        if (total_passenger_count == 0)
                         {
                         <div class="addAllbtn">
                             <input class="star-input" type="checkbox" id="addAll"  onclick="addall_click()" >
@@ -351,9 +352,11 @@
                             <input type="hidden" id="addall_hidden" name="addall_hidden" value="0">
                         </div>
                         }
+                   
                     <div class="addAllcost" id="addAllcost_@total_passenger_count" >
                         加購合計<span>0</span> 元 /人
                     </div>
+                     }
                     <input type="hidden" id="addallcost_hidden_@total_passenger_count" name="addallcost_hidden_@total_passenger_count" value="0">
 
                         <div class="pl-15 pr-15 mt-20 mb-20">
