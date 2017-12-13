@@ -165,14 +165,9 @@
 
 
 
-                                total_this_time_pay = total_this_time_pay - t_Cash;
-                                total_this_pay_s = total_this_time_pay.ToString("#,#");
-                                total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;
+                                //
 
-                                not_paid_i =( total_prod_amt - t_Cash )- total_this_time_pay;
-
-                                not_paid_s = not_paid_i.ToString("#,#");
-                                not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
+                               
                                 
                              <tr>
                                 <td>@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</td>
@@ -183,7 +178,14 @@
                             }
 
                            @{
-                              
+                               total_this_time_pay = total_this_time_pay - t_Cash;
+                               total_this_pay_s = total_this_time_pay.ToString("#,#");
+                               total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;
+
+                               not_paid_i = (total_prod_amt - t_Cash) - total_this_time_pay;
+
+                               not_paid_s = not_paid_i.ToString("#,#");
+                               not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
                             }
                             <tr>
                                 <td class="star-table01-subtotal" colspan="4">

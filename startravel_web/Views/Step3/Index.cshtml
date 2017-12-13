@@ -364,8 +364,9 @@
                         $('#t_cash').val($('#t_cash').attr('max'))
                     }
                     $('#t_price').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
-                    $('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    //$('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#total-price').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $('#footer-total').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                 }
 
                 function openWindowWithPost(url, name, keys, values) {
