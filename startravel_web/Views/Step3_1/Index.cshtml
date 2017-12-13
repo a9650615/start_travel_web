@@ -90,7 +90,8 @@
                   string not_paid_s = "";
                   string total_this_pay_s = "";
                 int t_Cash = 0;
-                var t_Cash_str = Request.Form["t_cash"];
+                var t_Cash_str = Request.Form["t-cash"];
+                
                 if (t_Cash_str == "") { t_Cash_str = "0"; }
                 Int32.TryParse(t_Cash_str, out t_Cash);
             }
@@ -148,8 +149,7 @@
                                     total_this_time_pay = total_this_time_pay + cus_this_pay;
                                 }
 
-                                 total_this_pay_s = total_this_time_pay.ToString("#,#");
-                                total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;
+                               
                                 
                                 
                                 int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item_cus.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
@@ -164,7 +164,12 @@
                                 total_prod_amt = total_prod_amt + nopaid_i;
 
 
-                                not_paid_i = total_prod_amt - total_this_time_pay;
+
+                                total_this_time_pay = total_this_time_pay - t_Cash;
+                                total_this_pay_s = total_this_time_pay.ToString("#,#");
+                                total_this_pay_s = total_this_pay_s == "" ? "0" : total_this_pay_s;
+
+                                not_paid_i =( total_prod_amt - t_Cash )- total_this_time_pay;
 
                                 not_paid_s = not_paid_i.ToString("#,#");
                                 not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
@@ -177,10 +182,13 @@
                             </tr>
                             }
 
+                           @{
+                              
+                            }
                             <tr>
                                 <td class="star-table01-subtotal" colspan="4">
                                     訂單總額 @total_prod_amt.ToString("#,#") 元<br>
-                                    -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
+                                    -會員本人折抵 T-Cash @t_Cash  元<br>
                                     -應付金額 @((total_prod_amt - t_Cash).ToString("#,#")) 元<br />
                                 </td>
                             </tr>
@@ -281,7 +289,7 @@
                 }
                     <div class="infoBlock text-right mt--1">
                         訂單總額 @total_prod_amt.ToString("#,#") 元<br>
-                        -會員本人折抵 T-Cash @Html.DisplayFor(model => t_Cash).ToString() 元<br>
+                        -會員本人折抵 T-Cash @t_Cash 元<br>
                         -應付金額 @((total_prod_amt - t_Cash).ToString("#,#")) 元<br />
                     </div>
                     <div class="table-mobile-total infoBlock text-right mt--1 mb-20">
