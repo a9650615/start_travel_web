@@ -16,7 +16,7 @@ namespace startravel_web.Controllers
     {
         //
         // GET: /Step3/
-        public async Task<ActionResult> Index(string order_number, string member_number, string member_name)
+        public async Task<ActionResult> Index(string order_number, string member_number, string member_id_no)
         {
 
             string order_number_s = order_number;
@@ -53,7 +53,7 @@ namespace startravel_web.Controllers
             var paymentorder_source = await api.PaymentOrder_api(paymentorder_postData);
             var tcashavblbalance_source = await api.tCashAvblBalance_api(tcashavblbalance_postData);
             var orderinstallment_source = await api.OrderInstallment_api(orderinstallment_postData);
-            step3_view_return_data step3_view_data = new step3_view_return_data { paymentorder_result = paymentorder_source, tcashavblbalance_result = tcashavblbalance_source, orderinstallment_result = orderinstallment_source, order_no = order_no_s, member_name = member_name };
+            step3_view_return_data step3_view_data = new step3_view_return_data { paymentorder_result = paymentorder_source, tcashavblbalance_result = tcashavblbalance_source, orderinstallment_result = orderinstallment_source, order_no = order_no_s, member_id_no = member_id_no };
 
             return View(step3_view_data);
         }
@@ -457,7 +457,7 @@ namespace startravel_web.Controllers
             {
                 //Response.Write("訂購成功" + "<br/>");
                 //Response.Write("訂單標號為:" + ordergrpcreate_source.Data.ORDER_NO + "<br/>");
-                return RedirectToAction("Index", "Step3", new { order_number = ordergrpcreate_source.Data.ORDER_NO, member_number = member_no_hidden, member_name = member_name_hidden });
+                return RedirectToAction("Index", "Step3", new { order_number = ordergrpcreate_source.Data.ORDER_NO, member_number = member_no_hidden, member_id_no = member_id_no_hidden });
 
             }else
             {
