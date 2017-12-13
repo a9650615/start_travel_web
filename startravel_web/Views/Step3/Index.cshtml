@@ -346,7 +346,7 @@
                     }
 
                     if ($('input[type=radio][name=payment4]:checked').attr('data-deposit') == 'true') {
-                        $('#t_cash').prop('disabled', 'disabled')
+                        $('#t_cash').val(0).prop('disabled', 'disabled')
                     }
                 }
 
@@ -410,7 +410,7 @@
                         {
                             var item_0_b = Model.orderinstallment_result.Data[i];
                             <div>
-                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="@payment_method" data-pay="false">
+                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="@payment_method" data-pay="false" @(i==0?"checked":"") >
                                 <label for="pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_0_b.PMCH_NAME).ToString()
                             </div>
                             payment_method++;
