@@ -304,7 +304,7 @@
                     if (@tcashavbl_i.ToString() <= 0) {
                         $('#t_cash').val(0).attr('disabled','disabled')
                     }
-                    $('#t_cash').keydown(function(){
+                    $('#t_cash').keyup(function(){
                         count_data()
                         $('#t-cash').val($('#t_cash').val() || 0)
                     })
@@ -333,7 +333,12 @@
                         if ($(this).attr('type'))
                             total += Number($(this).attr('data-' + $(this).attr('type')))
                     })
-                    console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    //console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    //console.log(parseInt($('#t_cash').val()))
+                    //console.log(total-parseInt($('#t_cash').val()))
+                    if ($('#t_cash').val() > Number($('#t_cash').attr('max'))) {
+                        $('#t_cash').val($('#t_cash').attr('max'))
+                    }
                     $('#t_price').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#total-price').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
