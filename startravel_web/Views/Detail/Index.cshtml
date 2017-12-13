@@ -1084,30 +1084,118 @@
                 function more_lightBox () {
                      $('.lightbox-moreGroup').fadeIn();
                       var grp_s_date= $("#more_grp_no").val();
-                          console.log(grp_s_date);
+                          //console.log(grp_s_date);
                      $.ajax({
                                        url: 'Detail/more_lightingbox_click?prod_no=@(Model.grpproductdetail_result.Data.PROD_NO)&date='+grp_s_date,
                                    method: 'get',
-                                   success: function(req) {
-		                              //console.log(req)
-                                     let data = JSON.parse(req)
-                                     data = data.Data
+                                           success: function(req) {
+                                               //console.log(req)
+                                             let data = JSON.parse(req)
+                                             data = data.Data
 
 
-		                                  // prod_name
-                                         $('.content-wrapper').html('');
-		                                  // console.log(data.Data[0])
-                                        $('.prod_name').html(data[0].PROD_NAME);
+                                               // prod_name
+                                                 $('.content-wrapper').html('');
+                                               // console.log(data.Data[0])
+                                                $('.prod_name').html(data[0].PROD_NAME);
 
-                                         var s_date=data[0].S_DATE;
-		                                  //  var s_date_s=s_date.substr(0,4)+"/"+s_date.substr(4,2)+"/"s_date.substr(6,2);
-                                        $('.prod_date').html(s_date);
+                                                 var s_date=data[0].S_DATE;
+                                         
+                                                 var s_date_s=s_date.substr(0,4)+"/"+s_date.substr(4,2)+"/"+s_date.substr(6,2);
+                                                 var then_date = new Date(s_date_s);
+                                                 var theday = then_date.getDay()+1;
 
-                                     for(let i in data) {
-                                      $('.content-wrapper').append("");
-                                      }
-		                                  //$('.lightbox-moreGroup .prod_name').html(data[0].PROD_NAME);
-		                              }
+                                                 var weekday = new Array(6);
+                                                 weekday[1]="日";
+                                                 weekday[2]="一";
+                                                 weekday[3]="二";
+                                                 weekday[4]="三";
+                                                 weekday[5]="四";
+                                                 weekday[6]="五";
+                                                 weekday[7]="六";
+
+
+                                                $('.prod_date').html(s_date_s+"("+weekday[theday]+")   當日更多團");
+                                                    var grp_count=0;
+                                             for(let i in data) {
+                                                 /* $('.content-wrapper').append(`<div class="moreGroup-block mb-20">`+
+                                                                                              `<div class="row mb-10">`+
+                                                                                                  `<div class="col-xs-12 col-sm-12">`+
+                                                                                                      `團號  `+data[i].GRP_NO+
+                                                                                                       if(data[i].DEPARTURE_FLAG==1){`<a class="ensure">保出</a> 可報名團人數：`+data[i].QTY_KK+`人`}+
+                                                                                                       else{`可報名團人數：`+data[i].QTY_KK+`人`}+
+                                                                                                  `</div>`+
+                                                                                              `</div>`+
+                                                                                            `<div class="row">`+
+                                                                                               `<div class="col-xs-12 col-sm-9">`+
+                                                                                                    `2017/09/20  12:30-15:55  長榮航空 BR130M 桃園國際機場→關西國際機場<br>`+
+                                                                                                   `<span class="text-blue2">關西國際機場 / 轉機</span><br>`+
+                                                                                                    `2017/09/20  20:50-09:35  夏威夷航空 HA4501 關西國際機場→夏威夷檀香山`+
+                                                                                               `</div>`+
+                                                                                               `<div class="col-xs-12 col-sm-3 text-right">`+
+                                                                                                   `<h2 class="text-orange text-bold mt-0">32,900 <small>元</small></h2>`+
+                                                                                                       `<a class="moreGroup-btn moreGroup-btn-see" href="javascript:;" title="">查看</a>`+
+                                                                                               ` </div>`+
+                                                                                             `</div>`);
+                                                                                                      }*/
+                                                 //$('.lightbox-moreGroup .prod_name').html(data[0].PROD_NAME);
+                                                  $('.content-wrapper').append(`<div class="moreGroup-block mb-20" id="moreGroup-block_`+grp_count+`"></div>`);
+                                                      var more_grp='#moreGroup-block_'+grp_count;
+                                                         $(more_grp).append(`<div class="row mb-10" id="row_more_`+grp_count+`"></div>`);
+                                                         var row_more_no='#row_more_'+grp_count;
+                                                          $(row_more_no).append(`<div class="col-xs-12 col-sm-12" id="more_col_`+grp_count+`"></div>`);
+                                                              var more_col_no='#more_col_'+grp_count;
+                                                               $(more_col_no).append(`團號  `+data[i].GRP_NO);
+                                                                     if(data[i].DEPARTURE_FLAG==1){
+                                                                           $(more_col_no).append(`<a class="ensure">保出</a>  可報名團人數：`+data[i].QTY_KK+`人`);
+                                                                     }else{
+                                                                           $(more_col_no).append(`    可報名團人數：`+data[i].QTY_KK+`人`);
+                                                                     }
+                                                          $(more_grp).append(`<div class="row" id="row_more_1_`+grp_count+`"></div>`);
+                                                          var row_more_1_no='#row_more_1_'+grp_count;
+                                                          $(row_more_1_no).append(`<div class="col-xs-12 col-sm-9" id="more_col_1_`+grp_count+`"></div>`);
+                                                          var more_col_1_no='#more_col_1_'+grp_count;
+                                                          var transfer_all_count = data[i].TrafficList.length;
+                                                          var transfer_times_half = transfer_all_count / 2;
+                                                          var transfer_times = transfer_times_half - 1;
+                                                              console.log(transfer_times_half);
+                                                              for(var j=0;j<transfer_times_half;j=j+1){           
+                                                                  
+                                                                  var s_date_at=data[i].TrafficList[j].DATE_AT;
+                                                                  var deparrt_time=data[i].TrafficList[j].DEPARRT_TIME;
+                                                                  var arrive_time=data[i].TrafficList[j].ARRIVE_TIME;
+                                                                  var air_name=data[i].TrafficList[j].AIR_NAME;
+                                                                  var fly_no=data[i].TrafficList[j].FLY_NO;
+                                                                  var city_from_name=data[i].TrafficList[j].CITY_FROM_NAME;
+                                                                  var city_to_name=data[i].TrafficList[j].CITY_TO_NAME;
+
+                                                                  var s_date_at_s=s_date_at.substr(0,4)+"/"+s_date_at.substr(4,2)+"/"+s_date_at.substr(6,2);
+                                                                  var deparrt_time_s=deparrt_time.substr(0,2)+":"+deparrt_time.substr(4,2);
+                                                                  var arrive_time_s=arrive_time.substr(0,2)+":"+arrive_time.substr(4,2);
+                                                                  if(j==0)
+                                                                  {
+                                                                      $(more_col_1_no).append(s_date_at_s+`　`+deparrt_time_s+`-`+arrive_time_s+`　`+air_name+`　`+fly_no+`　`+city_from_name+`→`+city_to_name);
+                                                                   }else{
+                                                                       $(more_col_1_no).append(`<br><span class="text-blue2">`+city_to_name+`/ 轉機</span><br>`);
+                                                                       $(more_col_1_no).append(s_date_at_s+`　`+deparrt_time_s+`-`+arrive_time_s+`　`+air_name+`　`+fly_no+`　`+city_from_name+`→`+city_to_name);                                                       
+                                                                  }
+
+                                                              }
+
+                                                          $(row_more_1_no).append(`<div class="col-xs-12 col-sm-3 text-right" id="more_col_2_`+grp_count+`"></div>`);
+                                                          var more_col_2_no='#more_col_2_'+grp_count;
+                                                           $(more_col_2_no).append(`<h2 class="text-orange text-bold mt-0">`+data[i].PRICE.toLocaleString()+`<small>元</small></h2>`);
+                                                           if(data[i].QTY_KK==0 && data[i].QTY_HL<=0)
+                                                           {
+                                                              
+                                                                  $(more_col_2_no).append(`<a class="moreGroup-btn moreGroup-btn-close" href="javascript:;" title="">關團</a>`);
+                                                           }else{
+                                                                $(more_col_2_no).append(`<a class="moreGroup-btn moreGroup-btn-see" href="?prod_no=`+data[i].PROD_NO+`&grp_no=`+data[i].GRP_NO+`&window_open=1&s_date=`+data[i].S_DATE+`" title="">查看</a>`);
+                                                           }
+                                                                                  
+                                                 grp_count=grp_count+1;
+                                             }
+                                           }
                                })
 
 
