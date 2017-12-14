@@ -89,11 +89,17 @@
                   int not_paid_i = 0;
                   string not_paid_s = "";
                   string total_this_pay_s = "";
-                int t_Cash = 0;
+                  int t_Cash = 0;
+                  int member_id_no = 0;  
+                
+                var member_id_no_str = Request.Form["member_id_no_hidden"];
                 var t_Cash_str = Request.Form["t-cash"];
                 
                 if (t_Cash_str == "") { t_Cash_str = "0"; }
                 Int32.TryParse(t_Cash_str, out t_Cash);
+
+                if (member_id_no_str == "") { member_id_no_str = "0"; }
+                Int32.TryParse(member_id_no_str, out member_id_no);
             }
 
 
@@ -332,7 +338,8 @@
 
             <form action="~/step4/Index" method="post" id="step3_1_form">
                 <input type="hidden" value="@Model.order_no" name="order_no_hidden">
-
+                <input type="hidden" value="@t_Cash" name="t_cash_hidden" id="t_cash_hidden"> 
+                <input type="hidden" value="@member_id_no" name="member_id_no_hidden" id="member_id_no_hidden"> 
                 <!-- 下一步 -->
                 <div class="goNext mb-20">
                     <a class="goBackBtn" href="javascript:;" onclick="javascript :history.back(-1);" title="">

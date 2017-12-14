@@ -94,6 +94,21 @@
                 {
                     dueday_doc_d = DateTime.ParseExact(DUEDAY_DOC_s, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                 }
+
+
+
+                int t_Cash = 0;
+                int member_id_no = 0;
+
+                var member_id_no_str = Request.Form["member_id_no_hidden"];
+                var t_Cash_str = Request.Form["t_cash_hidden"];
+
+                if (t_Cash_str == "") { t_Cash_str = "0"; }
+                Int32.TryParse(t_Cash_str, out t_Cash);
+
+                if (member_id_no_str == "") { member_id_no_str = "0"; }
+                Int32.TryParse(member_id_no_str, out member_id_no);
+                
              }
 
 
@@ -141,7 +156,18 @@
                     string prod_price_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("#,#");
                     string prod_sub_amt_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("#,#");
                     string pre_amt_s = Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("#,#");
-                    string nopaid_s = Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString()).ToString("#,#");
+                    int nopaid_i = Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString());
+                    string nopaid_s="";
+                    if (member_id_no==i)
+                    {
+                        nopaid_i=nopaid_i-t_Cash;
+                        nopaid_s = nopaid_i.ToString("#,#");
+                    }
+                    else
+                    {
+                        nopaid_s = nopaid_i.ToString("#,#");
+                    }
+                    
                     paid_amt_s = paid_amt_s == "" ? "0" : paid_amt_s;
                     prod_price_s = prod_price_s == "" ? "0" : prod_price_s;
                     prod_sub_amt_s = prod_sub_amt_s == "" ? "0" : prod_sub_amt_s;
