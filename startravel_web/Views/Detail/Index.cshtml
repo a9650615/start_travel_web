@@ -1062,7 +1062,7 @@
 
                     <td class="date-@(i * 7 + (j + 1))" data-active="active" data-select="@(Model.grpproductdetail_result.Data.S_DATE == current_day_e ? "select" : "")">
                         <div class="travel-calendar-date">
-                            <a class=" date active">@date_i</a>
+                            <a class=" date active">@date_i_e</a>
                             @if (qty_kk_i == 0 && qty_hl_i <= 0) {
                                 <span class="price">@price_grp_i.ToString("#,#") </span>
 
@@ -1118,7 +1118,7 @@
                                                             {
                                                                 <td class="date-@(i * 7 + ( j + 1 ))">
                                                                     <div class="travel-calendar-date">
-                                                                        <span class="date">@date_i</span>
+                                                                        <span class="date">@date_i_e</span>
                                                                     </div>
                                                                 </td>
                                                             }
