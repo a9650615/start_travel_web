@@ -502,3 +502,45 @@ $(function(){
   });
 
 });
+
+var beforePrint = function () {
+    //console.log('Functionality to run before printing.');
+    $('.print-area').html('')
+    $('.print-area').append($('.travelInformation').html())
+    $('.print-area').append($('#travel-traffic').html())
+    $('.print-area').append($('#travel-characteristics').html())
+    $('.print-area').append($('#travel-itinerary').html())
+    $('.print-area').append($('#travel-cost').html())
+    $('.print-area').append($('#travel - description').html())
+    //$('.content.content-gray>.star-container').clone().text().appendTo('.print-area')
+    //console.log($('.print-area').html())
+};
+
+$(function () {
+    $('.icon-print').click(function () {
+        beforePrint();
+        window.print();
+    })
+
+});
+
+(function () {
+    
+    var afterPrint = function () {
+        console.log('Functionality to run after printing');
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function (mql) {
+            if (mql.matches) {
+                beforePrint();
+            } else {
+                afterPrint();
+            }
+        });
+    }
+
+    window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;
+}());

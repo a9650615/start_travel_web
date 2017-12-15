@@ -2331,8 +2331,28 @@ div.datepicker a:hover {
 
 }
 
+.print-area {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: auto;
+    min-height: 100%;
+    background: #fff;
+    z-index: 100;
+    display: none;
+}
+
 @media print
-{    
+{
+    .print-area {
+        display: block;
+    }
+
+    body > *:not(.print-area) {
+        display: none;
+    } 
+
     .no-print, .no-print *
     {
         display: none !important;
