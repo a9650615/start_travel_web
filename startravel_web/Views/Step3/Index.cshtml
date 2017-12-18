@@ -397,7 +397,7 @@
                         if ($(this).attr('type'))
                             total += Number($(this).attr('data-' + $(this).attr('type')))
 
-                        $('#choicePay_'+i).val($(this).attr('type')=='payOff'? 1: 0)
+                        $('#choicePay_'+i).val($(this).attr('type')=='payOff'? 'P1': 'P0')
                     })
                     //console.log(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     //console.log(parseInt($('#t_cash').val()))
@@ -531,7 +531,7 @@
             @for (i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
            {
                <input name="seqno_@i" id="seqno_@i" type="hidden" value="0" />
-               <input name="choicePay_@i" id="choicePay_@i" type="hidden" value="0" />
+               <input name="choicePay_@i" id="choicePay_@i" type="hidden" value="P0" />
 
            }
         </form>
