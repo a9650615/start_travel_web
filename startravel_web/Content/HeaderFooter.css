@@ -461,7 +461,7 @@
 	text-align: left;
 }
 
-.hover-block h2, .hover-block h5,.right-viewer h2, .right-viewer h5 {
+.hover-block h2, .hover-block h3,.right-viewer h2, .right-viewer h5 {
 	font-size: 1rem;
 	margin: 5px;
 	color: #6C007D;
@@ -560,7 +560,7 @@
     position: relative;
 }
 
-.show-block h5 > a {
+.show-block h3 > a {
 	font-weight: 400 !important;
 	color: #666666 !important;
 }
@@ -574,7 +574,7 @@
 		display: none;
 	}
 	.navbar-nav {
-		
+		margin: 0px;
 	}
 	.navbar-nav li {
 		padding: 10px;
@@ -599,13 +599,13 @@
 	}
 	.arrow {
 		content: "";
-		width: 20px;
-		height: 20px;
+		width: 30px;
+		height: 30px;
 		position: absolute;
 		right: 20px;
-		top: 20px;
+		top: 15px;
 		background: url('/tour/Content/images/arrow.png') no-repeat;
-		background-size: cover;
+		background-size: 80%;
 		background-position: 90% center;
 		cursor: pointer;
 		transition: transform .5 ease;
