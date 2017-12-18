@@ -104,10 +104,11 @@
                         string cust_sex = cust_name_arrary[2];
                         int Prod_Amt_i = int.Parse(Html.DisplayFor(modelitem => item.Prod_Amt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int Pre_Amt_i = int.Parse(Html.DisplayFor(modelitem => item.Pre_Amt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
-                        int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
+                        //int PaidAmt_i = int.Parse(Html.DisplayFor(modelitem => item.PaidAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
                         int UnPayAmt_i = int.Parse(Html.DisplayFor(modelitem => item.UnPayAmt).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
-
+                        int PayAmt_i = Prod_Amt_i;
+                      
 
 
 
@@ -126,16 +127,19 @@
 
                         Prod_Amt_i = Prod_Amt_i - total_order_prod_sub;
 
+                        UnPayAmt_i = UnPayAmt_i - Pre_Amt_i;
+                        
                         string Prod_Amt_s = Prod_Amt_i.ToString("#,#");
                         string total_order_prod_sub_s = total_order_prod_sub.ToString("#,#");
                         string Pre_Amt_s = Pre_Amt_i.ToString("#,#");
-                        string PaidAmt_s = PaidAmt_i.ToString("#,#");
+                        string PayAmt_s = PayAmt_i.ToString("#,#");
                         string UnPayAmt_s = UnPayAmt_i.ToString("#,#");
+                        
 
                         Prod_Amt_s = Prod_Amt_s == "" ? "0" : Prod_Amt_s;
                         total_order_prod_sub_s = total_order_prod_sub_s == "" ? "0" : total_order_prod_sub_s;
                         Pre_Amt_s = Pre_Amt_s == "" ? "0" : Pre_Amt_s;
-                        PaidAmt_s = PaidAmt_s == "" ? "0" : PaidAmt_s;
+                        PayAmt_s = PayAmt_s == "" ? "0" : PayAmt_s;
                         UnPayAmt_s = UnPayAmt_s == "" ? "0" : UnPayAmt_s;
                         string UserId = item.Cust_ID;
                         if (UserId == Model.member_id_no) {
@@ -172,8 +176,9 @@
                                             <th>規格</th>
                                             <th>商品金額</th>
                                             <th>加購金額</th>
+                                            <th>應付金額</th>
                                             <th>訂金金額</th>
-                                            <th>已付金額</th>
+                                            <th>本次付款</th>
                                             <th>未付金額</th>
                                         </tr>
                                     </thead>
@@ -182,8 +187,9 @@
                                             <td>@Html.DisplayFor(modelitem => item.Prod_Name_Sub).ToString()</td>
                                             <td>@Prod_Amt_s</td>
                                             <td>@total_order_prod_sub_s</td>
+                                            <td>@PayAmt_s</td>
                                             <td>@Pre_Amt_s</td>
-                                            <td>@PaidAmt_s</td>
+                                            <td>@Pre_Amt_s</td>
                                             <td><span class="text-orange">@UnPayAmt_s</span></td>
                                         </tr>
                                     </tbody>
@@ -212,6 +218,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-8 pl-0">
+                                            應付金額
+                                        </div>
+                                        <div class="col-xs-4 text-right pr-0">
+                                            @PayAmt_s
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-8 pl-0">
                                             訂金金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
@@ -220,10 +234,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-8 pl-0">
-                                            已付金額
+                                            本次付款
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @PaidAmt_s
+                                            @Pre_Amt_s
                                         </div>
                                     </div>
                                     <div class="row">
