@@ -1034,21 +1034,34 @@
                                                     string current_day_s = current_day.ToString("MM/dd(ddd)");
                                                     current_day_s = current_day_s.Replace("週", "");
                                                     
-                                                   if (n == (item.GrpList.Count - 1))
-                                                   {
+                                                 
+                                                     if (item.GrpList.Count > 5)
+                                                    {
+                                                         if (n == 4)
+                                                         {
                                                            <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>
-                                                       if (item.GrpList.Count > 3)
-                                                       {
-                                                        <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
-                                                       }
-                                                   }
-                                                   else
-                                                   {
-                                                         <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
+                                                       
+                                                             <a class="more-date-more" href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
+                                                           
+                                                        }
+                                                          else if(n<4)
+                                                        {
+                                                            <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
+                                                         }
+                                                         
+                                                         
                                                     }
-                                                    
-                                                    
-
+                                                     else
+                                                     {
+                                                          if (n == (item.GrpList.Count - 1))
+                                                          {
+                                                           <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>                                                     
+                                                          }
+                                                           else
+                                                          {
+                                                         <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
+                                                          }
+                                                    }
                                                }
     
                                         </div>
@@ -2206,20 +2219,37 @@
                                     DateTime current_day = DateTime.ParseExact(string_s_date.ToString(), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                                     string current_day_s = current_day.ToString("MM/dd(ddd)");
                                     current_day_s = current_day_s.Replace("週", "");
-                                    
-                                    
-                                    if (n == (item.GrpList.Count - 1))
+
+
+                                    if (item.GrpList.Count > 4)
                                     {
-                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day_s</a>
+                                           if (n ==3)
+                                         {
+                                            <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day_s</a>
+                                           }
+                                           else if(n<3)
+                                         {
+                                              <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
+                                         }
+                                                                           
                                     }
                                     else
-
                                     {
-                                        <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
-                            }
+                                           if (n == (item.GrpList.Count - 1))
+                                          {
+                                             <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n) ')" title="">@current_day_s</a>
+                                         }
+                                         else
+                                        {
+                                            <a onclick="new_prev_list_function('1,@Html.DisplayFor(modelitem => number),0,0,@Html.DisplayFor(modelitem => n)')" title="">@current_day_s</a>@:|
+                                       }
+                                    }
+                                    
+                                    
+                                 
                                 }
                             </div>
-                            @if (item.GrpList.Count > 3)
+                            @if (item.GrpList.Count >4)
                             {
                             <a  href="javascript:;" id="@(i+1)" title="" onclick="more_button_click(this)">更多</a>
                             }
