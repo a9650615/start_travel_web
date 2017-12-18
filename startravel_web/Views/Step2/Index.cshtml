@@ -830,7 +830,54 @@
 
         }
 
+        /* id checker*/
+        let Code = [
+{c: 'A', n: 10},
+{c: 'B', n: 11},
+{c: 'C', n: 12},
+{c: 'D', n: 13},
+{c: 'E', n: 14},
+{c: 'F', n: 15},
+{c: 'G', n: 16},
+{c: 'H', n: 17},
+{c: 'I', n: 34},
+{c: 'J', n: 18},
+{c: 'K', n: 19},
+{c: 'L', n: 20},
+{c: 'M', n: 21},
+{c: 'N', n: 22},
+{c: 'O', n: 35},
+{c: 'P', n: 23},
+{c: 'Q', n: 24},
+{c: 'R', n: 25},
+{c: 'S', n: 26},
+{c: 'T', n: 27},
+{c: 'U', n: 28},
+{c: 'V', n: 29},
+{c: 'W', n: 32},
+{c: 'X', n: 30},
+{c: 'Y', n: 31},
+{c: 'Z', n: 33}
+        ]
 
+        let checkIsIdNumber = (string) => {
+            let str = string.split('')
+            let nn = 0
+            let total = 0
+            for (let i in Code) {
+                if (Code[i].c == str[0]) {
+                    nn = Code[i].n
+                    total += parseInt(nn/10) + (nn % 10) * 9
+                    break
+                }
+            }
+
+            for (i=8;i>=0;i--) {
+                total += parseInt(str[9-i]) * (i==0?1:i) 
+            }
+
+            return total % 10 == 0
+        }
 
 
         function order_click(k){
@@ -972,6 +1019,7 @@
             console.log($('#ch_name_2'))
             let err = false
             let id_arr = []
+            /* id checker */
             $('.err-text').hide()
             $('.err').removeClass('err')
             $('.ch_name_1, .ch_name_2').each(function(){
@@ -994,7 +1042,7 @@
                     err = true
                 }
                 else if (isNaN(parseInt($(this).val().slice(0,1)))) {
-                    if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                    if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1 || !checkIsIdNumber($(this).val())) {
                         $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
                         err = true
                     }
@@ -1057,7 +1105,7 @@
                 $(this).addClass('err').siblings('.err-text').text("請填寫身分證字號").show()
             }
             else if (isNaN(parseInt($(this).val().slice(0,1)))) {
-                if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+                if ($(this).val().search(/^[A-Z](1|2)\d{8}$/i) == -1 || !checkIsIdNumber($(this).val())) {
                     $(this).addClass('err').siblings('.err-text').text("身分證字號格式錯誤").show()
                 }
                 else {
