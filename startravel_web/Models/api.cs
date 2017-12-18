@@ -68,6 +68,8 @@ namespace startravel_web.Models
         public OrderInstallment_result orderinstallment_result { get; set; }
         public string order_no { get; set; }
         public string member_id_no { get; set; }
+        public string member_no { get; set; }
+        
     }
 
 

@@ -53,7 +53,7 @@ namespace startravel_web.Controllers
             var paymentorder_source = await api.PaymentOrder_api(paymentorder_postData);
             var tcashavblbalance_source = await api.tCashAvblBalance_api(tcashavblbalance_postData);
             var orderinstallment_source = await api.OrderInstallment_api(orderinstallment_postData);
-            step3_view_return_data step3_view_data = new step3_view_return_data { paymentorder_result = paymentorder_source, tcashavblbalance_result = tcashavblbalance_source, orderinstallment_result = orderinstallment_source, order_no = order_no_s, member_id_no = member_id_no };
+            step3_view_return_data step3_view_data = new step3_view_return_data { paymentorder_result = paymentorder_source, tcashavblbalance_result = tcashavblbalance_source, orderinstallment_result = orderinstallment_source, order_no = order_no_s, member_id_no = member_id_no, member_no = member_number };
          
             return View(step3_view_data);
         }

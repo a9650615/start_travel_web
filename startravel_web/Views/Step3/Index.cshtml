@@ -335,6 +335,9 @@
                         count_data()
                     })
 
+                    $('#travelCard').change(function(){$('#TravelCard_hidden').val(($(this).is(":checked")?"YES":"NO"))})
+
+
                     $('#t_cash').keyup(function(){
                         count_data()
                         $('#t-cash').val($('#t_cash').val() || 0)
@@ -342,9 +345,11 @@
 
                     $('.send-to').click(function(){
                         if($("input[name=payment4]:checked").attr('data-pay') == "true") {
-                            openWindowWithPost('https://payment.startravel.com.tw/fakepage', '付款頁面', {}, {})
+                            //openWindowWithPost('https://payment.startravel.com.tw/fakepage', '付款頁面', [], [])
+                            $('#card-data-send').submit()
                         }
-                        $('#main-form').submit()
+                         setTimeout(function(){ $('#main-form').submit()},500)
+                       
                     })
                     $('.chooseItem-radiobox>input:checked').each(function () {
                         console.log($(this).attr('value'))
@@ -360,7 +365,7 @@
                         }
                         //$(`input[name=${$(this).attr('name')}]`).checked(false)
                     })
-                    $('input[name=payment4]').change(function() {updateTCashInput(); count_data(); })
+                    $('input[name=payment4]').change(function() {updateTCashInput(); count_data();  $('#PmchNo').val($(this).attr("data-pmch"))  })
                     updateTCashInput()
                     count_data()
                 })
@@ -402,6 +407,8 @@
                     //$('#footer-total').text(total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#total-price').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                     $('#footer-total').text((total-Number($('#t_cash').val())).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+                    $("#Total_Amount").val(total)
+                    $("#Tcash_Amount").val($('#t_cash').val())
                 }
 
                 function openWindowWithPost(url, name, keys, values) {
@@ -447,7 +454,7 @@
                         {
                             var item_0_b = Model.orderinstallment_result.Data[i];
                             <div>
-                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="@payment_method" data-pay="false" @(i==0?"checked":"") >
+                                <input class="star-input" type="radio" id="pay_Off_@i" name="payment4" value="@payment_method" data-pmch="@item_0_b.PMCH_NO"  data-pay="false" @(i==0?"checked":"") >
                                 <label for="pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_0_b.PMCH_NAME).ToString()
                             </div>
                             payment_method++;
@@ -456,14 +463,14 @@
                     </div>
                     <div class="choosePayment-item">
                         <div class="chooseItem-radiobox">
-                            <input class="star-input" type="radio" id="deposit3" name="payment4" value="@(payment_method++)" data-pay="true">
+                            <input class="star-input" type="radio" id="deposit3" name="payment4" value="@(payment_method++)" data-pmch="@Model.orderinstallment_result.Data[2].PMCH_NO" data-pay="true">
                             <label for="deposit3"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[2].PMCH_NAME).ToString() (一次付清)
 
                         </div>
                     </div>
                     <div class="choosePayment-item">
                         <div class="chooseItem-radiobox">
-                            <input class="star-input" type="radio" id="unionPayCards" name="payment4" value="@(payment_method++)" data-pay="true">
+                            <input class="star-input" type="radio" id="unionPayCards" name="payment4" value="@(payment_method++)" data-pmch="@Model.orderinstallment_result.Data[3].PMCH_NO" data-pay="true">
                             <label for="unionPayCards"></label>@Html.DisplayFor(model => model.orderinstallment_result.Data[3].PMCH_NAME).ToString()
                         </div>
                     </div>
@@ -474,7 +481,7 @@
                            
                             var item_4_b = Model.orderinstallment_result.Data[i];
                             <div>
-                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="@payment_method" data-pay="true" data-deposit="true">
+                                <input class="star-input" type="radio" id="_pay_Off_@i" name="payment4" value="@payment_method"  data-pmch="@item_4_b.PMCH_NO" data-pay="true" data-deposit="true">
                                 <label for="_pay_Off_@i"></label>@Html.DisplayFor(modelitem => item_4_b.PMCH_NAME).ToString()
                             </div>
                             payment_method++;
@@ -485,10 +492,6 @@
 
             
 
-
-            <form id="card-data-send" target="_blank" action="https://payment.startravel.com.tw/fakepage">
-
-            </form>
 
 
 
@@ -507,6 +510,30 @@
 
         </div>
         </form>
+
+
+
+        <form id="card-data-send" target="_blank" action="https://payment.startravel.com.tw/fakepage"  >
+
+          
+            <input name="ORDER_NO" id="ORDER_NO" type="hidden" value=@Model.order_no />
+            <input name="OrderLst_Qty" id="OrderLst_Qty" type="hidden" value=@Model.paymentorder_result.Data.Count />
+            <input name="PayTimeType" id="PayTimeType" type="hidden" value="DP" />
+            <input name="PmchNo" id="PmchNo" type="hidden" value="0" />
+            <input name="Total_Amount" id="Total_Amount" type="hidden" value="0"/>
+            <input name="Tcash_Amount" id="Tcash_Amount" type="hidden" value="0" />
+            <input name="UserNo" id="UserNo" type="hidden" value=@Model.member_no />
+            <input name="TravelCard_hidden" id="TravelCard_hidden" type="hidden" value=@Model.paymentorder_result.Data.Count />
+            <input name="MobilPhone" id="MobilPhone" type="hidden" value="0" />
+          
+            @for (int i = 0; i < Model.paymentorder_result.Data.Count; i = i + 1)
+           {
+               <input name="seqno_@i" id="seqno_@i" type="hidden" value="0" />
+               <input name="choicePay_@i" id="choicePay_@i" type="hidden" value="0" />
+
+           }
+        </form>
+
     </div>
 
    
