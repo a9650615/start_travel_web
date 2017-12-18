@@ -421,7 +421,16 @@
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
+
+    function  more_get_grp_no(th){
+
+        //console.log(th);
+        var grp_no_more=$(th).attr("id"); 
+            //console.log(grp_no_more);
+        $("#more_grp_no").val(grp_no_more);
+    }
+
     function updateNav() {
         $('.nav .nav-link').click(function () {
             $('.row').removeClass('show')
@@ -1526,13 +1535,7 @@
                          $('#transferForm').submit();
                 }
 
-                   function  more_get_grp_no(th){
-
-                       //console.log(th);
-                       var grp_no_more=$(th).attr("id");
-                       //console.log(grp_no_more);
-                       $("#more_grp_no").val(grp_no_more);
-                   }
+                
 
                    $('#transferForm').submit(function() {
 
