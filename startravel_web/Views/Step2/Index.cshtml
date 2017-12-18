@@ -865,7 +865,7 @@
             let nn = 0
             let total = 0
             for (let i in Code) {
-                if (Code[i].c == str[0]) {
+                if (Code[i].c == str[0].toUpperCase()) {
                     nn = Code[i].n
                     total += parseInt(nn/10) + (nn % 10) * 9
                     break
