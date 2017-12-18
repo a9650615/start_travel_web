@@ -47,6 +47,108 @@
 }
 
 
+    <script>
+
+        $(document).ready(function()  {
+
+            var total_count = 0;
+        var total_cost = 0;
+        var current_cost = 0;
+        var current_count = 0;
+        $('.table-responsive .star-select2').each(function () {
+            total_count += parseInt($(this).val());
+            current_count = parseInt($(this).val());
+            current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
+            total_cost += current_count * current_cost;
+        });
+        var ary_room=[];
+
+        $('.table-responsive .star-select2').each(function () {
+            ary_room.push($(this).val());
+
+
+        });
+
+
+        $('#room_count').val(ary_room);
+
+        // total_cost = $(this).text()
+
+        console.log(total_cost);
+        $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
+        $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
+        });
+
+
+        function droplist_select() {
+            var total_count = 0;
+            var total_cost = 0;
+            var current_cost = 0;
+            var current_count = 0;
+            $('.table-responsive .star-select2').each(function () {
+                total_count += parseInt($(this).val());
+                current_count = parseInt($(this).val());
+                current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
+                total_cost += current_count * current_cost;
+            });
+            var ary_room=[];
+
+            $('.table-responsive .star-select2').each(function () {
+                ary_room.push($(this).val());
+
+
+            });
+
+
+            $('#room_count').val(ary_room);
+
+            // total_cost = $(this).text()
+
+            console.log(total_cost);
+            $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
+            $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
+        }
+
+        function droplist_select_mobile() {
+            var total_count = 0;
+            var total_cost = 0;
+            var current_cost = 0;
+            var current_count = 0;
+            $('.table-mobile .star-select2').each(function () {
+                total_count += parseInt($(this).val());
+                current_count = parseInt($(this).val());
+                current_cost = parseInt($(this).parent().parent().siblings().children('.col-xs-7').children('.text-orange2').text().replace(',',''));
+                total_cost += current_count * current_cost;
+            });
+
+
+            // total_cost = $(this).text()
+            var ary_room=[];
+
+            $('.table-mobile .star-select2').each(function () {
+                ary_room.push($(this).val());
+
+
+            });
+
+
+            $('#room_count').val(ary_room);
+
+            console.log(current_cost);
+            $('.mobile-people').html(total_count.toLocaleString());
+            $('.mobile_cost').html(total_cost.toLocaleString());
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
     @using (Html.BeginForm("Index", "Step2", FormMethod.Post, new { enctype = "multipart/form-data", name = "myForm", id = "myform" }))
     {
     <!-- header======================================================================= -->
@@ -251,99 +353,7 @@
                     </tbody>
                 </table>
             </div>
-            <script>
-
-                $(document).ready(() => {
-
-                 var total_count = 0;
-                var total_cost = 0;
-                var current_cost = 0;
-                var current_count = 0;
-                $('.table-responsive .star-select2').each(function () {
-                    total_count += parseInt($(this).val());
-                    current_count = parseInt($(this).val());
-                    current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
-                    total_cost += current_count * current_cost;
-                });
-                var ary_room=[];
-                    
-                $('.table-responsive .star-select2').each(function () {
-                    ary_room.push($(this).val());
-
-
-                });
-                   
-                  
-                $('#room_count').val(ary_room);
-                    
-                // total_cost = $(this).text()
-                      
-                console.log(total_cost);
-                $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
-                $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
-                });
-
-
-                function droplist_select() {
-                    var total_count = 0;
-                    var total_cost = 0;
-                    var current_cost = 0;
-                    var current_count = 0;
-                    $('.table-responsive .star-select2').each(function () {
-                        total_count += parseInt($(this).val());
-                        current_count = parseInt($(this).val());
-                        current_cost = parseInt( $(this).parent().siblings('.text-center').children('.text-orange2').text().replace(',',''));
-                        total_cost += current_count * current_cost;
-                    });
-                    var ary_room=[];
-                    
-                    $('.table-responsive .star-select2').each(function () {
-                        ary_room.push($(this).val());
-
-
-                    });
-                   
-                  
-                    $('#room_count').val(ary_room);
-                    
-                   // total_cost = $(this).text()
-                      
-                    console.log(total_cost);
-                    $('.star-table03-subtotal .h3').html(total_count.toLocaleString());
-                    $('.star-table03-subtotal .h1').html(total_cost.toLocaleString());
-                }
-
-                function droplist_select_mobile() {
-                    var total_count = 0;
-                    var total_cost = 0;
-                    var current_cost = 0;
-                    var current_count = 0;
-                    $('.table-mobile .star-select2').each(function () {
-                        total_count += parseInt($(this).val());
-                        current_count = parseInt($(this).val());
-                        current_cost = parseInt($(this).parent().parent().siblings().children('.col-xs-7').children('.text-orange2').text().replace(',',''));
-                        total_cost += current_count * current_cost;
-                    });
-
-
-                    // total_cost = $(this).text()
-                    var ary_room=[];
-                    
-                    $('.table-mobile .star-select2').each(function () {
-                        ary_room.push($(this).val());
-
-
-                    });
-                   
-                  
-                    $('#room_count').val(ary_room);
-
-                    console.log(current_cost);
-                    $('.mobile-people').html(total_count.toLocaleString());
-                    $('.mobile_cost').html(total_cost.toLocaleString());
-                }
-
-             </script>
+          
 
 
 
