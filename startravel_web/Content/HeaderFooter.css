@@ -67,14 +67,19 @@
 	font-size: 17px;
 	font-weight: bold;
 }
-.header-02 .header-02-menu a:focus,
-.right-viewer a:focus,
-.right-viewer a:hover,
-.header-02 .header-02-menu a:hover{
+
+    .header-02 .header-02-menu a:focus,
+    .header-02 .header-02-menu a:hover {
+        text-decoration: none;
+        background: #eeeeee;
+    }
+.header-02 .header-02-menu > a:hover, .header-02-menu .hover-block > a:hover{
 	background-color: #771a7a;
 	text-decoration: none;
 	color: #ffffff;
 }
+
+
 .header-02 .header-02-menu a.active,
 .right-viewer a:active{
 	background-color: #771a7a;
