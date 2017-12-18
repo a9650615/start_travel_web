@@ -2343,6 +2343,10 @@ div.datepicker a:hover {
     display: none;
 }
 
+.show-flex {
+    display: none;
+}
+
 @media print
 {
     .print-area {
@@ -2360,5 +2364,9 @@ div.datepicker a:hover {
 
     .show-on-print {
         display: block;
+    }
+
+    .show-flex {
+        display: flex;
     }
 }
