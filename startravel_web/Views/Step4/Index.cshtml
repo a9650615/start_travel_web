@@ -155,23 +155,56 @@
                     string paid_amt_s = Int32.Parse(Html.DisplayFor(modelitem => item.PAID_AMT_SALES).ToString()).ToString("#,#");
                     string prod_price_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_PRICE).ToString()).ToString("#,#");
                     string prod_sub_amt_s=Int32.Parse(Html.DisplayFor(modelitem => item.PROD_SUB_AMT).ToString()).ToString("#,#");
-                    string pre_amt_s = Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString()).ToString("#,#");
+                    int pre_amt_i = Int32.Parse(Html.DisplayFor(modelitem => item.PRE_AMT).ToString());
                     int nopaid_i = Int32.Parse(Html.DisplayFor(modelitem => item.NOPAID).ToString());
-                    string nopaid_s="";
-                    if (member_id_no==i)
+                    string nopaid_s = "";
+                    int payamt_i = 0;
+                    int nonpay_amt_i = 0;
+
+                    string cus_no = "payment_" + i;
+
+                    string is_payoff = Request.Form[cus_no];
+
+                    if (is_payoff.Equals("deposit"))
                     {
-                        nopaid_i=nopaid_i-t_Cash;
+                        payamt_i = pre_amt_i;
+
+                        nonpay_amt_i = nopaid_i - payamt_i;
                         nopaid_s = nopaid_i.ToString("#,#");
                     }
                     else
                     {
-                        nopaid_s = nopaid_i.ToString("#,#");
+
+                        if (member_id_no == i)
+                        {
+                            nopaid_i = nopaid_i - t_Cash;
+                            payamt_i = nopaid_i - t_Cash;
+                            nonpay_amt_i = nopaid_i - t_Cash - payamt_i;
+                            nopaid_s = nopaid_i.ToString("#,#");
+
+                           
+                        }
+                        else
+                        {
+                            payamt_i = nopaid_i ;
+                            nonpay_amt_i = nopaid_i - payamt_i;
+                            nopaid_s = nopaid_i.ToString("#,#");
+                        }
+
                     }
+
+
+
+                    string payamt_s = payamt_i.ToString("#,#");
+                    payamt_s = payamt_s == "" ? "0" : payamt_s;
+
+                    string nonpay_amt_s = nonpay_amt_i.ToString("#,#");
+                    nonpay_amt_s = nonpay_amt_s == "" ? "0" : nonpay_amt_s;
                     
                     paid_amt_s = paid_amt_s == "" ? "0" : paid_amt_s;
                     prod_price_s = prod_price_s == "" ? "0" : prod_price_s;
                     prod_sub_amt_s = prod_sub_amt_s == "" ? "0" : prod_sub_amt_s;
-                    pre_amt_s = pre_amt_s == "" ? "0" : pre_amt_s;
+                    //pre_amt_s = pre_amt_s == "" ? "0" : pre_amt_s;
                     nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
                     
                     int cus_sex_i = int.Parse(Html.DisplayFor(modelitem => item.CUS_SEX).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
@@ -198,8 +231,8 @@
                                     <th>規格</th>
                                     <th>商品金額</th>
                                     <th>加購金額</th>
-                                    <th>訂金金額</th>
-                                    <th>已付金額</th>
+                                    <th>應付金額</th>
+                                    <th>本次付款</th>
                                     <th>未付金額</th>
                                 </tr>
                             </thead>
@@ -208,9 +241,9 @@
                                     <td>@Html.DisplayFor(modelitem => item.COND_QTYB_NOTE).ToString() – @Html.DisplayFor(modelitem => item.QTYAC_NOTE).ToString()</td>
                                     <td>@prod_price_s</td>
                                     <td>@prod_sub_amt_s</td>
-                                    <td>0</td>
-                                    <td>@paid_amt_s</td>
-                                    <td><span class="text-orange">@nopaid_s</span></td>
+                                    <td>@nopaid_s</td>
+                                    <td>@payamt_s</td>
+                                    <td><span class="text-orange">@nonpay_amt_s</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -239,18 +272,18 @@
                            
                             <div class="row">
                                 <div class="col-xs-8 pl-0">
-                                    訂金金額
+                                    應付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    0
+                                    @nopaid_s
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-8 pl-0">
-                                    已付金額
+                                    本次付款
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    @paid_amt_s
+                                    @payamt_s
                                 </div>
                             </div>
                             <div class="row">
@@ -258,7 +291,7 @@
                                     未付金額
                                 </div>
                                 <div class="col-xs-4 text-right pr-0">
-                                    <span class="text-orange">@nopaid_s</span>
+                                    <span class="text-orange">@nonpay_amt_s</span>
                                 </div>
                             </div>
 
