@@ -349,6 +349,15 @@
                     $('.chooseItem-radiobox>input:checked').each(function () {
                         console.log($(this).attr('value'))
                         $(this).parents('.infoBlock').attr('type', $(this).attr('value'))
+                        if ($(this).val() =='payOff') {
+                            $(this).parents('.infoBlock').find('.just-pay').text('0')
+                            $(this).parents('.infoBlock').find('.not-pay > span').text('0')
+                            $(this).parents('.infoBlock').find('.this-time-pay').text($(this).parents('.infoBlock').find('.need-to-pay').eq(0).text())
+                        } else {
+                            $(this).parents('.infoBlock').find('.just-pay').text('5,000')
+                            $(this).parents('.infoBlock').find('.not-pay > span').text((parseInt($(this).parents('.infoBlock').find('.need-to-pay').eq(0).text().replace(',', '')) - 5000).toFixed(0).replace(/(\d)(?=(\d{3})+\b)/g, "$1,"))
+                            $(this).parents('.infoBlock').find('.this-time-pay').text('5,000')
+                        }
                         //$(`input[name=${$(this).attr('name')}]`).checked(false)
                     })
                     $('input[name=payment4]').change(function() {updateTCashInput(); count_data(); })
