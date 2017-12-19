@@ -90,6 +90,9 @@
                   string not_paid_s = "";
                   string total_this_pay_s = "";
                   int t_Cash = 0;
+
+                  int payamt_i = 0;
+                  int nonpay_amt_i = 0;
                   int member_id_no = 0;  
                 
                 var member_id_no_str = Request.Form["member_id_no_hidden"];
@@ -131,8 +134,7 @@
                                     int nopaid_i = int.Parse(Html.DisplayFor(modelitem => item_cus.NOPAID).ToString(), System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.AllowDecimalPoint);
 
 
-                                    int payamt_i = 0;
-                                    int nonpay_amt_i = 0;
+                                  
 
                                     string nopaid_s = nopaid_i.ToString("#,#");
                                     nopaid_s = nopaid_s == "" ? "0" : nopaid_s;
@@ -296,6 +298,13 @@
 
                             //    not_paid_s = not_paid_i.ToString("#,#");
                             //   not_paid_s = not_paid_s == "" ? "0" : not_paid_s;
+
+                            string payamt_s = payamt_i.ToString("#,#");
+                            payamt_s = payamt_s == "" ? "0" : payamt_s;
+
+                            string nonpay_amt_s = nonpay_amt_i.ToString("#,#");
+                            nonpay_amt_s = nonpay_amt_s == "" ? "0" : nonpay_amt_s;
+                            
                             <div class="table-mobile infoBlock">
                                 <span class="text-purple">@cus_name.ToString()<br>@Html.DisplayFor(modelitem => item_cus.CUS_E_NAME).ToString() @cus_sex_s</span>
                                 <div class="orderDetails-mobile mt-10">
@@ -328,7 +337,7 @@
                                             已付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @nopaid_s
+                                            @payamt_s
                                         </div>
                                     </div>
                                     <div class="row">
@@ -336,7 +345,7 @@
                                             未付金額
                                         </div>
                                         <div class="col-xs-4 text-right pr-0">
-                                            @nopaid_s
+                                            @nonpay_amt_s
                                         </div>
                                     </div>
 
