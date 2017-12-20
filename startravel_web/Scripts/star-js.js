@@ -511,7 +511,7 @@ var beforePrint = function () {
     $('.print-area').append($('#travel-characteristics').html())
     $('.print-area').append($('#travel-itinerary').html())
     $('.print-area').append($('#travel-cost').html())
-    $('.print-area').append($('#travel - description').html())
+    $('.print-area').append($('#travel-description').html())
     //$('.content.content-gray>.star-container').clone().text().appendTo('.print-area')
     //console.log($('.print-area').html())
 };
