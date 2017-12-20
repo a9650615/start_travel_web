@@ -2357,6 +2357,11 @@ div.datepicker a:hover {
         display: none;
     } 
 
+    .travel-itinerary-day {
+        padding: 0 !important;
+        margin-left: 30px;
+    }
+
     .no-print, .no-print *
     {
         display: none !important;

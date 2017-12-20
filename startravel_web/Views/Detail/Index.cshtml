@@ -40,7 +40,11 @@
     
 </head>
 <body>
-    <div class="print-area">print-area</div>
+    <div class="print-area">
+        <div id="print-area1"></div>
+        <div id="print-area2"></div>
+        <div id="print-area3"></div>
+    </div>
 @using (Html.BeginForm("detail_transfer", "Detail", FormMethod.Post, new { enctype = "multipart/form-data" , id="transferForm"}))
 {
     <!-- header======================================================================= -->
@@ -1799,7 +1803,7 @@
             <div id="travel-characteristics" class="travel-block hidden-xs">
                 <span class="h3 text-bold">行程特色</span>
                 <div class="travel-characteristics-text mt-10">
-                    <div class="images-special">
+                    <div class="images-special no-print">
                         <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL1)) center;"></div></div>
                         <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL2)) center;"></div></div>
                         <div class="img"><div style="background:url(http://www.startravel.com.tw/@Html.DisplayFor(model => model.grpproductdetail_result.Data.PIC_URL.URL3)) center;"></div></div>
