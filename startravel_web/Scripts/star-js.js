@@ -506,9 +506,9 @@ $(function(){
 var beforePrint = function () {
     //console.log('Functionality to run before printing.');
     $('.print-area').html('')
-    $('.print-area').append($('.travelInformation').html())
+    $('.print-area').append($('.travelInformation')[0].outerHTML)
     $('.print-area').append($('#travel-traffic').html())
-    $('.print-area').append($('#travel-characteristics').html())
+    $('.print-area').append($('#travel-characteristics')[0].outerHTML)
     $('.print-area').append($('#travel-itinerary').html())
     $('.print-area').append($('#travel-cost').html())
     $('.print-area').append($('#travel-description').html())
