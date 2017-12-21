@@ -524,6 +524,9 @@
 
             <!-- 行程標題照片介紹 -->
             <div class="travelInformation">
+                <div class="travelTitle print-area" style="position:relative;">
+                    @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NAME).ToString()))
+                </div>
                 <div class="row">
                     <!-- 左邊照片 -->
                     <div class="col-xs-12 col-sm-6 mb-10">
@@ -542,7 +545,7 @@
                         </div>
                         
 
-                        <div class="travelTitle">
+                        <div class="travelTitle no-print">
                             @Html.Raw(Server.HtmlDecode(Html.DisplayFor(model => model.grpproductdetail_result.Data.PROD_NAME).ToString()))
                         </div>
                         
