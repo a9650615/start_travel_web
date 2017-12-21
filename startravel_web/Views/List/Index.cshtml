@@ -1626,10 +1626,11 @@
             mode: 'range',
             starts: 1,
             onChange: function (formated) {
+                let date = new Date();
                 let startDate = new Date(formated[0])
                 let endDate = new Date(formated[1])
 
-                if (startDate <  new Date()) {
+                if (startDate <  new Date(date.getTime() - 24*60*60*1000)) {
                     startDate = new Date(new Date().toDateString())
                     $('#widgetCalendar').DatePickerSetDate(startDate, true)
                 }
