@@ -2383,8 +2383,8 @@ div.datepicker a:hover {
 }
 
 .datepickerSelected span, .datepickerSelected a, .datepickerSelected{
-    background: #17c4aa !important;
-    color: white !important;
+    /*background: #17c4aa !important;
+    color: white !important;*/
 }
 
 .datepickerSelected.end, .datepickerSelected.end span, .datepickerSelected.end a {
