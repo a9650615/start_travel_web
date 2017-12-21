@@ -150,6 +150,7 @@
                 var cal = $(el);
                 var currentCal = Math.floor(options.calendars/2), date, data, dow, month, cnt = 0, week, days, indic, indic2, html, tblCal;
                 cal.find('td>table tbody').remove();
+                var counter = 0;
                 for (var i = 0; i < options.calendars; i++) {
                     date = new Date(options.current);
                     date.addMonths(-currentCal + i);
@@ -208,8 +209,15 @@
                         var fromUser = options.onRender(date);
                         var val = date.valueOf();
                         if (fromUser.selected || options.date == val || $.inArray(val, options.date) > -1 || (options.mode == 'range' && val >= options.date[0] && val <= options.date[1])) {
-                            data.weeks[indic].days[indic2].classname.push('datepickerSelected');    
-                            //alert(data.weeks[indic].days[indic2].classname.push('datepickerSelected').index());                            
+                            console.log(new Date(val), new Date(options.date[1]))
+                            if (val == options.date[0])
+                                data.weeks[indic].days[indic2].classname.push('datepickerSelected first');
+                            else if (new Date(val).getMonth() == new Date(options.date[1]).getMonth() && new Date(val).getDate() == new Date(options.date[1]).getDate())
+                                data.weeks[indic].days[indic2].classname.push('datepickerSelected end');
+                            else
+                                data.weeks[indic].days[indic2].classname.push('datepickerSelected');
+                            //alert(data.weeks[indic].days[indic2].classname.push('datepickerSelected').index());     
+                            counter++;
                         }
                         if (fromUser.disabled) {
                             data.weeks[indic].days[indic2].classname.push('datepickerDisabled');

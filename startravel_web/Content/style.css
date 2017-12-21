@@ -2375,3 +2375,19 @@ div.datepicker a:hover {
         display: flex;
     }
 }
+
+/* DatePicker */
+.datepickerSelected.first, .datepickerSelected.first span, .datepickerSelected.first a {
+    background: #208e0f !important;
+    color: white !important;
+}
+
+.datepickerSelected span, .datepickerSelected a, .datepickerSelected{
+    background: #17c4aa !important;
+    color: white !important;
+}
+
+.datepickerSelected.end, .datepickerSelected.end span, .datepickerSelected.end a {
+    background: #f48641 !important;
+    color: white !important;
+}
