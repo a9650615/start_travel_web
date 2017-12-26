@@ -509,7 +509,7 @@ var beforePrint = function () {
     $('#print-area2').html('')
     $('#print-area3').html('')
     $('#print-area1').append($('.travelInformation')[0].outerHTML)
-    $('#print-area1').append($('#travel-traffic')[0].outerHTML)
+    $('#print-area1').append($('#travel-traffic').html())
     $('#print-area2').append($($('#travel-characteristics')[0].outerHTML).removeClass('hidden-xs'))
     $('#print-area2').append('<div style="position:relative;">' + $('#travel-itinerary').html() + '</div>')
     $('#print-area3').append($('#travel-cost').html())
